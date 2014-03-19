@@ -17,6 +17,7 @@
 - (void)viewDidLoad
 {
     NSLog(@"git remote");
+    NSLog(@"git changes made locally");
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 }

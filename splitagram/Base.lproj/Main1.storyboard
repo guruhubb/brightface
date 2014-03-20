@@ -43,26 +43,38 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NSj-Em-WcL">
-                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="itemSize" width="104" height="104"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="oDt-A5-Avc">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="104" height="104"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="104" height="104"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lhE-cd-3ph">
+                                                    <rect key="frame" x="0.0" y="0.0" width="104" height="104"/>
+                                                </imageView>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="U9u-RZ-Eow" id="G9b-bT-LnK"/>
+                                    <outlet property="delegate" destination="U9u-RZ-Eow" id="3N2-9T-q6Y"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                     </view>
                     <navigationItem key="navigationItem" title="splitagram" id="nr8-et-p0Z"/>
+                    <connections>
+                        <outlet property="view" destination="vD6-Ug-Eia" id="HsK-1b-bvA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ytQ-eK-p0h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -71,7 +83,6 @@
         <!--Navigation Controller - splitagram-->
         <scene sceneID="IM9-o9-m7F">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1s9-GA-oB1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="splitagram" definesPresentationContext="YES" id="Coq-wK-XDe" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="Fga-Rv-fqK">
                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
@@ -85,6 +96,7 @@
                         <segue destination="U9u-RZ-Eow" kind="relationship" relationship="rootViewController" id="ZJV-aW-LDI"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1s9-GA-oB1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="659" y="-898"/>
         </scene>

@@ -1,17 +1,14 @@
 //
 //  ViewController.m
-//  OverPicker
+//  splitagram
 //
-//  Created by Brandon Trebitowski on 7/21/13.
-//  Copyright (c) 2013 Brandon Trebitowski. All rights reserved.
+//  Created by Saswata Basu on 3/18/14.
+//  Copyright (c) 2014 Saswata Basu. All rights reserved.
 //
 
 #import "ViewController.h"
-#import <AssetsLibrary/AssetsLibrary.h>
-#import "PhotoCell.h"
 
-@interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-@property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@interface ViewController () <UIImagePickerControllerDelegate>
 @property(nonatomic, strong) NSArray *assets;
 @end
 
@@ -20,13 +17,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+//    ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
     
+//    [library enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+//        if (group) {
+//            [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+//            [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop){
+//                if (asset){
+//                    NSDictionary *meta = [[asset defaultRepresentation] metadata];
+//                }
+//            }];
+//        }
+//    } failureBlock:^(NSError *error) {
+//        NSLog(@"error enumerating AssetLibrary groups %@\n", error);
+//    }];
     _assets = [@[] mutableCopy];
     __block NSMutableArray *tmpAssets = [@[] mutableCopy];
     // 1
     ALAssetsLibrary *assetsLibrary = [ViewController defaultAssetsLibrary];
     // 2
     [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        [group setAssetsFilter:[ALAssetsFilter allPhotos]];
         [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if(result)
             {
@@ -41,10 +53,16 @@
         self.assets = tmpAssets;
         
         // 5
-        [self.collectionView reloadData];
+//        [self.collectionView reloadData];
     } failureBlock:^(NSError *error) {
         NSLog(@"Error loading images %@", error);
     }];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - collection view data source
@@ -96,45 +114,17 @@
     });
     return library;
 }
-
-#pragma mark - Actions
-
-- (IBAction)takePhotoButtonTapped:(id)sender
-{
-    if (([UIImagePickerController isSourceTypeAvailable:
-          UIImagePickerControllerSourceTypeCamera] == NO))
-        return;
-    
-    UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
-    mediaUI.sourceType = UIImagePickerControllerSourceTypeCamera;
-    mediaUI.allowsEditing = NO;
-    mediaUI.delegate = self;
-    [self presentViewController:mediaUI animated:YES completion:nil];
-}
-
-- (IBAction)albumsButtonTapped:(id)sender
-{
-    if (([UIImagePickerController isSourceTypeAvailable:
-          UIImagePickerControllerSourceTypePhotoLibrary] == NO))
-        return;
-    
-    UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
-    mediaUI.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    mediaUI.allowsEditing = NO;
-    mediaUI.delegate = self;
-    [self presentViewController:mediaUI animated:YES completion:nil];
-
-}
-
 #pragma mark - image picker delegate
 
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = (UIImage *) [info objectForKey:
-                                          UIImagePickerControllerOriginalImage];    
+                                  UIImagePickerControllerOriginalImage];
     [self dismissViewControllerAnimated:YES completion:^{
         // Do something with the image
     }];
 }
+
+
 
 @end

@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 Brandon Trebitowski. All rights reserved.
 //
 
+#define IS_TALL_SCREEN ( [ [ UIScreen mainScreen ] bounds ].size.height == 568 )
+#define screenSpecificSetting(tallScreen, normal) ((IS_TALL_SCREEN) ? tallScreen : normal)
+
 #import "ViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "PhotoCell.h"
@@ -20,7 +23,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    if (!IS_TALL_SCREEN) {
+        self.collectionView.frame = CGRectMake(0, 95+64, 320, 480-(95+64));  // for 3.5 screen; remove autolayout
+    }
     _assets = [@[] mutableCopy];
     __block NSMutableArray *tmpAssets = [@[] mutableCopy];
     // 1
@@ -36,15 +41,25 @@
         }];
         
         // 4
-        //NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO];
-        //self.assets = [tmpAssets sortedArrayUsingDescriptors:@[sort]];
+//        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
+//        self.assets = [tmpAssets sortedArrayUsingDescriptors:@[sort]];
         self.assets = tmpAssets;
         
         // 5
         [self.collectionView reloadData];
+        [self performSelector:@selector(scrollToBottom) withObject:nil afterDelay:0.01];
+       
+
+
     } failureBlock:^(NSError *error) {
         NSLog(@"Error loading images %@", error);
     }];
+}
+-(void)scrollToBottom
+{//Scrolls to bottom of scroller
+    
+    CGPoint bottomOffset = CGPointMake(0, self.collectionView.contentSize.height -     self.collectionView.bounds.size.height);
+    [self.collectionView setContentOffset:bottomOffset animated:NO];
 }
 
 #pragma mark - collection view data source
@@ -60,7 +75,7 @@
     
     ALAsset *asset = self.assets[indexPath.row];
     cell.asset = asset;
-    cell.backgroundColor = [UIColor redColor];
+//    cell.backgroundColor = [UIColor redColor];
     
     return cell;
 }

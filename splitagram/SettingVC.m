@@ -1,5 +1,10 @@
 //
 //  SettingVC.m
+//  splitagram
+//
+//  Created by Saswata Basu on 3/21/14.
+//  Copyright (c) 2014 Saswata Basu. All rights reserved.
+//
 //#define NSLog                       //
 //#define NSLog(...)
 #define IS_TALL_SCREEN ( [ [ UIScreen mainScreen ] bounds ].size.height == 568 )

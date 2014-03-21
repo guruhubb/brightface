@@ -1,39 +1,53 @@
 //
-//  ViewController.m
+//  gridViewController.m
 //  splitagram
 //
 //  Created by Saswata Basu on 3/21/14.
 //  Copyright (c) 2014 Saswata Basu. All rights reserved.
 //
-
 #define IS_TALL_SCREEN ( [ [ UIScreen mainScreen ] bounds ].size.height == 568 )
 #define screenSpecificSetting(tallScreen, normal) ((IS_TALL_SCREEN) ? tallScreen : normal)
 
+#import "gridViewController.h"
 #import "ViewController.h"
-#import "designViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "PhotoCell.h"
-
-@interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
-    NSInteger selectedPhotoIndex;
-}
-@property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@interface gridViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@property(nonatomic, weak) IBOutlet UICollectionView *gridCollectionView;
 @property(nonatomic, strong) NSArray *assets;
+
 @end
 
-@implementation ViewController
+@implementation gridViewController
+
+//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+//{
+//    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+//    if (self) {
+//        // Custom initialization
+//    }
+//    return self;
+//}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (!IS_TALL_SCREEN) {
-        self.collectionView.frame = CGRectMake(0, 95+64, 320, 480-(95+64));  // for 3.5 screen; remove autolayout
-    }
+    CGRect frame = CGRectMake(0, 0, 125, 40);
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont systemFontOfSize:20.0];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"my splits";
+    self.navigationItem.titleView = label;
+
     _assets = [@[] mutableCopy];
     __block NSMutableArray *tmpAssets = [@[] mutableCopy];
-    ALAssetsLibrary *assetsLibrary = [ViewController defaultAssetsLibrary];
+    NSString *albumName = @"Saved Photos";
+    ALAssetsLibrary *assetsLibrary = [gridViewController defaultAssetsLibrary];
+   
     [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+//        if ([[group valueForProperty:ALAssetsGroupPropertyName] isEqualToString:albumName]) {
         [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if(result)
             {
@@ -41,8 +55,12 @@
             }
         }];
         self.assets = tmpAssets;
-        [self.collectionView reloadData];
+
+        [self.gridCollectionView reloadData];
         [self performSelector:@selector(scrollToBottom) withObject:nil afterDelay:0.01];
+//        }
+        
+        
     } failureBlock:^(NSError *error) {
         NSLog(@"Error loading images %@", error);
     }];
@@ -50,8 +68,8 @@
 -(void)scrollToBottom
 {//Scrolls to bottom of scroller
     
-    CGPoint bottomOffset = CGPointMake(0, self.collectionView.contentSize.height - self.collectionView.bounds.size.height);
-    [self.collectionView setContentOffset:bottomOffset animated:NO];
+    CGPoint bottomOffset = CGPointMake(0, self.gridCollectionView.contentSize.height - self.gridCollectionView.bounds.size.height);
+    [self.gridCollectionView setContentOffset:bottomOffset animated:NO];
 }
 
 #pragma mark - collection view data source
@@ -67,7 +85,7 @@
     
     ALAsset *asset = self.assets[indexPath.row];
     cell.asset = asset;
-    cell.tag = indexPath.row;
+    
     return cell;
 }
 
@@ -81,47 +99,15 @@
     return 1;
 }
 
-//#pragma mark - collection view delegate
+#pragma mark - collection view delegate
 
-//- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    selectedPhotoIndex = indexPath.row;
-//    NSLog(@"index is %d",selectedPhotoIndex);
-////    ALAsset *asset = self.assets[indexPath.row];
-////    ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
-////    image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
-//
-////    designViewController *composeController = [self.storyboard instantiateViewControllerWithIdentifier:@"showDesign"];
-////    composeController.selectedImage = image;
-//    // Do something with the image
-//}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = (UICollectionViewCell *)sender;
-    selectedPhotoIndex = cell.tag;
-    NSLog(@"index is %d",selectedPhotoIndex);
-
-    ALAsset *asset = self.assets[selectedPhotoIndex];
+    ALAsset *asset = self.assets[indexPath.row];
     ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
     UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
-    // Make sure your segue name in storyboard is the same as this line
-    if ([[segue identifier] isEqualToString:@"showDesign"])
-    {
-        // Get reference to the destination view controller
-        designViewController *vc = [segue destinationViewController];
-        NSLog(@"image passed = %@",image);
-
-        // Pass any objects to the view controller here, like...
-        
-        vc.selectedImage=image;
-//        NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
-//        NSIndexPath *indexPath = [indexPaths objectAtIndex:selectedPhotoIndex];
-//        [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
-    }
-   
+    // Do something with the image
 }
-
 #pragma mark - assets
 
 + (ALAssetsLibrary *)defaultAssetsLibrary
@@ -134,5 +120,21 @@
     return library;
 }
 
+#pragma mark - image picker delegate
+
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = (UIImage *) [info objectForKey:
+                                  UIImagePickerControllerOriginalImage];
+    [self dismissViewControllerAnimated:YES completion:^{
+        // Do something with the image
+    }];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 @end

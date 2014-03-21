@@ -40,7 +40,7 @@
                                         <size key="customSize" width="104" height="104"/>
                                         <connections>
                                             <outlet property="photoImageView" destination="2rU-Bd-Ncq" id="krJ-gJ-6tP"/>
-                                            <segue destination="kAk-mV-MuV" kind="push" id="hQg-3c-nx7"/>
+                                            <segue destination="kAk-mV-MuV" kind="push" identifier="showDesign" id="hQg-3c-nx7"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -88,62 +88,130 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="collectionView" destination="x9o-VS-o0k" id="Dvy-ro-b1f"/>
+                        <outlet property="collectionView" destination="x9o-VS-o0k" id="ZQs-8M-RLd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="539" y="-448"/>
         </scene>
-        <!--View Controller-->
+        <!--Design View Controller-->
         <scene sceneID="VuC-MX-Sjy">
             <objects>
-                <viewController id="kAk-mV-MuV" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="showDesign" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kAk-mV-MuV" customClass="designViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pXx-vL-ZXo">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pXE-Ww-RoR">
+                                <rect key="frame" x="158" y="229" width="72" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="DqS-NE-TGa" kind="push" id="eXA-a6-nnh"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="zXi-wH-Vey">
+                                <rect key="frame" x="40" y="60" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="DFI-7S-QPB"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="selectedImageView" destination="zXi-wH-Vey" id="1CF-i7-QMi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wbM-Cd-IpG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="983" y="372"/>
+            <point key="canvasLocation" x="1039" y="374"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Done View Controller-->
+        <scene sceneID="ahp-DZ-C7I">
+            <objects>
+                <viewController id="DqS-NE-TGa" customClass="doneViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jav-Un-sz3">
+                        <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qkJ-o1-MtF"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yeR-qg-a3C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1477" y="374"/>
+        </scene>
+        <!--Grid View Controller-->
         <scene sceneID="5qN-4i-k9E">
             <objects>
-                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="GAH-FH-yWc" sceneMemberID="viewController">
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="GAH-FH-yWc" customClass="gridViewController" sceneMemberID="viewController">
                     <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="4tp-jv-NAj">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1rH-lG-1X9">
-                            <size key="itemSize" width="50" height="50"/>
+                            <size key="itemSize" width="104" height="104"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="tYl-zK-NIQ">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="tYl-zK-NIQ" customClass="PhotoCell">
+                                <rect key="frame" x="0.0" y="0.0" width="104" height="104"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="104" height="104"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="zHA-Yb-bph">
+                                            <rect key="frame" x="0.0" y="0.0" width="104" height="104"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </imageView>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <size key="customSize" width="104" height="104"/>
+                                <connections>
+                                    <outlet property="photoImageView" destination="zHA-Yb-bph" id="E7C-fb-SvL"/>
+                                    <segue destination="j1W-oP-z1w" kind="push" id="cCr-N4-UIu"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
-                            <outlet property="dataSource" destination="GAH-FH-yWc" id="lX2-9s-rE7"/>
-                            <outlet property="delegate" destination="GAH-FH-yWc" id="4r6-vl-6SU"/>
+                            <outlet property="dataSource" destination="GAH-FH-yWc" id="9Nx-1N-4P4"/>
+                            <outlet property="delegate" destination="GAH-FH-yWc" id="vTV-l1-SkR"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="PjX-qL-szc"/>
+                    <navigationItem key="navigationItem" id="PjX-qL-szc">
+                        <barButtonItem key="backBarButtonItem" title=" " id="3Y7-n9-VT9"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="gridCollectionView" destination="4tp-jv-NAj" id="Z2f-Yf-mpK"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KDe-ix-uWI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="983" y="-282"/>
+            <point key="canvasLocation" x="1039" y="-292"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="hcD-PT-vpS">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="j1W-oP-z1w" customClass="pageViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Hd2-RY-uXC"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UGK-rb-fJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1477" y="-292"/>
         </scene>
         <!--SettingVC - Settings-->
         <scene sceneID="tyN-0T-aus">
@@ -177,7 +245,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jB7-6W-Yoc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="988" y="-941"/>
+            <point key="canvasLocation" x="1039" y="-941"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="665-yV-g5p">

@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  designViewController.h
 //  splitagram
 //
 //  Created by Saswata Basu on 3/21/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController 
-
+@interface designViewController : UIViewController
+@property (nonatomic, strong) UIImage *selectedImage;
 @end

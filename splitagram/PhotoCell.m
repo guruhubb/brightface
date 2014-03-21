@@ -1,9 +1,9 @@
 //
 //  PhotoCell.m
-//  OverPicker
+//  splitagram
 //
-//  Created by Brandon Trebitowski on 7/24/13.
-//  Copyright (c) 2013 Brandon Trebitowski. All rights reserved.
+//  Created by Saswata Basu on 3/21/14.
+//  Copyright (c) 2014 Saswata Basu. All rights reserved.
 //
 
 #import "PhotoCell.h"

@@ -7,6 +7,7 @@
 //
 
 #import "designViewController.h"
+#import "doneViewController.h"
 
 @interface designViewController ()
 
@@ -32,6 +33,19 @@
     self.selectedImageView.image=self.selectedImage;
     NSLog(@"image passed = %@",self.selectedImage);
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+
+    if ([[segue identifier] isEqualToString:@"doneDesign"])
+    {
+        doneViewController *vc = [segue destinationViewController];
+        vc.image=self.selectedImage;
+        
+    }
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {

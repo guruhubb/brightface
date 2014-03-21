@@ -115,7 +115,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="DqS-NE-TGa" kind="push" id="eXA-a6-nnh"/>
+                                    <segue destination="DqS-NE-TGa" kind="push" identifier="doneDesign" id="eXA-a6-nnh"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="zXi-wH-Vey">
@@ -126,7 +126,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="DFI-7S-QPB"/>
+                    <navigationItem key="navigationItem" id="DFI-7S-QPB">
+                        <barButtonItem key="backBarButtonItem" title=" " id="gaH-JW-xpC"/>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="selectedImageView" destination="zXi-wH-Vey" id="1CF-i7-QMi"/>
@@ -139,13 +141,24 @@
         <!--Done View Controller-->
         <scene sceneID="ahp-DZ-C7I">
             <objects>
-                <viewController id="DqS-NE-TGa" customClass="doneViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="doneDesign" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DqS-NE-TGa" customClass="doneViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jav-Un-sz3">
                         <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="DPt-ki-IZu">
+                                <rect key="frame" x="52" y="112" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="qkJ-o1-MtF"/>
+                    <navigationItem key="navigationItem" id="qkJ-o1-MtF">
+                        <barButtonItem key="backBarButtonItem" title=" " id="tPg-Wv-oeW"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="DPt-ki-IZu" id="aAf-GK-JUn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yeR-qg-a3C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

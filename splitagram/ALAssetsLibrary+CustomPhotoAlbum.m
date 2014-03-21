@@ -11,10 +11,13 @@
 
 -(void)saveImage:(UIImage*)image toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock
 {
+    NSLog(@"add to album");
+
     //write the image data to the assets library (camera roll)
     [self writeImageToSavedPhotosAlbum:image.CGImage orientation:(ALAssetOrientation)image.imageOrientation 
                         completionBlock:^(NSURL* assetURL, NSError* error) {
-                              
+                            NSLog(@"add to album");
+        
                           //error handling
                           if (error!=nil) {
                               completionBlock(error);
@@ -32,14 +35,15 @@
 -(void)addAssetURL:(NSURL*)assetURL toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock
 {
     __block BOOL albumWasFound = NO;
-    
+    NSLog(@"add to album");
     //search all photo albums in the library
     [self enumerateGroupsWithTypes:ALAssetsGroupAlbum 
                         usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
 
                             //compare the names of the albums
                             if ([albumName compare: [group valueForProperty:ALAssetsGroupPropertyName]]==NSOrderedSame) {
-                                
+                                NSLog(@"add to existing album");
+
                                 //target album is found
                                 albumWasFound = YES;
                                 
@@ -63,6 +67,7 @@
                                 //photo albums are over, target album does not exist, thus create it
                                 
                                 __weak ALAssetsLibrary* weakSelf = self;
+                                NSLog(@"create album");
 
                                 //create new assets album
                                 [self addAssetsGroupAlbumWithName:albumName 

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface doneViewController : UIViewController
+@property (nonatomic, strong) UIImage *image;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end

@@ -81,20 +81,7 @@
     return 1;
 }
 
-//#pragma mark - collection view delegate
 
-//- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    selectedPhotoIndex = indexPath.row;
-//    NSLog(@"index is %d",selectedPhotoIndex);
-////    ALAsset *asset = self.assets[indexPath.row];
-////    ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
-////    image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
-//
-////    designViewController *composeController = [self.storyboard instantiateViewControllerWithIdentifier:@"showDesign"];
-////    composeController.selectedImage = image;
-//    // Do something with the image
-//}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -105,19 +92,11 @@
     ALAsset *asset = self.assets[selectedPhotoIndex];
     ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
     UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
-    // Make sure your segue name in storyboard is the same as this line
     if ([[segue identifier] isEqualToString:@"showDesign"])
     {
-        // Get reference to the destination view controller
         designViewController *vc = [segue destinationViewController];
-        NSLog(@"image passed = %@",image);
-
-        // Pass any objects to the view controller here, like...
-        
         vc.selectedImage=image;
-//        NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
-//        NSIndexPath *indexPath = [indexPaths objectAtIndex:selectedPhotoIndex];
-//        [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
+
     }
    
 }

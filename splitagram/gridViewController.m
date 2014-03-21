@@ -43,11 +43,11 @@
 
     _assets = [@[] mutableCopy];
     __block NSMutableArray *tmpAssets = [@[] mutableCopy];
-    NSString *albumName = @"Saved Photos";
+    NSString *albumName = @"splitagram";
     ALAssetsLibrary *assetsLibrary = [gridViewController defaultAssetsLibrary];
    
-    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-//        if ([[group valueForProperty:ALAssetsGroupPropertyName] isEqualToString:albumName]) {
+    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAlbum usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        if ([[group valueForProperty:ALAssetsGroupPropertyName] isEqualToString:albumName]) {
         [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if(result)
             {
@@ -57,8 +57,8 @@
         self.assets = tmpAssets;
 
         [self.gridCollectionView reloadData];
-        [self performSelector:@selector(scrollToBottom) withObject:nil afterDelay:0.01];
-//        }
+//        [self performSelector:@selector(scrollToBottom) withObject:nil afterDelay:0.01];
+        }
         
         
     } failureBlock:^(NSError *error) {

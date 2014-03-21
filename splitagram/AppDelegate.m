@@ -8,6 +8,7 @@
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 #import "AppDelegate.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @implementation AppDelegate
 
@@ -21,13 +22,31 @@
     // Override point for customization after application launch.
     
     [MKStoreManager sharedManager];
-    
-    
+    //create album
+    NSString *albumName = @"splitagram";
+    ALAssetsLibrary *library = [AppDelegate defaultAssetsLibrary];
+    [library addAssetsGroupAlbumWithName:albumName
+                             resultBlock:^(ALAssetsGroup *group) {
+                                 NSLog(@"added album:%@", albumName);
+                             }
+                            failureBlock:^(NSError *error) {
+                                NSLog(@"error adding album");
+                            }];
+
     //    [[MKStoreManager sharedManager] removeAllKeychainData];  //test purpose to reset in-app purchase
 
     return YES;
 }
-							
+#pragma mark - assets
++ (ALAssetsLibrary *)defaultAssetsLibrary
+{
+    static dispatch_once_t pred = 0;
+    static ALAssetsLibrary *library = nil;
+    dispatch_once(&pred, ^{
+        library = [[ALAssetsLibrary alloc] init];
+    });
+    return library;
+}
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

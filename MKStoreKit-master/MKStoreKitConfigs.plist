@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Non-Consumables</key>
+	<array>
+		<string>com.guruhubb.bookly.frames</string>
+		<string>com.guruhubb.bookly.filters</string>
+		<string>com.guruhubb.bookly.blends</string>
+		<string>com.guruhubb.bookly.stickersPack</string>
+		<string>com.guruhubb.bookly.music</string>
+		<string>com.guruhubb.bookly.titles</string>
+		<string>com.guruhubb.bookly.palette</string>
+		<string>com.guruhubb.bookly.fonts</string>
+		<string>com.guruhubb.bookly.all</string>
+	</array>
+	<key>Consumables</key>
+	<dict/>
+</dict>
+</plist>

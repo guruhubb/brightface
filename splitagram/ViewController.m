@@ -58,7 +58,7 @@
 -(void)scrollToBottom
 {//Scrolls to bottom of scroller
     
-    CGPoint bottomOffset = CGPointMake(0, self.collectionView.contentSize.height -     self.collectionView.bounds.size.height);
+    CGPoint bottomOffset = CGPointMake(0, self.collectionView.contentSize.height - self.collectionView.bounds.size.height);
     [self.collectionView setContentOffset:bottomOffset animated:NO];
 }
 

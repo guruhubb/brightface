@@ -25,6 +25,20 @@
 		CCD28DEB18DAD565001127EC /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28DEA18DAD565001127EC /* PhotoCell.m */; };
 		CCD28DEE18DB4421001127EC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28DED18DB4421001127EC /* ViewController.m */; };
 		CCD28DF018DB4430001127EC /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCD28DEF18DB4430001127EC /* MainStoryboard.storyboard */; };
+		CCD28DF418DB7A4D001127EC /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28DF318DB7A4D001127EC /* SettingVC.m */; };
+		CCD28E0C18DBE74E001127EC /* NSData+MKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28DF818DBE74E001127EC /* NSData+MKBase64.m */; };
+		CCD28E0D18DBE74E001127EC /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28DFA18DBE74E001127EC /* SFHFKeychainUtils.m */; };
+		CCD28E0E18DBE74E001127EC /* MKSKProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28DFC18DBE74E001127EC /* MKSKProduct.m */; };
+		CCD28E0F18DBE74E001127EC /* MKSKSubscriptionProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28DFE18DBE74E001127EC /* MKSKSubscriptionProduct.m */; };
+		CCD28E1018DBE74E001127EC /* MKStoreKitConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCD28E0018DBE74E001127EC /* MKStoreKitConfigs.plist */; };
+		CCD28E1118DBE74E001127EC /* MKStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28E0218DBE74E001127EC /* MKStoreManager.m */; };
+		CCD28E1218DBE74E001127EC /* README.mdown in Resources */ = {isa = PBXBuildFile; fileRef = CCD28E0318DBE74E001127EC /* README.mdown */; };
+		CCD28E1318DBE74E001127EC /* AddDevice.html in Resources */ = {isa = PBXBuildFile; fileRef = CCD28E0518DBE74E001127EC /* AddDevice.html */; };
+		CCD28E1418DBE74E001127EC /* DBSetup.sql in Resources */ = {isa = PBXBuildFile; fileRef = CCD28E0618DBE74E001127EC /* DBSetup.sql */; };
+		CCD28E1518DBE74E001127EC /* featureCheck.php in Resources */ = {isa = PBXBuildFile; fileRef = CCD28E0718DBE74E001127EC /* featureCheck.php */; };
+		CCD28E1618DBE74E001127EC /* requestAccess.php in Resources */ = {isa = PBXBuildFile; fileRef = CCD28E0818DBE74E001127EC /* requestAccess.php */; };
+		CCD28E1718DBE74E001127EC /* verifyProduct.php in Resources */ = {isa = PBXBuildFile; fileRef = CCD28E0918DBE74E001127EC /* verifyProduct.php */; };
+		CCD28E1818DBE74E001127EC /* VerificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28E0B18DBE74E001127EC /* VerificationController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +76,28 @@
 		CCD28DEC18DB4421001127EC /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		CCD28DED18DB4421001127EC /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		CCD28DEF18DB4430001127EC /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		CCD28DF218DB7A4D001127EC /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
+		CCD28DF318DB7A4D001127EC /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
+		CCD28DF718DBE74E001127EC /* NSData+MKBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MKBase64.h"; sourceTree = "<group>"; };
+		CCD28DF818DBE74E001127EC /* NSData+MKBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MKBase64.m"; sourceTree = "<group>"; };
+		CCD28DF918DBE74E001127EC /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
+		CCD28DFA18DBE74E001127EC /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
+		CCD28DFB18DBE74E001127EC /* MKSKProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSKProduct.h; sourceTree = "<group>"; };
+		CCD28DFC18DBE74E001127EC /* MKSKProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSKProduct.m; sourceTree = "<group>"; };
+		CCD28DFD18DBE74E001127EC /* MKSKSubscriptionProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSKSubscriptionProduct.h; sourceTree = "<group>"; };
+		CCD28DFE18DBE74E001127EC /* MKSKSubscriptionProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSKSubscriptionProduct.m; sourceTree = "<group>"; };
+		CCD28DFF18DBE74E001127EC /* MKStoreKitConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStoreKitConfigs.h; sourceTree = "<group>"; };
+		CCD28E0018DBE74E001127EC /* MKStoreKitConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MKStoreKitConfigs.plist; sourceTree = "<group>"; };
+		CCD28E0118DBE74E001127EC /* MKStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStoreManager.h; sourceTree = "<group>"; };
+		CCD28E0218DBE74E001127EC /* MKStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKStoreManager.m; sourceTree = "<group>"; };
+		CCD28E0318DBE74E001127EC /* README.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.mdown; sourceTree = "<group>"; };
+		CCD28E0518DBE74E001127EC /* AddDevice.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = AddDevice.html; sourceTree = "<group>"; };
+		CCD28E0618DBE74E001127EC /* DBSetup.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DBSetup.sql; sourceTree = "<group>"; };
+		CCD28E0718DBE74E001127EC /* featureCheck.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; path = featureCheck.php; sourceTree = "<group>"; };
+		CCD28E0818DBE74E001127EC /* requestAccess.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; path = requestAccess.php; sourceTree = "<group>"; };
+		CCD28E0918DBE74E001127EC /* verifyProduct.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; path = verifyProduct.php; sourceTree = "<group>"; };
+		CCD28E0A18DBE74E001127EC /* VerificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerificationController.h; sourceTree = "<group>"; };
+		CCD28E0B18DBE74E001127EC /* VerificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerificationController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +128,7 @@
 		CC2F4D6618D923580039E515 = {
 			isa = PBXGroup;
 			children = (
+				CCD28DF518DBE74E001127EC /* MKStoreKit-master */,
 				CCD28DD718DAB635001127EC /* Resources */,
 				CC2F4D7818D923590039E515 /* splitagram */,
 				CC2F4D9718D9235A0039E515 /* splitagramTests */,
@@ -131,6 +168,8 @@
 				CCD28DED18DB4421001127EC /* ViewController.m */,
 				CCD28DE918DAD565001127EC /* PhotoCell.h */,
 				CCD28DEA18DAD565001127EC /* PhotoCell.m */,
+				CCD28DF218DB7A4D001127EC /* SettingVC.h */,
+				CCD28DF318DB7A4D001127EC /* SettingVC.m */,
 				CC2F4D8A18D923590039E515 /* Images.xcassets */,
 				CC2F4D7918D923590039E515 /* Supporting Files */,
 			);
@@ -173,6 +212,49 @@
 				CCD28DE318DAC0D4001127EC /* userInvert20x20.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		CCD28DF518DBE74E001127EC /* MKStoreKit-master */ = {
+			isa = PBXGroup;
+			children = (
+				CCD28DF618DBE74E001127EC /* Externals */,
+				CCD28DFB18DBE74E001127EC /* MKSKProduct.h */,
+				CCD28DFC18DBE74E001127EC /* MKSKProduct.m */,
+				CCD28DFD18DBE74E001127EC /* MKSKSubscriptionProduct.h */,
+				CCD28DFE18DBE74E001127EC /* MKSKSubscriptionProduct.m */,
+				CCD28DFF18DBE74E001127EC /* MKStoreKitConfigs.h */,
+				CCD28E0018DBE74E001127EC /* MKStoreKitConfigs.plist */,
+				CCD28E0118DBE74E001127EC /* MKStoreManager.h */,
+				CCD28E0218DBE74E001127EC /* MKStoreManager.m */,
+				CCD28E0318DBE74E001127EC /* README.mdown */,
+				CCD28E0418DBE74E001127EC /* Server Code */,
+				CCD28E0A18DBE74E001127EC /* VerificationController.h */,
+				CCD28E0B18DBE74E001127EC /* VerificationController.m */,
+			);
+			path = "MKStoreKit-master";
+			sourceTree = "<group>";
+		};
+		CCD28DF618DBE74E001127EC /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				CCD28DF718DBE74E001127EC /* NSData+MKBase64.h */,
+				CCD28DF818DBE74E001127EC /* NSData+MKBase64.m */,
+				CCD28DF918DBE74E001127EC /* SFHFKeychainUtils.h */,
+				CCD28DFA18DBE74E001127EC /* SFHFKeychainUtils.m */,
+			);
+			path = Externals;
+			sourceTree = "<group>";
+		};
+		CCD28E0418DBE74E001127EC /* Server Code */ = {
+			isa = PBXGroup;
+			children = (
+				CCD28E0518DBE74E001127EC /* AddDevice.html */,
+				CCD28E0618DBE74E001127EC /* DBSetup.sql */,
+				CCD28E0718DBE74E001127EC /* featureCheck.php */,
+				CCD28E0818DBE74E001127EC /* requestAccess.php */,
+				CCD28E0918DBE74E001127EC /* verifyProduct.php */,
+			);
+			path = "Server Code";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,9 +334,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCD28DF018DB4430001127EC /* MainStoryboard.storyboard in Resources */,
+				CCD28E1718DBE74E001127EC /* verifyProduct.php in Resources */,
 				CC2F4D8B18D923590039E515 /* Images.xcassets in Resources */,
+				CCD28E1318DBE74E001127EC /* AddDevice.html in Resources */,
+				CCD28E1218DBE74E001127EC /* README.mdown in Resources */,
 				CC2F4D7D18D923590039E515 /* InfoPlist.strings in Resources */,
+				CCD28E1018DBE74E001127EC /* MKStoreKitConfigs.plist in Resources */,
 				CCD28DE418DAC0D4001127EC /* gearInvert24x24.png in Resources */,
+				CCD28E1418DBE74E001127EC /* DBSetup.sql in Resources */,
+				CCD28E1618DBE74E001127EC /* requestAccess.php in Resources */,
+				CCD28E1518DBE74E001127EC /* featureCheck.php in Resources */,
 				CCD28DE518DAC0D4001127EC /* userInvert20x20.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,10 +363,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCD28DF418DB7A4D001127EC /* SettingVC.m in Sources */,
+				CCD28E1118DBE74E001127EC /* MKStoreManager.m in Sources */,
 				CCD28DEB18DAD565001127EC /* PhotoCell.m in Sources */,
 				CC2F4D8318D923590039E515 /* AppDelegate.m in Sources */,
+				CCD28E0D18DBE74E001127EC /* SFHFKeychainUtils.m in Sources */,
+				CCD28E0F18DBE74E001127EC /* MKSKSubscriptionProduct.m in Sources */,
+				CCD28E1818DBE74E001127EC /* VerificationController.m in Sources */,
 				CC2F4D7F18D923590039E515 /* main.m in Sources */,
 				CCD28DEE18DB4421001127EC /* ViewController.m in Sources */,
+				CCD28E0C18DBE74E001127EC /* NSData+MKBase64.m in Sources */,
+				CCD28E0E18DBE74E001127EC /* MKSKProduct.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

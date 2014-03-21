@@ -13,11 +13,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
 //    UIImage *navBackgroundImage = [UIImage imageNamed:@"navbar_bg"];
 //    [[UINavigationBar appearance] setBackgroundImage:navBackgroundImage forBarMetrics:UIBarMetricsDefault];
-//    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x067AB5)];
-
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
     // Override point for customization after application launch.
+    
+    [MKStoreManager sharedManager];
+    
+    
+    //    [[MKStoreManager sharedManager] removeAllKeychainData];  //test purpose to reset in-app purchase
+
     return YES;
 }
 							

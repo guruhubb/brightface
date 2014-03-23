@@ -29,9 +29,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.selectedImageView.image=nil;
     self.selectedImageView.image=self.selectedImage;
-    NSLog(@"image passed = %@",self.selectedImage);
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

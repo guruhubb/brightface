@@ -14,15 +14,9 @@
 
 
 @class HackbookAppDelegate;
-@interface SettingVC : UITableViewController<UITableViewDataSource,UITableViewDelegate,NSURLConnectionDelegate,NSURLConnectionDataDelegate,UIAlertViewDelegate, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate, UIActionSheetDelegate,SKStoreProductViewControllerDelegate>{
+@interface SettingVC : UITableViewController<UITableViewDataSource,UITableViewDelegate,NSURLConnectionDelegate,NSURLConnectionDataDelegate,UIAlertViewDelegate, MFMailComposeViewControllerDelegate, UIActionSheetDelegate,SKStoreProductViewControllerDelegate>{
     
-//        int idint;
-//    NSMutableString *currentElementValue;
-//    NSMutableDictionary *dic;
-//    NSMutableArray *dataArr;
-//    NSMutableArray *fbIDs;
     NSArray *editArr;
-//    UIImage *userProfilePic;
     UISwitch *savePhoto;
     NSUserDefaults *defaults;
     BOOL restoreON;

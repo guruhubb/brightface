@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC2B4BDF18DF746F002CC198 /* shareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2B4BDE18DF746F002CC198 /* shareViewController.m */; };
 		CC2F4D7318D923590039E515 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7218D923590039E515 /* Foundation.framework */; };
 		CC2F4D7518D923590039E515 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7418D923590039E515 /* CoreGraphics.framework */; };
 		CC2F4D7718D923590039E515 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7618D923590039E515 /* UIKit.framework */; };
@@ -40,10 +41,10 @@
 		CCD28E1718DBE74E001127EC /* verifyProduct.php in Resources */ = {isa = PBXBuildFile; fileRef = CCD28E0918DBE74E001127EC /* verifyProduct.php */; };
 		CCD28E1818DBE74E001127EC /* VerificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28E0B18DBE74E001127EC /* VerificationController.m */; };
 		CCD28E1E18DC965B001127EC /* gridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28E1D18DC965B001127EC /* gridViewController.m */; };
-		CCD28E2118DCB147001127EC /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28E2018DCB147001127EC /* ALAssetsLibrary+CustomPhotoAlbum.m */; };
 		CCD28E2418DCB501001127EC /* designViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28E2318DCB501001127EC /* designViewController.m */; };
 		CCD28E2718DCB512001127EC /* doneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28E2618DCB512001127EC /* doneViewController.m */; };
 		CCD28E2A18DCB533001127EC /* pageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28E2918DCB533001127EC /* pageViewController.m */; };
+		CCD28E2D18DD0CCB001127EC /* pageViewContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28E2C18DD0CCA001127EC /* pageViewContentViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC2B4BDD18DF746E002CC198 /* shareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shareViewController.h; sourceTree = "<group>"; };
+		CC2B4BDE18DF746F002CC198 /* shareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shareViewController.m; sourceTree = "<group>"; };
 		CC2F4D6F18D923590039E515 /* splitagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = splitagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2F4D7218D923590039E515 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CC2F4D7418D923590039E515 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -105,14 +108,14 @@
 		CCD28E0B18DBE74E001127EC /* VerificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerificationController.m; sourceTree = "<group>"; };
 		CCD28E1C18DC965B001127EC /* gridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gridViewController.h; sourceTree = "<group>"; };
 		CCD28E1D18DC965B001127EC /* gridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gridViewController.m; sourceTree = "<group>"; };
-		CCD28E1F18DCB147001127EC /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
-		CCD28E2018DCB147001127EC /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
 		CCD28E2218DCB501001127EC /* designViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = designViewController.h; sourceTree = "<group>"; };
 		CCD28E2318DCB501001127EC /* designViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = designViewController.m; sourceTree = "<group>"; };
 		CCD28E2518DCB512001127EC /* doneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = doneViewController.h; sourceTree = "<group>"; };
 		CCD28E2618DCB512001127EC /* doneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = doneViewController.m; sourceTree = "<group>"; };
 		CCD28E2818DCB533001127EC /* pageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pageViewController.h; sourceTree = "<group>"; };
 		CCD28E2918DCB533001127EC /* pageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pageViewController.m; sourceTree = "<group>"; };
+		CCD28E2B18DD0CCA001127EC /* pageViewContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pageViewContentViewController.h; sourceTree = "<group>"; };
+		CCD28E2C18DD0CCA001127EC /* pageViewContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pageViewContentViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,11 +179,11 @@
 		CC2F4D7818D923590039E515 /* splitagram */ = {
 			isa = PBXGroup;
 			children = (
-				CCD28E1F18DCB147001127EC /* ALAssetsLibrary+CustomPhotoAlbum.h */,
-				CCD28E2018DCB147001127EC /* ALAssetsLibrary+CustomPhotoAlbum.m */,
 				CC2F4D8118D923590039E515 /* AppDelegate.h */,
 				CC2F4D8218D923590039E515 /* AppDelegate.m */,
 				CCD28DEF18DB4430001127EC /* MainStoryboard.storyboard */,
+				CC2B4BDD18DF746E002CC198 /* shareViewController.h */,
+				CC2B4BDE18DF746F002CC198 /* shareViewController.m */,
 				CCD28E1C18DC965B001127EC /* gridViewController.h */,
 				CCD28E1D18DC965B001127EC /* gridViewController.m */,
 				CCD28E2218DCB501001127EC /* designViewController.h */,
@@ -189,6 +192,8 @@
 				CCD28E2618DCB512001127EC /* doneViewController.m */,
 				CCD28E2818DCB533001127EC /* pageViewController.h */,
 				CCD28E2918DCB533001127EC /* pageViewController.m */,
+				CCD28E2B18DD0CCA001127EC /* pageViewContentViewController.h */,
+				CCD28E2C18DD0CCA001127EC /* pageViewContentViewController.m */,
 				CCD28DEC18DB4421001127EC /* ViewController.h */,
 				CCD28DED18DB4421001127EC /* ViewController.m */,
 				CCD28DE918DAD565001127EC /* PhotoCell.h */,
@@ -400,7 +405,8 @@
 				CCD28E1818DBE74E001127EC /* VerificationController.m in Sources */,
 				CC2F4D7F18D923590039E515 /* main.m in Sources */,
 				CCD28E2A18DCB533001127EC /* pageViewController.m in Sources */,
-				CCD28E2118DCB147001127EC /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
+				CCD28E2D18DD0CCB001127EC /* pageViewContentViewController.m in Sources */,
+				CC2B4BDF18DF746F002CC198 /* shareViewController.m in Sources */,
 				CCD28DEE18DB4421001127EC /* ViewController.m in Sources */,
 				CCD28E0C18DBE74E001127EC /* NSData+MKBase64.m in Sources */,
 				CCD28E0E18DBE74E001127EC /* MKSKProduct.m in Sources */,

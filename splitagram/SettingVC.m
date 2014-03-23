@@ -47,23 +47,6 @@
     [self.settingsTableView reloadData];
 }
 
--(void)smsAction{
-//    [Flurry logEvent:@"Settings - SMS Invite" ];
-    MFMessageComposeViewController *smsController = [[MFMessageComposeViewController alloc] init];
-    smsController.messageComposeDelegate = self;
-    smsController.body = @"Check out my new photobook on bookly.  Download bookly at www.appstore.com/bookly";
-//    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-//    pasteboard.persistent = YES;
-//    pasteboard.image = [UIImage imageNamed:@"bookly144.png"];
-//    smsController.body=[pasteboard string];
-    [self presentViewController:smsController animated:YES completion:nil];
-//    [smsController release];
-}
-- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 
 
 - (void)rateApp {
@@ -158,8 +141,7 @@
     }
 
         [cell.textLabel setFont:[UIFont systemFontOfSize:18]];
-//        [cell.textLabel setTextColor:[UIColor lightGrayColor]];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+//        cell.selectionStyle = UITableViewCellSelectionStyleGray;
         if (indexPath.section == 0){
             if (indexPath.row==0) {
                 [cell.textLabel setText:[editArr objectAtIndex:0]];
@@ -232,34 +214,6 @@
             
         }
 
-//        if (indexPath.section == 3) {
-//            if(indexPath.row==0){
-//                [cell.textLabel setText:[editArr objectAtIndex:7]];
-//                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-//                savePhoto = [[UISwitch alloc] initWithFrame:CGRectZero];
-//                [savePhoto addTarget: self action: @selector(flip:) forControlEvents:UIControlEventValueChanged];
-//                NSLog(@"savePHoto is %d",[defaults boolForKey:@"savePhoto"]);
-//                if ([defaults boolForKey:@"savePhoto"])  //if 1 then save is ON
-//                    savePhoto.on = YES;
-//                else
-//                    savePhoto.on = NO;
-//                NSLog(@"savePHoto.on is %d",savePhoto.on);
-//                
-//                cell.accessoryView = savePhoto;
-//            }
-//        }
-//        if (indexPath.section == 4) {
-//            if(indexPath.row==0){
-//                
-//                [cell.textLabel setText:[editArr objectAtIndex:8]];
-//                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-//            }
-//            if(indexPath.row==1){
-//                
-//                [cell.textLabel setText:[editArr objectAtIndex:9]];
-//                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-//            }
-//        }
     return cell;
 }
 
@@ -268,16 +222,11 @@
 {
     if (indexPath.section == 0) {
         if (indexPath.row==0) {
-//            suggestFollowersVC *suggestVC = [[suggestFollowersVC alloc]initWithNibName:@"suggestFollowersVC" bundle:nil];
-//            suggestVC.backButtonString=@"settings";
-//            [self.navigationController pushViewController:suggestVC animated:YES];
-//            [Flurry logEvent:@"Settings - Suggest Followers" ];
             [self frameAction];
         }
 
         if (indexPath.row==1) {
             [self backgroundColorAction];
-//            [self findFriends];
         }
     }
     if (indexPath.section == 2){
@@ -299,44 +248,21 @@
             if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
                 [[UIApplication sharedApplication] openURL:instagramURL];
             }
-//            ProfileEditVC *obj = [[ProfileEditVC alloc]initWithNibName:@"ProfileEditVC" bundle:nil];
-//            obj.backButtonString=@"settings";
-//            [self.navigationController pushViewController:obj animated:YES];
         }
         if (indexPath.row==1) {
             NSURL *fbURL = [NSURL URLWithString:@"https://www.facebook.com/getbooklyapp"];
             if ([[UIApplication sharedApplication] canOpenURL:fbURL]) {
                 [[UIApplication sharedApplication] openURL:fbURL];
             }
-
-//            [self cameraAction];
         }
         if (indexPath.row==2) {
             NSURL *twitterURL = [NSURL URLWithString:@"twitter://user?screen_name=getbooklyapp"];
             if ([[UIApplication sharedApplication] canOpenURL:twitterURL]) {
                 [[UIApplication sharedApplication] openURL:twitterURL];
             }
-
-//            PasswordVC *passwordVC = [[PasswordVC alloc]initWithNibName:@"PasswordVC" bundle:nil];
-//            passwordVC.backButtonString=@"settings";
-//            [self.navigationController pushViewController:passwordVC animated:YES];
         }
     }
-   
-//    if (indexPath.section == 4) {
-//        if (indexPath.row == 0){
-////            inAppPurchaseVC *inApp = [[inAppPurchaseVC alloc]initWithNibName:@"inAppPurchaseVC" bundle:nil];
-////            [self.navigationController pushViewController:inApp animated:NO];
-//        }
-//        if (indexPath.row == 1){
-//            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Log Out" message:@"Are you sure?" delegate:self cancelButtonTitle:@"no" otherButtonTitles:@"yes", nil];
-//            alert.tag = 3;
-//            [alert setDelegate:self];
-//            [alert show];
-//        }
-//    }
-
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 - (IBAction)flip:(id)sender {
     
@@ -352,26 +278,20 @@
 
 - (void)restorePurchases {
     
-//    if (!restoreON ){
         if( [[NSUserDefaults standardUserDefaults] boolForKey:@"restorePurchases"]) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Already Restored" message:nil
                                                            delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             return;
         }
-//        restoreON = YES;
-//        [self turnOnIndicator];
         [[MKStoreManager sharedManager]restorePreviousTransactionsOnComplete:^{
             NSLog(@"RESTORED PREVIOUS PURCHASE");
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Restore Successful" message:nil
                                                            delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             [self updateAppViewAndDefaults];
-//            [self turnOffIndicator];
-//            restoreON = NO;
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"restorePurchases"];
         } onError:nil];
-//    }
     
 }
 - (void) updateAppViewAndDefaults {
@@ -466,20 +386,14 @@
     UIActionSheet *popupQuery;
     popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"crop",@"fit frame",nil];
     popupQuery.tag=0;
-    popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [popupQuery showInView:self.view];
-    popupQuery = nil;
-    popupQuery.destructiveButtonIndex=-1;
 }
 -(void)backgroundColorAction
 {
     UIActionSheet *popupQuery;
     popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"white",@"black",nil];
     popupQuery.tag=1;
-    popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [popupQuery showInView:self.view];
-    popupQuery = nil;
-    popupQuery.destructiveButtonIndex=-1;
 }
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
         if (actionSheet.tag == 0) {
@@ -507,56 +421,8 @@
 
 
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (alertView.tag) {
-        case 0:
-            if (buttonIndex)
-//                [self emailContacts];
-            break;
-            
-        case 1:
-            if (buttonIndex)
-//                [self facebookAction];
-            break;
-            
-        case 2:
-            if (buttonIndex)
-//                [self findFacebookFriends];
-            break;
-            
-        case 3:
-            if(buttonIndex)
-                {
-                
-//                RootViewController *root=[[RootViewController alloc]init];
-//                [UIView animateWithDuration:0.2
-//                                 animations:^{
-//                                     [Flurry logEvent:@"Settings - Logout"];
-//                                     islogout=TRUE;
-//                                     [self loadxmlparsing];
-//                                     
-//                                     [[delegate facebook]logout];
-//                                     //                             [root fbSessionInvalidated];
-//                                     [root booklyLogout];
-//                                     
-//                                 }
-//                                 completion:^(BOOL finished){
-//                                     //                             [root showLoggedOut];
-//                                     [self presentViewController:root animated:NO completion:nil];
-//                                 }];
-            }
-            break;
-        case 4:
-            if (buttonIndex)
-//                [self clearCache];
-            break;
-            
-        default:
-            break;
-    }
-    
-}
+
+
 
 
 @end

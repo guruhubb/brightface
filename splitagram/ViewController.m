@@ -29,10 +29,14 @@
     if (!IS_TALL_SCREEN) {
         self.collectionView.frame = CGRectMake(0, 95+64, 320, 480-(95+64));  // for 3.5 screen; remove autolayout
     }
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     _assets = [@[] mutableCopy];
     __block NSMutableArray *tmpAssets = [@[] mutableCopy];
     ALAssetsLibrary *assetsLibrary = [ViewController defaultAssetsLibrary];
-    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         [group setAssetsFilter:[ALAssetsFilter allPhotos]];
         [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if(result)
@@ -42,16 +46,18 @@
         }];
         self.assets = tmpAssets;
         [self.collectionView reloadData];
-        [self performSelector:@selector(scrollToBottom) withObject:nil afterDelay:0.01];
     } failureBlock:^(NSError *error) {
         NSLog(@"Error loading images %@", error);
     }];
+
+    [self performSelector:@selector(scrollToBottom) withObject:nil afterDelay:0.01];
+    
 }
 -(void)scrollToBottom
-{//Scrolls to bottom of scroller
-    
-    CGPoint bottomOffset = CGPointMake(0, self.collectionView.contentSize.height - self.collectionView.bounds.size.height);
-    [self.collectionView setContentOffset:bottomOffset animated:NO];
+{
+    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:self.assets.count-1 inSection:0];
+    [self.collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+
 }
 
 #pragma mark - collection view data source
@@ -96,9 +102,7 @@
     {
         designViewController *vc = [segue destinationViewController];
         vc.selectedImage=image;
-
     }
-   
 }
 
 #pragma mark - assets

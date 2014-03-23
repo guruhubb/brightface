@@ -12,22 +12,18 @@
 #import "ViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "PhotoCell.h"
-@interface gridViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+#import "pageViewController.h"
+//#import "pageViewContentViewController.h"
+@interface gridViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
+    NSInteger selectedPhotoIndex;
+
+}
 @property(nonatomic, weak) IBOutlet UICollectionView *gridCollectionView;
 @property(nonatomic, strong) NSArray *assets;
 
 @end
 
 @implementation gridViewController
-
-//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-//{
-//    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-//    if (self) {
-//        // Custom initialization
-//    }
-//    return self;
-//}
 
 - (void)viewDidLoad
 {
@@ -40,38 +36,40 @@
     label.textColor = [UIColor whiteColor];
     label.text = @"my splits";
     self.navigationItem.titleView = label;
-
+}
+- (void)viewDidAppear:(BOOL)animated   {
     _assets = [@[] mutableCopy];
     __block NSMutableArray *tmpAssets = [@[] mutableCopy];
     NSString *albumName = @"splitagram";
     ALAssetsLibrary *assetsLibrary = [gridViewController defaultAssetsLibrary];
-   
+
     [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAlbum usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         if ([[group valueForProperty:ALAssetsGroupPropertyName] isEqualToString:albumName]) {
-        [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-            if(result)
-            {
-                [tmpAssets addObject:result];
-            }
-        }];
-        self.assets = tmpAssets;
-
-        [self.gridCollectionView reloadData];
-//        [self performSelector:@selector(scrollToBottom) withObject:nil afterDelay:0.01];
+            [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+                if(result)
+                {
+                    [tmpAssets addObject:result];
+                }
+            }];
+            self.assets = tmpAssets;
+            NSLog(@"  assets count = %d", self.assets.count);
+            
+            
+            [self.gridCollectionView reloadData];
         }
-        
-        
     } failureBlock:^(NSError *error) {
         NSLog(@"Error loading images %@", error);
     }];
-}
--(void)scrollToBottom
-{//Scrolls to bottom of scroller
-    
-    CGPoint bottomOffset = CGPointMake(0, self.gridCollectionView.contentSize.height - self.gridCollectionView.bounds.size.height);
-    [self.gridCollectionView setContentOffset:bottomOffset animated:NO];
+    [self performSelector:@selector(scrollToBottom) withObject:nil afterDelay:0.01];
 }
 
+-(void)scrollToBottom
+{
+    if (self.assets.count){
+    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:self.assets.count-1 inSection:0];
+    [self.collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+    }
+}
 #pragma mark - collection view data source
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -85,7 +83,7 @@
     
     ALAsset *asset = self.assets[indexPath.row];
     cell.asset = asset;
-    
+    cell.tag = indexPath.row;
     return cell;
 }
 
@@ -99,14 +97,16 @@
     return 1;
 }
 
-#pragma mark - collection view delegate
-
-- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    ALAsset *asset = self.assets[indexPath.row];
-    ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
-    UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
-    // Do something with the image
+    UICollectionViewCell *cell = (UICollectionViewCell *)sender;
+    selectedPhotoIndex = cell.tag;
+    if ([[segue identifier] isEqualToString:@"PageViewController"])
+    {
+        pageViewController *vc = [segue destinationViewController];
+        vc.pageImages=self.assets;
+        vc.index = selectedPhotoIndex;
+    }
 }
 #pragma mark - assets
 
@@ -118,17 +118,6 @@
         library = [[ALAssetsLibrary alloc] init];
     });
     return library;
-}
-
-#pragma mark - image picker delegate
-
-- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    UIImage *image = (UIImage *) [info objectForKey:
-                                  UIImagePickerControllerOriginalImage];
-    [self dismissViewControllerAnimated:YES completion:^{
-        // Do something with the image
-    }];
 }
 
 - (void)didReceiveMemoryWarning

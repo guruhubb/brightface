@@ -7,6 +7,8 @@
 //
 
 #import "pageViewController.h"
+#import "pageViewContentViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface pageViewController ()
 
@@ -14,19 +16,87 @@
 
 @implementation pageViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    CGRect frame = CGRectMake(0, 0, 125, 40);
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont systemFontOfSize:20.0];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"my splits";
+    self.navigationItem.titleView = label;
+    [self setUp];
+}
+
+- (void) setUp {
+    self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageView"];
+    self.pageViewController.dataSource = self;
+    self.pageViewController.delegate = self;
+    NSLog(@"pageImage.count = %d",self.pageImages.count);
+    pageViewContentViewController *startingViewController = [self viewControllerAtIndex:self.index];
+    NSLog(@"starting view controller = %@",startingViewController);
+
+    NSArray *viewControllers = @[startingViewController];
+    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    // Change the size of page view controller
+    self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    [self addChildViewController:_pageViewController];
+    [self.view addSubview:_pageViewController.view];
+    [self.pageViewController didMoveToParentViewController:self];
+
+}
+
+- (pageViewContentViewController *)viewControllerAtIndex:(NSUInteger)index
+{
+    NSLog(@"pageImage.count = %d",self.pageImages.count);
+
+    if (([self.pageImages count] == 0) || (index >= [self.pageImages count])) {
+        return nil;
+    }
+    NSString *string = [NSString stringWithFormat:@"%d of %d",index+1,self.pageImages.count];
+    ALAsset *asset = self.pageImages[index];
+    ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+    UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+    // Create a new view controller and pass suitable data.
+    pageViewContentViewController *pageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewContentViewController"];
+    pageContentViewController.image = image;
+    pageContentViewController.pageIndex = index;
+    pageContentViewController.titleText=string;
+    pageContentViewController.asset=asset;
+    return pageContentViewController;
+}
+
+#pragma mark - Page View Controller Data Source
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+{
+    NSUInteger index = ((pageViewContentViewController*) viewController).pageIndex;
+    NSLog(@"pageIndex  is %d",index);
+
+    if ((index == 0) || (index == NSNotFound)) {
+        return [self viewControllerAtIndex:self.pageImages.count-1];
+    }
+    
+    index--;
+    return [self viewControllerAtIndex:index];
+}
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+{
+    NSUInteger index = ((pageViewContentViewController*) viewController).pageIndex;
+    
+    if (index == NSNotFound) {
+        return [self viewControllerAtIndex:0];
+    }
+    
+    index++;
+    if (index == [self.pageImages count]) {
+        return [self viewControllerAtIndex:0];
+    }
+    return [self viewControllerAtIndex:index];
 }
 
 - (void)didReceiveMemoryWarning

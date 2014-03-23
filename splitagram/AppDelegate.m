@@ -15,8 +15,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-//    UIImage *navBackgroundImage = [UIImage imageNamed:@"navbar_bg"];
-//    [[UINavigationBar appearance] setBackgroundImage:navBackgroundImage forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
     // Override point for customization after application launch.
@@ -24,15 +22,27 @@
     [MKStoreManager sharedManager];
     //create album
     NSString *albumName = @"splitagram";
+    __block BOOL albumFound = NO;
     ALAssetsLibrary *library = [AppDelegate defaultAssetsLibrary];
-    [library addAssetsGroupAlbumWithName:albumName
-                             resultBlock:^(ALAssetsGroup *group) {
-                                 NSLog(@"added album:%@", albumName);
-                             }
-                            failureBlock:^(NSError *error) {
-                                NSLog(@"error adding album");
-                            }];
-
+    [library enumerateGroupsWithTypes:ALAssetsGroupAlbum
+                           usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+                               if ([[group valueForProperty:ALAssetsGroupPropertyName] isEqualToString:albumName]) {
+                                   NSLog(@"found album %@", albumName);
+                                   albumFound=YES;
+                               }
+                           }
+                         failureBlock:^(NSError* error) {
+                             NSLog(@"failed to enumerate albums:\nError: %@", [error localizedDescription]);
+                         }];
+    
+    if (!albumFound){
+        [library addAssetsGroupAlbumWithName:albumName
+                                 resultBlock:^(ALAssetsGroup *group) {
+                                 }
+                                failureBlock:^(NSError *error) {
+                                    NSLog(@"error adding album");
+                                }];
+    }
     //    [[MKStoreManager sharedManager] removeAllKeychainData];  //test purpose to reset in-app purchase
 
     return YES;

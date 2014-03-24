@@ -5,9 +5,12 @@
 //  Created by Saswata Basu on 3/21/14.
 //  Copyright (c) 2014 Saswata Basu. All rights reserved.
 //
+#define IS_TALL_SCREEN ( [ [ UIScreen mainScreen ] bounds ].size.height == 568 )
+#define screenSpecificSetting(tallScreen, normal) ((IS_TALL_SCREEN) ? tallScreen : normal)
 
 #import "doneViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "shareViewController.h"
 
 @interface doneViewController (){
     ALAssetsGroup* groupToAddTo;
@@ -29,9 +32,11 @@
     label.font = [UIFont systemFontOfSize:20.0];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
-    label.text = @"share split";
+    label.text = @"share";
     self.navigationItem.titleView = label;
-    
+    if (!IS_TALL_SCREEN) {
+        self.menuView.frame = CGRectMake(0, 454-88, 320, 50);  // for 3.5 screen; remove autolayout
+    }
     albumName = @"splitagram";
     self.imageView.image=self.image;
     //find album
@@ -46,7 +51,8 @@
                               failureBlock:^(NSError* error) {
                                   NSLog(@"failed to enumerate albums:\nError: %@", [error localizedDescription]);
                               }];
-    [self saveImage];
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"savePhoto"])
+        [self saveImage];
 }
 - (void) saveImage {
     //save image to library and then put it in album
@@ -75,8 +81,11 @@
                                }];
 }
 - (IBAction)deleteImage:(id)sender {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"savePhoto"]) {
+
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"delete",nil];
     [actionSheet showInView:sender];
+    }
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -101,8 +110,28 @@
     });
     return library;
 }
+
 - (IBAction)goHome:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"shareToNav"])
+	{
+		UINavigationController *navigationController = segue.destinationViewController;
+		shareViewController *vc = [[navigationController viewControllers] objectAtIndex:0];
+        vc.image=self.image;
+        NSLog(@"vc.imageDone is %@",vc.image);
+        
+        //		vc.delegate = self;
+	}
+//
+//    if ([[segue identifier] isEqualToString:@"ShareViewController"])
+//    {
+//        shareViewController *vc = [segue destinationViewController];
+//        vc.image=self.image;
+//    }
 }
 
 - (void)didReceiveMemoryWarning

@@ -11,6 +11,8 @@
 
 
 @interface pageViewContentViewController : UIViewController <UIActionSheetDelegate>
+@property (weak, nonatomic) IBOutlet UIView *menuView;
+
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property NSUInteger pageIndex;

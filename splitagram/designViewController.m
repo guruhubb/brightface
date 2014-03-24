@@ -36,7 +36,7 @@
     label.font = [UIFont systemFontOfSize:20.0];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
-    label.text = @"split photo";
+    label.text = @"create";
     self.navigationItem.titleView = label;
 }
 

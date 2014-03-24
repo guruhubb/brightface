@@ -8,6 +8,7 @@
 
 #import "shareViewController.h"
 #import <Social/Social.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface shareViewController ()
 @property(nonatomic,retain) UIDocumentInteractionController *documentationInteractionController;
@@ -20,42 +21,97 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    CGRect frame = CGRectMake(0, 0, 125, 40);
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont systemFontOfSize:20.0];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"share";
+    self.navigationItem.titleView = label;
 	// Do any additional setup after loading the view.
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
+    NSLog(@"self.image is %@",self.image);
+    [self setupCircles];
 
+}
+
+- (void) setupCircles {
+    int radius = 30;
+    self.imageView1.layer.cornerRadius = radius;
+    self.imageView2.layer.cornerRadius = radius;
+    self.imageView3.layer.cornerRadius = radius;
+    self.imageView4.layer.cornerRadius = radius;
+    self.imageView5.layer.cornerRadius = radius;
+    self.imageView6.layer.cornerRadius = radius;
+    self.imageView7.layer.cornerRadius = radius;
+    self.imageView8.layer.cornerRadius = radius;
 }
 - (void)cancel {
     [self dismissViewControllerAnimated: YES completion: nil];
 }
 
 - (IBAction)postToFacebook:(id)sender {
-    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
-        
+    NSLog(@"share to facebook");
+//    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+    // check whether facebook is (likely to be) installed or not
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]]) {
+        // Safe to launch the facebook app
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"fb://profile/200538917420"]];
+//    }
+        NSLog(@"share to facebook1");
+
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         
-        [controller setInitialText:@"First post from my iPhone app"];
-        [controller addURL:[NSURL URLWithString:@"http://www.appcoda.com"]];
-        [controller addImage:[UIImage imageNamed:@"socialsharing-facebook-image.jpg"]];
+        [controller setInitialText:@"#splitagram created with @splitagram"];
+        [controller addImage:self.image];
         
-        [self presentViewController:controller animated:YES completion:Nil];
+        [self presentViewController:controller animated:YES completion:nil];
         
     }
 }
 
 - (IBAction)postToTwitter:(id)sender {
-    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
-    {
+//    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+//    {
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]]) {
+
         SLComposeViewController *tweetSheet = [SLComposeViewController
                                                composeViewControllerForServiceType:SLServiceTypeTwitter];
-        [tweetSheet setInitialText:@"Great fun to learn iOS programming at appcoda.com!"];
-        [tweetSheet addURL:[NSURL URLWithString:@"http://www.appcoda.com"]];
-        [tweetSheet addImage:[UIImage imageNamed:@"socialsharing-facebook-image.jpg"]];
+        [tweetSheet setInitialText:@"#splitagram created with @splitagram"];
+        [tweetSheet addImage:self.image];
         [self presentViewController:tweetSheet animated:YES completion:nil];
     }
 }
 
+//- (IBAction)postToSinaWeibo:(id)sender {
+////    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeSinaWeibo]) {
+//    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"sinaweibo://"]]) {
+//
+//        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeSinaWeibo];
+//        
+//        [controller setInitialText:@"#splitagram created with @splitagram"];
+//        [controller addImage:self.image];
+//        
+//        [self presentViewController:controller animated:YES completion:nil];
+//        
+//    }
+//}
+//- (IBAction)postToTenCentWeibo:(id)sender {
+////    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeTencentWeibo]) {
+//    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tencentweibo://"]]) {
+//
+//        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTencentWeibo];
+//        
+//        [controller setInitialText:@"#splitagram created with @splitagram"];
+//        [controller addImage:self.image];
+//        
+//        [self presentViewController:controller animated:YES completion:nil];
+//        
+//    }
+//}
+- (IBAction)postToInstagram:(UIButton *)sender  {
 
-- (void) doInstagram {
 //    [Flurry logEvent:@"Photobook: Instagram"];
     //    UIImageView *drawingImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,612,612)];
     //    drawingImageView.image = self.albumImage.image;
@@ -76,7 +132,7 @@
     _docController.delegate=self;
     //key to open Instagram app - need to make sure docController is "strong"
     _docController.UTI = @"com.instagram.exclusivegram";
-    _docController.annotation = [NSDictionary dictionaryWithObject:@"#splitagram using @splitagram app" forKey:@"InstagramCaption"];
+    _docController.annotation = [NSDictionary dictionaryWithObject:@"#splitagram created with @splitagram" forKey:@"InstagramCaption"];
     [_docController presentOpenInMenuFromRect:self.view.frame inView:self.view animated:YES];
     
     //    [_docController release];
@@ -124,24 +180,24 @@
     return img;
 }
 
-- (void) sendMail:(NSData*)img
+- (IBAction)sendMail:(UIButton *)sender  
 {
 //    [Flurry logEvent:@"Photobook: Email"];
+    NSLog(@"send mail");
     MFMailComposeViewController *pickerMail = [[MFMailComposeViewController alloc] init];
     pickerMail.mailComposeDelegate = self;
     
-    [pickerMail setSubject:@"#bookly created using bookly app"];
+    [pickerMail setSubject:@"I created a splitagram!"];
     
     // Fill out the email body text
-    NSString *temp = @"bookly";
-    NSString *booklyMediaId = [temp stringByAppendingString:[labelContents objectForKey:@"id"]];
-    NSData *inputData = [booklyMediaId dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *encodedString = [inputData base64EncodedString];      //encode
-    NSString *string;
-    if (isImage)
-        string= [NSString stringWithFormat:@"http://getbooklyapp.com/image.php?mediaId=%@",encodedString];
-    else
-        string= [NSString stringWithFormat:@"http://getbooklyapp.com/video.php?mediaId=%@",encodedString];
+//    NSString *temp = @"bookly";
+//    NSString *booklyMediaId = [temp stringByAppendingString:[labelContents objectForKey:@"id"]];
+//    NSString *encodedString = [inputData base64EncodedString];      //encode
+    NSString *string= @"check it out!  created using splitagram.  download for free! http://getbooklyapp.com";
+//    if (isImage)
+//        string= [NSString stringWithFormat:@"http://getbooklyapp.com/image.php?mediaId=%@",encodedString];
+//    else
+//        string= [NSString stringWithFormat:@"http://getbooklyapp.com/video.php?mediaId=%@",encodedString];
     
     
     NSString *emailBody = string;
@@ -150,7 +206,7 @@
     
     // Attach an image to the email
     //    if (isImage)
-    [pickerMail addAttachmentData:img mimeType:@"image/png" fileName:@"attach"];
+    [pickerMail addAttachmentData:UIImagePNGRepresentation(self.image)  mimeType:@"image/png" fileName:@"attach"];
     //    else
     //        [pickerMail addAttachmentData:img mimeType:@"video/mpeg" fileName:@"tmp.mp4"];
     
@@ -163,7 +219,7 @@
 
 #pragma mark MFMailComposeViewControllerDelegate
 
-- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+- (void) mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
     //	[self dismissModalViewControllerAnimated:YES];
     [ self dismissViewControllerAnimated: YES completion:nil];
@@ -172,51 +228,75 @@
 - (void) mmsSend {  //sms or mms
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.persistent = YES;
-    pasteboard.image = [UIImage imageNamed:@"PDF_File.png"];
-    
+    pasteboard.image = self.image;
     
     NSString *phoneToCall = @"sms:";
     NSString *phoneToCallEncoded = [phoneToCall stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     NSURL *url = [[NSURL alloc] initWithString:phoneToCallEncoded];
     [[UIApplication sharedApplication] openURL:url];
 }
-- (IBAction)bocClick:(UIButton *)sender {
+
+- (IBAction)showSMS:(UIButton *)sender  {
     
+    if(![MFMessageComposeViewController canSendText]) {
+        UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device doesn't support SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [warningAlert show];
+        return;
+    }
+//    NSArray *recipents = @[@"12345678", @"72345524"];
+    NSString *message = [NSString stringWithFormat:@"created using splitagram.  get it for free at http://splitagram.com"];
+    MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
+    [messageController addAttachmentData:UIImagePNGRepresentation(self.image) typeIdentifier:@"public.data" filename:@"image.png"];
+    messageController.messageComposeDelegate = self;
+//    [messageController setRecipients:recipents];
+    [messageController setBody:message];
+    // Present message view controller on screen
+    [self presentViewController:messageController animated:YES completion:nil];
+}
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult) result
+{
+    switch (result) {
+        case MessageComposeResultCancelled:
+            break;
+            
+        case MessageComposeResultFailed:
+        {
+            UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to send SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [warningAlert show];
+            break;
+        }
+            
+        case MessageComposeResultSent:
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (IBAction)whatsApp:(UIButton *)sender {
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,     NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    
-    NSString *getImagePath = [documentsDirectory stringByAppendingPathComponent:@"savedImage.png"]; //here i am fetched image path from document directory and convert it in to URL and use bellow
-    
-    
+    NSString *getImagePath = [documentsDirectory stringByAppendingPathComponent:@"savedImage.png"];
     NSURL *imageFileURL =[NSURL fileURLWithPath:getImagePath];
-    NSLog(@"imag %@",imageFileURL);
-    
+    NSLog(@"image %@",imageFileURL);
+    [UIImagePNGRepresentation(self.image) writeToFile:getImagePath atomically:YES];
+
     self.documentationInteractionController.delegate = self;
-    self.documentationInteractionController.UTI = @"net.whatsapp.image";
+//    self.documentationInteractionController.UTI = @"net.whatsapp.image";
     self.documentationInteractionController = [self setupControllerWithURL:imageFileURL usingDelegate:self];
     [self.documentationInteractionController presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
-    
-    
 }
 
 - (UIDocumentInteractionController *) setupControllerWithURL: (NSURL*) fileURL
-
                                                usingDelegate: (id <UIDocumentInteractionControllerDelegate>) interactionDelegate {
-    
-    
-    
-    self.documentationInteractionController =
-    
-    [UIDocumentInteractionController interactionControllerWithURL: fileURL];
-    
+    self.documentationInteractionController = [UIDocumentInteractionController interactionControllerWithURL: fileURL];
     self.documentationInteractionController.delegate = interactionDelegate;
-    
-    
-    
     return self.documentationInteractionController;
-    
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

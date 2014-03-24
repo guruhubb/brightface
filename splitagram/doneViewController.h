@@ -12,5 +12,6 @@
 @interface doneViewController : UIViewController <UIActionSheetDelegate>
 @property (nonatomic, strong) UIImage *image;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIView *menuView;
 
 @end

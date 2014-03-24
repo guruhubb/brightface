@@ -26,6 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.launchView.backgroundColor= self.navigationController.navigationBar.barTintColor;
     if (!IS_TALL_SCREEN) {
         self.collectionView.frame = CGRectMake(0, 95+64, 320, 480-(95+64));  // for 3.5 screen; remove autolayout
     }

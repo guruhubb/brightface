@@ -23,14 +23,14 @@
     [super viewDidLoad];
     CGRect frame = CGRectMake(0, 0, 125, 40);
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:20.0];
+//    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont systemFontOfSize:18.0];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
     label.text = @"share";
     self.navigationItem.titleView = label;
 	// Do any additional setup after loading the view.
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
     NSLog(@"self.image is %@",self.image);
     [self setupCircles];
 

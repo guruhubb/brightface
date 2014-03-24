@@ -35,7 +35,7 @@
     CGRect frame = CGRectMake(0, 0, 125, 40);
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:20.0];
+    label.font = [UIFont systemFontOfSize:18];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
     label.text = @"settings";
@@ -140,7 +140,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId] ;
     }
 
-        [cell.textLabel setFont:[UIFont systemFontOfSize:18]];
+//        [cell.textLabel setFont:[UIFont systemFontOfSize:18]];
 //        cell.selectionStyle = UITableViewCellSelectionStyleGray;
         if (indexPath.section == 0){
             if (indexPath.row==0) {

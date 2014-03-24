@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		CC2B4BDF18DF746F002CC198 /* shareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2B4BDE18DF746F002CC198 /* shareViewController.m */; };
 		CC2B4BE118DF9CFB002CC198 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2B4BE018DF9CFB002CC198 /* Social.framework */; };
+		CC2B4BE518E0D28D002CC198 /* facebook-70251b04a4be865178ab592bc9586c83.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2B4BE218E0D28D002CC198 /* facebook-70251b04a4be865178ab592bc9586c83.png */; };
+		CC2B4BE618E0D28D002CC198 /* instagram-512-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2B4BE318E0D28D002CC198 /* instagram-512-2.png */; };
+		CC2B4BE718E0D28D002CC198 /* twitter_logo_white.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2B4BE418E0D28D002CC198 /* twitter_logo_white.png */; };
+		CC2B4BEB18E0D51A002CC198 /* more-512.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2B4BEA18E0D51A002CC198 /* more-512.png */; };
+		CC2B4BEF18E0D610002CC198 /* comments-icon-614x460.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2B4BED18E0D610002CC198 /* comments-icon-614x460.png */; };
+		CC2B4BF118E0D754002CC198 /* icon-letter-mail-hi.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2B4BF018E0D754002CC198 /* icon-letter-mail-hi.png */; };
+		CC2B4BF318E0D835002CC198 /* glyphicons_003_user.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2B4BF218E0D835002CC198 /* glyphicons_003_user.png */; };
+		CC2B4BF518E0D86C002CC198 /* glyphicons_136_cogwheel.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2B4BF418E0D86C002CC198 /* glyphicons_136_cogwheel.png */; };
 		CC2F4D7318D923590039E515 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7218D923590039E515 /* Foundation.framework */; };
 		CC2F4D7518D923590039E515 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7418D923590039E515 /* CoreGraphics.framework */; };
 		CC2F4D7718D923590039E515 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7618D923590039E515 /* UIKit.framework */; };
@@ -62,6 +70,14 @@
 		CC2B4BDD18DF746E002CC198 /* shareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shareViewController.h; sourceTree = "<group>"; };
 		CC2B4BDE18DF746F002CC198 /* shareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shareViewController.m; sourceTree = "<group>"; };
 		CC2B4BE018DF9CFB002CC198 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		CC2B4BE218E0D28D002CC198 /* facebook-70251b04a4be865178ab592bc9586c83.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-70251b04a4be865178ab592bc9586c83.png"; sourceTree = "<group>"; };
+		CC2B4BE318E0D28D002CC198 /* instagram-512-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instagram-512-2.png"; sourceTree = "<group>"; };
+		CC2B4BE418E0D28D002CC198 /* twitter_logo_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_logo_white.png; sourceTree = "<group>"; };
+		CC2B4BEA18E0D51A002CC198 /* more-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more-512.png"; sourceTree = "<group>"; };
+		CC2B4BED18E0D610002CC198 /* comments-icon-614x460.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comments-icon-614x460.png"; sourceTree = "<group>"; };
+		CC2B4BF018E0D754002CC198 /* icon-letter-mail-hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-letter-mail-hi.png"; sourceTree = "<group>"; };
+		CC2B4BF218E0D835002CC198 /* glyphicons_003_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_003_user.png; sourceTree = "<group>"; };
+		CC2B4BF418E0D86C002CC198 /* glyphicons_136_cogwheel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_136_cogwheel.png; sourceTree = "<group>"; };
 		CC2F4D6F18D923590039E515 /* splitagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = splitagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2F4D7218D923590039E515 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CC2F4D7418D923590039E515 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -242,6 +258,14 @@
 		CCD28DD718DAB635001127EC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CC2B4BE218E0D28D002CC198 /* facebook-70251b04a4be865178ab592bc9586c83.png */,
+				CC2B4BF018E0D754002CC198 /* icon-letter-mail-hi.png */,
+				CC2B4BED18E0D610002CC198 /* comments-icon-614x460.png */,
+				CC2B4BEA18E0D51A002CC198 /* more-512.png */,
+				CC2B4BE318E0D28D002CC198 /* instagram-512-2.png */,
+				CC2B4BE418E0D28D002CC198 /* twitter_logo_white.png */,
+				CC2B4BF218E0D835002CC198 /* glyphicons_003_user.png */,
+				CC2B4BF418E0D86C002CC198 /* glyphicons_136_cogwheel.png */,
 				CCD28DE218DAC0D4001127EC /* gearInvert24x24.png */,
 				CCD28DE318DAC0D4001127EC /* userInvert20x20.png */,
 			);
@@ -367,15 +391,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC2B4BE618E0D28D002CC198 /* instagram-512-2.png in Resources */,
 				CCD28DF018DB4430001127EC /* MainStoryboard.storyboard in Resources */,
+				CC2B4BF118E0D754002CC198 /* icon-letter-mail-hi.png in Resources */,
+				CC2B4BEF18E0D610002CC198 /* comments-icon-614x460.png in Resources */,
+				CC2B4BF518E0D86C002CC198 /* glyphicons_136_cogwheel.png in Resources */,
 				CCD28E1718DBE74E001127EC /* verifyProduct.php in Resources */,
 				CC2F4D8B18D923590039E515 /* Images.xcassets in Resources */,
+				CC2B4BF318E0D835002CC198 /* glyphicons_003_user.png in Resources */,
 				CCD28E1318DBE74E001127EC /* AddDevice.html in Resources */,
+				CC2B4BE718E0D28D002CC198 /* twitter_logo_white.png in Resources */,
 				CCD28E1218DBE74E001127EC /* README.mdown in Resources */,
 				CC2F4D7D18D923590039E515 /* InfoPlist.strings in Resources */,
 				CCD28E1018DBE74E001127EC /* MKStoreKitConfigs.plist in Resources */,
+				CC2B4BE518E0D28D002CC198 /* facebook-70251b04a4be865178ab592bc9586c83.png in Resources */,
 				CCD28DE418DAC0D4001127EC /* gearInvert24x24.png in Resources */,
 				CCD28E1418DBE74E001127EC /* DBSetup.sql in Resources */,
+				CC2B4BEB18E0D51A002CC198 /* more-512.png in Resources */,
 				CCD28E1618DBE74E001127EC /* requestAccess.php in Resources */,
 				CCD28E1518DBE74E001127EC /* featureCheck.php in Resources */,
 				CCD28DE518DAC0D4001127EC /* userInvert20x20.png in Resources */,

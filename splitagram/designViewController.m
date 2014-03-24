@@ -42,14 +42,11 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-
     if ([[segue identifier] isEqualToString:@"doneDesign"])
     {
         doneViewController *vc = [segue destinationViewController];
         vc.image=self.selectedImage;
-        
     }
-    
 }
 
 

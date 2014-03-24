@@ -133,7 +133,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellId = [NSString stringWithFormat:@"%d and %d",indexPath.row,indexPath.section];
+    NSString *cellId = [NSString stringWithFormat:@"%ld and %ld",(long)indexPath.row,(long)indexPath.section];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil)
     {

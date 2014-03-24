@@ -11,6 +11,8 @@
 #import <MessageUI/MFMailComposeViewController.h>
 @interface shareViewController : UIViewController <NSURLConnectionDelegate,NSURLConnectionDataDelegate,UIActionSheetDelegate, MFMailComposeViewControllerDelegate,UIDocumentInteractionControllerDelegate, UIDocumentInteractionControllerDelegate, MFMessageComposeViewControllerDelegate>
 @property (nonatomic,strong) UIImage *image;
+@property (strong, nonatomic) IBOutlet UIView *shareView;
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageView1;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView2;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView3;

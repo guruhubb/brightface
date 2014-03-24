@@ -5,6 +5,9 @@
 //  Created by Saswata Basu on 3/23/14.
 //  Copyright (c) 2014 Saswata Basu. All rights reserved.
 //
+#define IS_TALL_SCREEN ( [ [ UIScreen mainScreen ] bounds ].size.height == 568 )
+#define screenSpecificSetting(tallScreen, normal) ((IS_TALL_SCREEN) ? tallScreen : normal)
+
 
 #import "shareViewController.h"
 #import <Social/Social.h>
@@ -21,6 +24,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (!IS_TALL_SCREEN) {
+        self.shareView.frame = CGRectMake(0, 0, 320, 436);  // for 3.5 screen; remove autolayout
+    }
     CGRect frame = CGRectMake(0, 0, 125, 40);
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
 //    label.backgroundColor = [UIColor clearColor];

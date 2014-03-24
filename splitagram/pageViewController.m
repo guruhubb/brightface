@@ -35,7 +35,7 @@
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageView"];
     self.pageViewController.dataSource = self;
     self.pageViewController.delegate = self;
-    NSLog(@"pageImage.count = %d",self.pageImages.count);
+    NSLog(@"pageImage.count = %lu",(unsigned long)self.pageImages.count);
     pageViewContentViewController *startingViewController = [self viewControllerAtIndex:self.index];
     NSLog(@"starting view controller = %@",startingViewController);
 
@@ -51,12 +51,12 @@
 
 - (pageViewContentViewController *)viewControllerAtIndex:(NSUInteger)index
 {
-    NSLog(@"pageImage.count = %d",self.pageImages.count);
+    NSLog(@"pageImage.count = %lu",(unsigned long)self.pageImages.count);
 
     if (([self.pageImages count] == 0) || (index >= [self.pageImages count])) {
         return nil;
     }
-    NSString *string = [NSString stringWithFormat:@"%d of %d",index+1,self.pageImages.count];
+    NSString *string = [NSString stringWithFormat:@"%lu of %lu",index+1,(unsigned long)self.pageImages.count];
     ALAsset *asset = self.pageImages[index];
     ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
     UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
@@ -74,7 +74,7 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
     NSUInteger index = ((pageViewContentViewController*) viewController).pageIndex;
-    NSLog(@"pageIndex  is %d",index);
+    NSLog(@"pageIndex  is %lu",(unsigned long)index);
 
     if ((index == 0) || (index == NSNotFound)) {
         return [self viewControllerAtIndex:self.pageImages.count-1];

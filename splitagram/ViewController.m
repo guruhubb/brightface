@@ -56,8 +56,10 @@
 }
 -(void)scrollToBottom
 {
+    if (self.assets.count){
     NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:self.assets.count-1 inSection:0];
     [self.collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+    }
 
 }
 
@@ -94,7 +96,7 @@
 {
     UICollectionViewCell *cell = (UICollectionViewCell *)sender;
     selectedPhotoIndex = cell.tag;
-    NSLog(@"index is %d",selectedPhotoIndex);
+    NSLog(@"index is %ld",(long)selectedPhotoIndex);
 
     ALAsset *asset = self.assets[selectedPhotoIndex];
     ALAssetRepresentation *defaultRep = [asset defaultRepresentation];

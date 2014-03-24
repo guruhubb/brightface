@@ -52,7 +52,7 @@
                 }
             }];
             self.assets = tmpAssets;
-            NSLog(@"  assets count = %d", self.assets.count);
+            NSLog(@"  assets count = %lu", (unsigned long)self.assets.count);
             
             
             [self.gridCollectionView reloadData];

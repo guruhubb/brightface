@@ -13,6 +13,7 @@
     ALAssetsGroup* groupToAddTo;
     NSString *albumName;
     ALAssetsLibrary *library;
+    ALAsset *assetSaved;
 }
 @end
 
@@ -22,6 +23,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    CGRect frame = CGRectMake(0, 0, 125, 40);
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont systemFontOfSize:20.0];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"share split";
+    self.navigationItem.titleView = label;
+    
     albumName = @"splitagram";
     self.imageView.image=self.image;
     //find album
@@ -50,6 +60,7 @@
                                        // try to get the asset
                                        [library assetForURL:assetURL
                                                      resultBlock:^(ALAsset *asset) {
+                                                         assetSaved=asset;
                                                          // assign the photo to the album
                                                          [groupToAddTo addAsset:asset];
                                                          NSLog(@"Added %@ to %@", [[asset defaultRepresentation] filename], albumName);
@@ -63,7 +74,21 @@
                                    }
                                }];
 }
+- (IBAction)deleteImage:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"delete",nil];
+    [actionSheet showInView:sender];
+}
 
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex==0){
+        if(assetSaved.isEditable ) {
+            [assetSaved setImageData:nil metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
+                NSLog(@"Asset url %@ should be deleted. (Error %@)", assetURL, error);
+            }];
+        }
+        [self goHome:self];
+    }
+}
 
 #pragma mark - assets
 
@@ -75,6 +100,9 @@
         library = [[ALAssetsLibrary alloc] init];
     });
     return library;
+}
+- (IBAction)goHome:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

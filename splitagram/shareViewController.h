@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface shareViewController : UIViewController
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
+@interface shareViewController : UIViewController <NSURLConnectionDelegate,NSURLConnectionDataDelegate,UIActionSheetDelegate, MFMailComposeViewControllerDelegate,UIDocumentInteractionControllerDelegate, UIDocumentInteractionControllerDelegate>
+@property (nonatomic,strong) UIImage *image;
 
 @end

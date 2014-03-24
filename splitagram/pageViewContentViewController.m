@@ -16,7 +16,7 @@
 
 
 - (IBAction)deleteImage:(id)sender {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"DELETE",nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"delete",nil];
     [actionSheet showInView:sender];
 }
 
@@ -30,8 +30,7 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
-- (IBAction)shareImage:(id)sender {
-}
+
 
 - (void)viewDidLoad
 {

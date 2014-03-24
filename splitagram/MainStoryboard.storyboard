@@ -53,14 +53,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transform your photo!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OqC-Xo-EeP">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="transform your photo!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OqC-Xo-EeP">
                                         <rect key="frame" x="0.0" y="3" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a split-filtered photo with gorgeous filters.  Select photo, frame, and set to filters you love!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0wB-Qg-ByA">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="create a split-filtered photo with gorgeous filters.  select photo, frame, and set to filters you love!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0wB-Qg-ByA">
                                         <rect key="frame" x="0.0" y="36" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -100,7 +100,7 @@
             <objects>
                 <viewController storyboardIdentifier="showDesign" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kAk-mV-MuV" customClass="designViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pXx-vL-ZXo">
-                        <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pXE-Ww-RoR">
@@ -129,7 +129,6 @@
                     <navigationItem key="navigationItem" id="DFI-7S-QPB">
                         <barButtonItem key="backBarButtonItem" title=" " id="gaH-JW-xpC"/>
                     </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="selectedImageView" destination="zXi-wH-Vey" id="1CF-i7-QMi"/>
                     </connections>
@@ -143,7 +142,7 @@
             <objects>
                 <viewController storyboardIdentifier="doneDesign" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DqS-NE-TGa" customClass="doneViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jav-Un-sz3">
-                        <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="DPt-ki-IZu">
@@ -151,28 +150,39 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6lv-Ev-Mzq">
-                                <rect key="frame" x="0.0" y="417" width="250" height="44"/>
+                                <rect key="frame" x="0.0" y="460" width="250" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Share">
+                                <state key="normal" title="share">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="5Vg-CE-zTF" kind="modal" id="QIg-A7-B4M"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IAL-oP-9fz">
-                                <rect key="frame" x="250" y="417" width="70" height="44"/>
+                                <rect key="frame" x="250" y="460" width="70" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Delete">
+                                <state key="normal" title="delete">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="deleteImage:" destination="DqS-NE-TGa" eventType="touchUpInside" id="zEt-Xa-d3p"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="qkJ-o1-MtF">
                         <barButtonItem key="backBarButtonItem" title=" " id="tPg-Wv-oeW"/>
+                        <barButtonItem key="rightBarButtonItem" title="home" id="sXf-ar-7za">
+                            <connections>
+                                <action selector="goHome:" destination="DqS-NE-TGa" id="MQb-9c-RSi"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="DPt-ki-IZu" id="aAf-GK-JUn"/>
@@ -181,6 +191,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yeR-qg-a3C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1477" y="374"/>
+        </scene>
+        <!--Share View Controller-->
+        <scene sceneID="pXO-OG-rsB">
+            <objects>
+                <viewController id="gw0-9V-oiH" customClass="shareViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XHA-WT-aM3">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="36f-EQ-jma"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ahf-mX-wq4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2242" y="374"/>
         </scene>
         <!--Grid View Controller-->
         <scene sceneID="5qN-4i-k9E">
@@ -282,11 +307,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Share">
+                                <state key="normal" title="share">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="shareImage:" destination="g69-x7-bgu" eventType="touchUpInside" id="hhO-Z8-y9f"/>
                                     <segue destination="jbz-yx-T0e" kind="modal" id="ohc-R9-RMT"/>
                                 </connections>
                             </button>
@@ -295,7 +319,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Delete">
+                                <state key="normal" title="delete">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -327,7 +351,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eF4-B4-hrt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3223" y="-286"/>
+            <point key="canvasLocation" x="3127" y="-286"/>
         </scene>
         <!--SettingVC - Settings-->
         <scene sceneID="tyN-0T-aus">
@@ -403,6 +427,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="52f-7L-Chv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2697" y="-286"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BsJ-1a-9tf">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Vg-CE-zTF" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nex-ON-sb4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gw0-9V-oiH" kind="relationship" relationship="rootViewController" id="CVP-NQ-lg4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FzD-XA-K1d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1855" y="374"/>
         </scene>
     </scenes>
     <resources>

@@ -30,6 +30,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.selectedImageView.image=self.selectedImage;
+    CGRect frame = CGRectMake(0, 0, 125, 40);
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont systemFontOfSize:20.0];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"split photo";
+    self.navigationItem.titleView = label;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

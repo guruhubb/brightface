@@ -81,10 +81,10 @@
     MFMailComposeViewController *pickerMail = [[MFMailComposeViewController alloc] init];
     pickerMail.mailComposeDelegate = self;
     
-    [pickerMail setSubject:@"Customer Feedback"];
+    [pickerMail setSubject:@"customer feedback"];
     [pickerMail setToRecipients:[NSArray arrayWithObject:@"getbooklyapp@gmail.com"]];
     // Fill out the email body text
-    NSString *emailBody = @"Hello team, I have the following comments on splitagram...";
+    NSString *emailBody = @"hello, I have the following comments on splitagram...";
     [pickerMail setMessageBody:emailBody isHTML:NO];
 
     [self presentViewController:pickerMail animated:YES completion:nil];
@@ -279,15 +279,15 @@
 - (void)restorePurchases {
     
         if( [[NSUserDefaults standardUserDefaults] boolForKey:@"restorePurchases"]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Already Restored" message:nil
-                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"already restored" message:nil
+                                                           delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
             [alert show];
             return;
         }
         [[MKStoreManager sharedManager]restorePreviousTransactionsOnComplete:^{
             NSLog(@"RESTORED PREVIOUS PURCHASE");
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Restore Successful" message:nil
-                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"restore successful" message:nil
+                                                           delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
             [alert show];
             [self updateAppViewAndDefaults];
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"restorePurchases"];

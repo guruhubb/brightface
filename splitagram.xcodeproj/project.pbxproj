@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CC2B4BDF18DF746F002CC198 /* shareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2B4BDE18DF746F002CC198 /* shareViewController.m */; };
+		CC2B4BE118DF9CFB002CC198 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2B4BE018DF9CFB002CC198 /* Social.framework */; };
 		CC2F4D7318D923590039E515 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7218D923590039E515 /* Foundation.framework */; };
 		CC2F4D7518D923590039E515 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7418D923590039E515 /* CoreGraphics.framework */; };
 		CC2F4D7718D923590039E515 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7618D923590039E515 /* UIKit.framework */; };
@@ -60,6 +61,7 @@
 /* Begin PBXFileReference section */
 		CC2B4BDD18DF746E002CC198 /* shareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shareViewController.h; sourceTree = "<group>"; };
 		CC2B4BDE18DF746F002CC198 /* shareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shareViewController.m; sourceTree = "<group>"; };
+		CC2B4BE018DF9CFB002CC198 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CC2F4D6F18D923590039E515 /* splitagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = splitagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2F4D7218D923590039E515 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CC2F4D7418D923590039E515 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -123,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC2B4BE118DF9CFB002CC198 /* Social.framework in Frameworks */,
 				CCD28DE818DACD46001127EC /* AssetsLibrary.framework in Frameworks */,
 				CC2F4D7518D923590039E515 /* CoreGraphics.framework in Frameworks */,
 				CC2F4D7718D923590039E515 /* UIKit.framework in Frameworks */,
@@ -167,6 +170,7 @@
 		CC2F4D7118D923590039E515 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CC2B4BE018DF9CFB002CC198 /* Social.framework */,
 				CCD28DE718DACD46001127EC /* AssetsLibrary.framework */,
 				CC2F4D7218D923590039E515 /* Foundation.framework */,
 				CC2F4D7418D923590039E515 /* CoreGraphics.framework */,

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@interface doneViewController : UIViewController
+@interface doneViewController : UIViewController <UIActionSheetDelegate>
 @property (nonatomic, strong) UIImage *image;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 

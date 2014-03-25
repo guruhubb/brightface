@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface designViewController : UIViewController
+@interface designViewController : UIViewController <UIScrollViewDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIImage *selectedImage;
+@property (weak, nonatomic) IBOutlet UIScrollView *menuBar;
+@property (weak, nonatomic) IBOutlet UIScrollView *frameSelectionBar;
+@property (weak, nonatomic) IBOutlet UIScrollView *filterSelectionBar;
+@property (strong, nonatomic) IBOutlet UIScrollView *rotateMenuView;
 @end

@@ -12,8 +12,10 @@
 #define kRotateMax M_PI
 #import "designViewController.h"
 #import "doneViewController.h"
+#import "GPUImage.h"
 
 @interface designViewController (){
+    
     NSMutableArray *labelEffectsArray;
     NSMutableArray *labelSecondEffectsArray;
     NSMutableArray *droppableAreas;
@@ -28,7 +30,7 @@
     CGRect rectBlockSlider2;
     CGRect rectBlockSlider3;
     CGRect rectBlockSlider4;
-    UIView *frameContainer;
+
     UIScrollView* blockSlider1;
     UIScrollView* blockSlider2;
     UIScrollView* blockSlider3;
@@ -48,8 +50,9 @@
     CGFloat zoom3;
     CGFloat zoom4;
     
+    GPUImageOutput<GPUImageInput> *filter;
+    
     NSUserDefaults *defaults;
-
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *selectedImageView;
@@ -57,20 +60,20 @@
 
 @implementation designViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+//{
+//    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+//    if (self) {
+//        // Custom initialization
+//    }
+//    return self;
+//}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.selectedImageView.image=self.selectedImage;
+//    self.selectedImageView.image=self.selectedImage;
     CGRect frame = CGRectMake(0, 0, 125, 40);
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.backgroundColor = [UIColor clearColor];
@@ -81,8 +84,13 @@
     self.navigationItem.titleView = label;
     
     defaults = [NSUserDefaults standardUserDefaults];
+    [self fillFrameSelectionSlider];
+    [self fillRotateMenu];
 }
+- (void)viewDidAppear:(BOOL)animated   {
+    [self fillEffectsSlider];
 
+}
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"doneDesign"])
@@ -110,28 +118,28 @@
         [self.frameSelectionBar addSubview:btn];
     }
 }
-//- (void) fillSecondFrameSelectionSlider {
-//    
-//    //    self.secondFrameSelectionSlider= [[UIScrollView alloc] initWithFrame: CGRectMake(0, 85, 320, 80)];
-//    self.secondFrameSelectionSlider.contentSize = CGSizeMake(65 * 35+5, self.secondFrameSelectionSlider.frame.size.height);
-//    //    self.secondFrameSelectionSlider.backgroundColor = [UIColor darkGrayColor];
-//    //    [self.bottomView addSubview:self.secondFrameSelectionSlider];
-//    for (int ind = 1; ind <= 35; ind++) {
-//        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        btn.frame = CGRectMake((ind - 1 ) * 65+5, 5, 60, 60);
-//        btn.tag = ind;
-//        //        btn.showsTouchWhenHighlighted=YES;
-//        btn.layer.borderWidth=kBorderWidth;
-//        btn.layer.borderColor=[[UIColor clearColor] CGColor];
-//        [btn addTarget:self action:@selector(secondFrameClicked:) forControlEvents:UIControlEventTouchUpInside];
-//        NSLog(@"secondFrame%02d.png",ind);
-//        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"secondFrame%02d.png",ind]] forState:UIControlStateNormal];
-//        btn.alpha = 0.5;
-//        [self.secondFrameSelectionSlider addSubview:btn];
-//        //        MKStoreManager *mkStoreManager = [[MKStoreManager alloc] init];
-//        //        NSLog (@" isFeaturePurchased is %d", [MKStoreManager isFeaturePurchased:kFeatureAId]);
-//        //         NSLog (@" isSubscriptionPurchased is %d", [[MKStoreManager sharedManager ]isSubscriptionActive:kFeatureAId]);
-//        //        if(![[MKStoreManager sharedManager] isSubscriptionActive:kFeatureAId]){
+- (void) fillSecondFrameSelectionSlider {
+    
+    //    self.secondFrameSelectionSlider= [[UIScrollView alloc] initWithFrame: CGRectMake(0, 85, 320, 80)];
+    self.frameSelectionBar.contentSize = CGSizeMake(65 * 35+5, self.frameSelectionBar.frame.size.height);
+    //    self.secondFrameSelectionSlider.backgroundColor = [UIColor darkGrayColor];
+    //    [self.bottomView addSubview:self.secondFrameSelectionSlider];
+    for (int ind = 1; ind <= 35; ind++) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake((ind - 1 ) * 65+5, 5, 60, 60);
+        btn.tag = ind;
+        //        btn.showsTouchWhenHighlighted=YES;
+        btn.layer.borderWidth=kBorderWidth;
+        btn.layer.borderColor=[[UIColor clearColor] CGColor];
+        [btn addTarget:self action:@selector(secondFrameClicked:) forControlEvents:UIControlEventTouchUpInside];
+        NSLog(@"secondFrame%02d.png",ind);
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"secondFrame%02d.png",ind]] forState:UIControlStateNormal];
+        btn.alpha = 0.5;
+        [self.frameSelectionBar addSubview:btn];
+        //        MKStoreManager *mkStoreManager = [[MKStoreManager alloc] init];
+        //        NSLog (@" isFeaturePurchased is %d", [MKStoreManager isFeaturePurchased:kFeatureAId]);
+        //         NSLog (@" isSubscriptionPurchased is %d", [[MKStoreManager sharedManager ]isSubscriptionActive:kFeatureAId]);
+        //        if(![[MKStoreManager sharedManager] isSubscriptionActive:kFeatureAId]){
 //        if (![[NSUserDefaults standardUserDefaults] boolForKey:kFeature0]){
 //            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockImage.png"]];
 //            imageView.alpha = 0.4;
@@ -141,16 +149,16 @@
 //            //            imageView.center = CGPointMake(btn.frame.size.width/2, btn.frame.size.height/2);
 //            [btn addSubview:imageView];
 //        }
-//        //        else
-//        //            [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:@"booklySubscription"];
-//        //        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"com.guruhubb.bookly.subscription"]){
-//        //            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"glyphicons_203_lock.png"]];
-//        //            imageView.alpha = 0.5;
-//        //            imageView.center = CGPointMake(btn.frame.size.width/2, btn.frame.size.height/2);
-//        //            [btn addSubview:imageView];
-//        //        }
-//    }
-//}
+        //        else
+        //            [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:@"booklySubscription"];
+        //        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"com.guruhubb.bookly.subscription"]){
+        //            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"glyphicons_203_lock.png"]];
+        //            imageView.alpha = 0.5;
+        //            imageView.center = CGPointMake(btn.frame.size.width/2, btn.frame.size.height/2);
+        //            [btn addSubview:imageView];
+        //        }
+    }
+}
 
 - (void)frameClicked:(UIButton *)clickedBtn
 {
@@ -370,7 +378,7 @@
                 //            [self selectFrame:1 SUB:8];
                 //            break;
                 
-            case 2:
+            case 2: 
                 [self selectFrame:1 SUB:9];
                 break;
             case 3:
@@ -533,89 +541,90 @@
 //    }
 }
 
-//- (void) fillEffectsSlider {
-//    labelEffectsArray = [[NSMutableArray alloc]initWithObjects: @"Original", @"Delight",@"Morning", @"Sky", @"Sunny",@"Night", @"Beach",@"BW-Red",@"Sepia",@"Water", @"BW",nil];
-//    labelSecondEffectsArray = [[NSMutableArray alloc]initWithObjects: @"2Layer",@"Warm",@"Winter",@"Crisp",@"Candle",@"Fall",@"Film",@"Foggy",@"Cobalt",@"Blue",@"Bright",@"Bleak",@"Moon",@"Cyan",@"Soft",@"Gold",@"Platinum",@"Copper",@"Vignette",@"White", nil];
-//    //    self.effectsSlider = (UIScrollView *)[self.view viewWithTag:10125];
-//    self.filterSelectionBar.contentSize = CGSizeMake(65 * 11+10, self.filterSelectionBar.frame.size.height);
-//    
-//    for (int ind = 1; ind <= 11; ind++) {
-//        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        btn.frame = CGRectMake((ind-1) * 65+5, 5, 60, 60);
-//        btn.tag = ind;
-//        //        btn.showsTouchWhenHighlighted=YES;
-//        btn.layer.frame = btn.frame;
-//        btn.layer.borderWidth=kBorderWidth;
-//        btn.layer.borderColor=[[UIColor clearColor] CGColor];
-//        NSLog(@"effects btn.tag is %d ",btn.tag);
-//        [btn addTarget:self action:@selector(effectsClicked:) forControlEvents:UIControlEventTouchUpInside];
-//        CGRect labelEffects = CGRectMake((ind - 1 )*65+5+3, 50, 54, 13);
-//        UILabel *label = [[UILabel alloc] initWithFrame:labelEffects];
-//        label.backgroundColor = [UIColor whiteColor];
-//        label.alpha=0.8;
-//        label.font = [UIFont boldSystemFontOfSize:12.0];
-//        label.textAlignment = NSTextAlignmentCenter;
-//        label.textColor = [UIColor darkTextColor];
-//        label.text = [labelEffectsArray objectAtIndex:ind-1];
-//        label.layer.shadowOffset=CGSizeMake(1, 1);
-//        label.layer.shadowColor= [UIColor blackColor].CGColor;
-//        label.layer.shadowOpacity = 0.8;
-//        //        label.layer.masksToBounds=NO;
+- (void) fillEffectsSlider {
+    labelEffectsArray = [[NSMutableArray alloc]initWithObjects: @"Original", @"Delight",@"Morning", @"Sky", @"Sunny",@"Night", @"Beach",@"BW-Red",@"Sepia",@"Water", @"BW",nil];
+    labelSecondEffectsArray = [[NSMutableArray alloc]initWithObjects: @"2Layer",@"Warm",@"Winter",@"Crisp",@"Candle",@"Fall",@"Film",@"Foggy",@"Cobalt",@"Blue",@"Bright",@"Bleak",@"Moon",@"Cyan",@"Soft",@"Gold",@"Platinum",@"Copper",@"Vignette",@"White", nil];
+    //    self.effectsSlider = (UIScrollView *)[self.view viewWithTag:10125];
+    self.filterSelectionBar.contentSize = CGSizeMake(65 * 11+10, self.filterSelectionBar.frame.size.height);
+    
+    for (int ind = 1; ind <= 11; ind++) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake((ind-1) * 65+5, 5, 60, 60);
+        btn.tag = ind;
+        //        btn.showsTouchWhenHighlighted=YES;
+        btn.layer.frame = btn.frame;
+        btn.layer.borderWidth=kBorderWidth;
+        btn.layer.borderColor=[[UIColor clearColor] CGColor];
+        NSLog(@"effects btn.tag is %d ",btn.tag);
+        [btn addTarget:self action:@selector(effectsClicked:) forControlEvents:UIControlEventTouchUpInside];
+        CGRect labelEffects = CGRectMake((ind - 1 )*65+5+3, 50, 54, 13);
+        UILabel *label = [[UILabel alloc] initWithFrame:labelEffects];
+        label.backgroundColor = [UIColor whiteColor];
+        label.alpha=0.8;
+        label.font = [UIFont boldSystemFontOfSize:12.0];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor darkTextColor];
+        label.text = [labelEffectsArray objectAtIndex:ind-1];
+        label.layer.shadowOffset=CGSizeMake(1, 1);
+        label.layer.shadowColor= [UIColor blackColor].CGColor;
+        label.layer.shadowOpacity = 0.8;
+        //        label.layer.masksToBounds=NO;
 //        NSString *filters = [NSString stringWithFormat:@"filter #%d",ind];
-////        SDImageCache *imageCache = [SDImageCache.alloc initWithNamespace:@"Bookly"];
-////        UIImage *quickFilteredImage=[imageCache imageFromDiskCacheForKey:filters];
-////        if (quickFilteredImage==NULL) {
-//            NSLog(@"generating images");
-////            UIImage *inputImage = [UIImage imageNamed:@"balloons1.png"];
-//        UIImage *inputImage = self.selectedImage;
-//            switch (ind) {
-//                case 1:{
-//                    filter = [[GPUImageFilter alloc] init]; //original
-//                } break;
-//                case 2: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
-//                } break;
-//                case 3: {
-//                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
-//                } break;
-//                case 4: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
-//                } break;
-//                case 5: {
-//                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
-//                } break;
-//                case 6:{
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
-//                } break;
-//                case 7: {
-//                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
-//                } break;
-//                case 8: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
-//                } break;
-//                case 9: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
-//                } break;
-//                case 10: {
-//                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
-//                } break;
-//                case 11: {
-//                    filter = [[GPUImageGrayscaleFilter alloc] init];
-//                } break;
-//                default:
-//                    break;
-//                    
-//            }
-//            
-//            quickFilteredImage = [filter imageByFilteringImage:inputImage];
+//        SDImageCache *imageCache = [SDImageCache.alloc initWithNamespace:@"Bookly"];
+        UIImage *quickFilteredImage;
+//        =[imageCache imageFromDiskCacheForKey:filters];
+//        if (quickFilteredImage==NULL) {
+            NSLog(@"generating images");
+//            UIImage *inputImage = [UIImage imageNamed:@"balloons1.png"];
+        UIImage *inputImage = self.selectedImage;
+            switch (ind) {
+                case 1:{
+                    filter = [[GPUImageFilter alloc] init]; //original
+                } break;
+                case 2: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
+                } break;
+                case 3: {
+                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
+                } break;
+                case 4: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
+                } break;
+                case 5: {
+                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
+                } break;
+                case 6:{
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
+                } break;
+                case 7: {
+                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
+                } break;
+                case 8: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
+                } break;
+                case 9: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
+                } break;
+                case 10: {
+                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
+                } break;
+                case 11: {
+                    filter = [[GPUImageGrayscaleFilter alloc] init];
+                } break;
+                default:
+                    break;
+                    
+            }
+            
+            quickFilteredImage = [filter imageByFilteringImage:inputImage];
 //            SDImageCache *imageCache = [SDImageCache.alloc initWithNamespace:@"Bookly"];
 //            [imageCache storeImage:quickFilteredImage forKey:filters];
 //        }
-//        [btn setImage:quickFilteredImage forState:UIControlStateNormal];
-//        [self.effectsSlider addSubview:btn];
-//        [self.effectsSlider addSubview:label];
-//    }
-//}
+        [btn setImage:quickFilteredImage forState:UIControlStateNormal];
+        [self.filterSelectionBar addSubview:btn];
+        [self.filterSelectionBar addSubview:label];
+    }
+}
 
 - (void) turnOnIndicator {
     UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc]     initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -673,115 +682,116 @@
     
 }
 
-//- (void) fillSecondEffectsSlider {
-//    
+- (void) fillSecondEffectsSlider {
+    
 //    self.secondEffectsSlider.contentSize = CGSizeMake(65 * 20+10, self.secondEffectsSlider.frame.size.height);
-//    
-//    
-//    for (int ind = 1; ind <= 20; ind++) {
-//        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        btn.frame = CGRectMake((ind-1) * 65+5, 5, 60, 60);
-//        btn.tag = ind;
-//        btn.layer.borderWidth=kBorderWidth;
-//        btn.layer.borderColor=[[UIColor clearColor] CGColor];
-//        
-//        //        btn.showsTouchWhenHighlighted=YES;
-//        NSLog(@" second effects btn.tag is %d ",btn.tag);
-//        [btn addTarget:self action:@selector(secondEffectsClicked:) forControlEvents:UIControlEventTouchUpInside];
-//        CGRect labelEffects = CGRectMake((ind - 1 )*65+5+3, 50, 54, 13);
-//        UILabel *label = [[UILabel alloc] initWithFrame:labelEffects];
-//        label.backgroundColor = [UIColor whiteColor];
-//        label.alpha=0.8;
-//        label.font = [UIFont boldSystemFontOfSize:12.0];
-//        label.textAlignment = NSTextAlignmentCenter;
-//        label.textColor = [UIColor darkTextColor];
-//        label.text = [labelSecondEffectsArray objectAtIndex:ind-1];
-//        label.layer.shadowOffset=CGSizeMake(1, 1);
-//        label.layer.shadowColor= [UIColor blackColor].CGColor;
-//        label.layer.shadowOpacity = 0.8;
-//        NSString *filters = [NSString stringWithFormat:@"secondFilter #%d",ind];
+    
+    
+    for (int ind = 1; ind <= 20; ind++) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake((ind-1) * 65+5, 5, 60, 60);
+        btn.tag = ind;
+        btn.layer.borderWidth=kBorderWidth;
+        btn.layer.borderColor=[[UIColor clearColor] CGColor];
+        
+        //        btn.showsTouchWhenHighlighted=YES;
+        NSLog(@" second effects btn.tag is %d ",btn.tag);
+        [btn addTarget:self action:@selector(secondEffectsClicked:) forControlEvents:UIControlEventTouchUpInside];
+        CGRect labelEffects = CGRectMake((ind - 1 )*65+5+3, 50, 54, 13);
+        UILabel *label = [[UILabel alloc] initWithFrame:labelEffects];
+        label.backgroundColor = [UIColor whiteColor];
+        label.alpha=0.8;
+        label.font = [UIFont boldSystemFontOfSize:12.0];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor darkTextColor];
+        label.text = [labelSecondEffectsArray objectAtIndex:ind-1];
+        label.layer.shadowOffset=CGSizeMake(1, 1);
+        label.layer.shadowColor= [UIColor blackColor].CGColor;
+        label.layer.shadowOpacity = 0.8;
+        NSString *filters = [NSString stringWithFormat:@"secondFilter #%d",ind];
 //        SDImageCache *imageCache = [SDImageCache.alloc initWithNamespace:@"Bookly"];
-//        UIImage *quickFilteredImage=[imageCache imageFromDiskCacheForKey:filters];
+        UIImage *quickFilteredImage;
+//        =[imageCache imageFromDiskCacheForKey:filters];
 //        if (quickFilteredImage==NULL) {
 //            NSLog(@"generating images");
-//            UIImage *inputImage = [UIImage imageNamed:@"balloons1.png"];
-//            switch (ind) {
-//                case 1:{
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"2strip.png"];
-//                } break;
-//                case 2: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarmBleach.png"];
-//                } break;
-//                case 3: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWinter.png"];
-//                } break;
-//                case 4: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWarm.png"];
-//                } break;
-//                case 5: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"candlelight.png"];
-//                } break;
-//                case 6:{
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors.png"];
-//                } break;
-//                case 7: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
-//                } break;
-//                case 8: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"foggynight.png"];
-//                } break;
-//                case 9: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cobalt2Iron80Bleach.png"];
-//                } break;
-//                case 10: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"blue.png"];
-//                } break;
-//                case 11: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fuji2393.png"];
-//                } break;
-//                case 12: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleak.png"];
-//                } break;
-//                case 13: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachMoonlight.png"];
-//                } break;
-//                case 14: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cyanSeleniumBleachMoonlight.png"];
-//                } break;
-//                case 15: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarm.png"];
-//                } break;
-//                case 16: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"gold2.png"];
-//                } break;
-//                case 17: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"platinum.png"];
-//                } break;
-//                case 18: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
-//                } break;
-//                case 19: {
-//                    filter = [[GPUImageVignetteFilter alloc] init];
-//                    [(GPUImageVignetteFilter *) filter setVignetteEnd:0.6];
-//                } break;
-//                case 20: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
-//                } break;
-//                    
-//                default:
-//                    break;
-//            }
-//            
-//            quickFilteredImage = [filter imageByFilteringImage:inputImage];
+            UIImage *inputImage = self.selectedImage;
+            switch (ind) {
+                case 1:{
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"2strip.png"];
+                } break;
+                case 2: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarmBleach.png"];
+                } break;
+                case 3: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWinter.png"];
+                } break;
+                case 4: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWarm.png"];
+                } break;
+                case 5: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"candlelight.png"];
+                } break;
+                case 6:{
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors.png"];
+                } break;
+                case 7: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
+                } break;
+                case 8: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"foggynight.png"];
+                } break;
+                case 9: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cobalt2Iron80Bleach.png"];
+                } break;
+                case 10: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"blue.png"];
+                } break;
+                case 11: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fuji2393.png"];
+                } break;
+                case 12: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleak.png"];
+                } break;
+                case 13: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachMoonlight.png"];
+                } break;
+                case 14: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cyanSeleniumBleachMoonlight.png"];
+                } break;
+                case 15: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarm.png"];
+                } break;
+                case 16: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"gold2.png"];
+                } break;
+                case 17: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"platinum.png"];
+                } break;
+                case 18: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
+                } break;
+                case 19: {
+                    filter = [[GPUImageVignetteFilter alloc] init];
+                    [(GPUImageVignetteFilter *) filter setVignetteEnd:0.6];
+                } break;
+                case 20: {
+                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
+                } break;
+                    
+                default:
+                    break;
+            }
+            
+            quickFilteredImage = [filter imageByFilteringImage:inputImage];
 //            SDImageCache *imageCache = [SDImageCache.alloc initWithNamespace:@"Bookly"];
 //            [imageCache storeImage:quickFilteredImage forKey:filters];
 //        }
-//        
-//        [btn setImage:quickFilteredImage forState:UIControlStateNormal];
-//        [self.secondEffectsSlider addSubview:btn];
-//        [self.secondEffectsSlider addSubview:label];
-//        //        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"com.guruhubb.bookly.subscription"]){
-//        //        if(![[MKStoreManager sharedManager] isSubscriptionActive:kFeatureAId]){
+        
+        [btn setImage:quickFilteredImage forState:UIControlStateNormal];
+        [self.filterSelectionBar addSubview:btn];
+        [self.filterSelectionBar addSubview:label];
+        //        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"com.guruhubb.bookly.subscription"]){
+        //        if(![[MKStoreManager sharedManager] isSubscriptionActive:kFeatureAId]){
 //        if (![[NSUserDefaults standardUserDefaults] boolForKey:kFeature1]){
 //            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockImage.png"]];
 //            imageView.alpha = 0.4;
@@ -794,11 +804,12 @@
 //            //            imageView.tag = ind;
 //            [btn addSubview:imageView];
 //        }
-//        //        else
-//        //            [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:@"booklySubscription"];
-//        
+        //        else
+        //            [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:@"booklySubscription"];
+        
 //    }
-//}
+}
+}
 
 - (void)effectsClicked:(UIButton *)clickedBtn {
 //    [  Flurry logEvent:@"Frame - Effects"];
@@ -824,201 +835,201 @@
 //            for (int i=0;i<[self.originalImages count];i++){
 //                if ( (i == imageView.tag) && imageView.image ){
                     UIImage *inputImage = self.selectedImage;
-//                    switch (clickedBtn.tag) {
-//                        case 1:{
-//                            filter = [[GPUImageFilter alloc] init]; //original
+                    switch (clickedBtn.tag) {
+                        case 1:{
+                            filter = [[GPUImageFilter alloc] init]; //original
 //                            videoFilter = [[GPUImageFilter alloc] init]; //original
-//                        } break;
-//                        case 2: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
+                        } break;
+                        case 2: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
-//                        } break;
-//                        case 3: {
-//                            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
+                        } break;
+                        case 3: {
+                            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
-//                        } break;
-//                        case 4: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
+                        } break;
+                        case 4: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
-//                        } break;
-//                        case 5: {
-//                            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
+                        } break;
+                        case 5: {
+                            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
-//                        } break;
-//                        case 6:{
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
+                        } break;
+                        case 6:{
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
-//                        } break;
-//                        case 7: {
-//                            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
+                        } break;
+                        case 7: {
+                            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
-//                        } break;
-//                        case 8: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
+                        } break;
+                        case 8: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
-//                        } break;
-//                        case 9: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
+                        } break;
+                        case 9: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
-//                        } break;
-//                        case 10: {
-//                            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
+                        } break;
+                        case 10: {
+                            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
-//                        } break;
-//                        case 11: {
-//                            filter = [[GPUImageGrayscaleFilter alloc] init];
+                        } break;
+                        case 11: {
+                            filter = [[GPUImageGrayscaleFilter alloc] init];
 //                            videoFilter = [[GPUImageGrayscaleFilter alloc] init];
-//                        } break;
-//                    }
-//                    UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
-//                    imageView.image=quickFilteredImage;
-//                    [filter removeAllTargets];
+                        } break;
+                    }
+                    UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                    imageView.image=quickFilteredImage;
+                    [filter removeAllTargets];
             
                 }
             }
 //        }
 //    }
 }
-//- (void)secondEffectsClicked:(UIButton *)clickedBtn {
+- (void)secondEffectsClicked:(UIButton *)clickedBtn {
 //    [labelToApplyFilterToVideo removeFromSuperview];
 //    if (tapBlockNumber==100) tapBlockNumber=0;
 //    AppRecord *app = [[AppRecord alloc] init];
 //    [Flurry logEvent:@"Frame - Second Effects"];
-//    
+    
 //    if (![defaults boolForKey:kFeature1]){
 //        _inAppView.hidden=NO;
 //        [self.view bringSubviewToFront:_inAppView];
 //        return;
 //    }
-//    for (int i = 1; i <= 20; i++) {
-//        UIButton *frameButton = (UIButton *)[_secondEffectsSlider viewWithTag:i];
-//        frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
-//    }
-//    for (int i = 1; i <= 11; i++) {
-//        UIButton *frameButton = (UIButton *)[_effectsSlider viewWithTag:i];
-//        frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
-//    }
-//    clickedBtnTag= 11+clickedBtn.tag;
+    for (int i = 1; i <= 20; i++) {
+        UIButton *frameButton = (UIButton *)[_filterSelectionBar viewWithTag:i];
+        frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
+    }
+    for (int i = 1; i <= 11; i++) {
+        UIButton *frameButton = (UIButton *)[_filterSelectionBar viewWithTag:i];
+        frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
+    }
+//    NSInteger clickedBtnTag= 11+clickedBtn.tag;
 //    blendBtnClicked=NO;
 //    effectsBtnClicked=YES;
-//    clickedBtn.layer.borderColor=[[UIColor blackColor] CGColor];
-//    for (UIScrollView *blockSlider in self.droppableAreas){
-//        if (blockSlider.tag == tapBlockNumber){
-//            if (blockSlider.subviews.count==0) return;
-//            UIImageView *imageView = blockSlider.subviews[0];
+    clickedBtn.layer.borderColor=[[UIColor blackColor] CGColor];
+    for (UIScrollView *blockSlider in droppableAreas){
+        if (blockSlider.tag == tapBlockNumber){
+            if (blockSlider.subviews.count==0) return;
+            UIImageView *imageView = blockSlider.subviews[0];
 //            for (int i=0;i<[self.originalImages count];i++){
 //                if ( (i == imageView.tag) && imageView.image ){
-//                    UIImage *inputImage = [self.originalImages objectAtIndex:i];
-//                    switch (clickedBtn.tag) {
-//                        case 1:{
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"2strip.png"];
+                    UIImage *inputImage = self.selectedImage;
+                    switch (clickedBtn.tag) {
+                        case 1:{
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"2strip.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"2strip.png"];
-//                            
-//                        } break;
-//                        case 2: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarmBleach.png"];
+                            
+                        } break;
+                        case 2: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarmBleach.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarmBleach.png"];
-//                            
-//                        } break;
-//                        case 3: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWinter.png"];
+                            
+                        } break;
+                        case 3: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWinter.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWinter.png"];
-//                            
-//                        } break;
-//                        case 4: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWarm.png"];
+                            
+                        } break;
+                        case 4: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWarm.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWarm.png"];
-//                            
-//                        } break;
-//                        case 5: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"candlelight.png"];
+                            
+                        } break;
+                        case 5: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"candlelight.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"candlelight.png"];
-//                            
-//                        } break;
-//                        case 6:{
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors.png"];
+                            
+                        } break;
+                        case 6:{
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors.png"];
-//                            
-//                        } break;
-//                        case 7: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
+                            
+                        } break;
+                        case 7: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
-//                            
-//                        } break;
-//                            
-//                        case 8: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"foggynight.png"];
+                            
+                        } break;
+                            
+                        case 8: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"foggynight.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"foggynight.png"];
-//                            
-//                        } break;
-//                        case 9: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cobalt2Iron80Bleach.png"];
+                            
+                        } break;
+                        case 9: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cobalt2Iron80Bleach.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cobalt2Iron80Bleach.png"];
-//                            
-//                        } break;
-//                        case 10: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"blue.png"];
+                            
+                        } break;
+                        case 10: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"blue.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"blue.png"];
-//                            
-//                        } break;
-//                        case 11: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fuji2393.png"];
+                            
+                        } break;
+                        case 11: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fuji2393.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fuji2393.png"];
-//                            
-//                        } break;
-//                        case 12: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleak.png"];
+                            
+                        } break;
+                        case 12: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleak.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleak.png"];
-//                            
-//                        } break;
-//                        case 13: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachMoonlight.png"];
+                            
+                        } break;
+                        case 13: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachMoonlight.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachMoonlight.png"];
-//                            
-//                        } break;
-//                        case 14: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cyanSeleniumBleachMoonlight.png"];
+                            
+                        } break;
+                        case 14: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cyanSeleniumBleachMoonlight.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cyanSeleniumBleachMoonlight.png"];
-//                            
-//                        } break;
-//                        case 15: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarm.png"];
+                            
+                        } break;
+                        case 15: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarm.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarm.png"];
-//                            
-//                        } break;
-//                        case 16: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"gold2.png"];
+                            
+                        } break;
+                        case 16: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"gold2.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"gold2.png"];
-//                            
-//                        } break;
-//                        case 17: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"platinum.png"];
+                            
+                        } break;
+                        case 17: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"platinum.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"platinum.png"];
-//                            
-//                        } break;
-//                        case 18: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
+                            
+                        } break;
+                        case 18: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
-//                            
-//                        } break;
-//                        case 19: {
-//                            filter = [[GPUImageVignetteFilter alloc] init];
-//                            [(GPUImageVignetteFilter *) filter setVignetteEnd:0.6];
+                            
+                        } break;
+                        case 19: {
+                            filter = [[GPUImageVignetteFilter alloc] init];
+                            [(GPUImageVignetteFilter *) filter setVignetteEnd:0.6];
 //                            videoFilter = [[GPUImageVignetteFilter alloc] init];
 //                            [(GPUImageVignetteFilter *) videoFilter setVignetteEnd:0.6];
-//                        } break;
-//                        case 20: {
-//                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
+                        } break;
+                        case 20: {
+                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
-//                            
-//                        } break;
-//                            
-//                        default:
-//                            break;
-//                    }
-//                    UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
-//                    [filter removeAllTargets];
-//                    imageView.image=quickFilteredImage;
+                            
+                        } break;
+                            
+                        default:
+                            break;
+                    }
+                    UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                    [filter removeAllTargets];
+                    imageView.image=quickFilteredImage;
 //                    filterVideo=nil;
 //                    app=_videoArray[imageView.tag];
 //                    if ([app.appURLString isEqualToString:@"video"]){
@@ -1044,32 +1055,32 @@
 //                            filterVideo = app.appURL;
 //                        [self.frameContainerSlider addSubview:labelToApplyFilterToVideo];
 //                    }
-//                    
-//                    
-//                    //                                        if (app.appURL){
-//                    //                                            filterVideo = app.appURL;
-//                    ////                                            [self.bottomView addSubview:labelToApplyFilterToVideo];
-//                    //
-//                    //                                            labelToApplyFilterToVideo.hidden=NO;
-//                    //                                            [self.bottomView bringSubviewToFront:labelToApplyFilterToVideo];
-//                    
-//                    //                                        }
-//                    //                                        if (!brightenState) {
-//                    //                                            blurFilter = [[GPUImageBrightnessFilter alloc] init];
-//                    //                                            [(GPUImageBrightnessFilter *) blurFilter setBrightness:0.15];
-//                    //                                            quickFilteredImage = [blurFilter imageByFilteringImage:quickFilteredImage];
-//                    //                                            [blurFilter removeAllTargets];
-//                    //                                        }
-//                    //                                        if (clickedBtn.tag==1)
-//                    //                                            quickFilteredImage = [self.originalImages objectAtIndex:i];
-//                    
-//                    //                                        imageView.image=quickFilteredImage;
-//                    //                                    }
-//                }
+            
+                    
+                    //                                        if (app.appURL){
+                    //                                            filterVideo = app.appURL;
+                    ////                                            [self.bottomView addSubview:labelToApplyFilterToVideo];
+                    //
+                    //                                            labelToApplyFilterToVideo.hidden=NO;
+                    //                                            [self.bottomView bringSubviewToFront:labelToApplyFilterToVideo];
+                    
+                    //                                        }
+                    //                                        if (!brightenState) {
+                    //                                            blurFilter = [[GPUImageBrightnessFilter alloc] init];
+                    //                                            [(GPUImageBrightnessFilter *) blurFilter setBrightness:0.15];
+                    //                                            quickFilteredImage = [blurFilter imageByFilteringImage:quickFilteredImage];
+                    //                                            [blurFilter removeAllTargets];
+                    //                                        }
+                    //                                        if (clickedBtn.tag==1)
+                    //                                            quickFilteredImage = [self.originalImages objectAtIndex:i];
+                    
+                    //                                        imageView.image=quickFilteredImage;
+                    //                                    }
+                }
 //            }
 //        }
-//    }
-//}
+    }
+}
 //- (void) originalClicked {
 //    blendOrignalClicked=YES;
 //    for (UIScrollView *blockSlider in self.droppableAreas){
@@ -1090,12 +1101,29 @@
 //    }
 //}
 #pragma mark Autoload
+- (void) hideBars {
+    _filterSelectionBar.hidden=YES;
+    _frameSelectionBar.hidden=YES;
+    _rotateMenuView.hidden=YES;
+}
+- (IBAction)rotateButton:(id)sender {
+    [self hideBars];
+    _rotateMenuView.hidden=NO;
+}
+- (IBAction)filtersButton:(id)sender {
+    [self hideBars];
+    _filterSelectionBar.hidden=NO;
+}
+- (IBAction)framesButton:(id)sender {
+    [self hideBars];
+    _frameSelectionBar.hidden=NO;
+}
 
 - (void) selectFrame:(int)style SUB:(int)sub
 {
     
     
-    if (firstTime){
+    if (!firstTime){
         
 //        frameContainerArray = [[NSMutableArray alloc]init];
 //        canvasArray = [[NSMutableArray alloc] init];
@@ -1107,14 +1135,14 @@
 //        _doodleArray= [[NSMutableArray alloc] init];
         //        _labelViewArray=[[NSMutableArray alloc] init];
         
-        self.frameSelectionBar = (UIScrollView *)[self.view viewWithTag:10130];
-        self.frameSelectionBar.delegate = self;
+//        self.frameSelectionBar = (UIScrollView *)[self.view viewWithTag:10130];
+//        self.frameSelectionBar.delegate = self;
 //        self.frameSelectionBar.userInteractionEnabled=YES;
-        self.frameSelectionBar.canCancelContentTouches=NO;
+//        self.frameSelectionBar.canCancelContentTouches=NO;
         //        self.frameSlider.scrollEnabled = YES;
         ////        self.scrollIcon.alpha=0.5;
         ////        scrollON=NO;
-        self.frameSelectionBar.scrollEnabled=NO;
+//        self.frameSelectionBar.scrollEnabled=NO;
 //        frameCount= [self.originalImages count]/style;
 //        if ([originalImages count]%style != 0) frameCount++;
 //        
@@ -1123,7 +1151,7 @@
 //            self.frameSlider.contentSize = CGSizeMake(320 * frameCount, 320);//SB v1.0i
 //        }
         
-        firstTime = NO;
+        firstTime = YES;
         nStyle= style;
         nSubStyle = sub;
 //        cornerState=0;
@@ -1135,9 +1163,9 @@
 //        {
 //            NSLog(@"frameCount = %i",i);
         
-            frameContainer = [[UIView alloc] initWithFrame:CGRectMake(5, 5, 310, 310)];
+//            self.frameContainer = [[UIView alloc] initWithFrame:CGRectMake(5, 5, 310, 310)];
 //            self.frameContainer.tag = i;
-            frameContainer.backgroundColor = [UIColor clearColor];
+            self.frameContainer.backgroundColor = [UIColor clearColor];
 //            if (self.frameContainer.tag == i) {
 //                [self.frameSlider addSubview:self.frameContainer];
 //                [self.frameContainerArray addObject:self.frameContainer];
@@ -1194,12 +1222,12 @@
             [blockSlider4.layer setBorderWidth:kBorderWidth];
             
             
-            if ((blockSlider1.tag == 0) || (blockSlider2.tag == 1) || (blockSlider3.tag == 2) || (blockSlider4.tag == 3)) {
-                [frameContainer addSubview:blockSlider1];
-                [frameContainer addSubview:blockSlider2];
-                [frameContainer addSubview:blockSlider3];
-                [frameContainer addSubview:blockSlider4];
-            }
+//            if ((blockSlider1.tag == 0) || (blockSlider2.tag == 1) || (blockSlider3.tag == 2) || (blockSlider4.tag == 3)) {
+                [self.frameContainer addSubview:blockSlider1];
+                [self.frameContainer addSubview:blockSlider2];
+                [self.frameContainer addSubview:blockSlider3];
+                [self.frameContainer addSubview:blockSlider4];
+//            }
         
             
             //            UITapGestureRecognizer *tapBlock1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBlockEffects:)];
@@ -1399,7 +1427,7 @@
         UITapGestureRecognizer *tapBlock = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBlock:)];
         tapBlock.numberOfTapsRequired = 1;
         [tapBlock setDelegate:self];
-        [frameContainer addGestureRecognizer:tapBlock];
+        [self.frameContainer addGestureRecognizer:tapBlock];
         
         //        UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(eraseImage:)];
         //        tap1.numberOfTapsRequired = 2;
@@ -1408,7 +1436,7 @@
         
         UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchImage:)];
         pinchGesture.delegate=self;
-        [frameContainer addGestureRecognizer:pinchGesture];
+        [self.frameContainer addGestureRecognizer:pinchGesture];
         
 //        UIRotationGestureRecognizer *rotationGesture= [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotateImage:)];
 //        rotationGesture.delegate=self;
@@ -1416,7 +1444,7 @@
     
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanImage:)];
         panGesture.delegate=self;
-        [frameContainer addGestureRecognizer:panGesture];
+        [self.frameContainer addGestureRecognizer:panGesture];
         
 //        if (frameCount < kFrameMax) {
 //            self.tapToAddAFrame.frame = CGRectMake(320*(frameCount)+5, 5, 310, 350);
@@ -1940,9 +1968,9 @@
     
 }
 - (void) fillRotateMenu {
-    _rotateMenuView = [[UIScrollView alloc] initWithFrame:self.frameSelectionBar.frame];
+//    _rotateMenuView = [[UIScrollView alloc] initWithFrame:self.frameSelectionBar.frame];
     //    _rotateMenuView.contentSize=CGSizeMake(320, self.photoSlider.frame.size.height);
-    _rotateMenuView.backgroundColor=[UIColor darkGrayColor];
+//    _rotateMenuView.backgroundColor=[UIColor darkGrayColor];
     
 //    [self.bottomView addSubview:_rotateMenuView];
     
@@ -2077,14 +2105,14 @@
     NSLog(@"style=%d,sub=%d",style,sub);
     if (style == 1) {
         if( sub == 1) {
-            scroll_width = frameContainer.frame.size.width - 10 * 2;
-            scroll_height = frameContainer.frame.size.height - 10 * 2;
+            scroll_width = self.frameContainer.frame.size.width - 10 * 2;
+            scroll_height = self.frameContainer.frame.size.height - 10 * 2;
             rc = CGRectMake(10, 10, scroll_width, scroll_height );
             return rc;
             NSLog(@"width=%f , height=%f",scroll_width,scroll_height);
         }else if( sub == 2) {
-            scroll_width = frameContainer.frame.size.width - 10 * 7;
-            scroll_height = frameContainer.frame.size.height - 10 * 7;
+            scroll_width = self.frameContainer.frame.size.width - 10 * 7;
+            scroll_height = self.frameContainer.frame.size.height - 10 * 7;
             nLeftMargin =10 * 7/2;
             nTopMargin = 10 * 7/2;
             NSLog(@"width=%f , height=%f",scroll_width,scroll_height);
@@ -2092,21 +2120,21 @@
             return rc;
         }
         else if( sub == 3) {
-            scroll_width = frameContainer.frame.size.width - 10 * 2;
-            scroll_height = frameContainer.frame.size.height - 10 * 7*2;
+            scroll_width = self.frameContainer.frame.size.width - 10 * 2;
+            scroll_height = self.self.frameContainer.frame.size.height - 10 * 7*2;
             NSLog(@"width=%f , height=%f",scroll_width,scroll_height);
             rc = CGRectMake(10, 10, scroll_width, scroll_height );
             return rc;
         }
         else if ( sub == 4) {
-            scroll_width = frameContainer.frame.size.width - nMargin * 8*2;
-            scroll_height = frameContainer.frame.size.height - nMargin * 5*2;
+            scroll_width = self.frameContainer.frame.size.width - nMargin * 8*2;
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 5*2;
             NSLog(@"width=%f , height=%f",scroll_width,scroll_height);
         }
         
         else if ( sub == 5) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) / 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) / 2;
             //            nTopMargin = nMargin;
             nLeftMargin = nMargin * 2 + scroll_width;
             //nLeftMargin=  200;
@@ -2194,38 +2222,38 @@
     
     else if (style == 2) {
         if (sub == 1) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = frameContainer.frame.size.height - nMargin * 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 2;
             //NSLog(@"sub 2=%d",sub);
         }
         else if (sub == 2) {
-            scroll_width = frameContainer.frame.size.width - nMargin * 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) / 2;
+            scroll_width = self.frameContainer.frame.size.width - nMargin * 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) / 2;
         }
         else if (sub == 3){
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) / 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) / 2;
         }
         else if(sub == 4){
             
-            scroll_width = (frameContainer.frame.size.width - 10 * 3 ) / 2;
-            scroll_height = frameContainer.frame.size.height - 10 * 4;
+            scroll_width = (self.frameContainer.frame.size.width - 10 * 3 ) / 2;
+            scroll_height = self.frameContainer.frame.size.height - 10 * 4;
             nTopMargin=10 *2;
             rc = CGRectMake(10, nTopMargin, scroll_width, scroll_height );
             return rc;
         }
         else if(sub == 5){
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 12);
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 12);
             nTopMargin=nMargin *6;
             rc = CGRectMake(nMargin, nTopMargin, scroll_width, scroll_height );
             return rc;
             
         }
         else if(sub == 6){
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            //            scroll_height = (frameContainer.frame.size.height - nMargin * 14);
-            scroll_height = (frameContainer.frame.size.height - nMargin * 4 )/2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            //            scroll_height = (self.frameContainer.frame.size.height - nMargin * 14);
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 )/2;
             nTopMargin=nMargin *2;
             nLeftMargin = nMargin * 5;
             rc = CGRectMake(nLeftMargin, nTopMargin, scroll_width, scroll_height );
@@ -2296,23 +2324,23 @@
     }
     else if (style == 3) {
         if (sub == 1) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) * 2 / 5;
-            scroll_height = frameContainer.frame.size.height - nMargin * 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) * 2 / 5;
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 2;
         } else if (sub == 2) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) / 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) / 2;
         } else if (sub == 3) {
-            scroll_width = frameContainer.frame.size.width - nMargin * 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 2 / 5;
+            scroll_width = self.frameContainer.frame.size.width - nMargin * 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 2 / 5;
         } else if (sub == 4) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
         } else if (sub == 5) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 4 ) / 3;
-            scroll_height = frameContainer.frame.size.height - nMargin * 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 2;
         } else if (sub == 6) {
-            scroll_width = frameContainer.frame.size.width - nMargin * 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 4 ) / 3;
+            scroll_width = self.frameContainer.frame.size.width - nMargin * 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 ) / 3;
         }
         else if (sub == 7){
             scroll_width = 150;
@@ -2374,36 +2402,36 @@
     }
     else if (style == 4) {
         if (sub == 1) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) / 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) / 2;
         } else if (sub == 2) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 5 ) / 4;
-            scroll_height = frameContainer.frame.size.height - nMargin * 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 5 ) / 4;
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 2;
         } else if (sub == 3) {
-            scroll_width = frameContainer.frame.size.width - nMargin * 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 5 ) / 4;
+            scroll_width = self.frameContainer.frame.size.width - nMargin * 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 5 ) / 4;
         } else if (sub == 4) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) * 2 / 5;
-            scroll_height = frameContainer.frame.size.height - nMargin * 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) * 2 / 5;
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 2;
         } else if (sub == 5) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 4 ) / 3;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 ) / 3;
         } else if (sub == 6) {
-            scroll_width = frameContainer.frame.size.width - nMargin * 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 2 / 5;
+            scroll_width = self.frameContainer.frame.size.width - nMargin * 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 2 / 5;
         } else if (sub == 7) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 4 ) / 3;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
         }else if (sub == 8){
-            scroll_width = (frameContainer.frame.size.width - nMargin * 4);
-            scroll_height = frameContainer.frame.size.height - nMargin * 10.50;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4);
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 10.50;
             nLeftMargin = nMargin * 2;
             rc = CGRectMake( nLeftMargin, nMargin, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 9){
-            scroll_width = (frameContainer.frame.size.width - nMargin * 5 ) / 3;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3)*6/18;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 5 ) / 3;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3)*6/18;
             nTopMargin = nMargin  ;
             rc = CGRectMake(nMargin, nTopMargin, scroll_width, scroll_height );
             return rc;
@@ -2468,53 +2496,53 @@
     }
     else if (style == 2) {
         if (sub == 1) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = frameContainer.frame.size.height - nMargin * 2;
-            nLeftMargin = frameContainer.frame.size.width - nMargin - scroll_width;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 2;
+            nLeftMargin = self.frameContainer.frame.size.width - nMargin - scroll_width;
             nTopMargin = nMargin;
-            NSLog(@"Scroll 2 inside nLeftMargin=%f nTopMargin=%f width=%f,height=%f",nLeftMargin,nTopMargin,frameContainer.frame.size.width,frameContainer.frame.size.height);
+            NSLog(@"Scroll 2 inside nLeftMargin=%f nTopMargin=%f width=%f,height=%f",nLeftMargin,nTopMargin,self.frameContainer.frame.size.width,self.frameContainer.frame.size.height);
         }
         else if (sub == 2) {
-            scroll_width = frameContainer.frame.size.width - nMargin * 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3) / 2;
-            nTopMargin = frameContainer.frame.size.height - nMargin - scroll_height;
+            scroll_width = self.frameContainer.frame.size.width - nMargin * 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3) / 2;
+            nTopMargin = self.frameContainer.frame.size.height - nMargin - scroll_height;
             nLeftMargin = nMargin;
             NSLog(@"Scroll 2 inside nLeftMargin=%f nTopMargin=%f width=%f,height=%f",nLeftMargin,nTopMargin,scroll_width,scroll_height);
         }
         else if (sub == 3){
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) / 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) / 2;
             nLeftMargin = nMargin;
             nTopMargin = nMargin * 2 + scroll_height;
             
         }
         else if (sub == 4){
-            scroll_width = (frameContainer.frame.size.width - 10 * 3 ) / 2;
-            scroll_height = frameContainer.frame.size.height - 10 * 10;
-            nLeftMargin = frameContainer.frame.size.width - 10 - scroll_width;
+            scroll_width = (self.frameContainer.frame.size.width - 10 * 3 ) / 2;
+            scroll_height = self.frameContainer.frame.size.height - 10 * 10;
+            nLeftMargin = self.frameContainer.frame.size.width - 10 - scroll_width;
             nTopMargin = 10 *5;
             
         }
         else if (sub == 5){
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 12);
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 12);
             nTopMargin=nMargin *6;
             //            rc = CGRectMake(nMargin, nTopMargin, scroll_width, scroll_height );
             //            return rc;
-            //            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            //            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 5 / 9;
-            nLeftMargin = frameContainer.frame.size.width - nMargin - scroll_width;
+            //            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            //            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 5 / 9;
+            nLeftMargin = self.frameContainer.frame.size.width - nMargin - scroll_width;
             //            nTopMargin = nMargin *6;
         }
         else if (sub == 6){
-            //            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            //            scroll_height = (frameContainer.frame.size.height - nMargin * 3 )* 6/13;
-            //            nLeftMargin = frameContainer.frame.size.width - 5*nMargin - scroll_width;
+            //            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            //            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 )* 6/13;
+            //            nLeftMargin = self.frameContainer.frame.size.width - 5*nMargin - scroll_width;
             ////            nTopMargin = nMargin *13;
             //            nTopMargin = nMargin *18;
             
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 4 ) / 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 ) / 2;
             
             nLeftMargin = -nMargin * 2 + scroll_width;
             nTopMargin = nMargin * 2 + scroll_height;
@@ -2583,33 +2611,33 @@
     }
     else if (style == 3) {
         if (sub == 1) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) / 2;
-            nLeftMargin = frameContainer.frame.size.width - nMargin - scroll_width;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) / 2;
+            nLeftMargin = self.frameContainer.frame.size.width - nMargin - scroll_width;
             nTopMargin = nMargin;
         } else if (sub == 2) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) * 2 / 5;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 2 );
-            nLeftMargin = frameContainer.frame.size.width - nMargin - scroll_width;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) * 2 / 5;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 2 );
+            nLeftMargin = self.frameContainer.frame.size.width - nMargin - scroll_width;
             nTopMargin = nMargin;
         } else if (sub == 3) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
-            nTopMargin = frameContainer.frame.size.height - nMargin - scroll_height;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
+            nTopMargin = self.frameContainer.frame.size.height - nMargin - scroll_height;
             nLeftMargin = nMargin;
         } else if (sub == 4) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
-            nLeftMargin = frameContainer.frame.size.width - nMargin - scroll_width;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
+            nLeftMargin = self.frameContainer.frame.size.width - nMargin - scroll_width;
             nTopMargin = nMargin;
         } else if (sub == 5) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 4 ) / 3;
-            scroll_height = frameContainer.frame.size.height - nMargin * 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 2;
             nTopMargin = nMargin;
             nLeftMargin = nMargin * 2 + scroll_width;
         } else if (sub == 6) {
-            scroll_width = frameContainer.frame.size.width - nMargin * 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 4 ) / 3;
+            scroll_width = self.frameContainer.frame.size.width - nMargin * 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 ) / 3;
             nLeftMargin = nMargin;
             nTopMargin = nMargin * 2 + scroll_height;
         }
@@ -2664,50 +2692,50 @@
     }
     else if (style == 4) {
         if (sub == 1) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) / 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) / 2;
             nTopMargin = nMargin;
             nLeftMargin = nMargin * 2 + scroll_width;
         } else if (sub == 2) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 5 ) / 4;
-            scroll_height = frameContainer.frame.size.height - nMargin * 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 5 ) / 4;
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 2;
             nTopMargin = nMargin;
             nLeftMargin = nMargin * 2 + scroll_width;
         } else if (sub == 3) {
-            scroll_width = frameContainer.frame.size.width - nMargin * 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 5 ) / 4;
+            scroll_width = self.frameContainer.frame.size.width - nMargin * 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 5 ) / 4;
             nLeftMargin = nMargin;
             nTopMargin = nMargin * 2 + scroll_height;
         } else if (sub == 4) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 4 ) / 3;
-            nLeftMargin = frameContainer.frame.size.width - nMargin - scroll_width;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 ) / 3;
+            nLeftMargin = self.frameContainer.frame.size.width - nMargin - scroll_width;
             nTopMargin = nMargin;
         } else if (sub == 5) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) * 2 / 5;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 2 );
-            nLeftMargin = frameContainer.frame.size.width - nMargin - scroll_width;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) * 2 / 5;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 2 );
+            nLeftMargin = self.frameContainer.frame.size.width - nMargin - scroll_width;
             nTopMargin = nMargin;
         } else if (sub == 6) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 4 ) / 3;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
-            nTopMargin = frameContainer.frame.size.height - nMargin - scroll_height;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
+            nTopMargin = self.frameContainer.frame.size.height - nMargin - scroll_height;
             nLeftMargin = nMargin;
         } else if (sub == 7) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 4 ) / 3;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
             nTopMargin = nMargin;
             nLeftMargin = nMargin * 2 + scroll_width;
         }else if (sub == 8){
-            scroll_width = (frameContainer.frame.size.width - nMargin * 4 ) / 3;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3)*6/17;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3)*6/17;
             nTopMargin = nMargin *15 ;
             rc = CGRectMake(nMargin, nTopMargin, scroll_width, scroll_height );
             return rc;
             
         } else if (sub == 9) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 4 ) / 3;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 )*6 /9 ;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 )*6 /9 ;
             nTopMargin = nMargin *8.50;
             nLeftMargin = nMargin*7;
             rc = CGRectMake( nLeftMargin, nTopMargin, scroll_width, scroll_height );
@@ -2771,34 +2799,34 @@
     
     if (style == 3) {
         if (sub == 1) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) / 2;
-            nLeftMargin = frameContainer.frame.size.width - nMargin - scroll_width;
-            nTopMargin = frameContainer.frame.size.height - nMargin - scroll_height;
-            NSLog(@"Scroll 3 inside nLeftMargin=%f nTopMargin=%f width=%f,height=%f",nLeftMargin,nTopMargin,frameContainer.frame.size.width,frameContainer.frame.size.height);
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) / 2;
+            nLeftMargin = self.frameContainer.frame.size.width - nMargin - scroll_width;
+            nTopMargin = self.frameContainer.frame.size.height - nMargin - scroll_height;
+            NSLog(@"Scroll 3 inside nLeftMargin=%f nTopMargin=%f width=%f,height=%f",nLeftMargin,nTopMargin,self.frameContainer.frame.size.width,self.frameContainer.frame.size.height);
         } else if (sub == 2) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) / 2;
-            nTopMargin = frameContainer.frame.size.height - nMargin - scroll_height;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) / 2;
+            nTopMargin = self.frameContainer.frame.size.height - nMargin - scroll_height;
             nLeftMargin = nMargin;
         } else if (sub == 3) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
-            nTopMargin = frameContainer.frame.size.height - nMargin - scroll_height;
-            nLeftMargin = frameContainer.frame.size.width - nMargin - scroll_width;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
+            nTopMargin = self.frameContainer.frame.size.height - nMargin - scroll_height;
+            nLeftMargin = self.frameContainer.frame.size.width - nMargin - scroll_width;
         } else if (sub == 4) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 2 );
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 2 / 5;
-            nTopMargin = frameContainer.frame.size.height - nMargin - scroll_height;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 2 );
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 2 / 5;
+            nTopMargin = self.frameContainer.frame.size.height - nMargin - scroll_height;
             nLeftMargin = nMargin;
         } else if (sub == 5) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 4 ) / 3;
-            scroll_height = frameContainer.frame.size.height - nMargin * 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 2;
             nTopMargin = nMargin;
             nLeftMargin = nMargin * 3 + scroll_width * 2;
         } else if (sub == 6) {
-            scroll_width = frameContainer.frame.size.width - nMargin * 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 4 ) / 3;
+            scroll_width = self.frameContainer.frame.size.width - nMargin * 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 ) / 3;
             nLeftMargin = nMargin;
             nTopMargin = nMargin * 3 + scroll_height * 2;
         }
@@ -2853,51 +2881,51 @@
     }
     else if (style == 4) {
         if (sub == 1) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) / 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) / 2;
             nLeftMargin = nMargin;
             nTopMargin = nMargin * 2 + scroll_height;
         } else if (sub == 2) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 5 ) / 4;
-            scroll_height = frameContainer.frame.size.height - nMargin * 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 5 ) / 4;
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 2;
             nTopMargin = nMargin;
             nLeftMargin = nMargin * 3 + scroll_width * 2;
         } else if (sub == 3) {
-            scroll_width = frameContainer.frame.size.width - nMargin * 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 5 ) / 4;
+            scroll_width = self.frameContainer.frame.size.width - nMargin * 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 5 ) / 4;
             nLeftMargin = nMargin;
             nTopMargin = nMargin * 3 + scroll_height * 2;
         } else if (sub == 4) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 4 ) / 3;
-            nLeftMargin = frameContainer.frame.size.width - nMargin - scroll_width;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 ) / 3;
+            nLeftMargin = self.frameContainer.frame.size.width - nMargin - scroll_width;
             nTopMargin = nMargin * 2 + scroll_height;
         } else if (sub == 5) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 4 ) / 3;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 ) / 3;
             nTopMargin = nMargin * 2 + scroll_height;
             nLeftMargin = nMargin;
         } else if (sub == 6) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 4 ) / 3;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
-            nTopMargin = frameContainer.frame.size.height - nMargin - scroll_height;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
+            nTopMargin = self.frameContainer.frame.size.height - nMargin - scroll_height;
             nLeftMargin = nMargin * 2 + scroll_width;
         } else if (sub == 7) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 4 ) / 3;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
             nTopMargin = nMargin;
             nLeftMargin = nMargin * 3 + scroll_width * 2;
         }else if (sub == 8) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 4 ) / 3;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 )*6 /17 ;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 )*6 /17 ;
             nTopMargin = nMargin *15;
             nLeftMargin = nMargin * 2 + scroll_width;
             rc = CGRectMake(nLeftMargin , nTopMargin, scroll_width, scroll_height );
             return rc;
             
         }else if (sub == 9) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 15.50 ) ;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 12);
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 15.50 ) ;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 12);
             nTopMargin=nMargin *4;
             nLeftMargin = nMargin * 14.50;
             rc = CGRectMake(nLeftMargin , nTopMargin, scroll_width, scroll_height );
@@ -2960,44 +2988,44 @@
     
     if (style == 4) {
         if (sub == 1) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) / 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) / 2;
             nLeftMargin = nMargin * 2 + scroll_width;
             nTopMargin = nMargin * 2 + scroll_height;
             NSLog(@"Scroll 4 inside nLeftMargin=%f nTopMargin=%f width=%f,height=%f",nLeftMargin,nTopMargin,scroll_width,scroll_height);
         } else if (sub == 2) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 5 ) / 4;
-            scroll_height = frameContainer.frame.size.height - nMargin * 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 5 ) / 4;
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 2;
             nTopMargin = nMargin;
             nLeftMargin = nMargin * 4 + scroll_width * 3;
         } else if (sub == 3) {
-            scroll_width = frameContainer.frame.size.width - nMargin * 2;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 5 ) / 4;
+            scroll_width = self.frameContainer.frame.size.width - nMargin * 2;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 5 ) / 4;
             nLeftMargin = nMargin;
             nTopMargin = nMargin * 4 + scroll_height * 3;
         } else if (sub == 4) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 4 ) / 3;
-            nLeftMargin = frameContainer.frame.size.width - nMargin - scroll_width;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 ) / 3;
+            nLeftMargin = self.frameContainer.frame.size.width - nMargin - scroll_width;
             nTopMargin = nMargin * 3 + scroll_height * 2;
         } else if (sub == 5) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 4 ) / 3;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 ) / 3;
             nTopMargin = nMargin * 3 + scroll_height * 2;
             nLeftMargin = nMargin;
         } else if (sub == 6) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 4 ) / 3;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
-            nTopMargin = frameContainer.frame.size.height - nMargin - scroll_height;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
+            nTopMargin = self.frameContainer.frame.size.height - nMargin - scroll_height;
             nLeftMargin = nMargin * 3 + scroll_width * 2;
         } else if (sub == 7) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 2 );
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 2 / 5;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 2 );
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 2 / 5;
             nLeftMargin = nMargin;
-            nTopMargin = frameContainer.frame.size.height - nMargin - scroll_height;
+            nTopMargin = self.frameContainer.frame.size.height - nMargin - scroll_height;
         }else if (sub == 8) {
-            scroll_width = (frameContainer.frame.size.width - nMargin * 4 ) / 3;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 6 / 17;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 6 / 17;
             nTopMargin = nMargin*15;
             nLeftMargin = nMargin * 3 + scroll_width * 2;
             
@@ -3006,8 +3034,8 @@
         }
         else if (sub == 9) {
             
-            scroll_width = (frameContainer.frame.size.width - nMargin * 6 ) / 3;
-            scroll_height = (frameContainer.frame.size.height - nMargin * 3 ) * 6 / 20;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 6 ) / 3;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 6 / 20;
             nTopMargin = nMargin*16;
             nLeftMargin = nMargin * 3 + scroll_width * 2;
             

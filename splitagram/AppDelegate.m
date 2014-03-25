@@ -14,13 +14,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)
+//    {
+//    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];  //text color on nav bar
 //    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:165/255.0 green:42/255.0 blue:42/255.0 alpha:1.0f]]; //color of nav bar
     // Override point for customization after application launch.
   
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+//    }
     [MKStoreManager sharedManager];
     //create album
     NSString *albumName = @"splitagram";

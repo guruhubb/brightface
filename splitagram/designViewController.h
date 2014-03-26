@@ -8,12 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface designViewController : UIViewController <UIScrollViewDelegate,UIGestureRecognizerDelegate>
+@interface designViewController : UIViewController <UIScrollViewDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate>
 @property (nonatomic, strong) UIImage *selectedImage;
 @property (weak, nonatomic) IBOutlet UIScrollView *menuBar;
 @property (weak, nonatomic) IBOutlet UIScrollView *frameSelectionBar;
 @property (weak, nonatomic) IBOutlet UIScrollView *filterSelectionBar;
 @property (strong, nonatomic) IBOutlet UIScrollView *rotateMenuView;
 @property (weak, nonatomic) IBOutlet UIView *frameContainer;
+@property (weak, nonatomic) IBOutlet UIButton *rotateBtn;
+@property (weak, nonatomic) IBOutlet UIButton *frameBtn;
+@property (weak, nonatomic) IBOutlet UIButton *filtersBtn;
+@property (weak, nonatomic) IBOutlet UILabel *tapFrameLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *watermark;
+@property (weak, nonatomic) IBOutlet UILabel *watermarkLabel;
+@property (weak, nonatomic) IBOutlet UILabel *watermarkOnImage;
 @property (weak, nonatomic) IBOutlet UIScrollView *designViewContainer;
 @end

@@ -56,7 +56,6 @@
     CGFloat zoom4;
     
     GPUImageOutput<GPUImageInput> *filter;
-    
     NSUserDefaults *defaults;
 }
 
@@ -97,6 +96,18 @@
     [self fillSecondFrameSelectionSlider];
     [self fillRotateMenu];
     [self resetGestureParameters ];
+    
+    [_watermark addTarget: self action: @selector(watermarkAction) forControlEvents:UIControlEventValueChanged];
+    if ([defaults boolForKey:kFeature2]) { //if 0 then watermark is ON
+        _watermark.on = NO;
+        _watermarkOnImage.hidden=YES;
+    }
+    else
+        _watermark.on = YES;
+    
+    if ([defaults boolForKey:@"white"])
+        _frameContainer.backgroundColor=[UIColor blackColor];
+
 }
 - (void) resetGestureParameters {
     
@@ -123,10 +134,87 @@
     
 }
 - (void)viewDidAppear:(BOOL)animated   {
+    if (!firstTime){
     [self fillEffectsSlider];
     [self fillSecondEffectsSlider];
+    }
 
 }
+
+-(void)frameAction
+{
+    UIActionSheet *popupQuery;
+    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"get more frames",@"buy for $1.99",nil];
+    popupQuery.tag=0;
+    [popupQuery showInView:self.view];
+}
+-(void)filterAction
+{
+    UIActionSheet *popupQuery;
+    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"get more filters",@"buy for $1.99",nil];
+    popupQuery.tag=1;
+    [popupQuery showInView:self.view];
+}
+-(void)watermarkAction
+{
+    UIActionSheet *popupQuery;
+    if (![defaults boolForKey:kFeature2]){  //if not purchased
+        popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"remove watermark",@"buy for $1.99",nil];
+        popupQuery.tag=2;
+        [popupQuery showInView:self.view];
+        _watermark.on = YES;
+    }
+    else {  //if purchased
+        if (_watermark.on) {
+            _watermark.on = NO;
+            _watermarkOnImage.hidden=YES;
+        }
+        else {
+            _watermark.on = YES;
+            _watermarkOnImage.hidden=NO;
+        }
+    }
+}
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+//    if (actionSheet.tag == 0) {
+        if (buttonIndex==1){
+            [self inAppBuyAction:actionSheet.tag];
+        }
+//        else if (buttonIndex==1)[defaults setBool:YES forKey:@"crop"];
+        
+//    }
+//    else if (actionSheet.tag == 1) {
+//        if (buttonIndex==0){
+//            [self inAppBuyAction:actionSheet.tag];
+//        }
+////        else if (buttonIndex==1)[defaults setBool:YES forKey:@"white"];
+//    }
+//    if (actionSheet.tag == 2) {
+//        if (buttonIndex==0 || buttonIndex ==2){
+//            if (_watermark.on) {
+//                _watermark.on = NO;
+//                _watermarkOnImage.hidden=YES;
+//            }
+//            else {
+//                _watermark.on = YES;
+//                _watermarkOnImage.hidden=NO;
+//            }
+//        }
+//    }
+//            [self inAppBuyAction:actionSheet.tag];
+//        }
+//        //        else if (buttonIndex==1)[defaults setBool:YES forKey:@"white"];
+//    }
+//    
+//    UILabel *label1 = (UILabel *) [self.view viewWithTag:100];
+//    UILabel *label2 = (UILabel *) [self.view viewWithTag:101];
+//    [label1 removeFromSuperview];
+//    [label2 removeFromSuperview];
+//    
+//    [self.settingsTableView reloadData];
+    
+}
+
 
 - (void) updateAppViewAndDefaults {
     NSString *string;
@@ -163,7 +251,7 @@
                 break;
         }
         
-        if ([MKStoreManager isFeaturePurchased:kFeature8]){
+        if ([MKStoreManager isFeaturePurchased:kFeature2]){
             //            UIButton *btn = (UIButton *) [self.inAppSubView viewWithTag:i*2+800];
             //            btn.hidden = YES;
             //            UILabel *label = (UILabel*) [self.inAppSubView viewWithTag:i*2+1+800];
@@ -172,7 +260,7 @@
             //                label.hidden = YES;
             //            else
             //                label.text = @"YES";
-            
+            _watermarkOnImage.hidden=YES;
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:string];
         }
         
@@ -193,13 +281,13 @@
     }
 }
 
-- (IBAction)inAppBuyAction:(id)sender {
+- (IBAction)inAppBuyAction:(int)tag {
 //    [Flurry logEvent:@"InApp BUY"];
-    UIButton *btn = (UIButton *) sender;
+//    UIButton *btn = (UIButton *) sender;
     NSString *string;
-    NSLog(@"btn.tag is %d",btn.tag);
-    [self turnOnIndicator];
-    switch (btn.tag) {
+//    NSLog(@"btn.tag is %d",btn.tag);
+//    [self turnOnIndicator];
+    switch (tag) {
         case 800:
             string = kFeature0;
             break;
@@ -240,7 +328,7 @@
              NSLog(@"Purchased: %@, available downloads is %@ string is %@", purchasedFeature, availableDownloads, string);
              
              
-             [self turnOffIndicator];
+//             [self turnOffIndicator];
              UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Successful" message:nil
                                                             delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
              [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:string];
@@ -252,7 +340,7 @@
                                    onCancelled:^
      {
          NSLog(@"User Cancelled Transaction");
-         [self turnOffIndicator];
+//         [self turnOffIndicator];
      }];
     
 }
@@ -261,7 +349,15 @@
     if ([[segue identifier] isEqualToString:@"doneDesign"])
     {
         doneViewController *vc = [segue destinationViewController];
-        vc.image=self.selectedImage;
+        CGRect rect = _frameContainer.frame;//[[UIScreen mainScreen] bounds];
+        //    UIGraphicsBeginImageContext(rect.size);
+        UIGraphicsBeginImageContextWithOptions(rect.size, YES, 2.0);  //v1.0 bookly use this instead of withoutOptions and 2.0 magnification to give a sharper image  //v1.0g bookly Scaling at 2.0 is too much pixels and too big of an image to email.  0.0 goes to default image size of the device which makes it pretty large.  So the optimum is 1.25 scaling with 0.6 compression to keep most images at around 50kB.
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        
+        [_frameContainer.layer renderInContext:context];
+        vc.image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+//        vc.image=self.selectedImage;
     }
 }
 
@@ -341,6 +437,7 @@
 
 - (void)frameClicked:(UIButton *)clickedBtn
 {
+    [self hideLabels];
 //    NSLog(@"draggable %@, originalimagescount is %d, arrImagescount is %d",self.draggableSubjects, self.originalImages.count, self.arrImages.count);
     //    if (self.originalImages.count !=self.arrImages.count) return;
     
@@ -499,11 +596,13 @@
 {
     
 //    NSLog(@"second frame clicked ");
-//    if (![[NSUserDefaults standardUserDefaults] boolForKey:kFeature0]){
-////        _inAppView.hidden=NO;
-////        [self.view bringSubviewToFront:_inAppView];
-//        return;
-//    }
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kFeature0]){
+        [self frameAction];
+//        _inAppView.hidden=NO;
+//        [self.view bringSubviewToFront:_inAppView];
+        return;
+    }
+    [self hideLabels];
 //    else {
 //
 //        if (firstTime){
@@ -1083,11 +1182,12 @@
 //    AppRecord *app = [[AppRecord alloc] init];
 //    [Flurry logEvent:@"Frame - Second Effects"];
     
-//    if (![defaults boolForKey:kFeature1]){
-////        _inAppView.hidden=NO;
-////        [self.view bringSubviewToFront:_inAppView];
-//        return;
-//    }
+    if (![defaults boolForKey:kFeature1]){
+        [self filterAction];
+//        _inAppView.hidden=NO;
+//        [self.view bringSubviewToFront:_inAppView];
+        return;
+    }
     for (int i = 1; i <= 20; i++) {
         UIButton *frameButton = (UIButton *)[_filterSelectionBar viewWithTag:i];
         frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
@@ -1288,6 +1388,15 @@
 //    }
 //}
 #pragma mark Autoload
+- (void) hideLabels {
+    _watermark.hidden=YES;
+    _watermarkLabel.hidden=YES;
+    _tapFrameLabel.hidden=YES;
+    _rotateBtn.hidden=NO;
+    _frameBtn.hidden=NO;
+    _filtersBtn.hidden=NO;
+    
+}
 - (void) hideBars {
     _filterSelectionBar.hidden=YES;
     _frameSelectionBar.hidden=YES;
@@ -1352,7 +1461,7 @@
         
 //            self.frameContainer = [[UIView alloc] initWithFrame:CGRectMake(5, 5, 310, 310)];
 //            self.frameContainer.tag = i;
-            self.frameContainer.backgroundColor = [UIColor clearColor];
+//            self.frameContainer.backgroundColor = [UIColor clearColor];
 //            if (self.frameContainer.tag == i) {
 //                [self.frameSlider addSubview:self.frameContainer];
 //                [self.frameContainerArray addObject:self.frameContainer];
@@ -1632,7 +1741,7 @@
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanImage:)];
         panGesture.delegate=self;
         [self.frameContainer addGestureRecognizer:panGesture];
-        
+        [self.frameContainer bringSubviewToFront:_watermarkOnImage];
 //        if (frameCount < kFrameMax) {
 //            self.tapToAddAFrame.frame = CGRectMake(320*(frameCount)+5, 5, 310, 350);
 //            self.tapToAddAFrame.hidden = NO;
@@ -1826,6 +1935,8 @@
             [blockSlider addSubview:replaceImage];
             [self fitImageToScroll:replaceImage SCROLL:blockSlider scrollViewNumber:blockSlider.tag  angle:[defaults floatForKey:tagRotate] ];
         }
+        [self.frameContainer bringSubviewToFront:_watermarkOnImage];
+
     }
 }
 //- (IBAction)handleRotateImage:(UIRotationGestureRecognizer *)recognizer {

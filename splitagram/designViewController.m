@@ -96,6 +96,31 @@
     [self fillFrameSelectionSlider];
     [self fillSecondFrameSelectionSlider];
     [self fillRotateMenu];
+    [self resetGestureParameters ];
+}
+- (void) resetGestureParameters {
+    
+    
+    [defaults setFloat:0.0f forKey:@"PanX0"];
+    [defaults setFloat:0.0f forKey:@"PanY0"];
+    [defaults setFloat:0.0f forKey:@"Rotate0"];
+    [defaults setFloat:1.0f forKey:@"Zoom0"];
+    
+    [defaults setFloat:0.0f forKey:@"PanX1"];
+    [defaults setFloat:0.0f forKey:@"PanY1"];
+    [defaults setFloat:0.0f forKey:@"Rotate1"];
+    [defaults setFloat:1.0f forKey:@"Zoom1"];
+    
+    [defaults setFloat:0.0f forKey:@"PanX2"];
+    [defaults setFloat:0.0f forKey:@"PanY2"];
+    [defaults setFloat:0.0f forKey:@"Rotate2"];
+    [defaults setFloat:1.0f forKey:@"Zoom2"];
+    
+    [defaults setFloat:0.0f forKey:@"PanX3"];
+    [defaults setFloat:0.0f forKey:@"PanY3"];
+    [defaults setFloat:0.0f forKey:@"Rotate3"];
+    [defaults setFloat:1.0f forKey:@"Zoom3"];
+    
 }
 - (void)viewDidAppear:(BOOL)animated   {
     [self fillEffectsSlider];
@@ -275,20 +300,34 @@
         NSLog(@"secondFrame%02d.png",ind);
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"secondFrame%02d.png",ind]] forState:UIControlStateNormal];
         btn.alpha = 0.5;
+
         [self.frameSelectionBar addSubview:btn];
-        //        MKStoreManager *mkStoreManager = [[MKStoreManager alloc] init];
-        //        NSLog (@" isFeaturePurchased is %d", [MKStoreManager isFeaturePurchased:kFeatureAId]);
-        //         NSLog (@" isSubscriptionPurchased is %d", [[MKStoreManager sharedManager ]isSubscriptionActive:kFeatureAId]);
-        //        if(![[MKStoreManager sharedManager] isSubscriptionActive:kFeatureAId]){
-//        if (![[NSUserDefaults standardUserDefaults] boolForKey:kFeature0]){
+        
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:kFeature0]){
             UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockImage.png"]];
-            imageView.alpha = 0.4;
-            imageView.frame=CGRectMake(btn.frame.size.width-15, 60, 15, 15);
+//            imageView.alpha = 0.4;
+//            imageView.center=btn.center;
+            imageView.alpha = 0.8;
+            imageView.layer.shadowColor = [UIColor blackColor].CGColor;
+            imageView.layer.shadowOffset = CGSizeMake(0, 1);
+            imageView.layer.shadowOpacity = 1;
+            imageView.layer.shadowRadius = 1.0;
+            imageView.clipsToBounds = NO;
+//            imageView.layer.shadowOffset=CGSizeMake(1, 1);
+//            imageView.layer.shadowColor= [UIColor blackColor].CGColor;
+            imageView.frame=CGRectMake(btn.frame.size.width-15, 0, 15, 15);
+            //        NSLog(@"imageView of lockImage is %@",imageView.frame.origin);
             //            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"glyphicons_203_lock.png"]];
             //            imageView.alpha = 0.5;
             //            imageView.center = CGPointMake(btn.frame.size.width/2, btn.frame.size.height/2);
             [btn addSubview:imageView];
-//        }
+        }
+        
+        //        MKStoreManager *mkStoreManager = [[MKStoreManager alloc] init];
+        //        NSLog (@" isFeaturePurchased is %d", [MKStoreManager isFeaturePurchased:kFeatureAId]);
+        //         NSLog (@" isSubscriptionPurchased is %d", [[MKStoreManager sharedManager ]isSubscriptionActive:kFeatureAId]);
+        //        if(![[MKStoreManager sharedManager] isSubscriptionActive:kFeatureAId]){
+
         //        else
         //            [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:@"booklySubscription"];
         //        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"com.guruhubb.bookly.subscription"]){
@@ -933,10 +972,17 @@
         [self.filterSelectionBar addSubview:label];
         //        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"com.guruhubb.bookly.subscription"]){
         //        if(![[MKStoreManager sharedManager] isSubscriptionActive:kFeatureAId]){
-//        if (![[NSUserDefaults standardUserDefaults] boolForKey:kFeature1]){
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:kFeature1]){
             UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockImage.png"]];
-            imageView.alpha = 0.4;
-            imageView.frame=CGRectMake(btn.frame.size.width-15, 60, 15, 15);
+            imageView.alpha = 0.8;
+            imageView.layer.shadowColor = [UIColor blackColor].CGColor;
+            imageView.layer.shadowOffset = CGSizeMake(0, 1);
+            imageView.layer.shadowOpacity = 1;
+            imageView.layer.shadowRadius = 1.0;
+            imageView.clipsToBounds = NO;
+//            imageView.layer.shadowOffset=CGSizeMake(1, 1);
+//            imageView.layer.shadowColor= [UIColor blackColor].CGColor;
+            imageView.frame=CGRectMake(btn.frame.size.width-15, 0, 15, 15);
             
             //            [[NSUserDefaults standardUserDefaults] setBool:NO  forKey:@"booklySubscription"];
             //            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"glyphicons_203_lock.png"]];
@@ -944,7 +990,7 @@
             //            imageView.center = CGPointMake(btn.frame.size.width/2, btn.frame.size.height/2);
             //            imageView.tag = ind;
             [btn addSubview:imageView];
-//        }
+        }
         //        else
         //            [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:@"booklySubscription"];
         
@@ -1782,25 +1828,25 @@
         }
     }
 }
-- (IBAction)handleRotateImage:(UIRotationGestureRecognizer *)recognizer {
-    for (UIScrollView *blockSlider in droppableAreas){
-        if (blockSlider.tag == tapBlockNumber){
-            if (blockSlider.subviews.count==0) return;
-            UIImageView *imageView = blockSlider.subviews[0];
-            imageView.transform = CGAffineTransformRotate(imageView.transform, recognizer.rotation);
-        }
-    }
-    NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
-    CGFloat rotateVideo=[defaults floatForKey:tagRotate]+ recognizer.rotation;
-    rotateVideo = fmodf(rotateVideo, 2*M_PI);
-    
-    [defaults setFloat:rotateVideo forKey:tagRotate];
-    NSLog(@"rotateVideo is %f and tag is %d, and tagRotate is %@, recognizer.rotation is %f",rotateVideo, tapBlockNumber,tagRotate,recognizer.rotation);
-    sliderRotate.value=rotateVideo;
-    recognizer.rotation = 0;
-    labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(sliderRotate.value)];
-    
-}
+//- (IBAction)handleRotateImage:(UIRotationGestureRecognizer *)recognizer {
+//    for (UIScrollView *blockSlider in droppableAreas){
+//        if (blockSlider.tag == tapBlockNumber){
+//            if (blockSlider.subviews.count==0) return;
+//            UIImageView *imageView = blockSlider.subviews[0];
+//            imageView.transform = CGAffineTransformRotate(imageView.transform, recognizer.rotation);
+//        }
+//    }
+//    NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
+//    CGFloat rotateVideo=[defaults floatForKey:tagRotate]+ recognizer.rotation;
+//    rotateVideo = fmodf(rotateVideo, 2*M_PI);
+//    
+//    [defaults setFloat:rotateVideo forKey:tagRotate];
+//    NSLog(@"rotateVideo is %f and tag is %d, and tagRotate is %@, recognizer.rotation is %f",rotateVideo, tapBlockNumber,tagRotate,recognizer.rotation);
+//    sliderRotate.value=rotateVideo;
+//    recognizer.rotation = 0;
+//    labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(sliderRotate.value)];
+//    
+//}
 
 - (IBAction)handlePinchImage:(UIPinchGestureRecognizer *)sender {
     if (tapBlockNumber !=100){
@@ -2263,6 +2309,8 @@
         }
         rotateAngle = fmodf(rotateAngle, 2*M_PI);
         sliderRotate.value=rotateAngle;
+    labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(sliderRotate.value)];
+
 }
 
 - (void) plusTenDegreeRotate {
@@ -2286,6 +2334,8 @@
     }
     rotateAngle = fmodf(rotateAngle, 2*M_PI);
     sliderRotate.value=rotateAngle;
+    labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(sliderRotate.value)];
+
 }
 
 - (void) minusTenDegreeRotate {
@@ -2309,6 +2359,8 @@
     }
     rotateAngle = fmodf(rotateAngle, 2*M_PI);
     sliderRotate.value=rotateAngle;
+    labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(sliderRotate.value)];
+
 }
 
 - (void) flip {

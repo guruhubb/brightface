@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
-#import <StoreKit/StoreKit.h>
 #import "MKStoreManager.h"
 
 

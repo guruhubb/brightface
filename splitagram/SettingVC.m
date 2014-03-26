@@ -61,7 +61,7 @@
             NSLog(@"Error %@ with User Info %@.", error, [error userInfo]);
         } else {
             // Present Store Product View Controller
-            [[UINavigationBar appearance] setTintColor:[UIColor blueColor]];
+//            [[UINavigationBar appearance] setTintColor:[UIColor blueColor]];
 
             [self presentViewController:storeProductViewController animated:YES completion:nil];
         }
@@ -70,7 +70,7 @@
 }
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
     [self dismissViewControllerAnimated:YES completion:nil];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+//    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 
 }
 

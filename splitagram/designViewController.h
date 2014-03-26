@@ -15,4 +15,5 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *filterSelectionBar;
 @property (strong, nonatomic) IBOutlet UIScrollView *rotateMenuView;
 @property (weak, nonatomic) IBOutlet UIView *frameContainer;
+@property (weak, nonatomic) IBOutlet UIScrollView *designViewContainer;
 @end

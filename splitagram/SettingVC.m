@@ -384,7 +384,7 @@
 -(void)frameAction
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"crop",@"fit frame",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"fill frame",@"fit frame",nil];
     popupQuery.tag=0;
     [popupQuery showInView:self.view];
 }
@@ -398,9 +398,9 @@
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
         if (actionSheet.tag == 0) {
             if (buttonIndex==0){
-                [defaults setBool:NO forKey:@"crop"];
+                [defaults setBool:NO forKey:@"fill"];
             }
-            else if (buttonIndex==1)[defaults setBool:YES forKey:@"crop"];
+            else if (buttonIndex==1)[defaults setBool:YES forKey:@"fill"];
             
         }
         else {

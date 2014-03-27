@@ -113,25 +113,26 @@
 - (void) resetGestureParameters {
     
     
-    [defaults setFloat:0.0f forKey:@"PanX0"];
-    [defaults setFloat:0.0f forKey:@"PanY0"];
-    [defaults setFloat:0.0f forKey:@"Rotate0"];
-    [defaults setFloat:1.0f forKey:@"Zoom0"];
+    [defaults setFloat:0.0f forKey:@"PanX"];
+    [defaults setFloat:0.0f forKey:@"PanY"];
+    [defaults setFloat:0.0f forKey:@"Rotate"];
+    [defaults setFloat:1.0f forKey:@"Zoom"];
+    [defaults setBool:NO forKey:@"Flip"];
     
-    [defaults setFloat:0.0f forKey:@"PanX1"];
-    [defaults setFloat:0.0f forKey:@"PanY1"];
-    [defaults setFloat:0.0f forKey:@"Rotate1"];
-    [defaults setFloat:1.0f forKey:@"Zoom1"];
-    
-    [defaults setFloat:0.0f forKey:@"PanX2"];
-    [defaults setFloat:0.0f forKey:@"PanY2"];
-    [defaults setFloat:0.0f forKey:@"Rotate2"];
-    [defaults setFloat:1.0f forKey:@"Zoom2"];
-    
-    [defaults setFloat:0.0f forKey:@"PanX3"];
-    [defaults setFloat:0.0f forKey:@"PanY3"];
-    [defaults setFloat:0.0f forKey:@"Rotate3"];
-    [defaults setFloat:1.0f forKey:@"Zoom3"];
+//    [defaults setFloat:0.0f forKey:@"PanX1"];
+//    [defaults setFloat:0.0f forKey:@"PanY1"];
+//    [defaults setFloat:0.0f forKey:@"Rotate1"];
+//    [defaults setFloat:1.0f forKey:@"Zoom1"];
+//    
+//    [defaults setFloat:0.0f forKey:@"PanX2"];
+//    [defaults setFloat:0.0f forKey:@"PanY2"];
+//    [defaults setFloat:0.0f forKey:@"Rotate2"];
+//    [defaults setFloat:1.0f forKey:@"Zoom2"];
+//    
+//    [defaults setFloat:0.0f forKey:@"PanX3"];
+//    [defaults setFloat:0.0f forKey:@"PanY3"];
+//    [defaults setFloat:0.0f forKey:@"Rotate3"];
+//    [defaults setFloat:1.0f forKey:@"Zoom3"];
     
 }
 - (void)viewDidAppear:(BOOL)animated   {
@@ -1986,12 +1987,12 @@
             for (UIView *view in blockSlider.subviews)  {
                 [view removeFromSuperview];
             }
-            NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",blockSlider.tag];
+//            NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",blockSlider.tag];
             UIImageView *replaceImage = [[UIImageView alloc] initWithImage:imageView.image];
             replaceImage.tag = imageView.tag;
             replaceImage.userInteractionEnabled = YES;
             [blockSlider addSubview:replaceImage];
-            [self fitImageToScroll:replaceImage SCROLL:blockSlider scrollViewNumber:blockSlider.tag  angle:[defaults floatForKey:tagRotate] ];
+            [self fitImageToScroll:replaceImage SCROLL:blockSlider scrollViewNumber:blockSlider.tag  angle:[defaults floatForKey:@"Rotate"] ];
         }
         [self.frameContainer bringSubviewToFront:_watermarkOnImage];
 
@@ -2020,18 +2021,18 @@
 - (IBAction)handlePinchImage:(UIPinchGestureRecognizer *)sender {
     if (tapBlockNumber !=100){
         CGFloat factor = [(UIPinchGestureRecognizer *)sender scale];
-        NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
-        CGFloat factorVideo = [defaults floatForKey:tagZoom]*factor;
+//        NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
+        CGFloat factorVideo = [defaults floatForKey:@"Zoom"]*factor;
         if (factorVideo > kZoomMin && factorVideo < kZoomMax){
             for (UIScrollView *blockSlider in droppableAreas){
-                if (blockSlider.tag == tapBlockNumber){
+//                if (blockSlider.tag == tapBlockNumber){  //split
                     if (blockSlider.subviews.count==0) return;
                     UIImageView *imageView = blockSlider.subviews[0];
                     imageView.transform = CGAffineTransformScale(imageView.transform, factor, factor);
-                }
+//                }
             }
-            [defaults setFloat:factorVideo forKey:tagZoom];
-            NSLog(@"factor is %f and %f and %@",factorVideo, factor, tagZoom);
+            [defaults setFloat:factorVideo forKey:@"Zoom"];
+//            NSLog(@"factor is %f and %f and %@",factorVideo, factor, tagZoom);
             sliderZoom.value = factorVideo;
         }
         sender.scale = 1;
@@ -2084,18 +2085,20 @@
     //    if (currentStickerTag!=1000  || currentLabelTag != 1000  || currentDoodleTag!=1000) return;
     //
     //      [self tapBlock:(UITapGestureRecognizer *)sender];
-    NSString *tagPanX = [NSString stringWithFormat:@"PanX%d",tapBlockNumber];
-    NSString *tagPanY = [NSString stringWithFormat:@"PanY%d",tapBlockNumber];
+//    NSString *tagPanX = [NSString stringWithFormat:@"PanX%d",tapBlockNumber];
+//    NSString *tagPanY = [NSString stringWithFormat:@"PanY%d",tapBlockNumber];
     CGPoint pointVideo;
-    pointVideo.x = [defaults floatForKey:tagPanX];
-    pointVideo.y = [defaults floatForKey:tagPanY];
+    pointVideo.x = [defaults floatForKey:@"PanX"];
+    pointVideo.y = [defaults floatForKey:@"PanY"];
     //    pointVideo.x = [[_imageObject objectForKey:tagPanX] floatValue];//does not save values
     //    pointVideo.y = [[_imageObject objectForKey:tagPanY] floatValue];
     CGFloat width;
     CGFloat height;
     for (UIScrollView *blockSlider in droppableAreas){
-        if (blockSlider.tag == tapBlockNumber){
-            if (blockSlider.subviews.count==0) return;
+        if (blockSlider.tag == tapBlockNumber){   //split
+        NSLog(@"blockSlider is %@, count is %d",blockSlider,blockSlider.subviews.count);
+
+        if (blockSlider.subviews.count!=0) {
             UIImageView *imageView = blockSlider.subviews[0];
             width = imageView.frame.size.width;
             height = imageView.frame.size.height;
@@ -2108,13 +2111,14 @@
                 return;
             imageView.center = CGPointMake(imageView.center.x + translation.x,
                                            imageView.center.y + translation.y);
-            [defaults setFloat:ptX forKey:tagPanX];
-            [defaults setFloat:ptY forKey:tagPanY];
+            [defaults setFloat:ptX forKey:@"PanX"];
+            [defaults setFloat:ptY forKey:@"PanY"];
             //            [_imageObject setObject:[NSNumber numberWithFloat:ptX] forKey:tagPanX];
             //            [_imageObject setObject:[NSNumber numberWithFloat:ptY] forKey:tagPanX];
             NSLog(@"panX is %f",ptX);
             NSLog(@"panY is %f",ptY);
             [sender setTranslation:CGPointMake(0, 0) inView:[imageView superview]];
+        }
         }
     }
 }
@@ -2131,196 +2135,145 @@
 }
 
 -(void) tapBlock :(UITapGestureRecognizer *)recognizer{
-//    NSLog(@"FrameViewController tapImage is called");
-//    [labelToApplyFilterToVideo removeFromSuperview];
-//    [self hideSliders];
-//    textTouched=NO;
-//    doodleTouched=NO;
-//    BOOL isVideoBlock=NO;
-//    //    stickerTouched=NO;
-//    currentStickerTag=1000;
-//    currentLabelTag=1000;
-//    currentDoodleTag=1000;
-    for (UIScrollView *blockSlider in droppableAreas) {
-        CGPoint tappedBlock = [recognizer locationInView:blockSlider];
-        if ([blockSlider pointInside:tappedBlock withEvent:nil]) {
-            tapBlockNumber = blockSlider.tag;
-        }
-    }
-    for (UIScrollView *blockSlider in droppableAreas)
-        [blockSlider.layer setBorderColor:[[UIColor clearColor] CGColor]];
-    
-//    for (UILabel *label in _labelArray)
-//        [label.layer setBorderColor:[[UIColor clearColor] CGColor]];
-//    for (UILabel *doodle in _doodleArray)
-//        [doodle.layer setBorderColor:[[UIColor clearColor] CGColor]];
-//    //    for (UILabel *label in _labelArray)
-//    //        for (CALayer *layer in label.layer.sublayers)
-//    //            [layer removeFromSuperlayer];
-//    for (UIImageView *sticker in _stickerArray){
-//        [sticker.layer setBorderColor:[[UIColor clearColor] CGColor]];
+//    for (UIScrollView *blockSlider in droppableAreas) {
+//        CGPoint tappedBlock = [recognizer locationInView:blockSlider];
+//        if ([blockSlider pointInside:tappedBlock withEvent:nil]) {
+//            tapBlockNumber = blockSlider.tag;
+//        }
 //    }
-//    //    for (UIImageView *sticker in _stickerArray)
-//    //        for (CALayer *layer in sticker.layer.sublayers)
-//    //            [layer removeFromSuperlayer];
-    for (UIScrollView *blockSlider in droppableAreas)
-        if (blockSlider.tag == tapBlockNumber){
-            [blockSlider.layer setBorderColor:[[UIColor blueColor] CGColor]];
-            //            blockSlider.layer.shadowColor = [[UIColor whiteColor] CGColor];
-        }
-    
-    //    CGRect borderFrame;
-    //    CALayer *borderLayer = [CALayer layer];
-    //    for (UIScrollView *blockSlider in self.droppableAreas)
-    //        for (CALayer *layer in blockSlider.layer.sublayers)
-    //            [layer removeFromSuperlayer];
-    
-    //    for (UIScrollView *blockSlider in self.droppableAreas)
-    //        if (blockSlider.tag == tapBlockNumber){
-    //            borderFrame = CGRectMake(blockSlider.frame.origin.x+3, blockSlider.frame.origin.y+3, blockSlider.frame.size.width-6, blockSlider.frame.size.height-6);
-    //            [borderLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
-    //            [borderLayer setFrame:borderFrame];
-    //            [borderLayer setCornerRadius:kCornerRadius];
-    //            [borderLayer setBorderWidth:kBorderWidth];
-    //            [borderLayer setBorderColor:[[UIColor orangeColor] CGColor]];
-    //            [blockSlider.layer addSublayer:borderLayer];
-    //        }
-    
-//    isVideoBlock = NO;
-//    switch (tapBlockNumber) {
-//        case 0:
-//            if (editedVideo1)
-//                isVideoBlock = YES;
-//            break;
-//        case 1:
-//            if (editedVideo2)
-//                isVideoBlock = YES;
-//            break;
-//        case 2:
-//            if (editedVideo3)
-//                isVideoBlock = YES;
-//            break;
-//        case 3:
-//            if (editedVideo4)
-//                isVideoBlock = YES;
-//            break;
-//    }
-//    if(isVideoBlock)
-//        self.videoMenuSlider.hidden=NO;
-//    else
-//        self.imageMenuSlider.hidden=NO;
-    
-    //    for (UIScrollView *blockSlider in self.droppableAreas)
-    //        if ((blockSlider.tag == 4*currentPage) || (blockSlider.tag == 4*currentPage+1) || (blockSlider.tag == 4*currentPage+2) || (blockSlider.tag == 4*currentPage+3))
-    //            for (UIImageView *view in blockSlider.subviews)
-    //                for (UIGestureRecognizer *gestureRecognizer in view.gestureRecognizers)
-    //                    gestureRecognizer.enabled = YES;
-    //
-    //    for (UILabel *label in _labelArray)
-    //        if (label.tag==currentLabelTag)
-    //            for (UIGestureRecognizer *gestureRecognizer in label.gestureRecognizers)
-    //                gestureRecognizer.enabled =YES;
-    //
-    //    for (UIImageView *sticker in _stickerArray)
-    //        if (sticker.tag==currentStickerTag)
-    //            for (UIGestureRecognizer *gestureRecognizer in sticker.gestureRecognizers)
-    //                gestureRecognizer.enabled =YES;
-    //
-    //    for (UIGestureRecognizer *gestureRecognizer in self.view.gestureRecognizers)
-    //        if ([gestureRecognizer isKindOfClass:UIPinchGestureRecognizer.class] || [gestureRecognizer isKindOfClass:UIRotationGestureRecognizer.class])
-    //            gestureRecognizer.enabled=NO;
-    //    enableRotatePinchText=NO;
-    //    enableRotatePinchSticker=NO;
-    
-    //    for (UIScrollView *blockSlider in self.droppableAreas) {
-    //        CGPoint tappedBlock = [recognizer locationInView:blockSlider];
-    //        if ([blockSlider pointInside:tappedBlock withEvent:nil]){
-    //            tapBlockNumber = blockSlider.tag;
-    //            [self drawRect:blockSlider.frame];
-    //        }
-    //        else
-    //            [self eraseRect:blockSlider.frame];
-    //    }
-    
-    
-    
+    __block CGPoint tappedBlock;
+    [UIView animateWithDuration:2.0
+                     animations:^{
+                         for (UIScrollView *blockSlider in droppableAreas){
+                             tappedBlock = [recognizer locationInView:blockSlider];
+                             if ([blockSlider pointInside:tappedBlock withEvent:nil]) {
+                                 tapBlockNumber = blockSlider.tag;
+//                             }
+//
+//                             if (blockSlider.tag == tapBlockNumber){
+                                 CABasicAnimation *color = [CABasicAnimation animationWithKeyPath:@"borderColor"];
+                                 // animate from red to blue border ...
+                                 color.fromValue = (id)[UIColor clearColor].CGColor;
+                                 color.toValue   = (id)[UIColor orangeColor].CGColor;
+                                 // ... and change the model value
+                                 color.duration = 2;
+                                 [blockSlider.layer addAnimation:color forKey:@"AnimateFrame"];
+                             }
+                         }
+                     }
+                     completion:^(BOOL finished){
+                         for (UIScrollView *blockSlider in droppableAreas)
+                             [blockSlider.layer setBorderColor:[[UIColor clearColor] CGColor]];
+                         NSLog(@"completion block");
+                     }];
     
 }
 - (void) fitImageToScroll:(UIImageView*)imgView SCROLL:(UIScrollView*)scrView  scrollViewNumber: (NSInteger)tagNumber angle: (CGFloat) angle
 {
-    float rateScr=0, rateImg=0, rateWidth=0, rateHeight=0;
-    if (scrView.frame.size.width > 0 && imgView.frame.size.width >0){
-        rateScr = scrView.frame.size.height / scrView.frame.size.width;
-        rateImg = imgView.frame.size.height / imgView.frame.size.width;
-    }
-    if (imgView.frame.size.width > 0 && imgView.frame.size.height > 0){
-        rateWidth = scrView.frame.size.width / imgView.frame.size.width;
-        rateHeight = scrView.frame.size.height / imgView.frame.size.height;
-    }
-    NSLog(@"imgView is width=%f, height=%f, rateWidth is %f, rateHeight is %f",imgView.frame.size.width, imgView.frame.size.height,rateWidth,rateHeight);
-    CGFloat rateFit = rateScr < rateImg ? rateWidth : rateHeight;
-    NSLog (@"rateFit is %f",rateFit);
-    CGSize szImage = CGSizeMake(imgView.frame.size.width*rateFit, imgView.frame.size.height*rateFit);
+    float imageWidthGreater = imgView.frame.size.width > imgView.frame.size.height ? imgView.frame.size.width: imgView.frame.size.height;
+    float imageWidthSmaller = imgView.frame.size.width > imgView.frame.size.height ? imgView.frame.size.height: imgView.frame.size.width;
+    float rateImageFill;
+    float rateImageFit;
+        rateImageFill = 310/imageWidthSmaller;
+        rateImageFit = 310/imageWidthGreater;
+    
+    
+    float rate;
+    if ([defaults boolForKey:@"fill"])
+        rate = rateImageFit;
+    else
+        rate = rateImageFill;
+    
+//    float rateScr=0, rateImg=0, rateWidth=0, rateHeight=0;
+//    if (scrView.frame.size.width > 0 && imgView.frame.size.width >0){
+//        rateScr = scrView.frame.size.height / scrView.frame.size.width;
+//        rateImg = imgView.frame.size.height / imgView.frame.size.width;
+//    }
+//    if (imgView.frame.size.width > 0 && imgView.frame.size.height > 0){
+//        rateWidth = scrView.frame.size.width / imgView.frame.size.width;
+//        rateHeight = scrView.frame.size.height / imgView.frame.size.height;
+//    }
+    NSLog(@"imgView is width=%f, height=%f, imageWidthSmaller is %f, imageWidthGreater is %f",imgView.frame.size.width, imgView.frame.size.height,imageWidthSmaller,imageWidthGreater);
+//    CGFloat rateFit = rateScr < rateImg ? rateWidth : rateHeight;
+    NSLog (@"rateFit is %f, rateFill is %f, rate is %f",rateImageFit,rateImageFill,rate);
+//    CGSize szImage = CGSizeMake(imgView.frame.size.width*rateFit, imgView.frame.size.height*rateFit);
     //        [imgView setFrame:CGRectMake(scrView.center.x, scrView.center.y, szImage.width, szImage.height)];
-    [imgView setFrame:CGRectMake(0.0, 0.0, szImage.width, szImage.height)];
+//    [imgView setFrame:CGRectMake(0.0, 0.0, szImage.width, szImage.height)]; //split
+//    NSLog (@"imageView frame size is %f width %f height",szImage.width,szImage.height);
+    if(!isinf(rate)) {
+     [imgView setFrame:CGRectMake(0.0, 0.0, imgView.frame.size.width*rate, imgView.frame.size.height*rate)];  //split
+        NSLog (@"imageView frame size is %f width %f height",imgView.frame.size.width,imgView.frame.size.height);
+
+    }
     //        NSLog(@"scrView content .width%f,imgView content .width%f",scrView.frame.size.width,imgView.frame.size.height);
     //        scrView.frame = CGRectMake(imgView.center.x, imgView.center.y, imgView.frame.size.width*1.25, imgView.frame.size.height*1.25);
-    [scrView setContentSize:CGSizeMake(imgView.frame.size.width*1.2, imgView.frame.size.height*1.2)];
+//    [scrView setContentSize:CGSizeMake(imgView.frame.size.width*1.2, imgView.frame.size.height*1.2)];
     CGPoint pt;
     //        if (scrView.frame.size.width-2 <= scrView.frame.size.height){
     //        if ((imgView.frame.size.width >= imgView.frame.size.height)|| (scrView.frame.size.width <= scrView.frame.size.height)){
     
-    pt.x = (imgView.frame.size.width - scrView.frame.size.width)/2;
+//    pt.x = (imgView.frame.size.width - scrView.frame.size.width)/2;
     //            pt.y = 0;
     //        }
     //        else {
     //            pt.x = 0;
-    pt.y = (imgView.frame.size.height - scrView.frame.size.height)/2;
+//    pt.y = (imgView.frame.size.height - scrView.frame.size.height)/2;
     //        }
+    
+    pt.x =   scrView.frame.origin.x;//splitagram
+    pt.y =   scrView.frame.origin.y;//splitagram
+    
     NSLog(@"pt is x=%f and y=%f",pt.x, pt.y);
     [scrView setContentOffset:pt animated:YES];
     
-    NSString *tagPtX = [NSString stringWithFormat:@"PtX%d",tagNumber];
-    NSString *tagPtY = [NSString stringWithFormat:@"PtY%d",tagNumber];
-    NSString *tagScale = [NSString stringWithFormat:@"Scale%d",tagNumber];
-    [defaults setFloat:pt.x  forKey:tagPtX];
-    [defaults setFloat:pt.y forKey:tagPtY];
-    [defaults setFloat:rateFit forKey:tagScale];
-    switch (tagNumber) {
-        case 0:{
-            zoom1 = [defaults floatForKey:@"Scale0"];
-            [defaults setFloat:0.0f forKey:@"PanX0"];
-            [defaults setFloat:0.0f forKey:@"PanY0"];
-            [defaults setFloat:1.0f forKey:@"Zoom0"];
-        }
-            break;
-        case 1:{
-            zoom2 = [defaults floatForKey:@"Scale1"];
-            [defaults setFloat:0.0f forKey:@"PanX1"];
-            [defaults setFloat:0.0f forKey:@"PanY1"];
-            [defaults setFloat:1.0f forKey:@"Zoom1"];
-        }
-            break;
-        case 2:{
-            zoom3 = [defaults floatForKey:@"Scale2"];
-            [defaults setFloat:0.0f forKey:@"PanX2"];
-            [defaults setFloat:0.0f forKey:@"PanY2"];
-            [defaults setFloat:1.0f forKey:@"Zoom2"];
-        }
-            break;
-        case 3:{
-            zoom4 = [defaults floatForKey:@"Scale3"];
-            [defaults setFloat:0.0f forKey:@"PanX3"];
-            [defaults setFloat:0.0f forKey:@"PanY3"];
-            [defaults setFloat:1.0f forKey:@"Zoom3"];
-        }
-            break;
-            
-    }
+//    NSString *tagPtX = [NSString stringWithFormat:@"PtX%d",tagNumber];
+//    NSString *tagPtY = [NSString stringWithFormat:@"PtY%d",tagNumber];
+//    NSString *tagScale = [NSString stringWithFormat:@"Scale%d",tagNumber];
+    [defaults setFloat:pt.x  forKey:@"PanX"];
+    [defaults setFloat:pt.y forKey:@"PanY"];
+//    [defaults setFloat:1.0f forKey:@"Zoom"];
+    
+//    [defaults setFloat:rateFit forKey:tagScale];
+//    switch (tagNumber) {
+//        case 0:{
+//            zoom1 = [defaults floatForKey:@"Scale0"];
+//            [defaults setFloat:0.0f forKey:@"PanX0"];
+//            [defaults setFloat:0.0f forKey:@"PanY0"];
+//            [defaults setFloat:1.0f forKey:@"Zoom0"];
+//        }
+//            break;
+//        case 1:{
+//            zoom2 = [defaults floatForKey:@"Scale1"];
+//            [defaults setFloat:0.0f forKey:@"PanX1"];
+//            [defaults setFloat:0.0f forKey:@"PanY1"];
+//            [defaults setFloat:1.0f forKey:@"Zoom1"];
+//        }
+//            break;
+//        case 2:{
+//            zoom3 = [defaults floatForKey:@"Scale2"];
+//            [defaults setFloat:0.0f forKey:@"PanX2"];
+//            [defaults setFloat:0.0f forKey:@"PanY2"];
+//            [defaults setFloat:1.0f forKey:@"Zoom2"];
+//        }
+//            break;
+//        case 3:{
+//            zoom4 = [defaults floatForKey:@"Scale3"];
+//            [defaults setFloat:0.0f forKey:@"PanX3"];
+//            [defaults setFloat:0.0f forKey:@"PanY3"];
+//            [defaults setFloat:1.0f forKey:@"Zoom3"];
+//        }
+//            break;
+    
+//    }
     //    [self resetPostionZoomParameters];
     //    [self resetGestureParameters];
-    NSLog(@"angle is %f",angle);
+//    NSLog(@"angle is %f",angle);
+    float zoomFactor = [defaults floatForKey:@"Zoom"];
     imgView.transform = CGAffineTransformRotate(imgView.transform, angle);
+    if ([defaults boolForKey:@"Flip"])
+        imgView.transform = CGAffineTransformScale(imgView.transform, -zoomFactor, zoomFactor);
+    else
+        imgView.transform = CGAffineTransformScale(imgView.transform, zoomFactor, zoomFactor);
     
 }
 - (void) fillRotateMenu {
@@ -2422,18 +2375,18 @@
     
 }
 - (void) resetRotate {
-        NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
+//        NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
         sliderRotate.value = 0.0;
-        NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
-        [defaults setFloat:sliderRotate.value forKey:tagRotate];
-        CGFloat zoomFactor = [defaults floatForKey:tagZoom];
+//        NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
+        [defaults setFloat:sliderRotate.value forKey:@"Rotate"];
+        CGFloat zoomFactor = [defaults floatForKey:@"Zoom"];
         for (UIScrollView *blockSlider in droppableAreas){
-            if (blockSlider.tag == tapBlockNumber){
+//            if (blockSlider.tag == tapBlockNumber){//split
                 if (blockSlider.subviews.count==0) return;
                 UIImageView *imageView = blockSlider.subviews[0];
                 imageView.transform = CGAffineTransformIdentity;
                 imageView.transform = CGAffineTransformScale(imageView.transform, zoomFactor,zoomFactor);
-            }
+//            }
         }
     labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(sliderRotate.value)];
 }
@@ -2441,43 +2394,44 @@
 //    [Flurry logEvent:@"Frame - Rotate"];
     
     sliderRotate = (UISlider *)sender;
-        NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
-        NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
-        NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
-        CGFloat zoomFactor = [defaults floatForKey:tagZoom];
+//        NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
+//        NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
+//    NSString *tagRotate;
+        CGFloat zoomFactor = [defaults floatForKey:@"Zoom"];
         for (UIScrollView *blockSlider in droppableAreas){
-            if (blockSlider.tag == tapBlockNumber){
+//            tagRotate = [NSString stringWithFormat:@"Rotate%d",blockSlider.tag];
+//            if (blockSlider.tag == tapBlockNumber){//split
                 if (blockSlider.subviews.count==0) return;
                 UIImageView *imageView = blockSlider.subviews[0];
                 imageView.transform = CGAffineTransformIdentity;
                 imageView.transform = CGAffineTransformRotate(imageView.transform, sliderRotate.value);
-                if ([defaults boolForKey:tagFlip])
+                if ([defaults boolForKey:@"Flip"])
                     imageView.transform = CGAffineTransformScale(imageView.transform, -zoomFactor, zoomFactor);
                 else
                     imageView.transform = CGAffineTransformScale(imageView.transform, zoomFactor, zoomFactor);
-            }
+//            }
         }
-        [defaults setFloat:sliderRotate.value forKey:tagRotate];
+        [defaults setFloat:sliderRotate.value forKey:@"Rotate"];
     labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(sliderRotate.value)];
 }
 - (void) rightAngleRotate {
-        NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
-        NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
-        CGFloat rotateAngle = [defaults floatForKey:tagRotate]+M_PI_2;
-        [defaults setFloat:rotateAngle forKey:tagRotate];
-        CGFloat zoomFactor = [defaults floatForKey:tagZoom];
+//        NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
+//        NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
+        CGFloat rotateAngle = [defaults floatForKey:@"Rotate"]+M_PI_2;
+        [defaults setFloat:rotateAngle forKey:@"Rotate"];
+        CGFloat zoomFactor = [defaults floatForKey:@"Zoom"];
         for (UIScrollView *blockSlider in droppableAreas){
-            if (blockSlider.tag == tapBlockNumber){
+//            if (blockSlider.tag == tapBlockNumber){//split
                 if (blockSlider.subviews.count==0) return;
                 UIImageView *imageView = blockSlider.subviews[0];
                 imageView.transform = CGAffineTransformIdentity;
-                NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
+//                NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
                 imageView.transform = CGAffineTransformRotate(imageView.transform, rotateAngle);
-                if ([defaults boolForKey:tagFlip])
+                if ([defaults boolForKey:@"Flip"])
                     imageView.transform = CGAffineTransformScale(imageView.transform, -zoomFactor, zoomFactor);
                 else
                     imageView.transform = CGAffineTransformScale(imageView.transform, zoomFactor, zoomFactor);
-            }
+//            }
         }
         rotateAngle = fmodf(rotateAngle, 2*M_PI);
         sliderRotate.value=rotateAngle;
@@ -2486,23 +2440,23 @@
 }
 
 - (void) plusTenDegreeRotate {
-    NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
-    NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
-    CGFloat rotateAngle = [defaults floatForKey:tagRotate]+M_PI_2/9;
-    [defaults setFloat:rotateAngle forKey:tagRotate];
-    CGFloat zoomFactor = [defaults floatForKey:tagZoom];
+//    NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
+//    NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
+    CGFloat rotateAngle = [defaults floatForKey:@"Rotate"]+M_PI_2/9;
+    [defaults setFloat:rotateAngle forKey:@"Rotate"];
+    CGFloat zoomFactor = [defaults floatForKey:@"Zoom"];
     for (UIScrollView *blockSlider in droppableAreas){
-        if (blockSlider.tag == tapBlockNumber){
+//        if (blockSlider.tag == tapBlockNumber){//split
             if (blockSlider.subviews.count==0) return;
             UIImageView *imageView = blockSlider.subviews[0];
             imageView.transform = CGAffineTransformIdentity;
-            NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
+//            NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
             imageView.transform = CGAffineTransformRotate(imageView.transform, rotateAngle);
-            if ([defaults boolForKey:tagFlip])
+            if ([defaults boolForKey:@"Flip"])
                 imageView.transform = CGAffineTransformScale(imageView.transform, -zoomFactor, zoomFactor);
             else
                 imageView.transform = CGAffineTransformScale(imageView.transform, zoomFactor, zoomFactor);
-        }
+//        }
     }
     rotateAngle = fmodf(rotateAngle, 2*M_PI);
     sliderRotate.value=rotateAngle;
@@ -2511,23 +2465,23 @@
 }
 
 - (void) minusTenDegreeRotate {
-    NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
-    NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
-    CGFloat rotateAngle = [defaults floatForKey:tagRotate]-M_PI_2/9;
-    [defaults setFloat:rotateAngle forKey:tagRotate];
-    CGFloat zoomFactor = [defaults floatForKey:tagZoom];
+//    NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
+//    NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
+    CGFloat rotateAngle = [defaults floatForKey:@"Rotate"]-M_PI_2/9;
+    [defaults setFloat:rotateAngle forKey:@"Rotate"];
+    CGFloat zoomFactor = [defaults floatForKey:@"Zoom"];
     for (UIScrollView *blockSlider in droppableAreas){
-        if (blockSlider.tag == tapBlockNumber){
+//        if (blockSlider.tag == tapBlockNumber){ //split
             if (blockSlider.subviews.count==0) return;
             UIImageView *imageView = blockSlider.subviews[0];
             imageView.transform = CGAffineTransformIdentity;
-            NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
+//            NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
             imageView.transform = CGAffineTransformRotate(imageView.transform, rotateAngle);
-            if ([defaults boolForKey:tagFlip])
+            if ([defaults boolForKey:@"Flip"])
                 imageView.transform = CGAffineTransformScale(imageView.transform, -zoomFactor, zoomFactor);
             else
                 imageView.transform = CGAffineTransformScale(imageView.transform, zoomFactor, zoomFactor);
-        }
+//        }
     }
     rotateAngle = fmodf(rotateAngle, 2*M_PI);
     sliderRotate.value=rotateAngle;
@@ -2538,17 +2492,17 @@
 - (void) flip {
 //    [Flurry logEvent:@"Frame - Flip"];
     
-        NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
-        if (![defaults boolForKey:tagFlip])
-            [defaults setBool:YES forKey:tagFlip];
+//        NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
+        if (![defaults boolForKey:@"Flip"])
+            [defaults setBool:YES forKey:@"Flip"];
         else
-            [defaults setBool:NO forKey:tagFlip];
+            [defaults setBool:NO forKey:@"Flip"];
         for (UIScrollView *blockSlider in droppableAreas){
-            if (blockSlider.tag == tapBlockNumber){
+//            if (blockSlider.tag == tapBlockNumber){  //split
                 if (blockSlider.subviews.count==0) return;
                 UIImageView *imageView = blockSlider.subviews[0];
                 imageView.transform = CGAffineTransformScale(imageView.transform, -1,1);
-            }
+//            }
         }
 }
 

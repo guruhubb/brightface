@@ -26,6 +26,7 @@
     NSMutableArray *droppableAreas;
     BOOL firstTimeEffects;
     BOOL firstTime;
+    BOOL firstTimeFilter;
     NSInteger tapBlockNumber;
     NSInteger nStyle;
     NSInteger nSubStyle;
@@ -57,6 +58,9 @@
     
     GPUImageOutput<GPUImageInput> *filter;
     NSUserDefaults *defaults;
+    
+    CGFloat imageWidth;
+    CGFloat imageHeight;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *selectedImageView;
@@ -108,6 +112,33 @@
     if ([defaults boolForKey:@"white"])
         _frameContainer.backgroundColor=[UIColor blackColor];
     nMargin = 5;
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.tag = 19;
+    [self frameClicked:btn];
+    if (![defaults boolForKey:@"filter"])
+        [self randomFilterPick];
+}
+- (void) randomFilterPick {
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    int randNum = arc4random() % 11 ;
+    btn.tag = randNum;
+    tapBlockNumber=1;
+    [self effectsClicked:btn];
+    
+    randNum = arc4random() % 11 + 11;
+    btn.tag = randNum;
+    NSLog(@"tag block 3 is %d",btn.tag);
+    tapBlockNumber=2;
+    [self secondEffectsClicked:btn];
+    
+    tapBlockNumber=1;
+    randNum = arc4random() % 11 + 11;
+    btn.tag = randNum;
+    NSLog(@"tag block 3 is %d",btn.tag);
+    tapBlockNumber=3;
+    [self secondEffectsClicked:btn];
+    
+    tapBlockNumber=0;
 
 }
 - (void) resetGestureParameters {
@@ -136,7 +167,8 @@
     
 }
 - (void)viewDidAppear:(BOOL)animated   {
-    if (!firstTime){
+    if (!firstTimeFilter){
+        firstTimeFilter = YES;
     [self fillEffectsSlider];
     [self fillSecondEffectsSlider];
     }
@@ -467,7 +499,6 @@
 
 - (void)frameClicked:(UIButton *)clickedBtn
 {
-    [self hideLabels];
 //    NSLog(@"draggable %@, originalimagescount is %d, arrImagescount is %d",self.draggableSubjects, self.originalImages.count, self.arrImages.count);
     //    if (self.originalImages.count !=self.arrImages.count) return;
     
@@ -630,7 +661,6 @@
 //        [self frameAction];
 //        return;
 //    }
-    [self hideLabels];
 //    else {
 //
 //        if (firstTime){
@@ -1161,6 +1191,8 @@
 }
 
 - (void)effectsClicked:(UIButton *)clickedBtn {
+    NSLog(@"block number %d",tapBlockNumber);
+
 //    [  Flurry logEvent:@"Frame - Effects"];
 //    [labelToApplyFilterToVideo removeFromSuperview];
     if (tapBlockNumber==100) tapBlockNumber=0;
@@ -1247,6 +1279,7 @@
 //        [self filterAction];
 //        return;
 //    }
+    NSLog(@"block number %d",tapBlockNumber);
     for (int i = 1; i <= 20+11; i++) {
         UIButton *frameButton = (UIButton *)[_filterSelectionBar viewWithTag:i];
         frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
@@ -1801,6 +1834,7 @@
         panGesture.delegate=self;
         [self.frameContainer addGestureRecognizer:panGesture];
         [self.frameContainer bringSubviewToFront:_watermarkOnImage];
+        self.frameContainer.hidden=YES;
 //        if (frameCount < kFrameMax) {
 //            self.tapToAddAFrame.frame = CGRectMake(320*(frameCount)+5, 5, 310, 350);
 //            self.tapToAddAFrame.hidden = NO;
@@ -1872,6 +1906,9 @@
         //                gestureRecognizer.enabled=NO;
     }
     else {
+        self.frameContainer.hidden=NO;
+        [self hideLabels];
+
 //        if  (currentPage == frameContainerArray.count) return;
         
         //        NSString *string1 = [NSString stringWithFormat:@"%d",style];
@@ -2090,37 +2127,42 @@
     CGPoint pointVideo;
     pointVideo.x = [defaults floatForKey:@"PanX"];
     pointVideo.y = [defaults floatForKey:@"PanY"];
+    CGPoint translation = [sender translationInView:self.view];
+//    CGFloat width;
+//    CGFloat height;
+//    width = imageView.frame.size.width;
+//    height = imageView.frame.size.height;
+    CGFloat ptX = pointVideo.x + translation.x;
+    CGFloat ptY = pointVideo.y + translation.y;
+    [defaults setFloat:ptX forKey:@"PanX"];
+    [defaults setFloat:ptY forKey:@"PanY"];
+//    if ((ptX < -imageWidth*0.8 || ptX > imageWidth*.8) || (ptY < -imageHeight*.8 || ptY > imageHeight*.8 ))
+//        return;
     //    pointVideo.x = [[_imageObject objectForKey:tagPanX] floatValue];//does not save values
     //    pointVideo.y = [[_imageObject objectForKey:tagPanY] floatValue];
-    CGFloat width;
-    CGFloat height;
+
     for (UIScrollView *blockSlider in droppableAreas){
-        if (blockSlider.tag == tapBlockNumber){   //split
+//        if (blockSlider.tag == tapBlockNumber){   //split
         NSLog(@"blockSlider is %@, count is %d",blockSlider,blockSlider.subviews.count);
 
-        if (blockSlider.subviews.count!=0) {
-            UIImageView *imageView = blockSlider.subviews[0];
-            width = imageView.frame.size.width;
-            height = imageView.frame.size.height;
+//        if (blockSlider.subviews.count!=0) {
+//            UIImageView *imageView = blockSlider.subviews[0];
+        for (UIImageView *imageView in blockSlider.subviews){
+
             
-            CGPoint translation = [sender translationInView:[imageView superview]];
             
-            CGFloat ptX = pointVideo.x + translation.x;
-            CGFloat ptY = pointVideo.y + translation.y;
-            if ((ptX < -width*0.8 || ptX > width*.8) || (ptY < -height*.8 || ptY > height*.8 ))
-                return;
             imageView.center = CGPointMake(imageView.center.x + translation.x,
                                            imageView.center.y + translation.y);
-            [defaults setFloat:ptX forKey:@"PanX"];
-            [defaults setFloat:ptY forKey:@"PanY"];
+ 
             //            [_imageObject setObject:[NSNumber numberWithFloat:ptX] forKey:tagPanX];
             //            [_imageObject setObject:[NSNumber numberWithFloat:ptY] forKey:tagPanX];
-            NSLog(@"panX is %f",ptX);
-            NSLog(@"panY is %f",ptY);
-            [sender setTranslation:CGPointMake(0, 0) inView:[imageView superview]];
+
         }
-        }
+//        }
     }
+    NSLog(@"panX is %f",ptX);
+    NSLog(@"panY is %f",ptY);
+    [sender setTranslation:CGPointMake(0, 0) inView:self.view];
 }
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     
@@ -2201,9 +2243,10 @@
 //    [imgView setFrame:CGRectMake(0.0, 0.0, szImage.width, szImage.height)]; //split
 //    NSLog (@"imageView frame size is %f width %f height",szImage.width,szImage.height);
     if(!isinf(rate)) {
-     [imgView setFrame:CGRectMake(0.0, 0.0, imgView.frame.size.width*rate, imgView.frame.size.height*rate)];  //split
+     [imgView setFrame:CGRectMake(0.0,0.0, imgView.frame.size.width*rate, imgView.frame.size.height*rate)];  //split
         NSLog (@"imageView frame size is %f width %f height",imgView.frame.size.width,imgView.frame.size.height);
-
+        imageWidth=imgView.frame.size.width;
+        imageHeight=imgView.frame.size.height;
     }
     //        NSLog(@"scrView content .width%f,imgView content .width%f",scrView.frame.size.width,imgView.frame.size.height);
     //        scrView.frame = CGRectMake(imgView.center.x, imgView.center.y, imgView.frame.size.width*1.25, imgView.frame.size.height*1.25);
@@ -2220,7 +2263,7 @@
 //    pt.y = (imgView.frame.size.height - scrView.frame.size.height)/2;
     //        }
     
-    pt.x =   scrView.frame.origin.x;//splitagram
+    pt.x =   scrView.frame.origin.x ;//splitagram
     pt.y =   scrView.frame.origin.y;//splitagram
     
     NSLog(@"pt is x=%f and y=%f",pt.x, pt.y);
@@ -2229,8 +2272,8 @@
 //    NSString *tagPtX = [NSString stringWithFormat:@"PtX%d",tagNumber];
 //    NSString *tagPtY = [NSString stringWithFormat:@"PtY%d",tagNumber];
 //    NSString *tagScale = [NSString stringWithFormat:@"Scale%d",tagNumber];
-    [defaults setFloat:pt.x  forKey:@"PanX"];
-    [defaults setFloat:pt.y forKey:@"PanY"];
+//    [defaults setFloat:pt.x  forKey:@"PanX"];
+//    [defaults setFloat:pt.y forKey:@"PanY"];
 //    [defaults setFloat:1.0f forKey:@"Zoom"];
     
 //    [defaults setFloat:rateFit forKey:tagScale];
@@ -2274,7 +2317,7 @@
         imgView.transform = CGAffineTransformScale(imgView.transform, -zoomFactor, zoomFactor);
     else
         imgView.transform = CGAffineTransformScale(imgView.transform, zoomFactor, zoomFactor);
-    
+//    imgView.transform = CGAffineTransformTranslate(imgView.transform, [defaults floatForKey:@"PanX"], [defaults floatForKey:@"PanY"]);
 }
 - (void) fillRotateMenu {
 //    _rotateMenuView = [[UIScrollView alloc] initWithFrame:self.frameSelectionBar.frame];
@@ -2386,6 +2429,7 @@
                 UIImageView *imageView = blockSlider.subviews[0];
                 imageView.transform = CGAffineTransformIdentity;
                 imageView.transform = CGAffineTransformScale(imageView.transform, zoomFactor,zoomFactor);
+            [defaults setBool:NO forKey:@"Flip"];
 //            }
         }
     labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(sliderRotate.value)];

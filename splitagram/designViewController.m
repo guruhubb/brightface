@@ -27,6 +27,7 @@
     BOOL firstTimeEffects;
     BOOL firstTime;
     BOOL firstTimeFilter;
+    BOOL firstTimeDesign;
     NSInteger tapBlockNumber;
     NSInteger nStyle;
     NSInteger nSubStyle;
@@ -112,11 +113,11 @@
     if ([defaults boolForKey:@"white"])
         _frameContainer.backgroundColor=[UIColor blackColor];
     nMargin = 5;
+
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.tag = 19;
     [self frameClicked:btn];
-    if (![defaults boolForKey:@"filter"])
-        [self randomFilterPick];
+    firstTimeDesign = YES;
 }
 - (void) randomFilterPick {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -171,6 +172,16 @@
         firstTimeFilter = YES;
     [self fillEffectsSlider];
     [self fillSecondEffectsSlider];
+    if (![defaults boolForKey:@"filter"])
+        [self randomFilterPick];
+    }
+    if (!firstTimeDesign){
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.tag=[defaults integerForKey:@"frame"];
+    if (btn.tag <= 25)
+        [self frameClicked:btn];
+    else
+        [self secondEffectsClicked:btn];
     }
 
 }
@@ -382,6 +393,7 @@
 {
     if ([[segue identifier] isEqualToString:@"doneDesign"])
     {
+        firstTimeDesign=NO;
         for (UIScrollView *blockSlider in droppableAreas)
             [blockSlider.layer setBorderColor:[[UIColor clearColor] CGColor]];
         doneViewController *vc = [segue destinationViewController];
@@ -539,6 +551,7 @@
 //        //        if (frameButton.highlighted==YES)
 //        //            frameButton.highlighted=NO;
 //    }
+    [defaults setInteger:clickedBtn.tag forKey:@"frame"];
     for (int i = 1; i <= 35+25; i++) {
         UIButton *frameButton = (UIButton *)[_frameSelectionBar viewWithTag:i];
         frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
@@ -655,7 +668,8 @@
 }
 - (void)secondFrameClicked:(UIButton *)clickedBtn
 {
-    
+    [defaults setInteger:clickedBtn.tag forKey:@"frame"];
+
 //    NSLog(@"second frame clicked ");
 //    if (![[NSUserDefaults standardUserDefaults] boolForKey:kFeature0]){
 //        [self frameAction];

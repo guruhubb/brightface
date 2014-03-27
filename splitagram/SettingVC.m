@@ -41,7 +41,7 @@
     label.text = @"settings";
     self.navigationItem.titleView = label;
     editArr = [[NSArray alloc]initWithObjects:
-               @"photo format for frame",@"photo background color",@"auto-save to camera roll",
+               @"photo format for frame",@"photo background color",@"auto-filter",@"auto-save to camera roll",
                @"follow us on instagram", @"like us on facebook",@"follow us on twitter",
                @"rate app",@"feedback",@"restore purchases",nil];
     [self.settingsTableView reloadData];
@@ -103,7 +103,7 @@
 {
     switch (section) {
         case (0):
-            return 3;
+            return 4;
         case (1):
             return 3;
         case (2):
@@ -174,6 +174,20 @@
             if (indexPath.row==2) {
                 [cell.textLabel setText:[editArr objectAtIndex:2]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(255, 0, 40, 40)];
+                label.textColor = [UIColor lightGrayColor];
+                label.font = [UIFont systemFontOfSize:14];
+                label.tag = 102;
+                [cell.contentView addSubview:label];
+                if ([defaults boolForKey:@"filter"])
+                    label.text = @"no";
+                else
+                    label.text = @"yes";
+                
+            }
+            if (indexPath.row==3) {
+                [cell.textLabel setText:[editArr objectAtIndex:3]];
+                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
                 savePhoto = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [savePhoto addTarget: self action: @selector(flip:) forControlEvents:UIControlEventValueChanged];
                 if ([defaults boolForKey:@"savePhoto"])  //if 0 then save is ON
@@ -183,32 +197,33 @@
                 cell.accessoryView = savePhoto;
 
             }
+            
         }
         if (indexPath.section == 1) {
             if(indexPath.row==0){
-                [cell.textLabel setText:[editArr objectAtIndex:3]];
-                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-            }
-            if(indexPath.row==1){
                 [cell.textLabel setText:[editArr objectAtIndex:4]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             }
-            if (indexPath.row==2) {
+            if(indexPath.row==1){
                 [cell.textLabel setText:[editArr objectAtIndex:5]];
+                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+            }
+            if (indexPath.row==2) {
+                [cell.textLabel setText:[editArr objectAtIndex:6]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             }
         }
         if (indexPath.section == 2) {
             if(indexPath.row==0){
-                [cell.textLabel setText:[editArr objectAtIndex:6]];
-                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-            }
-            if(indexPath.row==1){
                 [cell.textLabel setText:[editArr objectAtIndex:7]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             }
-            if(indexPath.row==2){
+            if(indexPath.row==1){
                 [cell.textLabel setText:[editArr objectAtIndex:8]];
+                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+            }
+            if(indexPath.row==2){
+                [cell.textLabel setText:[editArr objectAtIndex:9]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             }
             
@@ -227,6 +242,9 @@
 
         if (indexPath.row==1) {
             [self backgroundColorAction];
+        }
+        if (indexPath.row==2) {
+            [self filterAction];
         }
     }
     if (indexPath.section == 2){
@@ -395,6 +413,13 @@
     popupQuery.tag=1;
     [popupQuery showInView:self.view];
 }
+-(void)filterAction
+{
+    UIActionSheet *popupQuery;
+    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"auto filter",@"no filter",nil];
+    popupQuery.tag=2;
+    [popupQuery showInView:self.view];
+}
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
         if (actionSheet.tag == 0) {
             if (buttonIndex==0){
@@ -403,16 +428,26 @@
             else if (buttonIndex==1)[defaults setBool:YES forKey:@"fill"];
             
         }
-        else {
+        else if (actionSheet.tag == 1){
             if (buttonIndex==0){
                 [defaults setBool:NO forKey:@"white"];
             }
             else if (buttonIndex==1)[defaults setBool:YES forKey:@"white"];
         }
+        else {
+            if (buttonIndex==0){
+                [defaults setBool:NO forKey:@"filter"];
+            }
+            else if (buttonIndex==1)[defaults setBool:YES forKey:@"filter"];
+        }
+    
     UILabel *label1 = (UILabel *) [self.view viewWithTag:100];
     UILabel *label2 = (UILabel *) [self.view viewWithTag:101];
+    UILabel *label3 = (UILabel *) [self.view viewWithTag:102];
+
     [label1 removeFromSuperview];
     [label2 removeFromSuperview];
+    [label3 removeFromSuperview];
 
     [self.settingsTableView reloadData];
 

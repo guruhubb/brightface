@@ -283,7 +283,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="qkJ-o1-MtF">
-                        <barButtonItem key="backBarButtonItem" title=" " id="tPg-Wv-oeW"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="U9o-S1-Lle"/>
                         <barButtonItem key="rightBarButtonItem" title="home" id="sXf-ar-7za">
                             <connections>
                                 <action selector="goHome:" destination="DqS-NE-TGa" id="MQb-9c-RSi"/>

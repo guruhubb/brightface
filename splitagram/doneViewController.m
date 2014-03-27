@@ -53,7 +53,13 @@
                               }];
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"savePhoto"])
         [self saveImage];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+//                                             initWithImage:nil
+//                                             style:UIBarButtonItemStylePlain
+//                                             target:self
+//                                             action:@selector(goHome:)];
 }
+
 - (void) saveImage {
     //save image to library and then put it in album
     CGImageRef img = [self.image CGImage];

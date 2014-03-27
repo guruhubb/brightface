@@ -24,6 +24,8 @@
   
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+    UINavigationController *navigationController;
+    [navigationController.interactivePopGestureRecognizer setEnabled:NO];
 //    }
     [MKStoreManager sharedManager];
     //create album

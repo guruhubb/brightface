@@ -41,7 +41,7 @@
     label.text = @"settings";
     self.navigationItem.titleView = label;
     editArr = [[NSArray alloc]initWithObjects:
-               @"photo format",@"photo background color",@"auto-save to camera roll",
+               @"photo format for frame",@"photo background color",@"auto-save to camera roll",
                @"follow us on instagram", @"like us on facebook",@"follow us on twitter",
                @"rate app",@"feedback",@"restore purchases",nil];
     [self.settingsTableView reloadData];
@@ -151,10 +151,10 @@
                 label.font = [UIFont systemFontOfSize:14];
                 label.tag = 100;
                 [cell.contentView addSubview:label];
-                if ([defaults boolForKey:@"crop"])
-                    label.text = @"frame";
+                if ([defaults boolForKey:@"fill"])
+                    label.text = @"fit";
                 else
-                    label.text = @"crop";
+                    label.text = @"fill";
             
             }
             if (indexPath.row==1) {

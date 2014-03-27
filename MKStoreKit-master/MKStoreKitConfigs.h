@@ -66,9 +66,9 @@
     #define SERVER_PRODUCT_MODEL 0
 #endif
 
-#ifndef OWN_SERVER
-    #define OWN_SERVER  @"http://m.omentos.com/backend/inapp/"
-#endif
+//#ifndef OWN_SERVER
+//    #define OWN_SERVER  @"http://m.omentos.com/backend/inapp/"
+//#endif
 
 #ifndef REVIEW_ALLOWED
     #define REVIEW_ALLOWED 0

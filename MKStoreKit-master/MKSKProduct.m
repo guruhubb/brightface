@@ -168,33 +168,33 @@ static NSMutableData *sDataFromConnection;
   }
 }
 
-- (void) verifyReceiptOnComplete:(void (^)(void)) completionBlock
-                         onError:(void (^)(NSError*)) errorBlock
-{
-  self.onReceiptVerificationSucceeded = completionBlock;
-  self.onReceiptVerificationFailed = errorBlock;
-  
-  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", OWN_SERVER, @"verifyProduct.php"]];
-	
-	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url 
-                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData 
-                                                        timeoutInterval:60];
-	
-	[theRequest setHTTPMethod:@"POST"];		
-	[theRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-	
-	NSString *receiptDataString = [self.receipt base64EncodedString];
-  
-	NSString *postData = [NSString stringWithFormat:@"receiptdata=%@", receiptDataString];
-	
-	NSString *length = [NSString stringWithFormat:@"%d", [postData length]];	
-	[theRequest setValue:length forHTTPHeaderField:@"Content-Length"];	
-	
-	[theRequest setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding]];
-	
-  self.theConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];    
-  [self.theConnection start];	
-}
+//- (void) verifyReceiptOnComplete:(void (^)(void)) completionBlock
+//                         onError:(void (^)(NSError*)) errorBlock
+//{
+//  self.onReceiptVerificationSucceeded = completionBlock;
+//  self.onReceiptVerificationFailed = errorBlock;
+//  
+//  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", OWN_SERVER, @"verifyProduct.php"]];
+//	
+//	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url 
+//                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData 
+//                                                        timeoutInterval:60];
+//	
+//	[theRequest setHTTPMethod:@"POST"];		
+//	[theRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//	
+//	NSString *receiptDataString = [self.receipt base64EncodedString];
+//  
+//	NSString *postData = [NSString stringWithFormat:@"receiptdata=%@", receiptDataString];
+//	
+//	NSString *length = [NSString stringWithFormat:@"%d", [postData length]];	
+//	[theRequest setValue:length forHTTPHeaderField:@"Content-Length"];	
+//	
+//	[theRequest setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding]];
+//	
+//  self.theConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];    
+//  [self.theConnection start];	
+//}
 
 
 #pragma mark -

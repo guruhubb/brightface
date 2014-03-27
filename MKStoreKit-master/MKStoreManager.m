@@ -510,44 +510,44 @@ static MKStoreManager* _sharedStoreManager;
 	}
 }
 
-- (void) startVerifyingSubscriptionReceipts
-{
-  NSDictionary *subscriptions = [[MKStoreManager storeKitItems] objectForKey:@"Subscriptions"];
-  
-  self.subscriptionProducts = [NSMutableDictionary dictionary];
-  for(NSString *productId in [subscriptions allKeys])
-  {
-    MKSKSubscriptionProduct *product = [[MKSKSubscriptionProduct alloc] initWithProductId:productId subscriptionDays:[[subscriptions objectForKey:productId] intValue]];
-    product.receipt = [MKStoreManager dataForKey:productId]; // cached receipt
-    
-    if(product.receipt)
-    {
-      [product verifyReceiptOnComplete:^(NSNumber* isActive)
-       {
-         if([isActive boolValue] == NO)
-         {
-           [[NSNotificationCenter defaultCenter] postNotificationName:kSubscriptionsInvalidNotification
-                                                               object:product.productId];
-           
-           NSLog(@"Subscription: %@ is inactive", product.productId);
-           product.receipt = nil;
-           [self.subscriptionProducts setObject:product forKey:productId];
-           [MKStoreManager setObject:nil forKey:product.productId];
-         }
-         else
-         {
-           NSLog(@"Subscription: %@ is active", product.productId);
-         }
-       }
-                               onError:^(NSError* error)
-       {
-         NSLog(@"Unable to check for subscription validity right now");
-       }];
-    }
-    
-    [self.subscriptionProducts setObject:product forKey:productId];
-  }
-}
+//- (void) startVerifyingSubscriptionReceipts
+//{
+//  NSDictionary *subscriptions = [[MKStoreManager storeKitItems] objectForKey:@"Subscriptions"];
+//  
+//  self.subscriptionProducts = [NSMutableDictionary dictionary];
+//  for(NSString *productId in [subscriptions allKeys])
+//  {
+//    MKSKSubscriptionProduct *product = [[MKSKSubscriptionProduct alloc] initWithProductId:productId subscriptionDays:[[subscriptions objectForKey:productId] intValue]];
+//    product.receipt = [MKStoreManager dataForKey:productId]; // cached receipt
+//    
+//    if(product.receipt)
+//    {
+//      [product verifyReceiptOnComplete:^(NSNumber* isActive)
+//       {
+//         if([isActive boolValue] == NO)
+//         {
+//           [[NSNotificationCenter defaultCenter] postNotificationName:kSubscriptionsInvalidNotification
+//                                                               object:product.productId];
+//           
+//           NSLog(@"Subscription: %@ is inactive", product.productId);
+//           product.receipt = nil;
+//           [self.subscriptionProducts setObject:product forKey:productId];
+//           [MKStoreManager setObject:nil forKey:product.productId];
+//         }
+//         else
+//         {
+//           NSLog(@"Subscription: %@ is active", product.productId);
+//         }
+//       }
+//                               onError:^(NSError* error)
+//       {
+//         NSLog(@"Unable to check for subscription validity right now");
+//       }];
+//    }
+//    
+//    [self.subscriptionProducts setObject:product forKey:productId];
+//  }
+//}
 
 -(NSData*) receiptFromBundle {
   // mac support, method not implemented yet
@@ -645,37 +645,37 @@ static MKStoreManager* _sharedStoreManager;
       }
     }
     
-    if(OWN_SERVER && SERVER_PRODUCT_MODEL)
-    {
-      // ping server and get response before serializing the product
-      // this is a blocking call to post receipt data to your server
-      // it should normally take a couple of seconds on a good 3G connection
-      MKSKProduct *thisProduct = [[MKSKProduct alloc] initWithProductId:productIdentifier receiptData:receiptData];
-      
-      [thisProduct verifyReceiptOnComplete:^
-       {
-         [self rememberPurchaseOfProduct:productIdentifier withReceipt:receiptData];
-         if(self.onTransactionCompleted)
-           self.onTransactionCompleted(productIdentifier, receiptData, hostedContent);
-       }
-                                   onError:^(NSError* error)
-       {
-         if(self.onTransactionCancelled)
-         {
-           self.onTransactionCancelled(productIdentifier);
-         }
-         else
-         {
-           NSLog(@"The receipt could not be verified");
-         }
-       }];
-    }
-    else
-    {
+//    if(OWN_SERVER && SERVER_PRODUCT_MODEL)
+//    {
+//      // ping server and get response before serializing the product
+//      // this is a blocking call to post receipt data to your server
+//      // it should normally take a couple of seconds on a good 3G connection
+//      MKSKProduct *thisProduct = [[MKSKProduct alloc] initWithProductId:productIdentifier receiptData:receiptData];
+//      
+//      [thisProduct verifyReceiptOnComplete:^
+//       {
+//         [self rememberPurchaseOfProduct:productIdentifier withReceipt:receiptData];
+//         if(self.onTransactionCompleted)
+//           self.onTransactionCompleted(productIdentifier, receiptData, hostedContent);
+//       }
+//                                   onError:^(NSError* error)
+//       {
+//         if(self.onTransactionCancelled)
+//         {
+//           self.onTransactionCancelled(productIdentifier);
+//         }
+//         else
+//         {
+//           NSLog(@"The receipt could not be verified");
+//         }
+//       }];
+//    }
+//    else
+//    {
       [self rememberPurchaseOfProduct:productIdentifier withReceipt:receiptData];
       if(self.onTransactionCompleted)
         self.onTransactionCompleted(productIdentifier, receiptData, hostedContent);
-    }
+//    }
 //  }
 }
 

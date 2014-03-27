@@ -107,6 +107,7 @@
     
     if ([defaults boolForKey:@"white"])
         _frameContainer.backgroundColor=[UIColor blackColor];
+    nMargin = 5;
 
 }
 - (void) resetGestureParameters {
@@ -348,6 +349,8 @@
 {
     if ([[segue identifier] isEqualToString:@"doneDesign"])
     {
+        for (UIScrollView *blockSlider in droppableAreas)
+            [blockSlider.layer setBorderColor:[[UIColor clearColor] CGColor]];
         doneViewController *vc = [segue destinationViewController];
         CGRect rect = _frameContainer.frame;//[[UIScreen mainScreen] bounds];
         //    UIGraphicsBeginImageContext(rect.size);
@@ -363,10 +366,20 @@
 
 - (void) fillFrameSelectionSlider {
     //    self.frameSelectionSlider = (UIScrollView *)[self.view viewWithTag:10120];
-    self.frameSelectionBar.contentSize = CGSizeMake(65 * 25+5, self.frameSelectionBar.frame.size.height);
-    for (int ind = 1; ind <= 25; ind++) {
+    if (!IS_TALL_SCREEN) {
+        self.frameSelectionBar.contentSize = CGSizeMake(55 * 28+10, self.frameSelectionBar.frame.size.height);
+    } else {
+        self.frameSelectionBar.contentSize = CGSizeMake(70 * 28+10, 151);
+        self.frameSelectionBar.frame=CGRectMake(0, 353, 320, 151);
+    }
+    for (int ind = 7; ind <= 25; ind++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake((ind - 1 ) * 55+5, 5, 50, 50);
+        if (!IS_TALL_SCREEN)
+            btn.frame = CGRectMake((ind - 7 ) * 55+5, 5, 50, 50);
+        else
+            btn.frame = CGRectMake((ind - 7 ) * 70+5, 5, 65, 65);
+            
+        
         btn.tag = ind;
         //            btn.showsTouchWhenHighlighted=YES;
         btn.layer.borderWidth=kBorderWidth;
@@ -376,19 +389,31 @@
         NSLog(@"Frame%02d.png",ind);
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"Frame%02d.png",ind]] forState:UIControlStateNormal];
         btn.alpha = 0.5;
+        [btn.imageView setContentMode:UIViewContentModeScaleToFill];
+
         [self.frameSelectionBar addSubview:btn];
     }
 }
 - (void) fillSecondFrameSelectionSlider {
     
     //    self.secondFrameSelectionSlider= [[UIScrollView alloc] initWithFrame: CGRectMake(0, 85, 320, 80)];
-    self.frameSelectionBar.contentSize = CGSizeMake(65 * 35+5, self.frameSelectionBar.frame.size.height);
+//    if (!IS_TALL_SCREEN) {
+//        self.frameSelectionBar.contentSize = CGSizeMake(65 * 35+5, self.frameSelectionBar.frame.size.height);
+//    } else {
+//        self.frameSelectionBar.contentSize = CGSizeMake(65 * 35+5, 151);
+//        self.frameSelectionBar.frame=CGRectMake(0, 353, 320, 151);
+//    }
+
     //    self.secondFrameSelectionSlider.backgroundColor = [UIColor darkGrayColor];
     //    [self.bottomView addSubview:self.secondFrameSelectionSlider];
-    for (int ind = 1; ind <= 35; ind++) {
+    for (int ind = 8; ind <= 35; ind++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake((ind - 1 ) * 55+5, 60, 50, 50);
-        btn.tag = ind;
+//        btn.frame = CGRectMake((ind - 1 ) * 55+5, 60, 50, 50);
+        if (!IS_TALL_SCREEN)
+            btn.frame = CGRectMake((ind - 8 ) * 55+5, 60, 50, 50);
+        else
+            btn.frame = CGRectMake((ind - 8 ) * 70+5, 75, 65, 65);
+        btn.tag = ind+25;
         //        btn.showsTouchWhenHighlighted=YES;
         btn.layer.borderWidth=kBorderWidth;
         btn.layer.borderColor=[[UIColor clearColor] CGColor];
@@ -396,6 +421,8 @@
         NSLog(@"secondFrame%02d.png",ind);
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"secondFrame%02d.png",ind]] forState:UIControlStateNormal];
         btn.alpha = 0.5;
+        [btn.imageView setContentMode:UIViewContentModeScaleToFill];
+
 
         [self.frameSelectionBar addSubview:btn];
         
@@ -407,11 +434,13 @@
             imageView.layer.shadowColor = [UIColor blackColor].CGColor;
             imageView.layer.shadowOffset = CGSizeMake(0, 1);
             imageView.layer.shadowOpacity = 1;
-            imageView.layer.shadowRadius = 1.0;
-            imageView.clipsToBounds = NO;
+//            imageView.layer.shadowRadius = 1.0;
+//            imageView.clipsToBounds = NO;
 //            imageView.layer.shadowOffset=CGSizeMake(1, 1);
 //            imageView.layer.shadowColor= [UIColor blackColor].CGColor;
-            imageView.frame=CGRectMake(btn.frame.size.width-15, 0, 15, 15);
+            
+                imageView.frame=CGRectMake(btn.frame.size.width-15, 2, 15, 15);
+            
             //        NSLog(@"imageView of lockImage is %@",imageView.frame.origin);
             //            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"glyphicons_203_lock.png"]];
             //            imageView.alpha = 0.5;
@@ -478,7 +507,7 @@
 //        //        if (frameButton.highlighted==YES)
 //        //            frameButton.highlighted=NO;
 //    }
-    for (int i = 1; i <= 35; i++) {
+    for (int i = 1; i <= 35+25; i++) {
         UIButton *frameButton = (UIButton *)[_frameSelectionBar viewWithTag:i];
         frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
         
@@ -596,12 +625,10 @@
 {
     
 //    NSLog(@"second frame clicked ");
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:kFeature0]){
-        [self frameAction];
-//        _inAppView.hidden=NO;
-//        [self.view bringSubviewToFront:_inAppView];
-        return;
-    }
+//    if (![[NSUserDefaults standardUserDefaults] boolForKey:kFeature0]){
+//        [self frameAction];
+//        return;
+//    }
     [self hideLabels];
 //    else {
 //
@@ -638,7 +665,7 @@
 //            //        if (frameButton.highlighted==YES)
 //            //            frameButton.highlighted=NO;
 //        }
-        for (int i = 1; i <= 35; i++) {
+        for (int i = 1; i <= 35+25; i++) {
             UIButton *frameButton = (UIButton *)[_frameSelectionBar viewWithTag:i];
             frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
             
@@ -648,7 +675,7 @@
         //    [self performSelector:@selector(highlightButton:) withObject:clickedBtn afterDelay:0.0];
         clickedBtn.layer.borderColor=[[UIColor blackColor] CGColor];
         
-        switch (clickedBtn.tag) {
+        switch (clickedBtn.tag-25) {
             case 1:
                 
                 [self selectFrame:1 SUB:7];
@@ -824,11 +851,24 @@
     labelEffectsArray = [[NSMutableArray alloc]initWithObjects: @"original", @"delight",@"morning", @"sky", @"sunny",@"night", @"beach",@"b&w-red",@"sepia",@"water", @"b&w",nil];
     labelSecondEffectsArray = [[NSMutableArray alloc]initWithObjects: @"2layer",@"warm",@"winter",@"crisp",@"candle",@"fall",@"film",@"foggy",@"cobalt",@"blue",@"bright",@"bleak",@"moon",@"cyan",@"soft",@"gold",@"platinum",@"copper",@"vignette",@"white", nil];
     //    self.effectsSlider = (UIScrollView *)[self.view viewWithTag:10125];
-    self.filterSelectionBar.contentSize = CGSizeMake(65 * 11+10, self.filterSelectionBar.frame.size.height);
+//    self.filterSelectionBar.contentSize = CGSizeMake(65 * 11+10, self.filterSelectionBar.frame.size.height);
+    if (!IS_TALL_SCREEN) {
+        self.filterSelectionBar.contentSize = CGSizeMake(55 * 11+10, self.frameSelectionBar.frame.size.height);
+    } else {
+        self.filterSelectionBar.contentSize = CGSizeMake(70 * 11+10, 151);
+        self.filterSelectionBar.frame=CGRectMake(0, 353, 320, 151);
+    }
     
     for (int ind = 1; ind <= 11; ind++) {
+        @autoreleasepool {
+     
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake((ind-1) * 55+5, 5, 50, 50);
+//        btn.frame = CGRectMake((ind-1) * 55+5, 5, 50, 50);
+        if (!IS_TALL_SCREEN)
+            btn.frame = CGRectMake((ind - 1 ) * 55+5, 5, 50, 50);
+        else
+            btn.frame = CGRectMake((ind - 1 ) * 70+5, 5, 65, 65);
+
         btn.tag = ind;
         //        btn.showsTouchWhenHighlighted=YES;
         btn.layer.frame = btn.frame;
@@ -836,7 +876,13 @@
         btn.layer.borderColor=[[UIColor clearColor] CGColor];
         NSLog(@"effects btn.tag is %d ",btn.tag);
         [btn addTarget:self action:@selector(effectsClicked:) forControlEvents:UIControlEventTouchUpInside];
-        CGRect labelEffects = CGRectMake((ind - 1 )*55+5, 42, 50, 13);
+        CGRect labelEffects;
+//        CGRect labelEffects = CGRectMake((ind - 1 )*55+5, 42, 50, 13);
+        if (!IS_TALL_SCREEN)
+            labelEffects = CGRectMake((ind - 1 ) * 55+5, 42, 50, 13);
+        else
+            labelEffects = CGRectMake((ind - 1 ) * 70+5, 57, 65, 13);
+
         UILabel *label = [[UILabel alloc] initWithFrame:labelEffects];
         label.backgroundColor = [UIColor darkGrayColor];
         label.alpha=0.8;
@@ -900,8 +946,10 @@
 //            [imageCache storeImage:quickFilteredImage forKey:filters];
 //        }
         [btn setImage:quickFilteredImage forState:UIControlStateNormal];
+        [btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
         [self.filterSelectionBar addSubview:btn];
         [self.filterSelectionBar addSubview:label];
+        }
     }
 }
 
@@ -963,20 +1011,31 @@
 
 - (void) fillSecondEffectsSlider {
     
-    self.filterSelectionBar.contentSize = CGSizeMake(65 * 20+10, self.filterSelectionBar.frame.size.height);
+//    self.filterSelectionBar.contentSize = CGSizeMake(65 * 20+10, self.filterSelectionBar.frame.size.height);
     
     
-    for (int ind = 1; ind <= 20; ind++) {
+    for (int ind = 1; ind <= 11; ind++) {
+        @autoreleasepool {
+           
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake((ind-1) * 55+5, 60, 50, 50);
-        btn.tag = ind;
+//        btn.frame = CGRectMake((ind-1) * 55+5, 60, 50, 50);
+        if (!IS_TALL_SCREEN)
+            btn.frame = CGRectMake((ind - 1 ) * 55+5, 60, 50, 50);
+        else
+            btn.frame = CGRectMake((ind - 1 ) * 70+5, 75, 65, 65);
+        btn.tag = ind+11;
         btn.layer.borderWidth=kBorderWidth;
         btn.layer.borderColor=[[UIColor clearColor] CGColor];
         
         //        btn.showsTouchWhenHighlighted=YES;
         NSLog(@" second effects btn.tag is %d ",btn.tag);
         [btn addTarget:self action:@selector(secondEffectsClicked:) forControlEvents:UIControlEventTouchUpInside];
-        CGRect labelEffects = CGRectMake((ind - 1 )*55+5, 52+45, 50, 13);
+        CGRect labelEffects;
+//        = CGRectMake((ind - 1 )*55+5, 52+45, 50, 13);
+        if (!IS_TALL_SCREEN)
+            labelEffects = CGRectMake((ind - 1 ) * 55+5, 52+45, 50, 13);
+        else
+            labelEffects = CGRectMake((ind - 1 ) * 70+5, 75+65-13, 65, 13);
         UILabel *label = [[UILabel alloc] initWithFrame:labelEffects];
         label.backgroundColor = [UIColor darkGrayColor];
         label.alpha=0.8;
@@ -1067,6 +1126,8 @@
 //        }
         
         [btn setImage:quickFilteredImage forState:UIControlStateNormal];
+        [btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
+
         [self.filterSelectionBar addSubview:btn];
         [self.filterSelectionBar addSubview:label];
         //        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"com.guruhubb.bookly.subscription"]){
@@ -1077,11 +1138,11 @@
             imageView.layer.shadowColor = [UIColor blackColor].CGColor;
             imageView.layer.shadowOffset = CGSizeMake(0, 1);
             imageView.layer.shadowOpacity = 1;
-            imageView.layer.shadowRadius = 1.0;
-            imageView.clipsToBounds = NO;
+//            imageView.layer.shadowRadius = 1.0;
+//            imageView.clipsToBounds = NO;
 //            imageView.layer.shadowOffset=CGSizeMake(1, 1);
 //            imageView.layer.shadowColor= [UIColor blackColor].CGColor;
-            imageView.frame=CGRectMake(btn.frame.size.width-15, 0, 15, 15);
+            imageView.frame=CGRectMake(btn.frame.size.width-15, 2, 15, 15);
             
             //            [[NSUserDefaults standardUserDefaults] setBool:NO  forKey:@"booklySubscription"];
             //            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"glyphicons_203_lock.png"]];
@@ -1089,6 +1150,7 @@
             //            imageView.center = CGPointMake(btn.frame.size.width/2, btn.frame.size.height/2);
             //            imageView.tag = ind;
             [btn addSubview:imageView];
+        }
         }
         //        else
         //            [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:@"booklySubscription"];
@@ -1102,7 +1164,7 @@
 //    [labelToApplyFilterToVideo removeFromSuperview];
     if (tapBlockNumber==100) tapBlockNumber=0;
 //    AppRecord *app = [[AppRecord alloc] init];
-    for (int i = 1; i <= 11; i++) {
+    for (int i = 1; i <= 11+20; i++) {
         UIButton *frameButton = (UIButton *)[_filterSelectionBar viewWithTag:i];
         frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
     }
@@ -1177,25 +1239,21 @@
 //    }
 }
 - (void)secondEffectsClicked:(UIButton *)clickedBtn {
-//    [labelToApplyFilterToVideo removeFromSuperview];
-//    if (tapBlockNumber==100) tapBlockNumber=0;
-//    AppRecord *app = [[AppRecord alloc] init];
+
 //    [Flurry logEvent:@"Frame - Second Effects"];
     
-    if (![defaults boolForKey:kFeature1]){
-        [self filterAction];
-//        _inAppView.hidden=NO;
-//        [self.view bringSubviewToFront:_inAppView];
-        return;
-    }
-    for (int i = 1; i <= 20; i++) {
+//    if (![defaults boolForKey:kFeature1]){
+//        [self filterAction];
+//        return;
+//    }
+    for (int i = 1; i <= 20+11; i++) {
         UIButton *frameButton = (UIButton *)[_filterSelectionBar viewWithTag:i];
         frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
     }
-    for (int i = 1; i <= 11; i++) {
-        UIButton *frameButton = (UIButton *)[_filterSelectionBar viewWithTag:i];
-        frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
-    }
+//    for (int i = 1; i <= 11; i++) {
+//        UIButton *frameButton = (UIButton *)[_filterSelectionBar viewWithTag:i];
+//        frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
+//    }
 //    NSInteger clickedBtnTag= 11+clickedBtn.tag;
 //    blendBtnClicked=NO;
 //    effectsBtnClicked=YES;
@@ -1207,7 +1265,7 @@
 //            for (int i=0;i<[self.originalImages count];i++){
 //                if ( (i == imageView.tag) && imageView.image ){
                     UIImage *inputImage = self.selectedImage;
-                    switch (clickedBtn.tag) {
+                    switch (clickedBtn.tag-11) {
                         case 1:{
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"2strip.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"2strip.png"];
@@ -2062,7 +2120,7 @@
 }
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     
-    if ([gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]] || [gestureRecognizer isKindOfClass:[UIRotationGestureRecognizer class]] ||[gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
+    if ([gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]])
         return YES;
     else
         return NO;
@@ -2281,7 +2339,10 @@
 //    backButton.titleLabel.textColor= [UIColor whiteColor];
 //    [backButton addTarget:self action:@selector(goBackToPreviousMenu) forControlEvents:UIControlEventTouchUpInside];
 //    [self.rotateMenuView addSubview:backButton];
-    
+    if (IS_TALL_SCREEN) {
+        
+        self.rotateMenuView.frame=CGRectMake(0, 353, 320, 151);
+    }
     CGRect frame = CGRectMake(5.0, 5.0, 310.0, 47.0);
     sliderRotate = [[UISlider alloc] initWithFrame:frame];
     [sliderRotate addTarget:self action:@selector(rotateChanged:) forControlEvents:UIControlEventValueChanged];
@@ -2306,14 +2367,14 @@
     resetButton.frame = CGRectMake(5*5+58*4, 57,  58, 58);
     //    resetButton.showsTouchWhenHighlighted=YES;
     [resetButton setTitle:@"reset" forState:UIControlStateNormal];
-    resetButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    resetButton.titleLabel.font = [UIFont systemFontOfSize:18];
     resetButton.backgroundColor=[UIColor scrollViewTexturedBackgroundColor];
     resetButton.titleLabel.textColor= [UIColor whiteColor];
     [resetButton addTarget:self action:@selector(resetRotate) forControlEvents:UIControlEventTouchUpInside];
     [self.rotateMenuView addSubview:resetButton];
     UIButton *minusAngleButton = [UIButton buttonWithType:UIButtonTypeCustom];
     minusAngleButton.frame = CGRectMake(5, 57,  58, 58);
-    minusAngleButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    minusAngleButton.titleLabel.font = [UIFont systemFontOfSize:18];
     //    rightAngleButton.showsTouchWhenHighlighted=YES;
     //    rightAngleButton.layer.borderWidth=kBorderWidth;
     //    rightAngleButton.layer.borderColor=[[UIColor clearColor] CGColor];
@@ -2325,7 +2386,7 @@
     
     UIButton *rightAngleButton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightAngleButton.frame = CGRectMake(5*2+58, 57,  58, 58);
-    rightAngleButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    rightAngleButton.titleLabel.font = [UIFont systemFontOfSize:18];
     //    rightAngleButton.showsTouchWhenHighlighted=YES;
     //    rightAngleButton.layer.borderWidth=kBorderWidth;
     //    rightAngleButton.layer.borderColor=[[UIColor clearColor] CGColor];
@@ -2337,7 +2398,7 @@
     
     UIButton *plusAngleButton = [UIButton buttonWithType:UIButtonTypeCustom];
     plusAngleButton.frame = CGRectMake(5*3+58*2, 57,  58, 58);
-    plusAngleButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    plusAngleButton.titleLabel.font = [UIFont systemFontOfSize:18];
     //    rightAngleButton.showsTouchWhenHighlighted=YES;
     //    rightAngleButton.layer.borderWidth=kBorderWidth;
     //    rightAngleButton.layer.borderColor=[[UIColor clearColor] CGColor];
@@ -2349,7 +2410,7 @@
     
     UIButton *flipButton = [UIButton buttonWithType:UIButtonTypeCustom];
     flipButton.frame = CGRectMake(5*4+58*3, 57,  58, 58);
-    flipButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    flipButton.titleLabel.font = [UIFont systemFontOfSize:18];
     //    flipButton.showsTouchWhenHighlighted=YES;
     //    flipButton.layer.borderWidth=kBorderWidth;
     //    flipButton.layer.borderColor=[[UIColor clearColor] CGColor];
@@ -2509,23 +2570,23 @@
             return rc;
             NSLog(@"width=%f , height=%f",scroll_width,scroll_height);
         }else if( sub == 2) {
-            scroll_width = self.frameContainer.frame.size.width - 10 * 7;
-            scroll_height = self.frameContainer.frame.size.height - 10 * 7;
-            nLeftMargin =10 * 7/2;
-            nTopMargin = 10 * 7/2;
+            scroll_width = self.frameContainer.frame.size.width - 10 * 4;//10*7
+            scroll_height = self.frameContainer.frame.size.height - 10 * 4;//10*7
+            nLeftMargin =10 * 4/2;//10*7
+            nTopMargin = 10 * 4/2;//10*7
             NSLog(@"width=%f , height=%f",scroll_width,scroll_height);
             rc = CGRectMake(nLeftMargin, nTopMargin, scroll_width, scroll_height );
             return rc;
         }
         else if( sub == 3) {
             scroll_width = self.frameContainer.frame.size.width - 10 * 2;
-            scroll_height = self.self.frameContainer.frame.size.height - 10 * 7*2;
+            scroll_height = self.self.frameContainer.frame.size.height - 70; // - 10*7*2 = -140
             NSLog(@"width=%f , height=%f",scroll_width,scroll_height);
             rc = CGRectMake(10, 10, scroll_width, scroll_height );
             return rc;
         }
         else if ( sub == 4) {
-            scroll_width = self.frameContainer.frame.size.width - nMargin * 8*2;
+            scroll_width = self.frameContainer.frame.size.width - nMargin * 5*2;// *8*2
             scroll_height = self.frameContainer.frame.size.height - nMargin * 5*2;
             NSLog(@"width=%f , height=%f",scroll_width,scroll_height);
         }
@@ -2542,7 +2603,7 @@
         }
         else if ( sub == 6) { //full
             scroll_width = 310;
-            scroll_height = 350;
+            scroll_height = 310;//350
             //            nTopMargin = nMargin;
             //            nLeftMargin = 0;
             //nLeftMargin=  200;
@@ -2555,7 +2616,7 @@
         
         else if ( sub == 7) { //tall right with 10 margin top/right
             scroll_width = 240;
-            scroll_height = 330;
+            scroll_height = 290; //330
             //            nTopMargin = nMargin;
             //            nLeftMargin = 0;
             //nLeftMargin=  200;
@@ -2576,25 +2637,25 @@
         
         else if ( sub == 9) {  //frame with horizontal bottom
             scroll_width = 310;
-            scroll_height = 250;
+            scroll_height = 250; //250
             rc = CGRectMake(0, 0, scroll_width, scroll_height );
             return rc;
         }
         else if ( sub == 10) { // left column frame
-            scroll_width = 210;
-            scroll_height = 350;
-            rc = CGRectMake(100, 0, scroll_width, scroll_height );
+            scroll_width = 250;
+            scroll_height = 310; //350
+            rc = CGRectMake(60, 0, scroll_width, scroll_height );
             return rc;
         }
         else if ( sub == 11) { // middle column frame
             scroll_width = 210;
-            scroll_height = 350;
+            scroll_height = 310; //350
             rc = CGRectMake(50, 0, scroll_width, scroll_height );
             return rc;
         }
         else if ( sub == 12) { // middle row frame
             scroll_width = 310;
-            scroll_height = 250;
+            scroll_height = 210; //250
             rc = CGRectMake(0, 50, scroll_width, scroll_height );
             return rc;
         }
@@ -2606,8 +2667,8 @@
         }
         else if ( sub == 14) { // right frame
             scroll_width = 200;
-            scroll_height = 250;
-            rc = CGRectMake(55, 50, scroll_width, scroll_height );
+            scroll_height = 200;
+            rc = CGRectMake(55, 55, scroll_width, scroll_height );
             return rc;
         }
         //        else if ( sub == 15) { // right frame
@@ -2660,37 +2721,37 @@
         }
         else if (sub == 7) { //secondFrameSlider stuff
             scroll_width = 155;
-            scroll_height = 350;
+            scroll_height = 310;//350
             rc = CGRectMake(0, 0, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 8) {  //secondFrameSlider stuff
             scroll_width = 200;
             scroll_height = 135;
-            rc = CGRectMake(10, 45, scroll_width, scroll_height );
+            rc = CGRectMake(10, 20, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 9) {  //secondFrameSlider stuff
             scroll_width = 185;
-            scroll_height = 250;
-            rc = CGRectMake(10, 50, scroll_width, scroll_height );
+            scroll_height = 290;
+            rc = CGRectMake(10, 10, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 10) {  //secondFrameSlider stuff
             scroll_width = 105;
-            scroll_height =250;
-            rc = CGRectMake(10, 50, scroll_width, scroll_height );
+            scroll_height =290;
+            rc = CGRectMake(10, 10, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 11) {  //secondFrameSlider stuff
-            scroll_width = 185;
-            scroll_height =185;
-            rc = CGRectMake(10, 140, scroll_width, scroll_height );
+            scroll_width = 190;
+            scroll_height =190;
+            rc = CGRectMake(5, 115, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 12) {  //secondFrameSlider stuff
-            scroll_width = 215;
-            scroll_height =215;
+            scroll_width = 180;
+            scroll_height =180;
             rc = CGRectMake(0, 0, scroll_width, scroll_height );
             return rc;
         }
@@ -2701,20 +2762,20 @@
             return rc;
         }
         else if (sub == 14) {  //secondFrameSlider stuff
-            scroll_width = 120;
-            scroll_height =120;
-            rc = CGRectMake(10, 10, scroll_width, scroll_height );
+            scroll_width = 130;
+            scroll_height =130;
+            rc = CGRectMake(5, 5, scroll_width, scroll_height );
             return rc;
         }
         else if ( sub == 15) { // right frame
             scroll_width = 155;
-            scroll_height = 350;
+            scroll_height = 310; //350
             rc = CGRectMake(0, 0, scroll_width, scroll_height );
             return rc;
         }
         else if ( sub == 16) { // right frame
             scroll_width = 310;
-            scroll_height = 175;
+            scroll_height = 155;
             rc = CGRectMake(0, 0, scroll_width, scroll_height );
             return rc;
         }
@@ -2742,14 +2803,14 @@
         }
         else if (sub == 7){
             scroll_width = 150;
-            scroll_height = 107;
-            rc = CGRectMake(10, 10, scroll_width, scroll_height );
+            scroll_height = 96;
+            rc = CGRectMake(5, 5, scroll_width, scroll_height );
             return rc;
             
         }else if (sub == 8) {
-            scroll_width = 93;
+            scroll_width = 96;
             scroll_height = 250;
-            rc = CGRectMake(10, 50, scroll_width, scroll_height );
+            rc = CGRectMake(5, 30, scroll_width, scroll_height );
             return rc;
             
         }else if (sub == 9) {
@@ -2760,9 +2821,9 @@
             
         }
         else if (sub == 10){
-            scroll_width = 93;
+            scroll_width = 96;
             scroll_height = 150;
-            rc = CGRectMake(10, 10, scroll_width, scroll_height );
+            rc = CGRectMake(5, 5, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 11){
@@ -2774,27 +2835,27 @@
         else if (sub == 12){
             scroll_width = 100;
             scroll_height = 100;
-            rc = CGRectMake(5, 125, scroll_width, scroll_height );
+            rc = CGRectMake(5, 105, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 13){
             scroll_width = 150;
-            scroll_height = 330;
-            rc = CGRectMake(10, 10, scroll_width, scroll_height );
+            scroll_height = 300;//330
+            rc = CGRectMake(5, 5, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 14){
             scroll_width = 150;
             scroll_height = 200;
-            rc = CGRectMake(0, 75, scroll_width, scroll_height );
+            rc = CGRectMake(0, 55, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 15){
-            rc = CGRectMake(0, 0, 155, 350 );
+            rc = CGRectMake(0, 0, 155, 310 ); //(0,0,155,350)
             return rc;
         }
         else if (sub == 16){
-            rc = CGRectMake(0, 0, 310, 175 );
+            rc = CGRectMake(0, 0, 310, 155 );
             return rc;
         }
     }
@@ -2835,16 +2896,16 @@
             return rc;
         }
         else if (sub == 10){
-            rc = CGRectMake(5, 25, 71, 250 );
+            rc = CGRectMake(5, 5, 71, 250 );
             return rc;
         }
         else if (sub == 11){
-            rc = CGRectMake(10, 10, 175, 150 );
+            rc = CGRectMake(5, 5, 180, 147 );
             return rc;
         }
         
         else if (sub == 12){
-            rc = CGRectMake(5,5,175,88 );
+            rc = CGRectMake(5,5,175,75 );
             return rc;
         }
         else if (sub == 13){
@@ -2860,11 +2921,11 @@
             return rc;
         }
         else if (sub == 16){
-            rc = CGRectMake(10,10,93,330 );
+            rc = CGRectMake(5,5,96,300 );//330
             return rc;
         }
         else if (sub == 17){
-            rc = CGRectMake(0, 0, 155, 175 );
+            rc = CGRectMake(0, 0, 155, 155 );
             return rc;
         }
         else if (sub == 18){
@@ -2946,7 +3007,7 @@
             nTopMargin = nMargin * 2 + scroll_height;
         }
         else if (sub == 7) {  //secondFrameSlider stuff
-            scroll_width = 115;
+            scroll_width = 120;
             scroll_height = 150;
             rc = CGRectMake(175, 20, scroll_width, scroll_height );
             return rc;
@@ -2954,7 +3015,7 @@
         else if (sub == 8) {  //secondFrameSlider stuff
             scroll_width = 200;
             scroll_height = 135;
-            rc = CGRectMake(100, 175, scroll_width, scroll_height );
+            rc = CGRectMake(100, 155, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 9) {  //secondFrameSlider stuff
@@ -2965,44 +3026,44 @@
         }
         else if (sub == 10) {  //secondFrameSlider stuff
             scroll_width = 180;
-            scroll_height =250;
-            rc = CGRectMake(120, 50, scroll_width, scroll_height );
+            scroll_height =290;
+            rc = CGRectMake(120, 10, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 11) {  //secondFrameSlider stuff
             scroll_width = 110;
             scroll_height =250;
-            rc = CGRectMake(190, 10, scroll_width, scroll_height );
+            rc = CGRectMake(195, 5, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 12) {  //secondFrameSlider stuff
             scroll_width = 210;
-            scroll_height =140;
-            rc = CGRectMake(100, 210, scroll_width, scroll_height );
+            scroll_height =130;
+            rc = CGRectMake(100, 180, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 13) {  //secondFrameSlider stuff
             scroll_width = 155;
             scroll_height =150;
-            rc = CGRectMake(155, 200, scroll_width, scroll_height );
+            rc = CGRectMake(155, 160, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 14) {  //secondFrameSlider stuff
             scroll_width = 170;
-            scroll_height =350;
+            scroll_height =310; //350
             rc = CGRectMake(140, 0, scroll_width, scroll_height );
             return rc;
         }
         else if ( sub == 15) { // right frame
             scroll_width = 155;
-            scroll_height = 350;
+            scroll_height = 310; //350
             rc = CGRectMake(155, 0, scroll_width, scroll_height );
             return rc;
         }
         else if ( sub == 16) { // right frame
             scroll_width = 310;
-            scroll_height = 175;
-            rc = CGRectMake(0, 175, scroll_width, scroll_height );
+            scroll_height = 155;
+            rc = CGRectMake(0, 155, scroll_width, scroll_height );
             return rc;
         }
         
@@ -3040,50 +3101,50 @@
             nTopMargin = nMargin * 2 + scroll_height;
         }
         else if (sub == 7) {
-            rc = CGRectMake(70,122,150,107 );
+            rc = CGRectMake(70,106,150,96 );
             return rc;
         }
         else if (sub == 8) {
-            rc = CGRectMake(108,50,93,250 );
+            rc = CGRectMake(106,30,96,250 );
             return rc;
         } else if (sub == 9) {
             rc = CGRectMake(135,10,165,165 );
             return rc;
         }
         else if (sub == 10) {
-            rc = CGRectMake(108,100,93,150 );
+            rc = CGRectMake(106,100,96,150 );
             return rc;
         }
         else if (sub == 11){
             scroll_width = 100;
             scroll_height = 200;
-            rc = CGRectMake(105, 105, scroll_width, scroll_height );
+            rc = CGRectMake(105, 90, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 12){
             scroll_width = 100;
-            scroll_height = 300;
+            scroll_height = 260;//300
             rc = CGRectMake(105,25, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 13){
-            scroll_width = 135;
-            scroll_height = 85;
-            rc = CGRectMake(165, 10, scroll_width, scroll_height );
+            scroll_width = 145;
+            scroll_height = 95;
+            rc = CGRectMake(160, 5, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 14){
             scroll_width = 75;
             scroll_height = 200;
-            rc = CGRectMake(155, 75, scroll_width, scroll_height );
+            rc = CGRectMake(155, 55, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 15){
-            rc = CGRectMake(155, 0, 155, 175 );
+            rc = CGRectMake(155, 0, 155, 155 );
             return rc;
         }
         else if (sub == 16){
-            rc = CGRectMake(0, 175, 155, 175 );
+            rc = CGRectMake(0, 155, 155, 155 );
             return rc;
         }
         
@@ -3141,15 +3202,15 @@
             
         }
         else if (sub == 10){
-            rc = CGRectMake(81, 75, 71, 250 );
+            rc = CGRectMake(81, 310-255, 71, 250 );
             return rc;
         }
         else if (sub == 11){
-            rc = CGRectMake(190, 10, 100, 150 );
+            rc = CGRectMake(190, 5, 100, 150 );
             return rc;
         }
         else if (sub == 12){
-            rc = CGRectMake(130, 90, 175, 88 );
+            rc = CGRectMake(130, 80, 175, 75 );
             return rc;
         }
         else if (sub == 13){
@@ -3165,15 +3226,15 @@
             return rc;
         }
         else if (sub == 16){
-            rc = CGRectMake(108, 10, 93, 93 );
+            rc = CGRectMake(106, 5, 96, 96 );
             return rc;
         }
         else if (sub == 17){
-            rc = CGRectMake(155, 0, 155, 175 );
+            rc = CGRectMake(155, 0, 155, 155 );
             return rc;
         }
         else if (sub == 18){
-            rc = CGRectMake(80, 85, 110, 260 );
+            rc = CGRectMake(80, 85, 110, 310-90 );
             return rc;
         }
         
@@ -3229,11 +3290,11 @@
             nTopMargin = nMargin * 3 + scroll_height * 2;
         }
         else if (sub == 7) {
-            rc = CGRectMake(150,234,150,107 );
+            rc = CGRectMake(150,310-96-5,155,96 );
             return rc;
         }
         else if (sub == 8) {
-            rc = CGRectMake(206,50,93,250 );
+            rc = CGRectMake(206,30,96,250 );
             return rc;
             
         } else if (sub == 9) {
@@ -3241,7 +3302,7 @@
             return rc;
         }
         else if (sub == 10) {
-            rc = CGRectMake(206,190,93,150 );
+            rc = CGRectMake(206,155,96,150 );
             return rc;
         }
         else if (sub == 11){
@@ -3253,27 +3314,27 @@
         else if (sub == 12){
             scroll_width = 100;
             scroll_height = 100;
-            rc = CGRectMake(205, 125, scroll_width, scroll_height );
+            rc = CGRectMake(205, 105, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 13){
-            scroll_width = 135;
-            scroll_height = 240;
-            rc = CGRectMake(165, 100, scroll_width, scroll_height );
+            scroll_width = 145;
+            scroll_height = 200;
+            rc = CGRectMake(160, 105, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 14){
             scroll_width = 75;
             scroll_height = 200;
-            rc = CGRectMake(235, 75, scroll_width, scroll_height );
+            rc = CGRectMake(235, 55, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 15){
-            rc = CGRectMake(155, 175, 155, 175 );
+            rc = CGRectMake(155, 155, 155, 155 );
             return rc;
         }
         else if (sub == 16){
-            rc = CGRectMake(155, 175, 155, 175 );
+            rc = CGRectMake(155, 155, 155, 155 );
             return rc;
         }
     }
@@ -3331,15 +3392,15 @@
             
         }
         else if (sub == 10){
-            rc = CGRectMake(157, 25, 71, 250 );
+            rc = CGRectMake(157, 5, 71, 250 );
             return rc;
         }
         else if (sub == 11){
-            rc = CGRectMake(85, 165, 100, 150 );
+            rc = CGRectMake(85, 157, 100, 147 );
             return rc;
         }
         else if (sub == 12){
-            rc = CGRectMake(5, 172, 175, 88 );
+            rc = CGRectMake(5, 310-155, 175, 75 );
             return rc;
         }
         else if (sub == 13){
@@ -3355,15 +3416,15 @@
             return rc;
         }
         else if (sub == 16){
-            rc = CGRectMake(108, 247, 93, 93 );
+            rc = CGRectMake(106, 310-96-5, 96, 96 );
             return rc;
         }
         else if (sub == 17){
-            rc = CGRectMake(0, 175, 155, 175 );
+            rc = CGRectMake(0, 155, 155, 155 );
             return rc;
         }
         else if (sub == 18){
-            rc = CGRectMake(195, 5, 110, 260 );
+            rc = CGRectMake(195, 5, 110, 310-75-15 );
             return rc;
         }
         
@@ -3441,15 +3502,15 @@
             return rc;
         }
         else if (sub == 10){
-            rc = CGRectMake(233, 75, 71, 250 );
+            rc = CGRectMake(233, 310-255, 71, 250 );//250
             return rc;
         }
         else if (sub == 11){
-            rc = CGRectMake(190, 165, 100, 150 );
+            rc = CGRectMake(190, 155, 100, 150 );
             return rc;
         }
         else if (sub == 12){
-            rc = CGRectMake(130, 256, 175, 90 );
+            rc = CGRectMake(130, 310-80, 175, 75 );
             return rc;
         }
         else if (sub == 13){
@@ -3457,7 +3518,7 @@
             return rc;
         }
         else if (sub == 14){
-            rc = CGRectMake(105, 145, 100, 200 );
+            rc = CGRectMake(105, 310-180, 100, 175 );
             return rc;
         }
         else if (sub == 15){
@@ -3465,15 +3526,15 @@
             return rc;
         }
         else if (sub == 16){
-            rc = CGRectMake(206, 10, 93, 330 );
+            rc = CGRectMake(207, 5, 96, 300 );//330
             return rc;
         }
         else if (sub == 17){
-            rc = CGRectMake(155, 175, 155, 175 );
+            rc = CGRectMake(155, 155, 155, 155 );
             return rc;
         }
         else if (sub == 18){
-            rc = CGRectMake(195, 270, 75, 75 );
+            rc = CGRectMake(195, 310-80, 75, 75 );
             return rc;
         }
     }

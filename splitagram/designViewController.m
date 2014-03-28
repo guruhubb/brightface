@@ -118,6 +118,8 @@
     btn.tag = 19;
     [self frameClicked:btn];
     firstTimeDesign = YES;
+    if (![defaults boolForKey:@"filter"])
+        [self randomFilterPick];
 }
 - (void) randomFilterPick {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -168,20 +170,20 @@
     
 }
 - (void)viewDidAppear:(BOOL)animated   {
+    self.frameContainer.hidden=YES;
     if (!firstTimeFilter){
         firstTimeFilter = YES;
-    [self fillEffectsSlider];
-    [self fillSecondEffectsSlider];
-    if (![defaults boolForKey:@"filter"])
-        [self randomFilterPick];
+        [self fillEffectsSlider];
+        [self fillSecondEffectsSlider];
+    
     }
     if (!firstTimeDesign){
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.tag=[defaults integerForKey:@"frame"];
-    if (btn.tag <= 25)
-        [self frameClicked:btn];
-    else
-        [self secondEffectsClicked:btn];
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.tag=[defaults integerForKey:@"frame"];
+        if (btn.tag <= 25)
+            [self frameClicked:btn];
+        else
+            [self secondFrameClicked:btn];
     }
 
 }
@@ -2039,7 +2041,7 @@
                 [view removeFromSuperview];
             }
 //            NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",blockSlider.tag];
-            UIImageView *replaceImage = [[UIImageView alloc] initWithImage:imageView.image];
+            UIImageView *replaceImage = [[UIImageView alloc] initWithImage:self.selectedImage];
             replaceImage.tag = imageView.tag;
             replaceImage.userInteractionEnabled = YES;
             [blockSlider addSubview:replaceImage];
@@ -2281,7 +2283,7 @@
     pt.y =   scrView.frame.origin.y;//splitagram
     
     NSLog(@"pt is x=%f and y=%f",pt.x, pt.y);
-    [scrView setContentOffset:pt animated:YES];
+    [scrView setContentOffset:pt animated:NO];
     
 //    NSString *tagPtX = [NSString stringWithFormat:@"PtX%d",tagNumber];
 //    NSString *tagPtY = [NSString stringWithFormat:@"PtY%d",tagNumber];

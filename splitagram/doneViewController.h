@@ -13,5 +13,6 @@
 @property (nonatomic, strong) UIImage *image;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIView *menuView;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
 
 @end

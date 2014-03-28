@@ -51,15 +51,15 @@
 //#define kFeature7 @"com.guruhubb.bookly.fonts"
 //#define kFeature8 @"com.guruhubb.bookly.all"
 
-#define kFeature0 @"com.guruhubb.bookly.frames"
-#define kFeature1 @"com.guruhubb.bookly.filters"
-#define kFeature2 @"com.guruhubb.bookly.blends"  //replaced with doodles
-#define kFeature3 @"com.guruhubb.bookly.stickersPack"
-#define kFeature4 @"com.guruhubb.bookly.music"  //replaced with transitions
-//#define kFeature5 @"com.guruhubb.bookly.titles"  //deleted it
-#define kFeature6 @"com.guruhubb.bookly.palette"
-#define kFeature7 @"com.guruhubb.bookly.fonts"
-#define kFeature8 @"com.guruhubb.bookly.all"
+#define kFeature0 @"com.guruhubb.splitagram.frames"
+#define kFeature1 @"com.guruhubb.splitagram.filters"
+#define kFeature2 @"com.guruhubb.splitagram.watermark"  
+//#define kFeature3 @"com.guruhubb.bookly.stickersPack"
+//#define kFeature4 @"com.guruhubb.bookly.music"  //replaced with transitions
+////#define kFeature5 @"com.guruhubb.bookly.titles"  //deleted it
+//#define kFeature6 @"com.guruhubb.bookly.palette"
+//#define kFeature7 @"com.guruhubb.bookly.fonts"
+//#define kFeature8 @"com.guruhubb.bookly.all"
 
 
 #ifndef SERVER_PRODUCT_MODEL

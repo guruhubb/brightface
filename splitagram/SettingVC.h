@@ -16,6 +16,7 @@
     
     NSArray *editArr;
     UISwitch *savePhoto;
+    UISwitch *watermark;
     NSUserDefaults *defaults;
     BOOL restoreON;
 }

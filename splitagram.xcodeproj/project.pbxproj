@@ -121,6 +121,8 @@
 		CC0E495418E24690003F2CAD /* Frame20.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E495218E24690003F2CAD /* Frame20.png */; };
 		CC0E495518E24690003F2CAD /* Frame21.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E495318E24690003F2CAD /* Frame21.png */; };
 		CC0E495718E26587003F2CAD /* lockImage.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E495618E26587003F2CAD /* lockImage.png */; };
+		CC205D7218E61D1700EECDE8 /* glyphicons_012_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = CC205D7018E61D1700EECDE8 /* glyphicons_012_heart.png */; };
+		CC205D7318E61D1700EECDE8 /* glyphicons_019_heart_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = CC205D7118E61D1700EECDE8 /* glyphicons_019_heart_empty.png */; };
 		CC2B4BDF18DF746F002CC198 /* shareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2B4BDE18DF746F002CC198 /* shareViewController.m */; };
 		CC2B4BE118DF9CFB002CC198 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2B4BE018DF9CFB002CC198 /* Social.framework */; };
 		CC2F4D7318D923590039E515 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7218D923590039E515 /* Foundation.framework */; };
@@ -307,6 +309,8 @@
 		CC0E495218E24690003F2CAD /* Frame20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Frame20.png; path = "Resources/frame icons/Frame20.png"; sourceTree = "<group>"; };
 		CC0E495318E24690003F2CAD /* Frame21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Frame21.png; path = "Resources/frame icons/Frame21.png"; sourceTree = "<group>"; };
 		CC0E495618E26587003F2CAD /* lockImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lockImage.png; path = Resources/icons/lockImage.png; sourceTree = "<group>"; };
+		CC205D7018E61D1700EECDE8 /* glyphicons_012_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glyphicons_012_heart.png; path = Resources/icons/glyphicons_012_heart.png; sourceTree = "<group>"; };
+		CC205D7118E61D1700EECDE8 /* glyphicons_019_heart_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glyphicons_019_heart_empty.png; path = Resources/icons/glyphicons_019_heart_empty.png; sourceTree = "<group>"; };
 		CC2B4BDD18DF746E002CC198 /* shareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shareViewController.h; sourceTree = "<group>"; };
 		CC2B4BDE18DF746F002CC198 /* shareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shareViewController.m; sourceTree = "<group>"; };
 		CC2B4BE018DF9CFB002CC198 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -403,6 +407,8 @@
 				CC0E48A118E1E80D003F2CAD /* comments-icon-614x460.png */,
 				CC0E48A218E1E80D003F2CAD /* facebook-70251b04a4be865178ab592bc9586c83.png */,
 				CC0E495618E26587003F2CAD /* lockImage.png */,
+				CC205D7018E61D1700EECDE8 /* glyphicons_012_heart.png */,
+				CC205D7118E61D1700EECDE8 /* glyphicons_019_heart_empty.png */,
 				CC0E48A318E1E80D003F2CAD /* glyphicons_003_user.png */,
 				CC0E48A418E1E80D003F2CAD /* glyphicons_136_cogwheel.png */,
 				CC0E48A518E1E80D003F2CAD /* icon-letter-mail-hi.png */,
@@ -822,6 +828,7 @@
 				CC0E489F18E1E7F5003F2CAD /* secondFrame34.png in Resources */,
 				CC0E486A18E1E7F5003F2CAD /* Frame09.png in Resources */,
 				CC0E488318E1E7F5003F2CAD /* secondFrame06.png in Resources */,
+				CC205D7318E61D1700EECDE8 /* glyphicons_019_heart_empty.png in Resources */,
 				CC0E493418E22AA1003F2CAD /* BWhighContrastRed.png in Resources */,
 				CC0E494A18E22AA1003F2CAD /* platinum.png in Resources */,
 				CC0E486318E1E7F5003F2CAD /* Frame02.png in Resources */,
@@ -884,6 +891,7 @@
 				CC0E486518E1E7F5003F2CAD /* Frame04.png in Resources */,
 				CC0E493318E22AA1003F2CAD /* blue.png in Resources */,
 				CC0E493B18E22AA1003F2CAD /* crossprocess.acv in Resources */,
+				CC205D7218E61D1700EECDE8 /* glyphicons_012_heart.png in Resources */,
 				CC0E494C18E22AA1003F2CAD /* sepiaSelenium2.png in Resources */,
 				CCD28E1018DBE74E001127EC /* MKStoreKitConfigs.plist in Resources */,
 				CC0E48B018E1E80D003F2CAD /* twitter_logo_white.png in Resources */,

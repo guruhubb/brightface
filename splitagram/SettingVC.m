@@ -41,10 +41,11 @@
     label.text = @"settings";
     self.navigationItem.titleView = label;
     editArr = [[NSArray alloc]initWithObjects:
-               @"photo format for frame",@"photo background color",@"auto-filter",@"auto-save to camera roll",
+               @"photo format for frame",@"photo background color",@"auto-filter",@"auto-save to camera roll",@"add watermark",
                @"follow us on instagram", @"like us on facebook",@"follow us on twitter",
                @"rate app",@"feedback",@"restore purchases",nil];
     [self.settingsTableView reloadData];
+    
 }
 
 
@@ -103,7 +104,7 @@
 {
     switch (section) {
         case (0):
-            return 4;
+            return 5;
         case (1):
             return 3;
         case (2):
@@ -189,7 +190,7 @@
                 [cell.textLabel setText:[editArr objectAtIndex:3]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
                 savePhoto = [[UISwitch alloc] initWithFrame:CGRectZero];
-                [savePhoto addTarget: self action: @selector(flip:) forControlEvents:UIControlEventValueChanged];
+                [savePhoto addTarget: self action: @selector(flip) forControlEvents:UIControlEventValueChanged];
                 if ([defaults boolForKey:@"savePhoto"])  //if 0 then save is ON
                     savePhoto.on = NO;
                 else
@@ -197,33 +198,48 @@
                 cell.accessoryView = savePhoto;
 
             }
+            if (indexPath.row==4) {
+                [cell.textLabel setText:[editArr objectAtIndex:4]];
+                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+                watermark = [[UISwitch alloc] initWithFrame:CGRectZero];
+                [watermark addTarget: self action: @selector(watermarkAction) forControlEvents:UIControlEventValueChanged];
+               
+                cell.accessoryView = watermark;
+                
+                if ([defaults boolForKey:@"watermark"]) { //if 0 then watermark is ON
+                    watermark.on = NO;
+                }
+                else
+                    watermark.on = YES;
+                
+            }
             
         }
         if (indexPath.section == 1) {
             if(indexPath.row==0){
-                [cell.textLabel setText:[editArr objectAtIndex:4]];
-                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-            }
-            if(indexPath.row==1){
                 [cell.textLabel setText:[editArr objectAtIndex:5]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             }
-            if (indexPath.row==2) {
+            if(indexPath.row==1){
                 [cell.textLabel setText:[editArr objectAtIndex:6]];
+                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+            }
+            if (indexPath.row==2) {
+                [cell.textLabel setText:[editArr objectAtIndex:7]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             }
         }
         if (indexPath.section == 2) {
             if(indexPath.row==0){
-                [cell.textLabel setText:[editArr objectAtIndex:7]];
-                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-            }
-            if(indexPath.row==1){
                 [cell.textLabel setText:[editArr objectAtIndex:8]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             }
-            if(indexPath.row==2){
+            if(indexPath.row==1){
                 [cell.textLabel setText:[editArr objectAtIndex:9]];
+                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+            }
+            if(indexPath.row==2){
+                [cell.textLabel setText:[editArr objectAtIndex:10]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             }
             
@@ -282,7 +298,7 @@
     }
      [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-- (IBAction)flip:(id)sender {
+- (void)flip {
     
     if (savePhoto.on) {  //if 1 then  save
         NSLog(@"save");
@@ -293,7 +309,90 @@
         [defaults setBool:YES forKey:@"savePhoto"];
     }
 }
-
+-(void)watermarkAction
+{
+    UIActionSheet *popupQuery;
+    if (![defaults boolForKey:kFeature2]){  //if not purchased
+        popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"remove watermark",@"buy for $1.99",nil];
+        popupQuery.tag=3;
+        [popupQuery showInView:self.view];
+        watermark.on = YES;
+    }
+    else {  //if purchased
+        if (watermark.on) {
+//            watermark.on = NO;
+            [defaults setBool:NO forKey:@"watermark"];
+        }
+        else {
+//            watermark.on = YES;
+            [defaults setBool:YES forKey:@"watermark"];
+        }
+    }
+}
+- (void)inAppBuyAction:(int)tag {
+    //    [Flurry logEvent:@"InApp BUY"];
+    //    UIButton *btn = (UIButton *) sender;
+//    NSString *string;
+//    //    NSLog(@"btn.tag is %d",btn.tag);
+//    //    [self turnOnIndicator];
+//    switch (tag) {
+//        case 800:
+//            string = kFeature0;
+//            break;
+//        case 802:
+//            string = kFeature1;
+//            break;
+//        case 804:
+//            string = kFeature2;
+//            break;
+//        case 806:
+//            string = kFeature3;
+//            break;
+//        case 808:
+//            string = kFeature4;
+//            break;
+//            //        case 810:
+//            //            string = kFeature5;
+//            //            break;
+//        case 812:
+//            string = kFeature6;
+//            break;
+//        case 814:
+//            string = kFeature7;
+//            break;
+//        case 816:
+//            string = kFeature8;
+//            break;
+//        default:
+//            break;
+//    }
+    NSLog(@"buying...");
+    
+    [[MKStoreManager sharedManager] buyFeature:kFeature2
+                                    onComplete:^(NSString* purchasedFeature,
+                                                 NSData* purchasedReceipt,
+                                                 NSArray* availableDownloads)
+     {
+         //         if (!restoreON){
+         NSLog(@"Purchased: %@, available downloads is %@ watermark ", purchasedFeature, availableDownloads );
+         
+         
+         //             [self turnOffIndicator];
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Successful" message:nil
+                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+         [defaults setBool:YES  forKey:kFeature2];
+         [alert show];
+         [self updateAppViewAndDefaults];
+         //         }
+         //         [self.inAppSubView setNeedsDisplay];
+     }
+                                   onCancelled:^
+     {
+         NSLog(@"User Cancelled Transaction");
+         //         [self turnOffIndicator];
+     }];
+    
+}
 - (void)restorePurchases {
     
         if( [[NSUserDefaults standardUserDefaults] boolForKey:@"restorePurchases"]) {
@@ -313,68 +412,83 @@
     
 }
 - (void) updateAppViewAndDefaults {
-    NSString *string;
-    for (int i=0;i<9;i++) {
-        switch (i) {
-            case 0:
-                string = kFeature0;
-                break;
-            case 1:
-                string = kFeature1;
-                break;
-            case 2:
-                string = kFeature2;
-                break;
-            case 3:
-                string = kFeature3;
-                break;
-            case 4:
-                string = kFeature4;
-                break;
-                //            case 5:
-                //                string = kFeature5;
-                //                break;
-            case 6:
-                string = kFeature6;
-                break;
-            case 7:
-                string = kFeature7;
-                break;
-            case 8:
-                string = kFeature8;
-                break;
-            default:
-                break;
-        }
-        
-        if ([MKStoreManager isFeaturePurchased:kFeature8]){
-//            UIButton *btn = (UIButton *) [self.inAppSubView viewWithTag:i*2+800];
-//            btn.hidden = YES;
-//            UILabel *label = (UILabel*) [self.inAppSubView viewWithTag:i*2+1+800];
-//            //            label.hidden = YES;
-//            if (label.tag == 817)
-//                label.hidden = YES;
-//            else
-//                label.text = @"YES";
-            
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:string];
-        }
-        
-        else if([MKStoreManager isFeaturePurchased:string])
-        {
-//            UIButton *btn = (UIButton *) [self.inAppSubView viewWithTag:i*2+800];
-//            btn.hidden = YES;
-//            UILabel *label = (UILabel*) [self.inAppSubView viewWithTag:i*2+1+800];
-//            if (label.tag == 817)
-//                label.hidden = YES;
-//            else
-//                label.text = @"YES";
-            
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:string];
-        }
-        else
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:string];
-    }
+    if ([MKStoreManager isFeaturePurchased:kFeature0])
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFeature0];
+    else
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFeature0];
+    
+    if([MKStoreManager isFeaturePurchased:kFeature1])
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFeature1];
+    else
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFeature1];
+    
+    if([MKStoreManager isFeaturePurchased:kFeature2])
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFeature2];
+    else
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFeature2];
+    
+//    NSString *string;
+//    for (int i=0;i<9;i++) {
+//        switch (i) {
+//            case 0:
+//                string = kFeature0;
+//                break;
+//            case 1:
+//                string = kFeature1;
+//                break;
+//            case 2:
+//                string = kFeature2;
+//                break;
+//            case 3:
+//                string = kFeature3;
+//                break;
+//            case 4:
+//                string = kFeature4;
+//                break;
+//                //            case 5:
+//                //                string = kFeature5;
+//                //                break;
+//            case 6:
+//                string = kFeature6;
+//                break;
+//            case 7:
+//                string = kFeature7;
+//                break;
+//            case 8:
+//                string = kFeature8;
+//                break;
+//            default:
+//                break;
+//        }
+//        
+//        if ([MKStoreManager isFeaturePurchased:kFeature8]){
+////            UIButton *btn = (UIButton *) [self.inAppSubView viewWithTag:i*2+800];
+////            btn.hidden = YES;
+////            UILabel *label = (UILabel*) [self.inAppSubView viewWithTag:i*2+1+800];
+////            //            label.hidden = YES;
+////            if (label.tag == 817)
+////                label.hidden = YES;
+////            else
+////                label.text = @"YES";
+//            
+//            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:string];
+//        }
+//        
+//        else if([MKStoreManager isFeaturePurchased:string])
+//        {
+////            UIButton *btn = (UIButton *) [self.inAppSubView viewWithTag:i*2+800];
+////            btn.hidden = YES;
+////            UILabel *label = (UILabel*) [self.inAppSubView viewWithTag:i*2+1+800];
+////            if (label.tag == 817)
+////                label.hidden = YES;
+////            else
+////                label.text = @"YES";
+//            
+//            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:string];
+//        }
+//        else
+//            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:string];
+//    }
 }
 
 - (void) turnOnIndicator {
@@ -434,11 +548,16 @@
             }
             else if (buttonIndex==1)[defaults setBool:YES forKey:@"white"];
         }
-        else {
+        else if (actionSheet.tag ==2 ){
             if (buttonIndex==0){
                 [defaults setBool:NO forKey:@"filter"];
             }
             else if (buttonIndex==1)[defaults setBool:YES forKey:@"filter"];
+        }
+        else if (actionSheet.tag == 3) {
+            if (buttonIndex==0){
+                [self inAppBuyAction:actionSheet.tag];
+            }
         }
     
     UILabel *label1 = (UILabel *) [self.view viewWithTag:100];

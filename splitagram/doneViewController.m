@@ -51,13 +51,24 @@
                               failureBlock:^(NSError* error) {
                                   NSLog(@"failed to enumerate albums:\nError: %@", [error localizedDescription]);
                               }];
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"savePhoto"])
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"savePhoto"]){
         [self saveImage];
+        _saveButton.hidden=YES;
+    }
+    else
+        _saveButton.hidden=NO;
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
 //                                             initWithImage:nil
 //                                             style:UIBarButtonItemStylePlain
 //                                             target:self
 //                                             action:@selector(goHome:)];
+}
+- (IBAction)saveImageAction:(id)sender {
+    [self saveImage];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"saved to camera roll" message:nil
+                                                   delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+    [alert show];
+
 }
 
 - (void) saveImage {

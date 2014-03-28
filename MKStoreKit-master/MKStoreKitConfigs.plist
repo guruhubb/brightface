@@ -4,17 +4,9 @@
 <dict>
 	<key>Non-Consumables</key>
 	<array>
-		<string>com.guruhubb.bookly.frames</string>
-		<string>com.guruhubb.bookly.filters</string>
-		<string>com.guruhubb.bookly.blends</string>
-		<string>com.guruhubb.bookly.stickersPack</string>
-		<string>com.guruhubb.bookly.music</string>
-		<string>com.guruhubb.bookly.titles</string>
-		<string>com.guruhubb.bookly.palette</string>
-		<string>com.guruhubb.bookly.fonts</string>
-		<string>com.guruhubb.bookly.all</string>
+		<string>com.guruhubb.splitagram.frames</string>
+		<string>com.guruhubb.splitagram.filters</string>
+		<string>com.guruhubb.splitagram.watermark</string>
 	</array>
-	<key>Consumables</key>
-	<dict/>
 </dict>
 </plist>

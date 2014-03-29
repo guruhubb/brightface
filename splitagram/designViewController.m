@@ -21,6 +21,7 @@
 #import "doneViewController.h"
 #import "GPUImage.h"
 #import "MKStoreManager.h"
+#import "Flurry.h"
 
 @interface designViewController (){
     
@@ -293,15 +294,16 @@
 }
 
 - (void)inAppBuyAction:(int)tag {
-//    [Flurry logEvent:@"InApp BUY"];
     NSString *string;
 
     switch (tag) {
         case 0:
             string = kFeature0;
+            [Flurry logEvent:@"InApp Frames"];
             break;
         case 1:
             string = kFeature1;
+            [Flurry logEvent:@"InApp Filters"];
             break;
         default:
             break;
@@ -1407,18 +1409,23 @@
     _splitMenuView.hidden=YES;
 }
 - (IBAction)rotateButton:(id)sender {
+    [Flurry logEvent:@"rotate"];
+
     [self hideBars];
     _rotateMenuView.hidden=NO;
 }
 - (IBAction)filtersButton:(id)sender {
+    [Flurry logEvent:@"filters"];
     [self hideBars];
     _filterSelectionBar.hidden=NO;
 }
 - (IBAction)framesButton:(id)sender {
+    [Flurry logEvent:@"frames"];
     [self hideBars];
     _frameSelectionBar.hidden=NO;
 }
 - (IBAction)splitButton:(id)sender {
+    [Flurry logEvent:@"split"];
     [self hideBars];
     _splitMenuView.hidden=NO;
 }
@@ -2114,7 +2121,7 @@
                                  color.fromValue = (id)[UIColor clearColor].CGColor;
                                  color.toValue   = (id)[UIColor cyanColor].CGColor;
                                  // ... and change the model value
-                                 color.duration = 2;
+                                 color.duration = 1;
                                  [blockSlider.layer addAnimation:color forKey:@"AnimateFrame"];
                              }
                          }
@@ -2460,6 +2467,7 @@
     labelSplit.text = [NSString stringWithFormat:@"%.0f",sliderSplit.value];
 }
 - (void)rotateChanged:(id)sender {
+    
 //    [Flurry logEvent:@"Frame - Rotate"];
     
     sliderRotate = (UISlider *)sender;
@@ -2484,6 +2492,8 @@
     labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(sliderRotate.value)];
 }
 - (void) rightAngleRotate {
+    [Flurry logEvent:@"rightAngle"];
+
 //        NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
 //        NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
         CGFloat rotateAngle = [defaults floatForKey:@"Rotate"]+M_PI_2;
@@ -2509,6 +2519,8 @@
 }
 
 - (void) plusTenDegreeRotate {
+    [Flurry logEvent:@"plusTen"];
+
 //    NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
 //    NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
     CGFloat rotateAngle = [defaults floatForKey:@"Rotate"]+M_PI_2/9;
@@ -2534,6 +2546,8 @@
 }
 
 - (void) minusTenDegreeRotate {
+    [Flurry logEvent:@"minusTen"];
+
 //    NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
 //    NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
     CGFloat rotateAngle = [defaults floatForKey:@"Rotate"]-M_PI_2/9;
@@ -2559,7 +2573,7 @@
 }
 
 - (void) flip {
-//    [Flurry logEvent:@"Frame - Flip"];
+    [Flurry logEvent:@"Flip"];
     
 //        NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
         if (![defaults boolForKey:@"Flip"])

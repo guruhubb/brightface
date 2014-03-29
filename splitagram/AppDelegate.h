@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MKStoreManager.h"
+//#import <Tapjoy/Tapjoy.h>
+
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

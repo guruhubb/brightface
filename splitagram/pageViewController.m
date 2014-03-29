@@ -9,6 +9,7 @@
 #import "pageViewController.h"
 #import "pageViewContentViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "Flurry.h"
 
 @interface pageViewController ()
 
@@ -29,6 +30,7 @@
     label.text = @"my splits";
     self.navigationItem.titleView = label;
     [self setUp];
+    [Flurry logEvent:@"mySplits"];
 }
 
 - (void) setUp {

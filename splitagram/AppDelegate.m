@@ -9,6 +9,8 @@
 
 #import "AppDelegate.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "MKStoreManager.h"
+#import "Flurry.h"
 
 @implementation AppDelegate
 
@@ -17,7 +19,33 @@
 //    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)
 //    {
 //    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
-
+    //note: iOS only allows one crash reporting tool per app; if using another, set to: NO
+    [Flurry setCrashReportingEnabled:YES];
+    
+    // Replace YOUR_API_KEY with the api key in the downloaded package
+    [Flurry startSession:@"N5GRJMCR5ZN2P9WS9R8Z"];
+    // Tapjoy Connect Notifications
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(tjcConnectSuccess:)
+//                                                 name:TJC_CONNECT_SUCCESS
+//                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(tjcConnectFail:)
+//                                                 name:TJC_CONNECT_FAILED
+//                                               object:nil];
+    
+	// NOTE: This is the only step required if you're an advertiser.
+	// NOTE: This must be replaced by your App ID. It is retrieved from the Tapjoy website, in your account.
+//	[Tapjoy requestTapjoyConnect:@"076a56d4-4ec1-44ce-b4b4-89e03032c2c5"
+//					   secretKey:@"BMgDZYR6Az8t23lCSQWf"
+//						 options:@{ TJC_OPTION_ENABLE_LOGGING : @(YES) }
+     // If you are not using Tapjoy Managed currency, you would set your own user ID here.
+     // TJC_OPTION_USER_ID : @"A_UNIQUE_USER_ID"
+     
+     // You can also set your event segmentation parameters here.
+     // Example segmentationParams object -- NSDictionary *segmentationParams = @{@"iap" : @(YES)};
+     // TJC_OPTION_SEGMENTATION_PARAMS : segmentationParams
+//     ];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];  //text color on nav bar
 //    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:165/255.0 green:42/255.0 blue:42/255.0 alpha:1.0f]]; //color of nav bar
     // Override point for customization after application launch.
@@ -64,6 +92,17 @@
         library = [[ALAssetsLibrary alloc] init];
     });
     return library;
+}
+
+-(void)tjcConnectSuccess:(NSNotification*)notifyObj
+{
+	NSLog(@"Tapjoy connect Succeeded");
+}
+
+
+- (void)tjcConnectFail:(NSNotification*)notifyObj
+{
+	NSLog(@"Tapjoy connect Failed");
 }
 - (void)applicationWillResignActive:(UIApplication *)application
 {

@@ -10,7 +10,7 @@
 #define IS_TALL_SCREEN ( [ [ UIScreen mainScreen ] bounds ].size.height == 568 )
 #define screenSpecificSetting(tallScreen, normal) ((IS_TALL_SCREEN) ? tallScreen : normal)
 #import "SettingVC.h"
-
+#import "Flurry.h"
 @implementation SettingVC
 
 
@@ -51,7 +51,8 @@
 
 
 - (void)rateApp {
-//    [Flurry logEvent:@"Settings - Rate App" ];
+    
+    [Flurry logEvent:@"Rate App" ];
 
     // Initialize Product View Controller
     SKStoreProductViewController *storeProductViewController = [[SKStoreProductViewController alloc] init];
@@ -307,6 +308,7 @@
     else {   //if 0 then don't save
         NSLog(@"dont save");
         [defaults setBool:YES forKey:@"savePhoto"];
+        [Flurry logEvent:@"NoSave"];
     }
 }
 -(void)watermarkAction
@@ -330,7 +332,7 @@
     }
 }
 - (void)inAppBuyAction:(int)tag {
-    //    [Flurry logEvent:@"InApp BUY"];
+    [Flurry logEvent:@"InApp Watermark"];
     //    UIButton *btn = (UIButton *) sender;
 //    NSString *string;
 //    //    NSLog(@"btn.tag is %d",btn.tag);
@@ -413,19 +415,19 @@
 }
 - (void) updateAppViewAndDefaults {
     if ([MKStoreManager isFeaturePurchased:kFeature0])
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFeature0];
+        [defaults setBool:YES forKey:kFeature0];
     else
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFeature0];
+        [defaults setBool:NO forKey:kFeature0];
     
     if([MKStoreManager isFeaturePurchased:kFeature1])
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFeature1];
+        [defaults setBool:YES forKey:kFeature1];
     else
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFeature1];
+        [defaults setBool:NO forKey:kFeature1];
     
     if([MKStoreManager isFeaturePurchased:kFeature2])
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFeature2];
+        [defaults setBool:YES forKey:kFeature2];
     else
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFeature2];
+        [defaults setBool:NO forKey:kFeature2];
     
 //    NSString *string;
 //    for (int i=0;i<9;i++) {

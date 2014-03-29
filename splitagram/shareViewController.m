@@ -12,6 +12,7 @@
 #import "shareViewController.h"
 #import <Social/Social.h>
 #import <QuartzCore/QuartzCore.h>
+#import "Flurry.h"
 
 @interface shareViewController ()
 @property(nonatomic,retain) UIDocumentInteractionController *documentationInteractionController;
@@ -58,6 +59,7 @@
 }
 
 - (IBAction)postToFacebook:(id)sender {
+    [Flurry logEvent:@"Facebook"];
     NSLog(@"share to facebook");
 //    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
     // check whether facebook is (likely to be) installed or not
@@ -78,6 +80,7 @@
 }
 
 - (IBAction)postToTwitter:(id)sender {
+    [Flurry logEvent:@"Twitter"];
 //    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
 //    {
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]]) {
@@ -118,7 +121,7 @@
 //}
 - (IBAction)postToInstagram:(UIButton *)sender  {
 
-//    [Flurry logEvent:@"Photobook: Instagram"];
+    [Flurry logEvent:@"Instagram"];
     //    UIImageView *drawingImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,612,612)];
     //    drawingImageView.image = self.albumImage.image;
     //    UIImage* instaImage = [self cropImage:self.albumImage.image :drawingImageView];  //this works it just chops the top/bottom off
@@ -188,7 +191,7 @@
 
 - (IBAction)sendMail:(UIButton *)sender  
 {
-//    [Flurry logEvent:@"Photobook: Email"];
+    [Flurry logEvent:@"Email"];
     NSLog(@"send mail");
     MFMailComposeViewController *pickerMail = [[MFMailComposeViewController alloc] init];
     pickerMail.mailComposeDelegate = self;
@@ -243,7 +246,7 @@
 }
 
 - (IBAction)showSMS:(UIButton *)sender  {
-    
+    [Flurry logEvent:@"SMS"];
     if(![MFMessageComposeViewController canSendText]) {
         UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device doesn't support SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [warningAlert show];
@@ -282,7 +285,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)whatsApp:(UIButton *)sender {
-    
+    [Flurry logEvent:@"Others"];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,     NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *getImagePath = [documentsDirectory stringByAppendingPathComponent:@"savedImage.png"];

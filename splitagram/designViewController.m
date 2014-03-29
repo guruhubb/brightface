@@ -139,7 +139,7 @@
         number = 0;
     }
     
-    btn.tag = 8;
+    btn.tag = number;
     tapBlockNumber=1;
     [self effectsClicked:btn];
     
@@ -207,14 +207,14 @@
 -(void)frameAction
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"get more frames",@"buy for $1.99",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"get more frames",@"buy for $0.99",nil];
     popupQuery.tag=0;
     [popupQuery showInView:self.view];
 }
 -(void)filterAction
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"get more filters",@"buy for $1.99",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"get more filters",@"buy for $0.99",nil];
     popupQuery.tag=1;
     [popupQuery showInView:self.view];
 }
@@ -353,9 +353,9 @@
 - (void) fillFrameSelectionSlider {
     //    self.frameSelectionSlider = (UIScrollView *)[self.view viewWithTag:10120];
     if (!IS_TALL_SCREEN) {
-        self.frameSelectionBar.contentSize = CGSizeMake(55 * 29+10, self.frameSelectionBar.frame.size.height);
+        self.frameSelectionBar.contentSize = CGSizeMake(55 * 19+10, self.frameSelectionBar.frame.size.height);
     } else {
-        self.frameSelectionBar.contentSize = CGSizeMake(70 * 29+10, 151);
+        self.frameSelectionBar.contentSize = CGSizeMake(70 * 19+10, 151);
 //        self.frameSelectionBar.frame=CGRectMake(0, 353, 320, 151);
     }
     for (int ind = 7; ind <= 25; ind++) {
@@ -383,7 +383,7 @@
     
 }
 - (void) fillSecondFrameSelectionSlider {
-    for (int ind = 8; ind <= 35; ind++) {
+    for (int ind = 8; ind <= 26; ind++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         if (!IS_TALL_SCREEN)
             btn.frame = CGRectMake((ind - 8 ) * 55+5, 60, 50, 50);
@@ -795,14 +795,14 @@
 }
 
 - (void) fillEffectsSlider {
-    labelEffectsArray = [[NSMutableArray alloc]initWithObjects: @"original", @"delight",@"morning", @"sky", @"sunny",@"night", @"beach",@"b&w-red",@"sepia",@"water", @"b&w",nil];
-    labelSecondEffectsArray = [[NSMutableArray alloc]initWithObjects: @"2layer",@"warm",@"winter",@"crisp",@"candle",@"fall",@"film",@"foggy",@"cobalt",@"blue",@"bright",@"bleak",@"moon",@"cyan",@"soft",@"gold",@"platinum",@"copper",@"vignette",@"white", nil];
+    labelEffectsArray = [[NSMutableArray alloc]initWithObjects: @"original", @"delight", @"sunny",@"night", @"beach",@"b&w-red",@"sepia",@"water", @"b&w",@"morning", @"sky",nil];
+    labelSecondEffectsArray = [[NSMutableArray alloc]initWithObjects: @"2layer",@"warm",@"winter",@"gold",@"platinum",@"copper",@"vignette",@"white", @"crisp",@"candle",@"fall",@"film",@"foggy",@"cobalt",@"blue",@"bright",@"bleak",@"moon",@"cyan",@"soft",nil];
     //    self.effectsSlider = (UIScrollView *)[self.view viewWithTag:10125];
 //    self.filterSelectionBar.contentSize = CGSizeMake(65 * 11+10, self.filterSelectionBar.frame.size.height);
     if (!IS_TALL_SCREEN) {
-        self.filterSelectionBar.contentSize = CGSizeMake(55 * 20+10, self.frameSelectionBar.frame.size.height);
+        self.filterSelectionBar.contentSize = CGSizeMake(55 * 11+10, self.frameSelectionBar.frame.size.height);
     } else {
-        self.filterSelectionBar.contentSize = CGSizeMake(70 * 20+10, 151);
+        self.filterSelectionBar.contentSize = CGSizeMake(70 * 11+10, 151);
 //        self.filterSelectionBar.frame=CGRectMake(0, 353, 320, 151);
     }
     
@@ -859,28 +859,28 @@
                 case 3: {
                     filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
                 } break;
-                case 4: {
+                case 10: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
                 } break;
-                case 5: {
+                case 11: {
                     filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
                 } break;
-                case 6:{
+                case 4:{
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
                 } break;
-                case 7: {
+                case 5: {
                     filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
                 } break;
-                case 8: {
+                case 6: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
                 } break;
-                case 9: {
+                case 7: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
                 } break;
-                case 10: {
+                case 8: {
                     filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
                 } break;
-                case 11: {
+                case 9: {
                     filter = [[GPUImageGrayscaleFilter alloc] init];
                 } break;
                 default:
@@ -961,7 +961,7 @@
 //    self.filterSelectionBar.contentSize = CGSizeMake(65 * 20+10, self.filterSelectionBar.frame.size.height);
     
     
-    for (int ind = 1; ind <= 20; ind++) {
+    for (int ind = 1; ind <= 11; ind++) {
         @autoreleasepool {
            
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -1010,56 +1010,56 @@
                 case 3: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWinter.png"];
                 } break;
-                case 4: {
+                case 9: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWarm.png"];
                 } break;
-                case 5: {
+                case 10: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"candlelight.png"];
                 } break;
-                case 6:{
+                case 11:{
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors.png"];
                 } break;
-                case 7: {
+                case 12: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
                 } break;
-                case 8: {
+                case 13: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"foggynight.png"];
                 } break;
-                case 9: {
+                case 14: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cobalt2Iron80Bleach.png"];
                 } break;
-                case 10: {
+                case 15: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"blue.png"];
                 } break;
-                case 11: {
+                case 16: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fuji2393.png"];
                 } break;
-                case 12: {
+                case 17: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleak.png"];
                 } break;
-                case 13: {
+                case 18: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachMoonlight.png"];
                 } break;
-                case 14: {
+                case 19: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cyanSeleniumBleachMoonlight.png"];
                 } break;
-                case 15: {
+                case 20: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarm.png"];
                 } break;
-                case 16: {
+                case 4: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"gold2.png"];
                 } break;
-                case 17: {
+                case 5: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"platinum.png"];
                 } break;
-                case 18: {
+                case 6: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
                 } break;
-                case 19: {
+                case 7: {
                     filter = [[GPUImageVignetteFilter alloc] init];
                     [(GPUImageVignetteFilter *) filter setVignetteEnd:0.6];
                 } break;
-                case 20: {
+                case 8: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
                 } break;
                     
@@ -1145,35 +1145,35 @@
                             filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
                         } break;
-                        case 4: {
+                        case 10: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
                         } break;
-                        case 5: {
+                        case 11: {
                             filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
                         } break;
-                        case 6:{
+                        case 4:{
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
                         } break;
-                        case 7: {
+                        case 5: {
                             filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
                         } break;
-                        case 8: {
+                        case 6: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
                         } break;
-                        case 9: {
+                        case 7: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
                         } break;
-                        case 10: {
+                        case 8: {
                             filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
                         } break;
-                        case 11: {
+                        case 9: {
                             filter = [[GPUImageGrayscaleFilter alloc] init];
 //                            videoFilter = [[GPUImageGrayscaleFilter alloc] init];
                         } break;
@@ -1231,89 +1231,89 @@
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWinter.png"];
                             
                         } break;
-                        case 4: {
+                        case 9: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWarm.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWarm.png"];
                             
                         } break;
-                        case 5: {
+                        case 10: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"candlelight.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"candlelight.png"];
                             
                         } break;
-                        case 6:{
+                        case 11:{
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors.png"];
                             
                         } break;
-                        case 7: {
+                        case 12: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
                             
                         } break;
                             
-                        case 8: {
+                        case 13: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"foggynight.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"foggynight.png"];
                             
                         } break;
-                        case 9: {
+                        case 14: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cobalt2Iron80Bleach.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cobalt2Iron80Bleach.png"];
                             
                         } break;
-                        case 10: {
+                        case 15: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"blue.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"blue.png"];
                             
                         } break;
-                        case 11: {
+                        case 16: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fuji2393.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fuji2393.png"];
                             
                         } break;
-                        case 12: {
+                        case 17: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleak.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleak.png"];
                             
                         } break;
-                        case 13: {
+                        case 18: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachMoonlight.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachMoonlight.png"];
                             
                         } break;
-                        case 14: {
+                        case 19: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cyanSeleniumBleachMoonlight.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cyanSeleniumBleachMoonlight.png"];
                             
                         } break;
-                        case 15: {
+                        case 20: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarm.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarm.png"];
                             
                         } break;
-                        case 16: {
+                        case 4: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"gold2.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"gold2.png"];
                             
                         } break;
-                        case 17: {
+                        case 5: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"platinum.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"platinum.png"];
                             
                         } break;
-                        case 18: {
+                        case 6: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
                             
                         } break;
-                        case 19: {
+                        case 7: {
                             filter = [[GPUImageVignetteFilter alloc] init];
                             [(GPUImageVignetteFilter *) filter setVignetteEnd:0.6];
 //                            videoFilter = [[GPUImageVignetteFilter alloc] init];
 //                            [(GPUImageVignetteFilter *) videoFilter setVignetteEnd:0.6];
                         } break;
-                        case 20: {
+                        case 8: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
                             

@@ -11,6 +11,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "MKStoreManager.h"
 #import "Flurry.h"
+//#import <Tapjoy/Tapjoy.h>
 
 @implementation AppDelegate
 
@@ -37,8 +38,8 @@
 	// NOTE: This is the only step required if you're an advertiser.
 	// NOTE: This must be replaced by your App ID. It is retrieved from the Tapjoy website, in your account.
 //	[Tapjoy requestTapjoyConnect:@"076a56d4-4ec1-44ce-b4b4-89e03032c2c5"
-//					   secretKey:@"BMgDZYR6Az8t23lCSQWf"
-//						 options:@{ TJC_OPTION_ENABLE_LOGGING : @(YES) }
+//					   secretKey:[@"BMgDZYR6Az8t23lCSQWf"
+//                                  options:@{ TJC_OPTION_ENABLE_LOGGING : @(YES) }];
      // If you are not using Tapjoy Managed currency, you would set your own user ID here.
      // TJC_OPTION_USER_ID : @"A_UNIQUE_USER_ID"
      

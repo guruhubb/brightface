@@ -41,34 +41,34 @@
 		CC0E488218E1E7F5003F2CAD /* secondFrame05.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484318E1E7F5003F2CAD /* secondFrame05.png */; };
 		CC0E488318E1E7F5003F2CAD /* secondFrame06.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484418E1E7F5003F2CAD /* secondFrame06.png */; };
 		CC0E488418E1E7F5003F2CAD /* secondFrame07.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484518E1E7F5003F2CAD /* secondFrame07.png */; };
-		CC0E488518E1E7F5003F2CAD /* secondFrame08.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484618E1E7F5003F2CAD /* secondFrame08.png */; };
-		CC0E488618E1E7F5003F2CAD /* secondFrame09.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484718E1E7F5003F2CAD /* secondFrame09.png */; };
-		CC0E488718E1E7F5003F2CAD /* secondFrame10.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484818E1E7F5003F2CAD /* secondFrame10.png */; };
-		CC0E488818E1E7F5003F2CAD /* secondFrame11.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484918E1E7F5003F2CAD /* secondFrame11.png */; };
-		CC0E488918E1E7F5003F2CAD /* secondFrame12.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484A18E1E7F5003F2CAD /* secondFrame12.png */; };
-		CC0E488A18E1E7F5003F2CAD /* secondFrame13.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484B18E1E7F5003F2CAD /* secondFrame13.png */; };
-		CC0E488B18E1E7F5003F2CAD /* secondFrame14.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484C18E1E7F5003F2CAD /* secondFrame14.png */; };
-		CC0E488C18E1E7F5003F2CAD /* secondFrame15.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484D18E1E7F5003F2CAD /* secondFrame15.png */; };
-		CC0E488D18E1E7F5003F2CAD /* secondFrame16.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484E18E1E7F5003F2CAD /* secondFrame16.png */; };
-		CC0E488E18E1E7F5003F2CAD /* secondFrame17.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484F18E1E7F5003F2CAD /* secondFrame17.png */; };
-		CC0E488F18E1E7F5003F2CAD /* secondFrame18.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485018E1E7F5003F2CAD /* secondFrame18.png */; };
-		CC0E489018E1E7F5003F2CAD /* secondFrame19.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485118E1E7F5003F2CAD /* secondFrame19.png */; };
-		CC0E489118E1E7F5003F2CAD /* secondFrame20.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485218E1E7F5003F2CAD /* secondFrame20.png */; };
-		CC0E489218E1E7F5003F2CAD /* secondFrame21.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485318E1E7F5003F2CAD /* secondFrame21.png */; };
-		CC0E489318E1E7F5003F2CAD /* secondFrame22.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485418E1E7F5003F2CAD /* secondFrame22.png */; };
-		CC0E489418E1E7F5003F2CAD /* secondFrame23.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485518E1E7F5003F2CAD /* secondFrame23.png */; };
-		CC0E489518E1E7F5003F2CAD /* secondFrame24.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485618E1E7F5003F2CAD /* secondFrame24.png */; };
-		CC0E489618E1E7F5003F2CAD /* secondFrame25.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485718E1E7F5003F2CAD /* secondFrame25.png */; };
-		CC0E489718E1E7F5003F2CAD /* secondFrame26.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485818E1E7F5003F2CAD /* secondFrame26.png */; };
-		CC0E489818E1E7F5003F2CAD /* secondFrame27.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485918E1E7F5003F2CAD /* secondFrame27.png */; };
-		CC0E489918E1E7F5003F2CAD /* secondFrame28.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485A18E1E7F5003F2CAD /* secondFrame28.png */; };
-		CC0E489A18E1E7F5003F2CAD /* secondFrame29.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485B18E1E7F5003F2CAD /* secondFrame29.png */; };
-		CC0E489B18E1E7F5003F2CAD /* secondFrame30.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485C18E1E7F5003F2CAD /* secondFrame30.png */; };
-		CC0E489C18E1E7F5003F2CAD /* secondFrame31.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485D18E1E7F5003F2CAD /* secondFrame31.png */; };
-		CC0E489D18E1E7F5003F2CAD /* secondFrame32.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485E18E1E7F5003F2CAD /* secondFrame32.png */; };
-		CC0E489E18E1E7F5003F2CAD /* secondFrame33.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485F18E1E7F5003F2CAD /* secondFrame33.png */; };
-		CC0E489F18E1E7F5003F2CAD /* secondFrame34.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E486018E1E7F5003F2CAD /* secondFrame34.png */; };
-		CC0E48A018E1E7F5003F2CAD /* secondFrame35.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E486118E1E7F5003F2CAD /* secondFrame35.png */; };
+		CC0E488518E1E7F5003F2CAD /* secondFrame08a.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484618E1E7F5003F2CAD /* secondFrame08a.png */; };
+		CC0E488618E1E7F5003F2CAD /* secondFrame09a.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484718E1E7F5003F2CAD /* secondFrame09a.png */; };
+		CC0E488718E1E7F5003F2CAD /* secondFrame10a.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484818E1E7F5003F2CAD /* secondFrame10a.png */; };
+		CC0E488818E1E7F5003F2CAD /* secondFrame8.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484918E1E7F5003F2CAD /* secondFrame8.png */; };
+		CC0E488918E1E7F5003F2CAD /* secondFrame9.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484A18E1E7F5003F2CAD /* secondFrame9.png */; };
+		CC0E488A18E1E7F5003F2CAD /* secondFrame10.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484B18E1E7F5003F2CAD /* secondFrame10.png */; };
+		CC0E488B18E1E7F5003F2CAD /* secondFrame11.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484C18E1E7F5003F2CAD /* secondFrame11.png */; };
+		CC0E488C18E1E7F5003F2CAD /* secondFrame15a.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484D18E1E7F5003F2CAD /* secondFrame15a.png */; };
+		CC0E488D18E1E7F5003F2CAD /* secondFrame16a.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484E18E1E7F5003F2CAD /* secondFrame16a.png */; };
+		CC0E488E18E1E7F5003F2CAD /* secondFrame17a.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E484F18E1E7F5003F2CAD /* secondFrame17a.png */; };
+		CC0E488F18E1E7F5003F2CAD /* secondFrame12.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485018E1E7F5003F2CAD /* secondFrame12.png */; };
+		CC0E489018E1E7F5003F2CAD /* secondFrame13.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485118E1E7F5003F2CAD /* secondFrame13.png */; };
+		CC0E489118E1E7F5003F2CAD /* secondFrame14.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485218E1E7F5003F2CAD /* secondFrame14.png */; };
+		CC0E489218E1E7F5003F2CAD /* secondFrame15.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485318E1E7F5003F2CAD /* secondFrame15.png */; };
+		CC0E489318E1E7F5003F2CAD /* secondFrame16.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485418E1E7F5003F2CAD /* secondFrame16.png */; };
+		CC0E489418E1E7F5003F2CAD /* secondFrame17.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485518E1E7F5003F2CAD /* secondFrame17.png */; };
+		CC0E489518E1E7F5003F2CAD /* secondFrame18.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485618E1E7F5003F2CAD /* secondFrame18.png */; };
+		CC0E489618E1E7F5003F2CAD /* secondFrame19.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485718E1E7F5003F2CAD /* secondFrame19.png */; };
+		CC0E489718E1E7F5003F2CAD /* secondFrame26a.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485818E1E7F5003F2CAD /* secondFrame26a.png */; };
+		CC0E489818E1E7F5003F2CAD /* secondFrame27a.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485918E1E7F5003F2CAD /* secondFrame27a.png */; };
+		CC0E489918E1E7F5003F2CAD /* secondFrame20.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485A18E1E7F5003F2CAD /* secondFrame20.png */; };
+		CC0E489A18E1E7F5003F2CAD /* secondFrame21.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485B18E1E7F5003F2CAD /* secondFrame21.png */; };
+		CC0E489B18E1E7F5003F2CAD /* secondFrame22.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485C18E1E7F5003F2CAD /* secondFrame22.png */; };
+		CC0E489C18E1E7F5003F2CAD /* secondFrame23.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485D18E1E7F5003F2CAD /* secondFrame23.png */; };
+		CC0E489D18E1E7F5003F2CAD /* secondFrame24.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485E18E1E7F5003F2CAD /* secondFrame24.png */; };
+		CC0E489E18E1E7F5003F2CAD /* secondFrame25.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E485F18E1E7F5003F2CAD /* secondFrame25.png */; };
+		CC0E489F18E1E7F5003F2CAD /* secondFrame34a.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E486018E1E7F5003F2CAD /* secondFrame34a.png */; };
+		CC0E48A018E1E7F5003F2CAD /* secondFrame26.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E486118E1E7F5003F2CAD /* secondFrame26.png */; };
 		CC0E48A918E1E80D003F2CAD /* comments-icon-614x460.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E48A118E1E80D003F2CAD /* comments-icon-614x460.png */; };
 		CC0E48AA18E1E80D003F2CAD /* facebook-70251b04a4be865178ab592bc9586c83.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E48A218E1E80D003F2CAD /* facebook-70251b04a4be865178ab592bc9586c83.png */; };
 		CC0E48AB18E1E80D003F2CAD /* glyphicons_003_user.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E48A318E1E80D003F2CAD /* glyphicons_003_user.png */; };
@@ -146,6 +146,8 @@
 		CC205DBA18E63CA200EECDE8 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC205DB918E63CA200EECDE8 /* libz.1.2.5.dylib */; };
 		CC205DBC18E63CAA00EECDE8 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC205DBB18E63CAA00EECDE8 /* libz.1.1.3.dylib */; };
 		CC205DBE18E63CC500EECDE8 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC205DBD18E63CC500EECDE8 /* libxml2.2.dylib */; };
+		CC205DD018E64E5B00EECDE8 /* TapjoyResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CC205DCE18E64E5B00EECDE8 /* TapjoyResources.bundle */; };
+		CC205DD118E64E5B00EECDE8 /* Tapjoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC205DCF18E64E5B00EECDE8 /* Tapjoy.framework */; };
 		CC2B4BDF18DF746F002CC198 /* shareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2B4BDE18DF746F002CC198 /* shareViewController.m */; };
 		CC2B4BE118DF9CFB002CC198 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2B4BE018DF9CFB002CC198 /* Social.framework */; };
 		CC2F4D7318D923590039E515 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7218D923590039E515 /* Foundation.framework */; };
@@ -251,34 +253,34 @@
 		CC0E484318E1E7F5003F2CAD /* secondFrame05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame05.png; path = "Resources/frame icons/secondFrame05.png"; sourceTree = "<group>"; };
 		CC0E484418E1E7F5003F2CAD /* secondFrame06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame06.png; path = "Resources/frame icons/secondFrame06.png"; sourceTree = "<group>"; };
 		CC0E484518E1E7F5003F2CAD /* secondFrame07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame07.png; path = "Resources/frame icons/secondFrame07.png"; sourceTree = "<group>"; };
-		CC0E484618E1E7F5003F2CAD /* secondFrame08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame08.png; path = "Resources/frame icons/secondFrame08.png"; sourceTree = "<group>"; };
-		CC0E484718E1E7F5003F2CAD /* secondFrame09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame09.png; path = "Resources/frame icons/secondFrame09.png"; sourceTree = "<group>"; };
-		CC0E484818E1E7F5003F2CAD /* secondFrame10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame10.png; path = "Resources/frame icons/secondFrame10.png"; sourceTree = "<group>"; };
-		CC0E484918E1E7F5003F2CAD /* secondFrame11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame11.png; path = "Resources/frame icons/secondFrame11.png"; sourceTree = "<group>"; };
-		CC0E484A18E1E7F5003F2CAD /* secondFrame12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame12.png; path = "Resources/frame icons/secondFrame12.png"; sourceTree = "<group>"; };
-		CC0E484B18E1E7F5003F2CAD /* secondFrame13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame13.png; path = "Resources/frame icons/secondFrame13.png"; sourceTree = "<group>"; };
-		CC0E484C18E1E7F5003F2CAD /* secondFrame14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame14.png; path = "Resources/frame icons/secondFrame14.png"; sourceTree = "<group>"; };
-		CC0E484D18E1E7F5003F2CAD /* secondFrame15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame15.png; path = "Resources/frame icons/secondFrame15.png"; sourceTree = "<group>"; };
-		CC0E484E18E1E7F5003F2CAD /* secondFrame16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame16.png; path = "Resources/frame icons/secondFrame16.png"; sourceTree = "<group>"; };
-		CC0E484F18E1E7F5003F2CAD /* secondFrame17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame17.png; path = "Resources/frame icons/secondFrame17.png"; sourceTree = "<group>"; };
-		CC0E485018E1E7F5003F2CAD /* secondFrame18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame18.png; path = "Resources/frame icons/secondFrame18.png"; sourceTree = "<group>"; };
-		CC0E485118E1E7F5003F2CAD /* secondFrame19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame19.png; path = "Resources/frame icons/secondFrame19.png"; sourceTree = "<group>"; };
-		CC0E485218E1E7F5003F2CAD /* secondFrame20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame20.png; path = "Resources/frame icons/secondFrame20.png"; sourceTree = "<group>"; };
-		CC0E485318E1E7F5003F2CAD /* secondFrame21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame21.png; path = "Resources/frame icons/secondFrame21.png"; sourceTree = "<group>"; };
-		CC0E485418E1E7F5003F2CAD /* secondFrame22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame22.png; path = "Resources/frame icons/secondFrame22.png"; sourceTree = "<group>"; };
-		CC0E485518E1E7F5003F2CAD /* secondFrame23.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame23.png; path = "Resources/frame icons/secondFrame23.png"; sourceTree = "<group>"; };
-		CC0E485618E1E7F5003F2CAD /* secondFrame24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame24.png; path = "Resources/frame icons/secondFrame24.png"; sourceTree = "<group>"; };
-		CC0E485718E1E7F5003F2CAD /* secondFrame25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame25.png; path = "Resources/frame icons/secondFrame25.png"; sourceTree = "<group>"; };
-		CC0E485818E1E7F5003F2CAD /* secondFrame26.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame26.png; path = "Resources/frame icons/secondFrame26.png"; sourceTree = "<group>"; };
-		CC0E485918E1E7F5003F2CAD /* secondFrame27.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame27.png; path = "Resources/frame icons/secondFrame27.png"; sourceTree = "<group>"; };
-		CC0E485A18E1E7F5003F2CAD /* secondFrame28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame28.png; path = "Resources/frame icons/secondFrame28.png"; sourceTree = "<group>"; };
-		CC0E485B18E1E7F5003F2CAD /* secondFrame29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame29.png; path = "Resources/frame icons/secondFrame29.png"; sourceTree = "<group>"; };
-		CC0E485C18E1E7F5003F2CAD /* secondFrame30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame30.png; path = "Resources/frame icons/secondFrame30.png"; sourceTree = "<group>"; };
-		CC0E485D18E1E7F5003F2CAD /* secondFrame31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame31.png; path = "Resources/frame icons/secondFrame31.png"; sourceTree = "<group>"; };
-		CC0E485E18E1E7F5003F2CAD /* secondFrame32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame32.png; path = "Resources/frame icons/secondFrame32.png"; sourceTree = "<group>"; };
-		CC0E485F18E1E7F5003F2CAD /* secondFrame33.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame33.png; path = "Resources/frame icons/secondFrame33.png"; sourceTree = "<group>"; };
-		CC0E486018E1E7F5003F2CAD /* secondFrame34.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame34.png; path = "Resources/frame icons/secondFrame34.png"; sourceTree = "<group>"; };
-		CC0E486118E1E7F5003F2CAD /* secondFrame35.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame35.png; path = "Resources/frame icons/secondFrame35.png"; sourceTree = "<group>"; };
+		CC0E484618E1E7F5003F2CAD /* secondFrame08a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame08a.png; path = "Resources/frame icons/secondFrame08a.png"; sourceTree = "<group>"; };
+		CC0E484718E1E7F5003F2CAD /* secondFrame09a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame09a.png; path = "Resources/frame icons/secondFrame09a.png"; sourceTree = "<group>"; };
+		CC0E484818E1E7F5003F2CAD /* secondFrame10a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame10a.png; path = "Resources/frame icons/secondFrame10a.png"; sourceTree = "<group>"; };
+		CC0E484918E1E7F5003F2CAD /* secondFrame8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame8.png; path = "Resources/frame icons/secondFrame8.png"; sourceTree = "<group>"; };
+		CC0E484A18E1E7F5003F2CAD /* secondFrame9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame9.png; path = "Resources/frame icons/secondFrame9.png"; sourceTree = "<group>"; };
+		CC0E484B18E1E7F5003F2CAD /* secondFrame10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame10.png; path = "Resources/frame icons/secondFrame10.png"; sourceTree = "<group>"; };
+		CC0E484C18E1E7F5003F2CAD /* secondFrame11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame11.png; path = "Resources/frame icons/secondFrame11.png"; sourceTree = "<group>"; };
+		CC0E484D18E1E7F5003F2CAD /* secondFrame15a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame15a.png; path = "Resources/frame icons/secondFrame15a.png"; sourceTree = "<group>"; };
+		CC0E484E18E1E7F5003F2CAD /* secondFrame16a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame16a.png; path = "Resources/frame icons/secondFrame16a.png"; sourceTree = "<group>"; };
+		CC0E484F18E1E7F5003F2CAD /* secondFrame17a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame17a.png; path = "Resources/frame icons/secondFrame17a.png"; sourceTree = "<group>"; };
+		CC0E485018E1E7F5003F2CAD /* secondFrame12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame12.png; path = "Resources/frame icons/secondFrame12.png"; sourceTree = "<group>"; };
+		CC0E485118E1E7F5003F2CAD /* secondFrame13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame13.png; path = "Resources/frame icons/secondFrame13.png"; sourceTree = "<group>"; };
+		CC0E485218E1E7F5003F2CAD /* secondFrame14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame14.png; path = "Resources/frame icons/secondFrame14.png"; sourceTree = "<group>"; };
+		CC0E485318E1E7F5003F2CAD /* secondFrame15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame15.png; path = "Resources/frame icons/secondFrame15.png"; sourceTree = "<group>"; };
+		CC0E485418E1E7F5003F2CAD /* secondFrame16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame16.png; path = "Resources/frame icons/secondFrame16.png"; sourceTree = "<group>"; };
+		CC0E485518E1E7F5003F2CAD /* secondFrame17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame17.png; path = "Resources/frame icons/secondFrame17.png"; sourceTree = "<group>"; };
+		CC0E485618E1E7F5003F2CAD /* secondFrame18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame18.png; path = "Resources/frame icons/secondFrame18.png"; sourceTree = "<group>"; };
+		CC0E485718E1E7F5003F2CAD /* secondFrame19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame19.png; path = "Resources/frame icons/secondFrame19.png"; sourceTree = "<group>"; };
+		CC0E485818E1E7F5003F2CAD /* secondFrame26a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame26a.png; path = "Resources/frame icons/secondFrame26a.png"; sourceTree = "<group>"; };
+		CC0E485918E1E7F5003F2CAD /* secondFrame27a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame27a.png; path = "Resources/frame icons/secondFrame27a.png"; sourceTree = "<group>"; };
+		CC0E485A18E1E7F5003F2CAD /* secondFrame20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame20.png; path = "Resources/frame icons/secondFrame20.png"; sourceTree = "<group>"; };
+		CC0E485B18E1E7F5003F2CAD /* secondFrame21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame21.png; path = "Resources/frame icons/secondFrame21.png"; sourceTree = "<group>"; };
+		CC0E485C18E1E7F5003F2CAD /* secondFrame22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame22.png; path = "Resources/frame icons/secondFrame22.png"; sourceTree = "<group>"; };
+		CC0E485D18E1E7F5003F2CAD /* secondFrame23.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame23.png; path = "Resources/frame icons/secondFrame23.png"; sourceTree = "<group>"; };
+		CC0E485E18E1E7F5003F2CAD /* secondFrame24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame24.png; path = "Resources/frame icons/secondFrame24.png"; sourceTree = "<group>"; };
+		CC0E485F18E1E7F5003F2CAD /* secondFrame25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame25.png; path = "Resources/frame icons/secondFrame25.png"; sourceTree = "<group>"; };
+		CC0E486018E1E7F5003F2CAD /* secondFrame34a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame34a.png; path = "Resources/frame icons/secondFrame34a.png"; sourceTree = "<group>"; };
+		CC0E486118E1E7F5003F2CAD /* secondFrame26.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame26.png; path = "Resources/frame icons/secondFrame26.png"; sourceTree = "<group>"; };
 		CC0E48A118E1E80D003F2CAD /* comments-icon-614x460.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "comments-icon-614x460.png"; path = "Resources/icons/comments-icon-614x460.png"; sourceTree = "<group>"; };
 		CC0E48A218E1E80D003F2CAD /* facebook-70251b04a4be865178ab592bc9586c83.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-70251b04a4be865178ab592bc9586c83.png"; path = "Resources/icons/facebook-70251b04a4be865178ab592bc9586c83.png"; sourceTree = "<group>"; };
 		CC0E48A318E1E80D003F2CAD /* glyphicons_003_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glyphicons_003_user.png; path = Resources/icons/glyphicons_003_user.png; sourceTree = "<group>"; };
@@ -358,6 +360,8 @@
 		CC205DB918E63CA200EECDE8 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		CC205DBB18E63CAA00EECDE8 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		CC205DBD18E63CC500EECDE8 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		CC205DCE18E64E5B00EECDE8 /* TapjoyResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapjoyResources.bundle; sourceTree = "<group>"; };
+		CC205DCF18E64E5B00EECDE8 /* Tapjoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tapjoy.framework; sourceTree = "<group>"; };
 		CC2B4BDD18DF746E002CC198 /* shareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shareViewController.h; sourceTree = "<group>"; };
 		CC2B4BDE18DF746F002CC198 /* shareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shareViewController.m; sourceTree = "<group>"; };
 		CC2B4BE018DF9CFB002CC198 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -439,6 +443,7 @@
 				CC205D9118E62B4200EECDE8 /* EventKitUI.framework in Frameworks */,
 				CC205D8F18E62B3D00EECDE8 /* EventKit.framework in Frameworks */,
 				CC205D8D18E62B2F00EECDE8 /* CoreLocation.framework in Frameworks */,
+				CC205DD118E64E5B00EECDE8 /* Tapjoy.framework in Frameworks */,
 				CC205D8B18E62B1700EECDE8 /* CoreTelephony.framework in Frameworks */,
 				CC205D8918E62AFE00EECDE8 /* CoreMotion.framework in Frameworks */,
 				CC205D8718E62AEC00EECDE8 /* AdSupport.framework in Frameworks */,
@@ -524,34 +529,34 @@
 				CC0E484318E1E7F5003F2CAD /* secondFrame05.png */,
 				CC0E484418E1E7F5003F2CAD /* secondFrame06.png */,
 				CC0E484518E1E7F5003F2CAD /* secondFrame07.png */,
-				CC0E484618E1E7F5003F2CAD /* secondFrame08.png */,
-				CC0E484718E1E7F5003F2CAD /* secondFrame09.png */,
-				CC0E484818E1E7F5003F2CAD /* secondFrame10.png */,
-				CC0E484918E1E7F5003F2CAD /* secondFrame11.png */,
-				CC0E484A18E1E7F5003F2CAD /* secondFrame12.png */,
-				CC0E484B18E1E7F5003F2CAD /* secondFrame13.png */,
-				CC0E484C18E1E7F5003F2CAD /* secondFrame14.png */,
-				CC0E484D18E1E7F5003F2CAD /* secondFrame15.png */,
-				CC0E484E18E1E7F5003F2CAD /* secondFrame16.png */,
-				CC0E484F18E1E7F5003F2CAD /* secondFrame17.png */,
-				CC0E485018E1E7F5003F2CAD /* secondFrame18.png */,
-				CC0E485118E1E7F5003F2CAD /* secondFrame19.png */,
-				CC0E485218E1E7F5003F2CAD /* secondFrame20.png */,
-				CC0E485318E1E7F5003F2CAD /* secondFrame21.png */,
-				CC0E485418E1E7F5003F2CAD /* secondFrame22.png */,
-				CC0E485518E1E7F5003F2CAD /* secondFrame23.png */,
-				CC0E485618E1E7F5003F2CAD /* secondFrame24.png */,
-				CC0E485718E1E7F5003F2CAD /* secondFrame25.png */,
-				CC0E485818E1E7F5003F2CAD /* secondFrame26.png */,
-				CC0E485918E1E7F5003F2CAD /* secondFrame27.png */,
-				CC0E485A18E1E7F5003F2CAD /* secondFrame28.png */,
-				CC0E485B18E1E7F5003F2CAD /* secondFrame29.png */,
-				CC0E485C18E1E7F5003F2CAD /* secondFrame30.png */,
-				CC0E485D18E1E7F5003F2CAD /* secondFrame31.png */,
-				CC0E485E18E1E7F5003F2CAD /* secondFrame32.png */,
-				CC0E485F18E1E7F5003F2CAD /* secondFrame33.png */,
-				CC0E486018E1E7F5003F2CAD /* secondFrame34.png */,
-				CC0E486118E1E7F5003F2CAD /* secondFrame35.png */,
+				CC0E484618E1E7F5003F2CAD /* secondFrame08a.png */,
+				CC0E484718E1E7F5003F2CAD /* secondFrame09a.png */,
+				CC0E484818E1E7F5003F2CAD /* secondFrame10a.png */,
+				CC0E484918E1E7F5003F2CAD /* secondFrame8.png */,
+				CC0E484A18E1E7F5003F2CAD /* secondFrame9.png */,
+				CC0E484B18E1E7F5003F2CAD /* secondFrame10.png */,
+				CC0E484C18E1E7F5003F2CAD /* secondFrame11.png */,
+				CC0E484D18E1E7F5003F2CAD /* secondFrame15a.png */,
+				CC0E484E18E1E7F5003F2CAD /* secondFrame16a.png */,
+				CC0E484F18E1E7F5003F2CAD /* secondFrame17a.png */,
+				CC0E485018E1E7F5003F2CAD /* secondFrame12.png */,
+				CC0E485118E1E7F5003F2CAD /* secondFrame13.png */,
+				CC0E485218E1E7F5003F2CAD /* secondFrame14.png */,
+				CC0E485318E1E7F5003F2CAD /* secondFrame15.png */,
+				CC0E485418E1E7F5003F2CAD /* secondFrame16.png */,
+				CC0E485518E1E7F5003F2CAD /* secondFrame17.png */,
+				CC0E485618E1E7F5003F2CAD /* secondFrame18.png */,
+				CC0E485718E1E7F5003F2CAD /* secondFrame19.png */,
+				CC0E485818E1E7F5003F2CAD /* secondFrame26a.png */,
+				CC0E485918E1E7F5003F2CAD /* secondFrame27a.png */,
+				CC0E485A18E1E7F5003F2CAD /* secondFrame20.png */,
+				CC0E485B18E1E7F5003F2CAD /* secondFrame21.png */,
+				CC0E485C18E1E7F5003F2CAD /* secondFrame22.png */,
+				CC0E485D18E1E7F5003F2CAD /* secondFrame23.png */,
+				CC0E485E18E1E7F5003F2CAD /* secondFrame24.png */,
+				CC0E485F18E1E7F5003F2CAD /* secondFrame25.png */,
+				CC0E486018E1E7F5003F2CAD /* secondFrame34a.png */,
+				CC0E486118E1E7F5003F2CAD /* secondFrame26.png */,
 			);
 			name = "frame icons";
 			sourceTree = "<group>";
@@ -619,6 +624,24 @@
 				CC205D7818E6260F00EECDE8 /* libFlurry_4.3.2.a */,
 			);
 			path = Flurry;
+			sourceTree = "<group>";
+		};
+		CC205DCC18E64E5B00EECDE8 /* Tapjoy.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				CC205DCD18E64E5B00EECDE8 /* Resources */,
+				CC205DCF18E64E5B00EECDE8 /* Tapjoy.framework */,
+			);
+			name = Tapjoy.embeddedframework;
+			path = ../../../../Downloads/TapjoySDK_iOS_v10.0.0/Libraries/Tapjoy.embeddedframework;
+			sourceTree = "<group>";
+		};
+		CC205DCD18E64E5B00EECDE8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CC205DCE18E64E5B00EECDE8 /* TapjoyResources.bundle */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		CC2F4D6618D923580039E515 = {
@@ -707,6 +730,7 @@
 				CCD28DEA18DAD565001127EC /* PhotoCell.m */,
 				CCD28DF218DB7A4D001127EC /* SettingVC.h */,
 				CCD28DF318DB7A4D001127EC /* SettingVC.m */,
+				CC205DCC18E64E5B00EECDE8 /* Tapjoy.embeddedframework */,
 				CC0E48D918E214C7003F2CAD /* GPUImage.xcodeproj */,
 				CC2F4D8A18D923590039E515 /* Images.xcassets */,
 				CC2F4D7918D923590039E515 /* Supporting Files */,
@@ -908,35 +932,35 @@
 				CC0E488218E1E7F5003F2CAD /* secondFrame05.png in Resources */,
 				CC0E493518E22AA1003F2CAD /* candlelight.png in Resources */,
 				CC0E486618E1E7F5003F2CAD /* Frame05.png in Resources */,
-				CC0E489C18E1E7F5003F2CAD /* secondFrame31.png in Resources */,
-				CC0E489318E1E7F5003F2CAD /* secondFrame22.png in Resources */,
-				CC0E489018E1E7F5003F2CAD /* secondFrame19.png in Resources */,
+				CC0E489C18E1E7F5003F2CAD /* secondFrame23.png in Resources */,
+				CC0E489318E1E7F5003F2CAD /* secondFrame16.png in Resources */,
+				CC0E489018E1E7F5003F2CAD /* secondFrame13.png in Resources */,
 				CC0E48AB18E1E80D003F2CAD /* glyphicons_003_user.png in Resources */,
-				CC0E489518E1E7F5003F2CAD /* secondFrame24.png in Resources */,
+				CC0E489518E1E7F5003F2CAD /* secondFrame18.png in Resources */,
 				CC0E494B18E22AA1003F2CAD /* purple-green.acv in Resources */,
 				CC0E494118E22AA1003F2CAD /* filmstock.png in Resources */,
-				CC0E488F18E1E7F5003F2CAD /* secondFrame18.png in Resources */,
-				CC0E488818E1E7F5003F2CAD /* secondFrame11.png in Resources */,
+				CC0E488F18E1E7F5003F2CAD /* secondFrame12.png in Resources */,
+				CC0E488818E1E7F5003F2CAD /* secondFrame8.png in Resources */,
 				CC0E487618E1E7F5003F2CAD /* Frame23.png in Resources */,
 				CC0E486218E1E7F5003F2CAD /* Frame01.png in Resources */,
 				CCD28DF018DB4430001127EC /* MainStoryboard.storyboard in Resources */,
-				CC0E489418E1E7F5003F2CAD /* secondFrame23.png in Resources */,
+				CC0E489418E1E7F5003F2CAD /* secondFrame17.png in Resources */,
 				CC0E493E18E22AA1003F2CAD /* dropblues.png in Resources */,
-				CC0E488618E1E7F5003F2CAD /* secondFrame09.png in Resources */,
+				CC0E488618E1E7F5003F2CAD /* secondFrame09a.png in Resources */,
 				CCD28E1718DBE74E001127EC /* verifyProduct.php in Resources */,
-				CC0E489918E1E7F5003F2CAD /* secondFrame28.png in Resources */,
+				CC0E489918E1E7F5003F2CAD /* secondFrame20.png in Resources */,
 				CC0E492E18E22AA1003F2CAD /* aqua.acv in Resources */,
-				CC0E489618E1E7F5003F2CAD /* secondFrame25.png in Resources */,
-				CC0E489F18E1E7F5003F2CAD /* secondFrame34.png in Resources */,
+				CC0E489618E1E7F5003F2CAD /* secondFrame19.png in Resources */,
+				CC0E489F18E1E7F5003F2CAD /* secondFrame34a.png in Resources */,
 				CC0E486A18E1E7F5003F2CAD /* Frame09.png in Resources */,
 				CC0E488318E1E7F5003F2CAD /* secondFrame06.png in Resources */,
 				CC205D7318E61D1700EECDE8 /* glyphicons_019_heart_empty.png in Resources */,
 				CC0E493418E22AA1003F2CAD /* BWhighContrastRed.png in Resources */,
 				CC0E494A18E22AA1003F2CAD /* platinum.png in Resources */,
 				CC0E486318E1E7F5003F2CAD /* Frame02.png in Resources */,
-				CC0E489718E1E7F5003F2CAD /* secondFrame26.png in Resources */,
+				CC0E489718E1E7F5003F2CAD /* secondFrame26a.png in Resources */,
 				CC0E48AD18E1E80D003F2CAD /* icon-letter-mail-hi.png in Resources */,
-				CC0E488718E1E7F5003F2CAD /* secondFrame10.png in Resources */,
+				CC0E488718E1E7F5003F2CAD /* secondFrame10a.png in Resources */,
 				CC0E486F18E1E7F5003F2CAD /* Frame14.png in Resources */,
 				CC0E493618E22AA1003F2CAD /* cobalt2Iron80Bleach.png in Resources */,
 				CC0E492F18E22AA1003F2CAD /* bleach.png in Resources */,
@@ -945,13 +969,13 @@
 				CC0E487818E1E7F5003F2CAD /* Frame25.png in Resources */,
 				CC0E492C18E22AA1003F2CAD /* 06.acv in Resources */,
 				CC2F4D8B18D923590039E515 /* Images.xcassets in Resources */,
-				CC0E488C18E1E7F5003F2CAD /* secondFrame15.png in Resources */,
-				CC0E489118E1E7F5003F2CAD /* secondFrame20.png in Resources */,
+				CC0E488C18E1E7F5003F2CAD /* secondFrame15a.png in Resources */,
+				CC0E489118E1E7F5003F2CAD /* secondFrame14.png in Resources */,
 				CC0E493F18E22AA1003F2CAD /* edgyAmber.png in Resources */,
 				CC0E494D18E22AA1003F2CAD /* softWarm.png in Resources */,
 				CC0E493718E22AA1003F2CAD /* copperSepia2strip.png in Resources */,
 				CC0E494818E22AA1003F2CAD /* lookup.png in Resources */,
-				CC0E488918E1E7F5003F2CAD /* secondFrame12.png in Resources */,
+				CC0E488918E1E7F5003F2CAD /* secondFrame9.png in Resources */,
 				CC0E494218E22AA1003F2CAD /* foggynight.png in Resources */,
 				CC0E48AA18E1E80D003F2CAD /* facebook-70251b04a4be865178ab592bc9586c83.png in Resources */,
 				CC0E492D18E22AA1003F2CAD /* 17.acv in Resources */,
@@ -962,19 +986,20 @@
 				CC0E487518E1E7F5003F2CAD /* Frame22.png in Resources */,
 				CC0E487118E1E7F5003F2CAD /* Frame16.png in Resources */,
 				CC0E494F18E22AA1003F2CAD /* tealOrangePlusContrast.png in Resources */,
-				CC0E488E18E1E7F5003F2CAD /* secondFrame17.png in Resources */,
+				CC0E488E18E1E7F5003F2CAD /* secondFrame17a.png in Resources */,
 				CC0E495518E24690003F2CAD /* Frame21.png in Resources */,
 				CC0E494318E22AA1003F2CAD /* fuji2393.png in Resources */,
 				CC0E48AF18E1E80D003F2CAD /* more-512.png in Resources */,
-				CC0E489218E1E7F5003F2CAD /* secondFrame21.png in Resources */,
+				CC0E489218E1E7F5003F2CAD /* secondFrame15.png in Resources */,
 				CC0E495018E22AA1003F2CAD /* yellow-red.acv in Resources */,
+				CC205DD018E64E5B00EECDE8 /* TapjoyResources.bundle in Resources */,
 				CC0E488418E1E7F5003F2CAD /* secondFrame07.png in Resources */,
 				CCD28E1318DBE74E001127EC /* AddDevice.html in Resources */,
 				CC0E486818E1E7F5003F2CAD /* Frame07.png in Resources */,
 				CCD28E1218DBE74E001127EC /* README.mdown in Resources */,
 				CC0E48AE18E1E80D003F2CAD /* instagram-512-2.png in Resources */,
-				CC0E489818E1E7F5003F2CAD /* secondFrame27.png in Resources */,
-				CC0E488A18E1E7F5003F2CAD /* secondFrame13.png in Resources */,
+				CC0E489818E1E7F5003F2CAD /* secondFrame27a.png in Resources */,
+				CC0E488A18E1E7F5003F2CAD /* secondFrame10.png in Resources */,
 				CC0E487718E1E7F5003F2CAD /* Frame24.png in Resources */,
 				CC0E488118E1E7F5003F2CAD /* secondFrame04.png in Resources */,
 				CC0E487218E1E7F5003F2CAD /* Frame17.png in Resources */,
@@ -983,7 +1008,7 @@
 				CC0E493818E22AA1003F2CAD /* crispWarm.png in Resources */,
 				CC0E48AC18E1E80D003F2CAD /* glyphicons_136_cogwheel.png in Resources */,
 				CC0E486418E1E7F5003F2CAD /* Frame03.png in Resources */,
-				CC0E489B18E1E7F5003F2CAD /* secondFrame30.png in Resources */,
+				CC0E489B18E1E7F5003F2CAD /* secondFrame22.png in Resources */,
 				CC0E493218E22AA1003F2CAD /* bleak.png in Resources */,
 				CC0E494418E22AA1003F2CAD /* gold2.png in Resources */,
 				CC0E494E18E22AA1003F2CAD /* softWarmBleach.png in Resources */,
@@ -998,21 +1023,21 @@
 				CCD28E1018DBE74E001127EC /* MKStoreKitConfigs.plist in Resources */,
 				CC0E48B018E1E80D003F2CAD /* twitter_logo_white.png in Resources */,
 				CCD28E1418DBE74E001127EC /* DBSetup.sql in Resources */,
-				CC0E48A018E1E7F5003F2CAD /* secondFrame35.png in Resources */,
-				CC0E489E18E1E7F5003F2CAD /* secondFrame33.png in Resources */,
+				CC0E48A018E1E7F5003F2CAD /* secondFrame26.png in Resources */,
+				CC0E489E18E1E7F5003F2CAD /* secondFrame25.png in Resources */,
 				CC0E486C18E1E7F5003F2CAD /* Frame11.png in Resources */,
 				CCD28E1618DBE74E001127EC /* requestAccess.php in Resources */,
 				CC0E487318E1E7F5003F2CAD /* Frame18.png in Resources */,
 				CC0E495718E26587003F2CAD /* lockImage.png in Resources */,
 				CC0E486E18E1E7F5003F2CAD /* Frame13.png in Resources */,
-				CC0E489A18E1E7F5003F2CAD /* secondFrame29.png in Resources */,
+				CC0E489A18E1E7F5003F2CAD /* secondFrame21.png in Resources */,
 				CC0E493A18E22AA1003F2CAD /* crispWinter.png in Resources */,
 				CC0E494618E22AA1003F2CAD /* lookup_amatorka.png in Resources */,
-				CC0E488B18E1E7F5003F2CAD /* secondFrame14.png in Resources */,
+				CC0E488B18E1E7F5003F2CAD /* secondFrame11.png in Resources */,
 				CC0E492918E22AA1003F2CAD /* 02.acv in Resources */,
-				CC0E488518E1E7F5003F2CAD /* secondFrame08.png in Resources */,
+				CC0E488518E1E7F5003F2CAD /* secondFrame08a.png in Resources */,
 				CC0E486918E1E7F5003F2CAD /* Frame08.png in Resources */,
-				CC0E488D18E1E7F5003F2CAD /* secondFrame16.png in Resources */,
+				CC0E488D18E1E7F5003F2CAD /* secondFrame16a.png in Resources */,
 				CC0E493118E22AA1003F2CAD /* bleachNight.png in Resources */,
 				CC0E494918E22AA1003F2CAD /* maximumWhite.png in Resources */,
 				CCD28E1518DBE74E001127EC /* featureCheck.php in Resources */,
@@ -1022,7 +1047,7 @@
 				CC0E493918E22AA1003F2CAD /* crispWarmBleach.png in Resources */,
 				CC0E494018E22AA1003F2CAD /* fallcolors.png in Resources */,
 				CC0E492A18E22AA1003F2CAD /* 2strip.png in Resources */,
-				CC0E489D18E1E7F5003F2CAD /* secondFrame32.png in Resources */,
+				CC0E489D18E1E7F5003F2CAD /* secondFrame24.png in Resources */,
 				CC0E494518E22AA1003F2CAD /* infrared.png in Resources */,
 				CC0E486718E1E7F5003F2CAD /* Frame06.png in Resources */,
 			);

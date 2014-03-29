@@ -353,9 +353,9 @@
 - (void) fillFrameSelectionSlider {
     //    self.frameSelectionSlider = (UIScrollView *)[self.view viewWithTag:10120];
     if (!IS_TALL_SCREEN) {
-        self.frameSelectionBar.contentSize = CGSizeMake(55 * 18+10, self.frameSelectionBar.frame.size.height);
+        self.frameSelectionBar.contentSize = CGSizeMake(55 * 29+10, self.frameSelectionBar.frame.size.height);
     } else {
-        self.frameSelectionBar.contentSize = CGSizeMake(70 * 18+10, 151);
+        self.frameSelectionBar.contentSize = CGSizeMake(70 * 29+10, 151);
 //        self.frameSelectionBar.frame=CGRectMake(0, 353, 320, 151);
     }
     for (int ind = 7; ind <= 25; ind++) {
@@ -383,7 +383,7 @@
     
 }
 - (void) fillSecondFrameSelectionSlider {
-    for (int ind = 8; ind <= 26; ind++) {
+    for (int ind = 8; ind <= 35; ind++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         if (!IS_TALL_SCREEN)
             btn.frame = CGRectMake((ind - 8 ) * 55+5, 60, 50, 50);
@@ -800,9 +800,9 @@
     //    self.effectsSlider = (UIScrollView *)[self.view viewWithTag:10125];
 //    self.filterSelectionBar.contentSize = CGSizeMake(65 * 11+10, self.filterSelectionBar.frame.size.height);
     if (!IS_TALL_SCREEN) {
-        self.filterSelectionBar.contentSize = CGSizeMake(55 * 11+10, self.frameSelectionBar.frame.size.height);
+        self.filterSelectionBar.contentSize = CGSizeMake(55 * 20+10, self.frameSelectionBar.frame.size.height);
     } else {
-        self.filterSelectionBar.contentSize = CGSizeMake(70 * 11+10, 151);
+        self.filterSelectionBar.contentSize = CGSizeMake(70 * 20+10, 151);
 //        self.filterSelectionBar.frame=CGRectMake(0, 353, 320, 151);
     }
     
@@ -961,7 +961,7 @@
 //    self.filterSelectionBar.contentSize = CGSizeMake(65 * 20+10, self.filterSelectionBar.frame.size.height);
     
     
-    for (int ind = 1; ind <= 11; ind++) {
+    for (int ind = 1; ind <= 20; ind++) {
         @autoreleasepool {
            
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -2269,7 +2269,7 @@
     sliderRotate.minimumValue = kRotateMin;
     sliderRotate.maximumValue = kRotateMax;
     sliderRotate.continuous = YES;
-    sliderRotate.value = 1.0;
+    sliderRotate.value = 0.0;
     [self.rotateMenuView addSubview:sliderRotate];
     
     labelRotate = [[UILabel alloc] initWithFrame:CGRectMake(265, 0, 50, 15)];
@@ -2351,7 +2351,7 @@
     sliderSplit.minimumValue = kSplitMin;
     sliderSplit.maximumValue = kSplitMax;
     sliderSplit.continuous = YES;
-    sliderSplit.value = 5;
+    sliderSplit.value = [defaults integerForKey:@"Split"];
     [self.splitMenuView addSubview:sliderSplit];
     
     labelSplit = [[UILabel alloc] initWithFrame:CGRectMake(265, 0, 50, 15)];

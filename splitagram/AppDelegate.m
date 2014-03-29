@@ -79,7 +79,7 @@
                                     NSLog(@"error adding album");
                                 }];
     }
-    [[MKStoreManager sharedManager] removeAllKeychainData];  //test purpose to reset in-app purchase
+//    [[MKStoreManager sharedManager] removeAllKeychainData];  //test purpose to reset in-app purchase
 
     return YES;
 }

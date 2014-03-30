@@ -9,8 +9,8 @@
 #define screenSpecificSetting(tallScreen, normal) ((IS_TALL_SCREEN) ? tallScreen : normal)
 #define degreesToRadians(x) (M_PI * x / 180.0)
 #define radiansToDegrees(x) (180.0 * x / M_PI)
-#define kBorderWidth 5.0
-#define kBlockWidth 20.0
+#define kBorderWidth 3.0
+#define kBlockWidth 7.0
 #define kZoomMin 0.5
 #define kZoomMax 2.5
 #define kSplitMin 0.0
@@ -125,11 +125,14 @@
 
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.tag = 19;
-    [self frameClicked:btn];
+//    [self frameClicked:btn];
     [self frameClicked:btn];
     firstTimeDesign = YES;
     if (![defaults boolForKey:@"filter"])
         [self randomFilterPick];
+    
+//    [defaults setBool:YES forKey:kFeature0];  //test
+//    [defaults setBool:YES forKey:kFeature1];  //test
 }
 - (void) randomFilterPick {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -201,20 +204,23 @@
         else
             [self secondFrameClicked:btn];
     }
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
 
 }
 
 -(void)frameAction
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"get more frames",@"buy for $0.99",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"get more frames",@"buy for $1.99",nil];
     popupQuery.tag=0;
     [popupQuery showInView:self.view];
 }
 -(void)filterAction
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"get more filters",@"buy for $0.99",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"get more filters",@"buy for $1.99",nil];
     popupQuery.tag=1;
     [popupQuery showInView:self.view];
 }
@@ -573,7 +579,7 @@
     [defaults setInteger:clickedBtn.tag forKey:@"frame"];
 
 //    NSLog(@"second frame clicked ");
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:kFeature0]){
+    if (![defaults boolForKey:kFeature0]){
         [self frameAction];
         return;
     }
@@ -658,7 +664,7 @@
                 //
                 //            [self selectFrame:1 SUB:15];
                 //            break;
-            case 8:
+            case 12:
                 
                 [self selectFrame:2 SUB:7];
                 break;
@@ -667,81 +673,81 @@
                 
                 [self selectFrame:2 SUB:8];
                 break;
+//
+//            case 10:
+//                
+//                [self selectFrame:2 SUB:9];
+//                break;
                 
-            case 10:
-                
-                [self selectFrame:2 SUB:9];
-                break;
-                
-            case 11:
+            case 8:
                 
                 [self selectFrame:2 SUB:10];
                 break;
-            case 12:
-                
-                [self selectFrame:2 SUB:11];
-                break;
-            case 13:
+//            case 9:
+//                
+//                [self selectFrame:2 SUB:11];
+//                break;
+            case 10:
                 
                 [self selectFrame:2 SUB:12];
                 break;
-            case 14:
+            case 11:
                 
                 [self selectFrame:2 SUB:13];
                 break;
-            case 15:
+//            case 15:
+//                
+//                [self selectFrame:2 SUB:14];
+//                break;
+//            case 16:
+//                
+//                [self selectFrame:2 SUB:15];
+//                break;
                 
-                [self selectFrame:2 SUB:14];
-                break;
-            case 16:
                 
-                [self selectFrame:2 SUB:15];
-                break;
-                
-                
-            case 17:
-                
-                [self selectFrame:2 SUB:16];
-                break;
-            case 18:
+//            case 17:
+//                
+//                [self selectFrame:2 SUB:16];
+//                break;
+            case 13:
                 
                 [self selectFrame:3 SUB:7];
                 break;
-            case 19:
+            case 14:
                 
                 [self selectFrame:3 SUB:8];
                 break;
-            case 20:
+            case 15:
                 
                 [self selectFrame:3 SUB:9];
                 break;
-            case 21:
+            case 16:
                 
                 [self selectFrame:3 SUB:10];
                 break;
-            case 22:
+            case 17:
                 
                 [self selectFrame:3 SUB:11];
                 break;
-            case 23:
+            case 18:
                 
                 [self selectFrame:3 SUB:12];
                 break;
-            case 24:
+//            case 18:
+//                
+//                [self selectFrame:3 SUB:13];
+//                break;
                 
-                [self selectFrame:3 SUB:13];
-                break;
-                
-            case 25:
+            case 19:
                 [self selectFrame:3 SUB:14];
                 break;
-            case 26:
-                
-                [self selectFrame:3 SUB:15];
-                break;
-            case 27:
-                [self selectFrame:3 SUB:16];
-                break;
+//            case 26:
+//                
+//                [self selectFrame:3 SUB:15];
+//                break;
+//            case 27:
+//                [self selectFrame:3 SUB:16];
+//                break;
                 
                 //        case 28:
                 //
@@ -751,39 +757,39 @@
                 //
                 //            [self selectFrame:4 SUB:9];
                 //            break;
-            case 28:
+            case 20:
                 
                 [self selectFrame:4 SUB:10];
                 break;
-            case 29:
+            case 21:
                 
                 [self selectFrame:4 SUB:11];
                 break;
-            case 30:
+            case 22:
                 
                 [self selectFrame:4 SUB:12];
                 break;
-            case 31:
+            case 23:
                 
                 [self selectFrame:4 SUB:13];
                 break;
                 
-            case 32:
+            case 24:
                 [self selectFrame:4 SUB:14];
                 break;
                 //        case 33:
                 //
                 //            [self selectFrame:4 SUB:15];
                 //            break;
-            case 33:
+            case 25:
                 [self selectFrame:4 SUB:16];
                 
                 break;
-            case 34:
-                [self selectFrame:4 SUB:17];
-                
-                break;
-            case 35:
+//            case 34:
+//                [self selectFrame:4 SUB:17];
+//                
+//                break;
+            case 26:
                 [self selectFrame:4 SUB:18];
                 
                 break;
@@ -1463,8 +1469,8 @@
 //        }
         
         firstTime = YES;
-        nStyle= style;
-        nSubStyle = sub;
+        nStyle= 4;
+        nSubStyle = 1;
 //        cornerState=0;
 //        panState=0;
 //        borderState=0;
@@ -1506,11 +1512,11 @@
             blockSlider3.scrollEnabled=NO;
             blockSlider4.scrollEnabled=NO;
             
-            blockSlider1.backgroundColor = [UIColor clearColor];
-            blockSlider2.backgroundColor = [UIColor clearColor];
-            blockSlider3.backgroundColor = [UIColor clearColor];
-            blockSlider4.backgroundColor = [UIColor clearColor];
-            
+//            blockSlider1.backgroundColor = [UIColor clearColor];
+//            blockSlider2.backgroundColor = [UIColor clearColor];
+//            blockSlider3.backgroundColor = [UIColor clearColor];
+//            blockSlider4.backgroundColor = [UIColor clearColor];
+        
             blockSlider1.tag = 0;
             blockSlider2.tag = 1;
             blockSlider3.tag = 2;
@@ -1534,10 +1540,7 @@
             
             
 //            if ((blockSlider1.tag == 0) || (blockSlider2.tag == 1) || (blockSlider3.tag == 2) || (blockSlider4.tag == 3)) {
-                [self.frameContainer addSubview:blockSlider1];
-                [self.frameContainer addSubview:blockSlider2];
-                [self.frameContainer addSubview:blockSlider3];
-                [self.frameContainer addSubview:blockSlider4];
+
 //            }
         
             
@@ -1598,122 +1601,142 @@
 //            
 //            [self.frameDimensionArray addObject:frameDimensionDictionary];
         
-            if (nStyle == 1){
-                image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
-//                self.image1.userInteractionEnabled = YES;
-                image1.tag =0;
-                
-                if ((blockSlider1.tag == 0) && (image1.tag == 0)) {
-                    [blockSlider1 addSubview:image1];
-                    [self fitImageToScroll:image1 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:0.0 ];
-                }
-            }
-            else if (nStyle == 2 ){
-                image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
-                image1.tag =0;
-//                self.image1.userInteractionEnabled = YES;
-                if ((blockSlider1.tag == 0) && (image1.tag == 0)) {
-                    [blockSlider1 addSubview:image1];
-                    [self fitImageToScroll:image1 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:0.0 ];
-                }
-//                if (i*2+1 <[self.originalImages count]){
-                    image2 = [[UIImageView alloc] initWithImage:self.selectedImage];
-                    image2.tag =1;
-//                    image2.userInteractionEnabled = YES;
-                    if ((blockSlider2.tag == 1) && (image2.tag == 1)) {
-                        [blockSlider2 addSubview:image2];
-                        [self fitImageToScroll:image2 SCROLL:blockSlider2 scrollViewNumber:blockSlider2.tag angle:0.0 ];
-                    }
+//            if (nStyle == 1){
+//                image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
+////                self.image1.userInteractionEnabled = YES;
+//                image1.tag =0;
+//                
+//                if ((blockSlider1.tag == 0) && (image1.tag == 0)) {
+//                    [blockSlider1 addSubview:image1];
+//                    [self fitImageToScroll:image1 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:0.0 ];
 //                }
-            }
-            else if (nStyle == 3 ){
-                image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
-                image1.tag =0;
-//                self.image1.userInteractionEnabled = YES;
-                if ((blockSlider1.tag == 0) && (image1.tag == 0)) {
-                    [blockSlider1 addSubview:image1];
-                    [self fitImageToScroll:image1 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:0.0 ];
-                }
-//                if (i*3+1 <[self.originalImages count]) {
-                    image2 = [[UIImageView alloc] initWithImage:self.selectedImage];
-                    image2.tag =1;
-//                    self.image2.userInteractionEnabled = YES;
-                    if ((blockSlider2.tag == 1) && (image2.tag == 1)) {
-                        [blockSlider2 addSubview:image2];
-                        [self fitImageToScroll:image2 SCROLL:blockSlider2 scrollViewNumber:blockSlider2.tag angle:0.0 ];
-                    }
+//            }
+//            else if (nStyle == 2 ){
+//                image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
+//                image1.tag =0;
+////                self.image1.userInteractionEnabled = YES;
+//                if ((blockSlider1.tag == 0) && (image1.tag == 0)) {
+//                    [blockSlider1 addSubview:image1];
+//                    [self fitImageToScroll:image1 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:0.0 ];
 //                }
-//                if (i*3+2 <[self.originalImages count]) {
-                    image3 = [[UIImageView alloc] initWithImage:self.selectedImage];
-                    image3.tag =2;
-//                    self.image3.userInteractionEnabled = YES;
-                    if ((blockSlider3.tag == 2) && (image3.tag == 2)) {
-                        [blockSlider3 addSubview:image3];
-                        [self fitImageToScroll:image3 SCROLL:blockSlider3 scrollViewNumber:blockSlider3.tag angle:0.0 ];
-                    }
-                    
+////                if (i*2+1 <[self.originalImages count]){
+//                    image2 = [[UIImageView alloc] initWithImage:self.selectedImage];
+//                    image2.tag =1;
+////                    image2.userInteractionEnabled = YES;
+//                    if ((blockSlider2.tag == 1) && (image2.tag == 1)) {
+//                        [blockSlider2 addSubview:image2];
+//                        [self fitImageToScroll:image2 SCROLL:blockSlider2 scrollViewNumber:blockSlider2.tag angle:0.0 ];
+//                    }
+////                }
+//            }
+//            else if (nStyle == 3 ){
+//                image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
+//                image1.tag =0;
+////                self.image1.userInteractionEnabled = YES;
+//                if ((blockSlider1.tag == 0) && (image1.tag == 0)) {
+//                    [blockSlider1 addSubview:image1];
+//                    [self fitImageToScroll:image1 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:0.0 ];
 //                }
-            }
-            else if (nStyle == 4 ){
-                image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
-                image1.tag =0;
-//                self.image1.userInteractionEnabled = YES;
-                if ((blockSlider1.tag == 0) && (image1.tag == 0)) {
-                    [blockSlider1 addSubview:image1];
-                    [self fitImageToScroll:image1 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:0.0 ];
-                }
-//                if (i*4+1 <[self.originalImages count]){
-                    image2 = [[UIImageView alloc] initWithImage:self.selectedImage];
-                    image2.tag =1;
-//                    self.image2.userInteractionEnabled = YES;
-                    if ((blockSlider2.tag == 1) && (image2.tag == 1)) {
-                        [blockSlider2 addSubview:image2];
-                        [self fitImageToScroll:image2 SCROLL:blockSlider2 scrollViewNumber:blockSlider2.tag angle:0.0 ];
-                    }
+////                if (i*3+1 <[self.originalImages count]) {
+//                    image2 = [[UIImageView alloc] initWithImage:self.selectedImage];
+//                    image2.tag =1;
+////                    self.image2.userInteractionEnabled = YES;
+//                    if ((blockSlider2.tag == 1) && (image2.tag == 1)) {
+//                        [blockSlider2 addSubview:image2];
+//                        [self fitImageToScroll:image2 SCROLL:blockSlider2 scrollViewNumber:blockSlider2.tag angle:0.0 ];
+//                    }
+////                }
+////                if (i*3+2 <[self.originalImages count]) {
+//                    image3 = [[UIImageView alloc] initWithImage:self.selectedImage];
+//                    image3.tag =2;
+////                    self.image3.userInteractionEnabled = YES;
+//                    if ((blockSlider3.tag == 2) && (image3.tag == 2)) {
+//                        [blockSlider3 addSubview:image3];
+//                        [self fitImageToScroll:image3 SCROLL:blockSlider3 scrollViewNumber:blockSlider3.tag angle:0.0 ];
+//                    }
+//                    
+////                }
+//            }
+//            else if (nStyle == 4 ){
+//                image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
+//                image1.tag =0;
+////                self.image1.userInteractionEnabled = YES;
+//                if ((blockSlider1.tag == 0) && (image1.tag == 0)) {
+//                    [blockSlider1 addSubview:image1];
+//                    [self fitImageToScroll:image1 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:0.0 ];
 //                }
-//                if (i*4+2 <[self.originalImages count]){
-                    
-                    image3 = [[UIImageView alloc] initWithImage:self.selectedImage];
-                    image3.tag =2;
-//                    self.image3.userInteractionEnabled = YES;
-                    if ((blockSlider3.tag == 2) && (image3.tag == 2)) {
-                        [blockSlider3 addSubview:image3];
-                        [self fitImageToScroll:image3 SCROLL:blockSlider3 scrollViewNumber:blockSlider3.tag angle:0.0 ];
-                    }
-//                }
-//                if (i*4+3 <[self.originalImages count]){
-                    
-                    image4 = [[UIImageView alloc] initWithImage:self.selectedImage];
-                    image4.tag =3;
-//                    self.image4.userInteractionEnabled = YES;
-                    if ((blockSlider4.tag == 3) && (image4.tag == 3)) {
-                        [blockSlider4 addSubview:image4];
-                        [self fitImageToScroll:image4 SCROLL:blockSlider4 scrollViewNumber:blockSlider4.tag angle:0.0 ];
-                    }
-//                }
-            }
+////                if (i*4+1 <[self.originalImages count]){
+//                    image2 = [[UIImageView alloc] initWithImage:self.selectedImage];
+//                    image2.tag =1;
+////                    self.image2.userInteractionEnabled = YES;
+//                    if ((blockSlider2.tag == 1) && (image2.tag == 1)) {
+//                        [blockSlider2 addSubview:image2];
+//                        [self fitImageToScroll:image2 SCROLL:blockSlider2 scrollViewNumber:blockSlider2.tag angle:0.0 ];
+//                    }
+////                }
+////                if (i*4+2 <[self.originalImages count]){
+//                    
+//                    image3 = [[UIImageView alloc] initWithImage:self.selectedImage];
+//                    image3.tag =2;
+////                    self.image3.userInteractionEnabled = YES;
+//                    if ((blockSlider3.tag == 2) && (image3.tag == 2)) {
+//                        [blockSlider3 addSubview:image3];
+//                        [self fitImageToScroll:image3 SCROLL:blockSlider3 scrollViewNumber:blockSlider3.tag angle:0.0 ];
+//                    }
+////                }
+////                if (i*4+3 <[self.originalImages count]){
+//                    
+//                    image4 = [[UIImageView alloc] initWithImage:self.selectedImage];
+//                    image4.tag =3;
+////                    self.image4.userInteractionEnabled = YES;
+//                    if ((blockSlider4.tag == 3) && (image4.tag == 3)) {
+//                        [blockSlider4 addSubview:image4];
+//                        [self fitImageToScroll:image4 SCROLL:blockSlider4 scrollViewNumber:blockSlider4.tag angle:0.0 ];
+//                    }
+////                }
+//            }
 //            NSLog(@"original Image 2 %@", self.originalImages);
         
-            if (blockSlider1.tag==0){
+        image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
+        image1.tag =0;
+        [blockSlider1 addSubview:image1];
+        [self fitImageToScroll:image1 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:0.0 ];
+        image2 = [[UIImageView alloc] initWithImage:self.selectedImage];
+        image2.tag =1;
+        [blockSlider2 addSubview:image2];
+        [self fitImageToScroll:image2 SCROLL:blockSlider2 scrollViewNumber:blockSlider2.tag angle:0.0 ];
+        image3 = [[UIImageView alloc] initWithImage:self.selectedImage];
+        image3.tag =2;
+        [blockSlider3 addSubview:image3];
+        [self fitImageToScroll:image3 SCROLL:blockSlider3 scrollViewNumber:blockSlider3.tag angle:0.0 ];
+        image4 = [[UIImageView alloc] initWithImage:self.selectedImage];
+        image4.tag =3;
+        [blockSlider4 addSubview:image4];
+        [self fitImageToScroll:image4 SCROLL:blockSlider4 scrollViewNumber:blockSlider4.tag angle:0.0 ];
+        [self.frameContainer addSubview:blockSlider1];
+        [self.frameContainer addSubview:blockSlider2];
+        [self.frameContainer addSubview:blockSlider3];
+        [self.frameContainer addSubview:blockSlider4];
+//            if (blockSlider1.tag==0){
                 [droppableAreas addObject:blockSlider1];
-//                [self.replacableImages addObject:self.blockSlider1];
-            }
-            if (blockSlider2.tag == 1){
+////                [self.replacableImages addObject:self.blockSlider1];
+//            }
+//            if (blockSlider2.tag == 1){
                 [droppableAreas addObject:blockSlider2];
 //                [self.replacableImages addObject:self.blockSlider2];
                 
-            }
-            if (blockSlider3.tag ==2){
+//            }
+//            if (blockSlider3.tag ==2){
                 [droppableAreas addObject:blockSlider3];
 //                [self.replacableImages addObject:self.blockSlider3];
                 
-            }
-            if (blockSlider4.tag == 3){
+//            }
+//            if (blockSlider4.tag == 3){
                 [droppableAreas addObject:blockSlider4];
 //                [self.replacableImages addObject:self.blockSlider4];
-                
-            }
-            
+//                
+//            }
+        
             //            CGRect bounds = self.frameContainer.bounds;
             //            self.blockSlider1.center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
             //            self.blockSlider1.clipsToBounds=YES;
@@ -1954,6 +1977,12 @@
             [blockSlider addSubview:replaceImage];
             [self fitImageToScroll:replaceImage SCROLL:blockSlider scrollViewNumber:blockSlider.tag  angle:[defaults floatForKey:@"Rotate"] ];
         }
+        for (UIScrollView *blockSlider in droppableAreas)
+            for (UIImageView *imageView in blockSlider.subviews){
+                imageView.center = CGPointMake(imageView.center.x + [defaults floatForKey:@"PanX"],
+                                               imageView.center.y + [defaults floatForKey:@"PanY"]);
+            }
+
         [self.frameContainer bringSubviewToFront:_watermarkOnImage];
 
     }
@@ -2100,22 +2129,22 @@
 }
 
 -(void) tapBlock :(UITapGestureRecognizer *)recognizer{
-//    for (UIScrollView *blockSlider in droppableAreas) {
-//        CGPoint tappedBlock = [recognizer locationInView:blockSlider];
-//        if ([blockSlider pointInside:tappedBlock withEvent:nil]) {
-//            tapBlockNumber = blockSlider.tag;
-//        }
-//    }
+    for (UIScrollView *blockSlider in droppableAreas) {
+        CGPoint tappedBlock = [recognizer locationInView:blockSlider];
+        if ([blockSlider pointInside:tappedBlock withEvent:nil]) {
+            tapBlockNumber = blockSlider.tag;
+        }
+    }
     __block CGPoint tappedBlock;
     [UIView animateWithDuration:2.0
                      animations:^{
                          for (UIScrollView *blockSlider in droppableAreas){
-                             tappedBlock = [recognizer locationInView:blockSlider];
-                             if ([blockSlider pointInside:tappedBlock withEvent:nil]) {
-                                 tapBlockNumber = blockSlider.tag;
-//                             }
+//                             tappedBlock = [recognizer locationInView:blockSlider];
+//                             if ([blockSlider pointInside:tappedBlock withEvent:nil]) {
+//                                 tapBlockNumber = blockSlider.tag;
+////                             }
 //
-//                             if (blockSlider.tag == tapBlockNumber){
+                             if (blockSlider.tag == tapBlockNumber){
                                  CABasicAnimation *color = [CABasicAnimation animationWithKeyPath:@"borderColor"];
                                  // animate from red to blue border ...
                                  color.fromValue = (id)[UIColor clearColor].CGColor;
@@ -2123,6 +2152,8 @@
                                  // ... and change the model value
                                  color.duration = 1;
                                  [blockSlider.layer addAnimation:color forKey:@"AnimateFrame"];
+//                                 if (tapBlockNumber >1)
+//                                     break;
                              }
                          }
                      }
@@ -2720,7 +2751,6 @@
         if (sub == 1) {
             scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
             scroll_height = self.frameContainer.frame.size.height - nMargin * 2;
-            //NSLog(@"sub 2=%d",sub);
         }
         else if (sub == 2) {
             scroll_width = self.frameContainer.frame.size.width - nMargin * 2;
@@ -2731,33 +2761,31 @@
             scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) / 2;
         }
         else if(sub == 4){
-            
             scroll_width = (self.frameContainer.frame.size.width - 10 * 3 ) / 2;
             scroll_height = self.frameContainer.frame.size.height - 10 * 4;
-            nTopMargin=10 *2;
-            rc = CGRectMake(10, nTopMargin, scroll_width, scroll_height );
+            nTopMargin=10 *2+10;
+
+            rc = CGRectMake(20-nMargin, nTopMargin, scroll_width, scroll_height );
             return rc;
         }
         else if(sub == 5){
-            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = (self.frameContainer.frame.size.height - nMargin * 12);
-            nTopMargin=nMargin *6;
+            scroll_width = (self.frameContainer.frame.size.width - 10 * 3 ) / 2;
+            scroll_height = (self.frameContainer.frame.size.height - 10 * 12);
+            nTopMargin=10 *6;
             rc = CGRectMake(nMargin, nTopMargin, scroll_width, scroll_height );
             return rc;
-            
         }
         else if(sub == 6){
             scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            //            scroll_height = (self.frameContainer.frame.size.height - nMargin * 14);
             scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 )/2;
             nTopMargin=nMargin *2;
-            nLeftMargin = nMargin * 5;
+            nLeftMargin = nMargin * 5+2;
             rc = CGRectMake(nLeftMargin, nTopMargin, scroll_width, scroll_height );
             return rc;
             
         }
         else if (sub == 7) { //secondFrameSlider stuff
-            scroll_width = 155;
+            scroll_width = 155;//155
             scroll_height = 310;//350
             rc = CGRectMake(0, 0, scroll_width, scroll_height );
             return rc;
@@ -2765,7 +2793,7 @@
         else if (sub == 8) {  //secondFrameSlider stuff
             scroll_width = 200;
             scroll_height = 135;
-            rc = CGRectMake(10, 20, scroll_width, scroll_height );
+            rc = CGRectMake(10, 20, scroll_width+nMargin, scroll_height );
             return rc;
         }
         else if (sub == 9) {  //secondFrameSlider stuff
@@ -2775,9 +2803,9 @@
             return rc;
         }
         else if (sub == 10) {  //secondFrameSlider stuff
-            scroll_width = 105;
-            scroll_height =290;
-            rc = CGRectMake(10, 10, scroll_width, scroll_height );
+            scroll_width = 310;
+            scroll_height =310;
+            rc = CGRectMake(0, 0, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 11) {  //secondFrameSlider stuff
@@ -2789,13 +2817,13 @@
         else if (sub == 12) {  //secondFrameSlider stuff
             scroll_width = 180;
             scroll_height =180;
-            rc = CGRectMake(0, 0, scroll_width, scroll_height );
+            rc = CGRectMake(0, 0, scroll_width+nMargin*3, scroll_height );
             return rc;
         }
         else if (sub == 13) {  //secondFrameSlider stuff
             scroll_width = 150;
             scroll_height =250;
-            rc = CGRectMake(0, 0, scroll_width, scroll_height );
+            rc = CGRectMake(0, 0, scroll_width+nMargin/4, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 14) {  //secondFrameSlider stuff
@@ -2841,38 +2869,38 @@
         else if (sub == 7){
             scroll_width = 150;
             scroll_height = 96;
-            rc = CGRectMake(5, 5, scroll_width, scroll_height );
+            rc = CGRectMake(5, 5, scroll_width+nMargin*3, scroll_height );
             return rc;
             
         }else if (sub == 8) {
             scroll_width = 96;
             scroll_height = 250;
-            rc = CGRectMake(5, 30, scroll_width, scroll_height );
+            rc = CGRectMake(5, 30-nMargin, scroll_width, scroll_height+nMargin*2 );
             return rc;
             
         }else if (sub == 9) {
             scroll_width = 100;
             scroll_height = 100;
-            rc = CGRectMake(30, 75, scroll_width, scroll_height );
+            rc = CGRectMake(30-nMargin, 75-nMargin - nMargin/4, scroll_width+nMargin+nMargin/4, scroll_height+nMargin +nMargin/4 );
             return rc;
             
         }
         else if (sub == 10){
             scroll_width = 96;
             scroll_height = 150;
-            rc = CGRectMake(5, 5, scroll_width, scroll_height );
+            rc = CGRectMake(5, 5, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 11){
             scroll_width = 100;
             scroll_height = 200;
-            rc = CGRectMake(5, 20, scroll_width, scroll_height );
+            rc = CGRectMake(5, 20, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 12){
             scroll_width = 100;
             scroll_height = 100;
-            rc = CGRectMake(5, 105, scroll_width, scroll_height );
+            rc = CGRectMake(5, 105-nMargin, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 13){
@@ -2884,7 +2912,7 @@
         else if (sub == 14){
             scroll_width = 150;
             scroll_height = 200;
-            rc = CGRectMake(0, 55, scroll_width, scroll_height );
+            rc = CGRectMake(0, 55-nMargin, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 15){
@@ -2933,20 +2961,20 @@
             return rc;
         }
         else if (sub == 10){
-            rc = CGRectMake(5, 5, 71, 250 );
+            rc = CGRectMake(5-nMargin/4, 5, 71+nMargin/2, 250+nMargin );
             return rc;
         }
         else if (sub == 11){
-            rc = CGRectMake(5, 5, 180, 147 );
+            rc = CGRectMake(5-nMargin/4, 5, 180+nMargin/2, 150 );
             return rc;
         }
         
         else if (sub == 12){
-            rc = CGRectMake(5,5,175,75 );
+            rc = CGRectMake(5,5,175+nMargin*2,75 );
             return rc;
         }
         else if (sub == 13){
-            rc = CGRectMake(10,75,100,100 );
+            rc = CGRectMake(10-nMargin/4,75-nMargin/2,100+nMargin/2,100+nMargin/2 );
             return rc;
         }
         else if (sub == 14){
@@ -2966,7 +2994,7 @@
             return rc;
         }
         else if (sub == 18){
-            rc = CGRectMake(5, 5, 75, 75 );
+            rc = CGRectMake(5, 5, 75+nMargin, 75 );
             return rc;
         }
         
@@ -3015,14 +3043,15 @@
         else if (sub == 4){
             scroll_width = (self.frameContainer.frame.size.width - 10 * 3 ) / 2;
             scroll_height = self.frameContainer.frame.size.height - 10 * 10;
-            nLeftMargin = self.frameContainer.frame.size.width - 10 - scroll_width;
-            nTopMargin = 10 *5;
-            
+            nLeftMargin = self.frameContainer.frame.size.width - scroll_width ;
+            nTopMargin = 10 *5+10;
+            rc = CGRectMake(nLeftMargin - (20-nMargin), nTopMargin, scroll_width, scroll_height );
+            return rc;
         }
         else if (sub == 5){
-            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = (self.frameContainer.frame.size.height - nMargin * 12);
-            nTopMargin=nMargin *6;
+            scroll_width = (self.frameContainer.frame.size.width - 10 * 3 ) / 2;
+            scroll_height = (self.frameContainer.frame.size.height - 10 * 12);
+            nTopMargin=10 *6;
             //            rc = CGRectMake(nMargin, nTopMargin, scroll_width, scroll_height );
             //            return rc;
             //            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
@@ -3044,15 +3073,15 @@
             nTopMargin = nMargin * 2 + scroll_height;
         }
         else if (sub == 7) {  //secondFrameSlider stuff
-            scroll_width = 120;
-            scroll_height = 150;
-            rc = CGRectMake(175, 20, scroll_width, scroll_height );
+            scroll_width = 120+nMargin*2;
+            scroll_height = 150+nMargin*2;
+            rc = CGRectMake(175-nMargin, 20-nMargin, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 8) {  //secondFrameSlider stuff
             scroll_width = 200;
             scroll_height = 135;
-            rc = CGRectMake(100, 155, scroll_width, scroll_height );
+            rc = CGRectMake(100-nMargin*3, 155, scroll_width+nMargin*3, scroll_height );
             return rc;
         }
         else if (sub == 9) {  //secondFrameSlider stuff
@@ -3062,9 +3091,9 @@
             return rc;
         }
         else if (sub == 10) {  //secondFrameSlider stuff
-            scroll_width = 180;
-            scroll_height =290;
-            rc = CGRectMake(120, 10, scroll_width, scroll_height );
+            scroll_width = 100;
+            scroll_height =100;
+            rc = CGRectMake(105-nMargin, 105-nMargin, scroll_width+nMargin*4, scroll_height+nMargin*4 );
             return rc;
         }
         else if (sub == 11) {  //secondFrameSlider stuff
@@ -3076,13 +3105,13 @@
         else if (sub == 12) {  //secondFrameSlider stuff
             scroll_width = 210;
             scroll_height =130;
-            rc = CGRectMake(100, 180, scroll_width, scroll_height );
+            rc = CGRectMake(100-nMargin*3, 180, scroll_width+nMargin*3, scroll_height );
             return rc;
         }
         else if (sub == 13) {  //secondFrameSlider stuff
             scroll_width = 155;
             scroll_height =150;
-            rc = CGRectMake(155, 160, scroll_width, scroll_height );
+            rc = CGRectMake(155, 160-nMargin*3, scroll_width, scroll_height+nMargin*3 );
             return rc;
         }
         else if (sub == 14) {  //secondFrameSlider stuff
@@ -3138,30 +3167,30 @@
             nTopMargin = nMargin * 2 + scroll_height;
         }
         else if (sub == 7) {
-            rc = CGRectMake(70,106,150,96 );
+            rc = CGRectMake(70-nMargin,106-nMargin/4,150+nMargin*3,98+nMargin/2 );
             return rc;
         }
         else if (sub == 8) {
-            rc = CGRectMake(106,30,96,250 );
+            rc = CGRectMake(106-nMargin/4,30-nMargin,96+nMargin/2,250+nMargin*2 );
             return rc;
         } else if (sub == 9) {
             rc = CGRectMake(135,10,165,165 );
             return rc;
         }
         else if (sub == 10) {
-            rc = CGRectMake(106,100,96,150 );
+            rc = CGRectMake(106-nMargin/4,100-nMargin,96+nMargin/2,150+nMargin*2 );
             return rc;
         }
         else if (sub == 11){
             scroll_width = 100;
             scroll_height = 200;
-            rc = CGRectMake(105, 90, scroll_width, scroll_height );
+            rc = CGRectMake(105, 90-nMargin, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 12){
             scroll_width = 100;
             scroll_height = 260;//300
-            rc = CGRectMake(105,25, scroll_width, scroll_height );
+            rc = CGRectMake(105,25-nMargin, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 13){
@@ -3173,7 +3202,7 @@
         else if (sub == 14){
             scroll_width = 75;
             scroll_height = 200;
-            rc = CGRectMake(155, 55, scroll_width, scroll_height );
+            rc = CGRectMake(155-nMargin/2, 55-nMargin, scroll_width+nMargin, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 15){
@@ -3239,7 +3268,7 @@
             
         }
         else if (sub == 10){
-            rc = CGRectMake(81, 310-255, 71, 250 );
+            rc = CGRectMake(81, 310-255-nMargin, 71+nMargin/4, 250+nMargin );
             return rc;
         }
         else if (sub == 11){
@@ -3247,11 +3276,11 @@
             return rc;
         }
         else if (sub == 12){
-            rc = CGRectMake(130, 80, 175, 75 );
+            rc = CGRectMake(130-nMargin*2, 80, 175+nMargin*2, 75 );
             return rc;
         }
         else if (sub == 13){
-            rc = CGRectMake(10, 180, 100, 100 );
+            rc = CGRectMake(10-nMargin/4, 180-nMargin/4, 100+nMargin/2, 100+nMargin/2 );
             return rc;
         }
         else if (sub == 14){
@@ -3263,7 +3292,7 @@
             return rc;
         }
         else if (sub == 16){
-            rc = CGRectMake(106, 5, 96, 96 );
+            rc = CGRectMake(106-nMargin/4, 5, 96+nMargin/2, 96+nMargin );
             return rc;
         }
         else if (sub == 17){
@@ -3271,7 +3300,7 @@
             return rc;
         }
         else if (sub == 18){
-            rc = CGRectMake(80, 85, 110, 310-90 );
+            rc = CGRectMake(80-nMargin/4, 85-nMargin/4, 110+nMargin/2, 310-90+nMargin/4 );
             return rc;
         }
         
@@ -3327,31 +3356,31 @@
             nTopMargin = nMargin * 3 + scroll_height * 2;
         }
         else if (sub == 7) {
-            rc = CGRectMake(150,310-96-5,155,96 );
+            rc = CGRectMake(150-nMargin*2,310-96-5,155+nMargin*2,96 );
             return rc;
         }
         else if (sub == 8) {
-            rc = CGRectMake(206,30,96,250 );
+            rc = CGRectMake(206,30-nMargin,96,250+nMargin*2 );
             return rc;
             
         } else if (sub == 9) {
-            rc = CGRectMake(135,180,100,100 );
+            rc = CGRectMake(135,180-nMargin/4,100+nMargin+nMargin/4,100+nMargin+nMargin/4 );
             return rc;
         }
         else if (sub == 10) {
-            rc = CGRectMake(206,155,96,150 );
+            rc = CGRectMake(206,155-nMargin*2,96,150+nMargin*2 );
             return rc;
         }
         else if (sub == 11){
             scroll_width = 100;
             scroll_height = 200;
-            rc = CGRectMake(205, 20, scroll_width, scroll_height );
+            rc = CGRectMake(205, 20, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 12){
             scroll_width = 100;
             scroll_height = 100;
-            rc = CGRectMake(205, 105, scroll_width, scroll_height );
+            rc = CGRectMake(205, 105-nMargin, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 13){
@@ -3363,7 +3392,7 @@
         else if (sub == 14){
             scroll_width = 75;
             scroll_height = 200;
-            rc = CGRectMake(235, 55, scroll_width, scroll_height );
+            rc = CGRectMake(235, 55-nMargin, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 15){
@@ -3429,23 +3458,23 @@
             
         }
         else if (sub == 10){
-            rc = CGRectMake(157, 5, 71, 250 );
+            rc = CGRectMake(157, 5, 71+nMargin/4, 250+nMargin );
             return rc;
         }
         else if (sub == 11){
-            rc = CGRectMake(85, 157, 100, 147 );
+            rc = CGRectMake(85-nMargin, 160-nMargin/4, 100+nMargin+nMargin/4, 150+nMargin/4 );
             return rc;
         }
         else if (sub == 12){
-            rc = CGRectMake(5, 310-155, 175, 75 );
+            rc = CGRectMake(5, 310-155, 175+nMargin*2, 75 );
             return rc;
         }
         else if (sub == 13){
-            rc = CGRectMake(115, 180, 100, 100 );
+            rc = CGRectMake(115, 180-nMargin/4, 100+nMargin/2, 100+nMargin/2 );
             return rc;
         }
         else if (sub == 14){
-            rc = CGRectMake(105, 5, 100, 100 );
+            rc = CGRectMake(105, 10, 100, 100 );
             return rc;
         }
         else if (sub == 15){
@@ -3453,7 +3482,7 @@
             return rc;
         }
         else if (sub == 16){
-            rc = CGRectMake(106, 310-96-5, 96, 96 );
+            rc = CGRectMake(106-nMargin/4, 310-96-5-nMargin, 96+nMargin/2, 96+nMargin );
             return rc;
         }
         else if (sub == 17){
@@ -3461,7 +3490,7 @@
             return rc;
         }
         else if (sub == 18){
-            rc = CGRectMake(195, 5, 110, 310-75-15 );
+            rc = CGRectMake(195, 5, 110, 310-75-15+nMargin/4 );
             return rc;
         }
         
@@ -3539,23 +3568,23 @@
             return rc;
         }
         else if (sub == 10){
-            rc = CGRectMake(233, 310-255, 71, 250 );//250
+            rc = CGRectMake(233, 310-255-nMargin, 71+nMargin/4, 250+nMargin );//250
             return rc;
         }
         else if (sub == 11){
-            rc = CGRectMake(190, 155, 100, 150 );
+            rc = CGRectMake(190, 160-nMargin/4, 100, 150 +nMargin/4);
             return rc;
         }
         else if (sub == 12){
-            rc = CGRectMake(130, 310-80, 175, 75 );
+            rc = CGRectMake(130-nMargin*2, 310-80, 175+nMargin*2, 75 );
             return rc;
         }
         else if (sub == 13){
-            rc = CGRectMake(115, 10, 185, 165 );
+            rc = CGRectMake(115, 10, 185+nMargin/4, 165 );
             return rc;
         }
         else if (sub == 14){
-            rc = CGRectMake(105, 310-180, 100, 175 );
+            rc = CGRectMake(105, 310-180-nMargin, 100, 175+nMargin );
             return rc;
         }
         else if (sub == 15){
@@ -3571,7 +3600,7 @@
             return rc;
         }
         else if (sub == 18){
-            rc = CGRectMake(195, 310-80, 75, 75 );
+            rc = CGRectMake(195, 310-80, 75+nMargin, 75 );
             return rc;
         }
     }

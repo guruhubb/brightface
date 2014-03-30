@@ -45,6 +45,8 @@
                @"follow us on instagram", @"like us on facebook",@"follow us on twitter",
                @"rate app",@"feedback",@"restore purchases",nil];
     [self.settingsTableView reloadData];
+//    [defaults setBool:YES forKey:kFeature2];  //test
+
     
 }
 
@@ -279,19 +281,19 @@
     }
     if (indexPath.section == 1) {
         if (indexPath.row==0) {
-            NSURL *instagramURL = [NSURL URLWithString:@"instagram://user?username=getbooklyapp"];
+            NSURL *instagramURL = [NSURL URLWithString:@"instagram://user?username=splitagram"];
             if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
                 [[UIApplication sharedApplication] openURL:instagramURL];
             }
         }
         if (indexPath.row==1) {
-            NSURL *fbURL = [NSURL URLWithString:@"https://www.facebook.com/getbooklyapp"];
+            NSURL *fbURL = [NSURL URLWithString:@"fb://profile/671210576279888"];
             if ([[UIApplication sharedApplication] canOpenURL:fbURL]) {
                 [[UIApplication sharedApplication] openURL:fbURL];
             }
         }
         if (indexPath.row==2) {
-            NSURL *twitterURL = [NSURL URLWithString:@"twitter://user?screen_name=getbooklyapp"];
+            NSURL *twitterURL = [NSURL URLWithString:@"twitter://user?screen_name=splitagram"];
             if ([[UIApplication sharedApplication] canOpenURL:twitterURL]) {
                 [[UIApplication sharedApplication] openURL:twitterURL];
             }
@@ -557,7 +559,7 @@
             else if (buttonIndex==1)[defaults setBool:YES forKey:@"filter"];
         }
         else if (actionSheet.tag == 3) {
-            if (buttonIndex==0){
+            if (buttonIndex==1){
                 [self inAppBuyAction:actionSheet.tag];
             }
         }

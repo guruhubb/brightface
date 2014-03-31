@@ -360,19 +360,61 @@
     if ([[segue identifier] isEqualToString:@"doneDesign"])
     {
         firstTimeDesign=NO;
-        for (UIScrollView *blockSlider in droppableAreas)
-            [blockSlider.layer setBorderColor:[[UIColor clearColor] CGColor]];
         doneViewController *vc = [segue destinationViewController];
-        CGRect rect = _frameContainer.frame;//[[UIScreen mainScreen] bounds];
-        //    UIGraphicsBeginImageContext(rect.size);
-        UIGraphicsBeginImageContextWithOptions(rect.size, YES, 2.0);  //v1.0 bookly use this instead of withoutOptions and 2.0 magnification to give a sharper image  //v1.0g bookly Scaling at 2.0 is too much pixels and too big of an image to email.  0.0 goes to default image size of the device which makes it pretty large.  So the optimum is 1.25 scaling with 0.6 compression to keep most images at around 50kB.
-        CGContextRef context = UIGraphicsGetCurrentContext();
+//        vc.image = [self captureScreenshot];
+        vc.image = [self captureImage];
+        NSData *imageData = [[NSData alloc] initWithData:UIImageJPEGRepresentation((vc.image), 1.0)];
         
-        [_frameContainer.layer renderInContext:context];
-        vc.image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+        int imageSize = imageData.length;
+        NSLog(@"SIZE OF IMAGE: %i ", imageSize);
+
+        
+//        for (UIScrollView *blockSlider in droppableAreas)
+//            [blockSlider.layer setBorderColor:[[UIColor clearColor] CGColor]];
+//        doneViewController *vc = [segue destinationViewController];
+//        CGRect rect = _frameContainer.frame;//[[UIScreen mainScreen] bounds];
+//        //    UIGraphicsBeginImageContext(rect.size);
+//        UIGraphicsBeginImageContextWithOptions(rect.size, YES, 2.0);  //v1.0 bookly use this instead of withoutOptions and 2.0 magnification to give a sharper image  //v1.0g bookly Scaling at 2.0 is too much pixels and too big of an image to email.  0.0 goes to default image size of the device which makes it pretty large.  So the optimum is 1.25 scaling with 0.6 compression to keep most images at around 50kB.
+//        CGContextRef context = UIGraphicsGetCurrentContext();
+//        
+//        [_frameContainer.layer renderInContext:context];
+//        vc.image = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
 //        vc.image=self.selectedImage;
     }
+}
+
+- (UIImage *) captureScreenshot {
+    //        for (UIScrollView *blockSlider in droppableAreas)
+    //            [blockSlider.layer setBorderColor:[[UIColor clearColor] CGColor]];
+    CGRect rect = _frameContainer.frame;//[[UIScreen mainScreen] bounds];
+    //    UIGraphicsBeginImageContext(rect.size);
+    UIGraphicsBeginImageContextWithOptions(rect.size, YES, 2.0);  //v1.0 bookly use this instead of withoutOptions and 2.0 magnification to give a sharper image  //v1.0g bookly Scaling at 2.0 is too much pixels and too big of an image to email.  0.0 goes to default image size of the device which makes it pretty large.  So the optimum is 1.25 scaling with 0.6 compression to keep most images at around 50kB.
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    [_frameContainer.layer renderInContext:context];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+
+}
+
+- (UIImage *) captureImage {
+    UIView* captureView = self.frameContainer;
+    
+    /* Capture the screen shoot at native resolution */
+    UIGraphicsBeginImageContextWithOptions(captureView.bounds.size, captureView.opaque, 0.0);
+    [captureView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage * screenshot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    /* Render the screen shot at custom resolution */
+    CGRect cropRect = CGRectMake(0 ,0 ,1435 ,1435);
+    UIGraphicsBeginImageContextWithOptions(cropRect.size, captureView.opaque, 1.0f);
+    [screenshot drawInRect:cropRect];
+    UIImage * customScreenShot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return customScreenShot;
 }
 
 - (void) fillFrameSelectionSlider {

@@ -202,7 +202,7 @@
 //    NSString *temp = @"bookly";
 //    NSString *booklyMediaId = [temp stringByAppendingString:[labelContents objectForKey:@"id"]];
 //    NSString *encodedString = [inputData base64EncodedString];      //encode
-    NSString *string= @"check it out!  created using splitagram app.  download for free! www.splitagram.com";
+    NSString *string= @"Check it out!  \n\n______\nCreated using splitagram app.  Download for free! \nwww.splitagram.com";
 //    if (isImage)
 //        string= [NSString stringWithFormat:@"http://getbooklyapp.com/image.php?mediaId=%@",encodedString];
 //    else

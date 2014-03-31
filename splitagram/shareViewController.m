@@ -60,18 +60,18 @@
 
 - (IBAction)postToFacebook:(id)sender {
     [Flurry logEvent:@"Facebook"];
-    NSLog(@"share to facebook");
+//    NSLog(@"share to facebook");
 //    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
     // check whether facebook is (likely to be) installed or not
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]]) {
         // Safe to launch the facebook app
 //        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"fb://profile/200538917420"]];
 //    }
-        NSLog(@"share to facebook1");
+//        NSLog(@"share to facebook1");
 
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         
-        [controller setInitialText:@"#splitagram created with @splitagram"];
+        [controller setInitialText:@"#splitagram created with splitagram app"];
         [controller addImage:self.image];
         
         [self presentViewController:controller animated:YES completion:nil];
@@ -202,7 +202,7 @@
 //    NSString *temp = @"bookly";
 //    NSString *booklyMediaId = [temp stringByAppendingString:[labelContents objectForKey:@"id"]];
 //    NSString *encodedString = [inputData base64EncodedString];      //encode
-    NSString *string= @"check it out!  created using splitagram.  download for free! http://getbooklyapp.com";
+    NSString *string= @"check it out!  created using splitagram app.  download for free! www.splitagram.com";
 //    if (isImage)
 //        string= [NSString stringWithFormat:@"http://getbooklyapp.com/image.php?mediaId=%@",encodedString];
 //    else
@@ -218,7 +218,8 @@
     [pickerMail addAttachmentData:UIImagePNGRepresentation(self.image)  mimeType:@"image/png" fileName:@"attach"];
     //    else
     //        [pickerMail addAttachmentData:img mimeType:@"video/mpeg" fileName:@"tmp.mp4"];
-    
+    [[UINavigationBar appearance] setTintColor:[UIColor blueColor]];
+
     //    [self presentModalViewController:pickerMail animated:YES];
     [self presentViewController:pickerMail animated:YES completion:nil];
     //    [[[[pickerMail viewControllers] lastObject] navigationItem] setTitle:@"Email"];
@@ -231,6 +232,8 @@
 - (void) mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
     //	[self dismissModalViewControllerAnimated:YES];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+
     [ self dismissViewControllerAnimated: YES completion:nil];
 }
 
@@ -253,7 +256,7 @@
         return;
     }
 //    NSArray *recipents = @[@"12345678", @"72345524"];
-    NSString *message = [NSString stringWithFormat:@"created using splitagram.  get it for free at http://splitagram.com"];
+    NSString *message = [NSString stringWithFormat:@"created using splitagram app.  download for free! www.splitagram.com"];
     MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
     [messageController addAttachmentData:UIImagePNGRepresentation(self.image) typeIdentifier:@"public.data" filename:@"image.png"];
     messageController.messageComposeDelegate = self;

@@ -58,14 +58,14 @@
 
     // Initialize Product View Controller
     SKStoreProductViewController *storeProductViewController = [[SKStoreProductViewController alloc] init];
-    // Configure View Controller
+    // Configure View Controller  850204569
     [storeProductViewController setDelegate:self];
-    [storeProductViewController loadProductWithParameters:@{SKStoreProductParameterITunesItemIdentifier : @"554083056"} completionBlock:^(BOOL result, NSError *error) {
+    [storeProductViewController loadProductWithParameters:@{SKStoreProductParameterITunesItemIdentifier : @"850204569"} completionBlock:^(BOOL result, NSError *error) {
         if (error) {
             NSLog(@"Error %@ with User Info %@.", error, [error userInfo]);
         } else {
             // Present Store Product View Controller
-//            [[UINavigationBar appearance] setTintColor:[UIColor blueColor]];
+            [[UINavigationBar appearance] setTintColor:[UIColor blueColor]];
 
             [self presentViewController:storeProductViewController animated:YES completion:nil];
         }
@@ -74,7 +74,7 @@
 }
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
     [self dismissViewControllerAnimated:YES completion:nil];
-//    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 
 }
 
@@ -86,16 +86,19 @@
     pickerMail.mailComposeDelegate = self;
     
     [pickerMail setSubject:@"customer feedback"];
-    [pickerMail setToRecipients:[NSArray arrayWithObject:@"getbooklyapp@gmail.com"]];
+    [pickerMail setToRecipients:[NSArray arrayWithObject:@"splitagram@gmail.com"]];
     // Fill out the email body text
-    NSString *emailBody = @"hello, I have the following comments on splitagram...";
+    NSString *emailBody = @"hi, I have the following feedback on splitagram...";
     [pickerMail setMessageBody:emailBody isHTML:NO];
+    [[UINavigationBar appearance] setTintColor:[UIColor blueColor]];
 
     [self presentViewController:pickerMail animated:YES completion:nil];
     pickerMail=nil;
 }
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 

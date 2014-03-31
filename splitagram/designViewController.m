@@ -125,11 +125,14 @@
 
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.tag = 19;
-//    [self frameClicked:btn];
     [self frameClicked:btn];
+//    [self frameClicked:btn];
     firstTimeDesign = YES;
+//    [self performSelector:@selector(frameClicked:) withObject:btn afterDelay:0.1];
+
     if (![defaults boolForKey:@"filter"])
         [self randomFilterPick];
+
     
 //    [defaults setBool:YES forKey:kFeature0];  //test
 //    [defaults setBool:YES forKey:kFeature1];  //test
@@ -138,26 +141,42 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    int randNum = arc4random() % 11 ;
     int number = [defaults integerForKey:@"number"];
+    NSLog(@"number is %d",number);
     if (number > 9) {
-        number = 0;
+        number = 1;
     }
-    
+//    dispatch_queue_t queue = dispatch_queue_create("com.saswata.queue", DISPATCH_QUEUE_CONCURRENT);
+//    dispatch_async(queue, ^{
+
     btn.tag = number;
     tapBlockNumber=1;
-    [self effectsClicked:btn];
+//    [self performSelectorOnMainThread:@selector(effectsClicked:) withObject:btn waitUntilDone:YES];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+            [self effectsClicked:btn];
+//});
+//    });
     
-//    randNum = arc4random() % 11 ;
+//    dispatch_async(queue, ^{
     btn.tag = number+1;
-    NSLog(@"tag block 2 is %d",btn.tag);
     tapBlockNumber=2;
+//    [self performSelectorOnMainThread:@selector(effectsClicked:) withObject:btn waitUntilDone:YES];
+
+//    [self performSelector:@selector(effectsClicked:) withObject:btn afterDelay:0.3];
+//dispatch_async(dispatch_get_main_queue(), ^{
     [self effectsClicked:btn];
+//});
+//    });
     
-    tapBlockNumber=1;
-//    randNum = arc4random() % 11 ;
+//    dispatch_async(queue, ^{
     btn.tag = number+2;
-    NSLog(@"tag block 3 is %d",btn.tag);
     tapBlockNumber=3;
+//    [self performSelectorOnMainThread:@selector(effectsClicked:) withObject:btn waitUntilDone:YES];
+
+//    [self performSelector:@selector(effectsClicked:) withObject:btn afterDelay:0.5];
+//dispatch_async(dispatch_get_main_queue(), ^{
     [self effectsClicked:btn];
+//});
+//    });
     
     tapBlockNumber=0;
     number ++;
@@ -2135,7 +2154,7 @@
             tapBlockNumber = blockSlider.tag;
         }
     }
-    __block CGPoint tappedBlock;
+//    __block CGPoint tappedBlock;
     [UIView animateWithDuration:2.0
                      animations:^{
                          for (UIScrollView *blockSlider in droppableAreas){
@@ -2271,6 +2290,8 @@
         imgView.transform = CGAffineTransformScale(imgView.transform, -zoomFactor, zoomFactor);
     else
         imgView.transform = CGAffineTransformScale(imgView.transform, zoomFactor, zoomFactor);
+    
+    
 //    imgView.transform = CGAffineTransformTranslate(imgView.transform, [defaults floatForKey:@"PanX"], [defaults floatForKey:@"PanY"]);
 }
 - (void) fillRotateMenu {
@@ -2318,7 +2339,7 @@
     //    resetButton.showsTouchWhenHighlighted=YES;
     [resetButton setTitle:@"reset" forState:UIControlStateNormal];
     resetButton.titleLabel.font = [UIFont systemFontOfSize:18];
-    resetButton.backgroundColor=[UIColor scrollViewTexturedBackgroundColor];
+    resetButton.backgroundColor=[UIColor darkGrayColor];
     resetButton.titleLabel.textColor= [UIColor whiteColor];
     [resetButton addTarget:self action:@selector(resetRotate) forControlEvents:UIControlEventTouchUpInside];
     [self.rotateMenuView addSubview:resetButton];
@@ -2329,7 +2350,7 @@
     //    rightAngleButton.layer.borderWidth=kBorderWidth;
     //    rightAngleButton.layer.borderColor=[[UIColor clearColor] CGColor];
     [minusAngleButton setTitle:@"-10°" forState:UIControlStateNormal];
-    minusAngleButton.backgroundColor=[UIColor scrollViewTexturedBackgroundColor];
+    minusAngleButton.backgroundColor=[UIColor darkGrayColor];
     [minusAngleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [minusAngleButton addTarget:self action:@selector(minusTenDegreeRotate) forControlEvents:UIControlEventTouchUpInside];
     [self.rotateMenuView addSubview:minusAngleButton];
@@ -2341,7 +2362,7 @@
     //    rightAngleButton.layer.borderWidth=kBorderWidth;
     //    rightAngleButton.layer.borderColor=[[UIColor clearColor] CGColor];
     [rightAngleButton setTitle:@"90°" forState:UIControlStateNormal];
-    rightAngleButton.backgroundColor=[UIColor scrollViewTexturedBackgroundColor];
+    rightAngleButton.backgroundColor=[UIColor darkGrayColor];
     [rightAngleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [rightAngleButton addTarget:self action:@selector(rightAngleRotate) forControlEvents:UIControlEventTouchUpInside];
     [self.rotateMenuView addSubview:rightAngleButton];
@@ -2353,7 +2374,7 @@
     //    rightAngleButton.layer.borderWidth=kBorderWidth;
     //    rightAngleButton.layer.borderColor=[[UIColor clearColor] CGColor];
     [plusAngleButton setTitle:@"10°" forState:UIControlStateNormal];
-    plusAngleButton.backgroundColor=[UIColor scrollViewTexturedBackgroundColor];
+    plusAngleButton.backgroundColor=[UIColor darkGrayColor];
     [plusAngleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [plusAngleButton addTarget:self action:@selector(plusTenDegreeRotate) forControlEvents:UIControlEventTouchUpInside];
     [self.rotateMenuView addSubview:plusAngleButton];
@@ -2365,7 +2386,7 @@
     //    flipButton.layer.borderWidth=kBorderWidth;
     //    flipButton.layer.borderColor=[[UIColor clearColor] CGColor];
     [flipButton setTitle:@"flip" forState:UIControlStateNormal];
-    flipButton.backgroundColor=[UIColor scrollViewTexturedBackgroundColor];
+    flipButton.backgroundColor=[UIColor darkGrayColor];
     [flipButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [flipButton addTarget:self action:@selector(flip) forControlEvents:UIControlEventTouchUpInside];
     [self.rotateMenuView addSubview:flipButton];

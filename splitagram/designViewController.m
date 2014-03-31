@@ -363,10 +363,10 @@
         doneViewController *vc = [segue destinationViewController];
 //        vc.image = [self captureScreenshot];
         vc.image = [self captureImage];
-        NSData *imageData = [[NSData alloc] initWithData:UIImageJPEGRepresentation((vc.image), 1.0)];
-        
-        int imageSize = imageData.length;
-        NSLog(@"SIZE OF IMAGE: %i ", imageSize);
+//        NSData *imageData = [[NSData alloc] initWithData:UIImageJPEGRepresentation((vc.image), 1.0)];
+//        
+//        int imageSize = imageData.length;
+//        NSLog(@"SIZE OF IMAGE: %i ", imageSize);
 
         
 //        for (UIScrollView *blockSlider in droppableAreas)

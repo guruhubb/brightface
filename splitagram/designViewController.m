@@ -3114,7 +3114,7 @@
         else if (sub == 10) {  //secondFrameSlider stuff
             scroll_width = 100;
             scroll_height =100;
-            rc = CGRectMake(105-nMargin, 105-nMargin, scroll_width+nMargin*4, scroll_height+nMargin*4 );
+            rc = CGRectMake(105-nMargin*2, 105-nMargin*2, scroll_width+nMargin*4, scroll_height+nMargin*4 );
             return rc;
         }
         else if (sub == 11) {  //secondFrameSlider stuff

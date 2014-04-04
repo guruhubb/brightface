@@ -62,6 +62,7 @@
 //                                             style:UIBarButtonItemStylePlain
 //                                             target:self
 //                                             action:@selector(goHome:)];
+    [self performSegueWithIdentifier:@"shareToNav" sender:self];
 }
 - (IBAction)saveImageAction:(id)sender {
     [self saveImage];

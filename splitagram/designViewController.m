@@ -862,6 +862,16 @@
 //    }
 }
 
+- (UIImage *) cropImage: (UIImage *) image {
+    CGRect rect = CGRectMake(0,0,75,75);
+    UIGraphicsBeginImageContext( rect.size );
+    [image drawInRect:rect];
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return img;
+}
+
 - (void) fillEffectsSlider {
     labelEffectsArray = [[NSMutableArray alloc]initWithObjects: @"original", @"delight", @"sunny",@"night", @"beach",@"b&w-red",@"sepia",@"water", @"b&w",@"morning", @"sky",nil];
     labelSecondEffectsArray = [[NSMutableArray alloc]initWithObjects: @"2layer",@"warm",@"winter",@"gold",@"platinum",@"copper",@"vignette",@"white", @"crisp",@"candle",@"fall",@"film",@"foggy",@"cobalt",@"blue",@"bright",@"bleak",@"moon",@"cyan",@"soft",nil];
@@ -916,7 +926,8 @@
 //        if (quickFilteredImage==NULL) {
             NSLog(@"generating images");
 //            UIImage *inputImage = [UIImage imageNamed:@"balloons1.png"];
-        UIImage *inputImage = self.selectedImage;
+        UIImage *inputImage = [self cropImage:self.selectedImage];
+        
             switch (ind) {
                 case 1:{
                     filter = [[GPUImageFilter alloc] init]; //original
@@ -1067,7 +1078,7 @@
 //        =[imageCache imageFromDiskCacheForKey:filters];
 //        if (quickFilteredImage==NULL) {
 //            NSLog(@"generating images");
-            UIImage *inputImage = self.selectedImage;
+            UIImage *inputImage =  [self cropImage:self.selectedImage];
             switch (ind) {
                 case 1:{
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"2strip.png"];

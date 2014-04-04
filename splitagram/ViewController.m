@@ -100,7 +100,7 @@
 
     ALAsset *asset = self.assets[selectedPhotoIndex];
     ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
-    UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];
+    UIImage *image = [UIImage imageWithCGImage:[defaultRep fullResolutionImage] scale:[defaultRep scale] orientation:0];
     if ([[segue identifier] isEqualToString:@"showDesign"])
     {
         designViewController *vc = [segue destinationViewController];

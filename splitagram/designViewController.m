@@ -124,9 +124,10 @@
     });
 
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.tag = 19;
-    [self frameClicked:btn];
+//    btn.tag = 19;
 //    [self frameClicked:btn];
+    btn.tag=[defaults integerForKey:@"frame"];
+    [self frameClicked:btn];
     firstTimeDesign = YES;
 //    [self performSelector:@selector(frameClicked:) withObject:btn afterDelay:0.1];
 

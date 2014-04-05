@@ -110,6 +110,8 @@
     }
     [self fillFrameSelectionSlider];
     [self fillSecondFrameSelectionSlider];
+    [self fillEffectsSlider];
+    [self fillSecondEffectsSlider];
     [self fillRotateMenu];
     [self fillSplitMenu];
     [self resetGestureParameters ];
@@ -132,60 +134,53 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    btn.tag = 19;
     btn.tag=[defaults integerForKey:@"frame"];
-    if (btn.tag==0) btn.tag = 19;
+    if (btn.tag==0 || btn.tag > 25) btn.tag = 19;
     NSLog(@"initial btn.tag is %d",btn.tag);
     [self frameClicked:btn];
     [self frameClicked:btn];
     [self centerImage];
     firstTimeDesign = YES;
-//    [self performSelector:@selector(frameClicked:) withObject:btn afterDelay:0.1];
-
-    
-    
+//    if (![defaults boolForKey:@"filter"])
+//        [self randomFilterPick];
 //    [defaults setBool:YES forKey:kFeature0];  //test
 //    [defaults setBool:YES forKey:kFeature1];  //test
-}
-- (void) randomFilterPick {
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    int randNum = arc4random() % 11 ;
+    
     int number = [defaults integerForKey:@"number"];
     NSLog(@"number is %d",number);
     if (number > 9) {
         number = 1;
     }
+    [defaults setInteger:number forKey:@"number"];
+
+    //    dispatch_queue_t queue = dispatch_queue_create("com.saswata.queue", DISPATCH_QUEUE_CONCURRENT);
+    //    dispatch_async(queue, ^{
+    
+    btn.tag = number;
+    tapBlockNumber=1;
+    [self effectsClicked:btn];
+}
+- (void) randomFilterPick {
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    int number = [defaults integerForKey:@"number"];
+    NSLog(@"number is %d",number);
+//    if (number > 9) {
+//        number = 1;
+//    }
 //    dispatch_queue_t queue = dispatch_queue_create("com.saswata.queue", DISPATCH_QUEUE_CONCURRENT);
 //    dispatch_async(queue, ^{
 
-    btn.tag = number;
-    tapBlockNumber=1;
-//    [self performSelectorOnMainThread:@selector(effectsClicked:) withObject:btn waitUntilDone:YES];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-            [self effectsClicked:btn];
-//});
-//    });
-    
-//    dispatch_async(queue, ^{
+//    btn.tag = number;
+//    tapBlockNumber=1;
+//    [self effectsClicked:btn];
+
     btn.tag = number+1;
     tapBlockNumber=2;
-//    [self performSelectorOnMainThread:@selector(effectsClicked:) withObject:btn waitUntilDone:YES];
-
-//    [self performSelector:@selector(effectsClicked:) withObject:btn afterDelay:0.3];
-//dispatch_async(dispatch_get_main_queue(), ^{
     [self effectsClicked:btn];
-//});
-//    });
-    
-//    dispatch_async(queue, ^{
+
     btn.tag = number+2;
     tapBlockNumber=3;
-//    [self performSelectorOnMainThread:@selector(effectsClicked:) withObject:btn waitUntilDone:YES];
-
-//    [self performSelector:@selector(effectsClicked:) withObject:btn afterDelay:0.5];
-//dispatch_async(dispatch_get_main_queue(), ^{
     [self effectsClicked:btn];
-//});
-//    });
-    
+
     tapBlockNumber=0;
     number ++;
     [defaults setInteger:number forKey:@"number"];
@@ -220,12 +215,12 @@
     if (![defaults boolForKey:@"filter"])
         [self randomFilterPick];
 
-    if (!firstTimeFilter){
-        firstTimeFilter = YES;
-        [self fillEffectsSlider];
-        [self fillSecondEffectsSlider];
-    
-    }
+//    if (!firstTimeFilter){
+//        firstTimeFilter = YES;
+//        [self fillEffectsSlider];
+//        [self fillSecondEffectsSlider];
+//    
+//    }
     if (!firstTimeDesign){
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag=[defaults integerForKey:@"frame"];

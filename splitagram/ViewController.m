@@ -51,6 +51,7 @@
     }
     else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"showSurvey"];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"counter" ];
 
     }
 }

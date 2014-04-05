@@ -228,9 +228,9 @@
                 label.font = [UIFont systemFontOfSize:14];
                 label.tag = 103;
                 [cell.contentView addSubview:label];
-                if ([defaults integerForKey:@"pixel"]==0)
+                if ([defaults integerForKey:@"pixel"]==1)
                     label.text = @"640x640";
-                else if ([defaults integerForKey:@"pixel"]==1) {
+                else if ([defaults integerForKey:@"pixel"]==0) {
                     label.text = @"1280x1280";
                 }
                 else if ([defaults integerForKey:@"pixel"]==2){
@@ -497,10 +497,10 @@
         }
         else if (actionSheet.tag == 4) {
             if (buttonIndex==0){
-                [defaults setInteger:0 forKey:@"pixel"];
+                [defaults setInteger:1 forKey:@"pixel"];
             }
             else if (buttonIndex==1)
-                [defaults setInteger:1 forKey:@"pixel"];
+                [defaults setInteger:0 forKey:@"pixel"];
             else if (buttonIndex==2)
                 [defaults setInteger:2 forKey:@"pixel"];
         }

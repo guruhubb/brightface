@@ -20,8 +20,8 @@
 #import "designViewController.h"
 #import "doneViewController.h"
 #import "GPUImage.h"
-#import "MKStoreManager.h"
 #import "Flurry.h"
+#import "MKStoreManager.h"
 
 
 @interface designViewController (){
@@ -64,7 +64,29 @@
     CGFloat zoom2;
     CGFloat zoom3;
     CGFloat zoom4;
+    
     CGFloat scale;
+    
+    CGFloat adjustedPtX1;
+    CGFloat adjustedPtY1;
+    CGFloat adjustedWidth1;
+    CGFloat adjustedHeight1;
+    
+    CGFloat adjustedPtX2;
+    CGFloat adjustedPtY2;
+    CGFloat adjustedWidth2;
+    CGFloat adjustedHeight2;
+    
+    CGFloat adjustedPtX3;
+    CGFloat adjustedPtY3;
+    CGFloat adjustedWidth3;
+    CGFloat adjustedHeight3;
+    
+    CGFloat adjustedPtX4;
+    CGFloat adjustedPtY4;
+    CGFloat adjustedWidth4;
+    CGFloat adjustedHeight4;
+    
     
     GPUImageOutput<GPUImageInput> *filter;
     NSUserDefaults *defaults;
@@ -211,16 +233,8 @@
 //    [defaults setFloat:1.0f forKey:@"Zoom3"];
     
 }
-- (void)viewDidAppear:(BOOL)animated   {
-    if (![defaults boolForKey:@"filter"])
-        [self randomFilterPick];
+- (void)viewWillAppear:(BOOL)animated   {
 
-//    if (!firstTimeFilter){
-//        firstTimeFilter = YES;
-//        [self fillEffectsSlider];
-//        [self fillSecondEffectsSlider];
-//    
-//    }
     if (!firstTimeDesign){
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag=[defaults integerForKey:@"frame"];
@@ -229,10 +243,13 @@
         else
             [self secondFrameClicked:btn];
     }
+    else {
+        if (![defaults boolForKey:@"filter"])
+            [self randomFilterPick];
+    }
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
-
 }
 
 -(void)frameAction
@@ -416,9 +433,9 @@
     
     /* Render the screen shot at custom resolution */
     CGRect cropRect;
-    if ([defaults integerForKey:@"pixel"]==0)
+    if ([defaults integerForKey:@"pixel"]==1)
         cropRect= CGRectMake(0 ,0 ,640,640);
-    else if ([defaults integerForKey:@"pixel"]==1)
+    else if ([defaults integerForKey:@"pixel"]==0)
         cropRect= CGRectMake(0 ,0 ,1280,1280);
     else if ([defaults integerForKey:@"pixel"]==2)
         cropRect= CGRectMake(0 ,0 ,2560,2560);
@@ -1484,25 +1501,7 @@
         }
     }
 }
-//- (void) originalClicked {
-//    blendOrignalClicked=YES;
-//    for (UIScrollView *blockSlider in self.droppableAreas){
-//        if (blockSlider.tag == tapBlockNumber){
-//            //        if ((blockSlider.tag == 4*currentPage) || (blockSlider.tag == 4*currentPage+1) || (blockSlider.tag == 4*currentPage+2) || (blockSlider.tag == 4*currentPage+3)) {
-//            for (UIImageView *imageView in blockSlider.subviews){
-//                for (int i=0;i<[self.originalImages count];i++){
-//                    if ( (i == imageView.tag) && imageView.image ){
-//                        UIImage *inputImage = [self.originalImages objectAtIndex:i];
-//                        filter = [[GPUImageFilter alloc] init]; //original
-//                        UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
-//                        [filter removeAllTargets];
-//                        imageView.image=quickFilteredImage;
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
+
 #pragma mark Autoload
 - (void) hideLabels {
     _rotateBtn.hidden=NO;
@@ -1544,60 +1543,10 @@
     
     if (!firstTime){
         
-//        frameContainerArray = [[NSMutableArray alloc]init];
-//        canvasArray = [[NSMutableArray alloc] init];
         droppableAreas = [[NSMutableArray alloc] init];
-//        replacableImages = [[NSMutableArray alloc] init];
-//        frameDimensionArray = [[NSMutableArray alloc] init];
-//        _labelArray= [[NSMutableArray alloc] init];
-//        _stickerArray= [[NSMutableArray alloc] init];
-//        _doodleArray= [[NSMutableArray alloc] init];
-        //        _labelViewArray=[[NSMutableArray alloc] init];
-        
-//        self.frameSelectionBar = (UIScrollView *)[self.view viewWithTag:10130];
-//        self.frameSelectionBar.delegate = self;
-//        self.frameSelectionBar.userInteractionEnabled=YES;
-//        self.frameSelectionBar.canCancelContentTouches=NO;
-        //        self.frameSlider.scrollEnabled = YES;
-        ////        self.scrollIcon.alpha=0.5;
-        ////        scrollON=NO;
-//        self.frameSelectionBar.scrollEnabled=NO;
-//        frameCount= [self.originalImages count]/style;
-//        if ([originalImages count]%style != 0) frameCount++;
-//        
-//        if (frameCount >= kFrameMax) {
-//            frameCount=kFrameMax;  //maximum frameCount=kFrameMax
-//            self.frameSlider.contentSize = CGSizeMake(320 * frameCount, 320);//SB v1.0i
-//        }
-        
         firstTime = YES;
         nStyle= 4;
         nSubStyle = 1;
-//        cornerState=0;
-//        panState=0;
-//        borderState=0;
-        //        self.pan.alpha=0.8;
-        
-//        for (int i = 0; i < frameCount; i++)
-//        {
-//            NSLog(@"frameCount = %i",i);
-        
-//            self.frameContainer = [[UIView alloc] initWithFrame:CGRectMake(5, 5, 310, 310)];
-//            self.frameContainer.tag = i;
-//            self.frameContainer.backgroundColor = [UIColor clearColor];
-//            if (self.frameContainer.tag == i) {
-//                [self.frameSlider addSubview:self.frameContainer];
-//                [self.frameContainerArray addObject:self.frameContainer];
-//            }
-        
-//            canvas = [[UIImageView alloc] initWithFrame:CGRectMake (0, 0, 310, 350)];
-//            canvas.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0f];
-////            canvas.tag = i;
-//            [canvas setContentMode:UIViewContentModeScaleToFill];
-        
-//            [self.canvasArray addObject:canvas];
-//            if ((self.frameContainer.tag == i) && (canvas.tag == i))
-//                [self.frameContainer addSubview:canvas];
         
             rectBlockSlider1 = [self getScrollFrame1:style subStyle:sub];
             rectBlockSlider2 = [self getScrollFrame2:style subStyle:sub];
@@ -1613,11 +1562,6 @@
             blockSlider2.scrollEnabled=NO;
             blockSlider3.scrollEnabled=NO;
             blockSlider4.scrollEnabled=NO;
-            
-//            blockSlider1.backgroundColor = [UIColor clearColor];
-//            blockSlider2.backgroundColor = [UIColor clearColor];
-//            blockSlider3.backgroundColor = [UIColor clearColor];
-//            blockSlider4.backgroundColor = [UIColor clearColor];
         
             blockSlider1.tag = 0;
             blockSlider2.tag = 1;
@@ -1625,179 +1569,17 @@
             blockSlider4.tag = 3;
             
             [blockSlider1.layer setBorderColor:[[UIColor clearColor] CGColor]];
-            //            [blockSlider1.layer setCornerRadius:kCornerRadius];
             [blockSlider1.layer setBorderWidth:kBlockWidth];
             
             [blockSlider2.layer setBorderColor:[[UIColor clearColor] CGColor]];
-            //            [blockSlider2.layer setCornerRadius:kCornerRadius];
             [blockSlider2.layer setBorderWidth:kBlockWidth];
             
             [blockSlider3.layer setBorderColor:[[UIColor clearColor] CGColor]];
-            //            [blockSlider3.layer setCornerRadius:kCornerRadius];
             [blockSlider3.layer setBorderWidth:kBlockWidth];
             
             [blockSlider4.layer setBorderColor:[[UIColor clearColor] CGColor]];
-            //            [blockSlider4.layer setCornerRadius:kCornerRadius];
             [blockSlider4.layer setBorderWidth:kBlockWidth];
-            
-            
-//            if ((blockSlider1.tag == 0) || (blockSlider2.tag == 1) || (blockSlider3.tag == 2) || (blockSlider4.tag == 3)) {
-
-//            }
         
-            
-            //            UITapGestureRecognizer *tapBlock1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBlockEffects:)];
-            //            tapBlock1.numberOfTapsRequired = 1;
-            //            [tapBlock1 setDelegate:self];
-            //            [blockSlider1 addGestureRecognizer:tapBlock1];
-            
-//            UILongPressGestureRecognizer * longPressGestureRecognizer1 = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(draggingLongPress:)];
-//            [blockSlider1 addGestureRecognizer:longPressGestureRecognizer1];
-//            longPressGestureRecognizer1.minimumPressDuration=1.0;
-        
-            
-            //            UITapGestureRecognizer *tapBlock2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBlockEffects:)];
-            //            tapBlock2.numberOfTapsRequired = 1;
-            //            [tapBlock2 setDelegate:self];
-            //            [blockSlider2 addGestureRecognizer:tapBlock2];
-//            UILongPressGestureRecognizer * longPressGestureRecognizer2 = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(draggingLongPress:)];
-//            [blockSlider2 addGestureRecognizer:longPressGestureRecognizer2];
-//            longPressGestureRecognizer2.minimumPressDuration=1.0;
-        
-            
-            //            UITapGestureRecognizer *tapBlock3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBlockEffects:)];
-            //            tapBlock3.numberOfTapsRequired = 1;
-            //            [tapBlock3 setDelegate:self];
-            //            [blockSlider3 addGestureRecognizer:tapBlock3];
-//            UILongPressGestureRecognizer * longPressGestureRecognizer3 = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(draggingLongPress:)];
-//            [blockSlider3 addGestureRecognizer:longPressGestureRecognizer3];
-//            longPressGestureRecognizer3.minimumPressDuration=1.0;
-        
-            
-            //            UITapGestureRecognizer *tapBlock4 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBlockEffects:)];
-            //            tapBlock4.numberOfTapsRequired = 1;
-            //            [tapBlock4 setDelegate:self];
-            //            [blockSlider4 addGestureRecognizer:tapBlock4];
-//            UILongPressGestureRecognizer * longPressGestureRecognizer4 = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(draggingLongPress:)];
-//            [blockSlider4 addGestureRecognizer:longPressGestureRecognizer4];
-//            longPressGestureRecognizer4.minimumPressDuration=1.0;
-//            
-//            
-//            cornerState=0;
-//            panState=0;
-//            borderState=0;
-//            vignetteState=1;
-//            brightenState=0;
-//            stickerState=1;
-//            textState=1;
-        
-//            NSMutableDictionary *frameDimensionDictionary = [[NSMutableDictionary alloc ]  init];
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:nStyle] forKey:@"style"];
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:nSubStyle] forKey:@"sub"];
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:nMargin] forKey:@"nMargin"];
-//            
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:borderState] forKey:@"borderState"];
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:vignetteState] forKey:@"vignetteState"];
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:brightenState] forKey:@"brightenState"];
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:cornerState] forKey:@"cornerState"];
-//            
-//            [self.frameDimensionArray addObject:frameDimensionDictionary];
-        
-//            if (nStyle == 1){
-//                image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
-////                self.image1.userInteractionEnabled = YES;
-//                image1.tag =0;
-//                
-//                if ((blockSlider1.tag == 0) && (image1.tag == 0)) {
-//                    [blockSlider1 addSubview:image1];
-//                    [self fitImageToScroll:image1 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:0.0 ];
-//                }
-//            }
-//            else if (nStyle == 2 ){
-//                image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
-//                image1.tag =0;
-////                self.image1.userInteractionEnabled = YES;
-//                if ((blockSlider1.tag == 0) && (image1.tag == 0)) {
-//                    [blockSlider1 addSubview:image1];
-//                    [self fitImageToScroll:image1 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:0.0 ];
-//                }
-////                if (i*2+1 <[self.originalImages count]){
-//                    image2 = [[UIImageView alloc] initWithImage:self.selectedImage];
-//                    image2.tag =1;
-////                    image2.userInteractionEnabled = YES;
-//                    if ((blockSlider2.tag == 1) && (image2.tag == 1)) {
-//                        [blockSlider2 addSubview:image2];
-//                        [self fitImageToScroll:image2 SCROLL:blockSlider2 scrollViewNumber:blockSlider2.tag angle:0.0 ];
-//                    }
-////                }
-//            }
-//            else if (nStyle == 3 ){
-//                image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
-//                image1.tag =0;
-////                self.image1.userInteractionEnabled = YES;
-//                if ((blockSlider1.tag == 0) && (image1.tag == 0)) {
-//                    [blockSlider1 addSubview:image1];
-//                    [self fitImageToScroll:image1 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:0.0 ];
-//                }
-////                if (i*3+1 <[self.originalImages count]) {
-//                    image2 = [[UIImageView alloc] initWithImage:self.selectedImage];
-//                    image2.tag =1;
-////                    self.image2.userInteractionEnabled = YES;
-//                    if ((blockSlider2.tag == 1) && (image2.tag == 1)) {
-//                        [blockSlider2 addSubview:image2];
-//                        [self fitImageToScroll:image2 SCROLL:blockSlider2 scrollViewNumber:blockSlider2.tag angle:0.0 ];
-//                    }
-////                }
-////                if (i*3+2 <[self.originalImages count]) {
-//                    image3 = [[UIImageView alloc] initWithImage:self.selectedImage];
-//                    image3.tag =2;
-////                    self.image3.userInteractionEnabled = YES;
-//                    if ((blockSlider3.tag == 2) && (image3.tag == 2)) {
-//                        [blockSlider3 addSubview:image3];
-//                        [self fitImageToScroll:image3 SCROLL:blockSlider3 scrollViewNumber:blockSlider3.tag angle:0.0 ];
-//                    }
-//                    
-////                }
-//            }
-//            else if (nStyle == 4 ){
-//                image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
-//                image1.tag =0;
-////                self.image1.userInteractionEnabled = YES;
-//                if ((blockSlider1.tag == 0) && (image1.tag == 0)) {
-//                    [blockSlider1 addSubview:image1];
-//                    [self fitImageToScroll:image1 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:0.0 ];
-//                }
-////                if (i*4+1 <[self.originalImages count]){
-//                    image2 = [[UIImageView alloc] initWithImage:self.selectedImage];
-//                    image2.tag =1;
-////                    self.image2.userInteractionEnabled = YES;
-//                    if ((blockSlider2.tag == 1) && (image2.tag == 1)) {
-//                        [blockSlider2 addSubview:image2];
-//                        [self fitImageToScroll:image2 SCROLL:blockSlider2 scrollViewNumber:blockSlider2.tag angle:0.0 ];
-//                    }
-////                }
-////                if (i*4+2 <[self.originalImages count]){
-//                    
-//                    image3 = [[UIImageView alloc] initWithImage:self.selectedImage];
-//                    image3.tag =2;
-////                    self.image3.userInteractionEnabled = YES;
-//                    if ((blockSlider3.tag == 2) && (image3.tag == 2)) {
-//                        [blockSlider3 addSubview:image3];
-//                        [self fitImageToScroll:image3 SCROLL:blockSlider3 scrollViewNumber:blockSlider3.tag angle:0.0 ];
-//                    }
-////                }
-////                if (i*4+3 <[self.originalImages count]){
-//                    
-//                    image4 = [[UIImageView alloc] initWithImage:self.selectedImage];
-//                    image4.tag =3;
-////                    self.image4.userInteractionEnabled = YES;
-//                    if ((blockSlider4.tag == 3) && (image4.tag == 3)) {
-//                        [blockSlider4 addSubview:image4];
-//                        [self fitImageToScroll:image4 SCROLL:blockSlider4 scrollViewNumber:blockSlider4.tag angle:0.0 ];
-//                    }
-////                }
-//            }
-//            NSLog(@"original Image 2 %@", self.originalImages);
         
         image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
         image1.tag =0;
@@ -1819,265 +1601,54 @@
         [self.frameContainer addSubview:blockSlider2];
         [self.frameContainer addSubview:blockSlider3];
         [self.frameContainer addSubview:blockSlider4];
-//            if (blockSlider1.tag==0){
-                [droppableAreas addObject:blockSlider1];
-////                [self.replacableImages addObject:self.blockSlider1];
-//            }
-//            if (blockSlider2.tag == 1){
-                [droppableAreas addObject:blockSlider2];
-//                [self.replacableImages addObject:self.blockSlider2];
-                
-//            }
-//            if (blockSlider3.tag ==2){
-                [droppableAreas addObject:blockSlider3];
-//                [self.replacableImages addObject:self.blockSlider3];
-                
-//            }
-//            if (blockSlider4.tag == 3){
-                [droppableAreas addObject:blockSlider4];
-//                [self.replacableImages addObject:self.blockSlider4];
-//                
-//            }
-        
-            //            CGRect bounds = self.frameContainer.bounds;
-            //            self.blockSlider1.center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
-            //            self.blockSlider1.clipsToBounds=YES;
-            //            blockSlider1Offset = CGPointMake(0.0, 0.0);
-            //            blockSlider1Rotation = 0.0;
-            //            CGRect bounds = self.blockSlider1.bounds;
-            //            self.image1.center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
-            //            self.image1.bounds = (CGRect){ CGPointZero, self.image1.image.size };
-            //            UIPanGestureRecognizer *panBlock = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panBlock:)];
-            //            [panBlock setDelegate:self];
-            //            [self.blockSlider1 addGestureRecognizer:panBlock];
-            //            UIRotationGestureRecognizer *rotateBlock = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotateBlock:)];
-            //            [rotateBlock setDelegate:self];
-            //            [self.blockSlider1 addGestureRecognizer:rotateBlock];
-            //            UIPinchGestureRecognizer *pinchBlock = [[UIPinchGestureRecognizer alloc]
-            //                                                      initWithTarget:self action:@selector(pinchBlock:)];
-            //            pinchBlock.delegate=self;
-            ////            [self.blockSlider1 addGestureRecognizer:pinchBlock];
-            //            [self transformView:self.blockSlider1 :self.image1 :CGPointZero :1 :1];
-//        }
-        
+        [droppableAreas addObject:blockSlider1];
+        [droppableAreas addObject:blockSlider2];
+        [droppableAreas addObject:blockSlider3];
+        [droppableAreas addObject:blockSlider4];
+
         UITapGestureRecognizer *tapBlock = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBlock:)];
         tapBlock.numberOfTapsRequired = 1;
         [tapBlock setDelegate:self];
         [self.frameContainer addGestureRecognizer:tapBlock];
-        
-        //        UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(eraseImage:)];
-        //        tap1.numberOfTapsRequired = 2;
-        //        [tap1 setDelegate:self];
-        //        [self.frameContainer addGestureRecognizer:tap1];
-        
+
         UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchImage:)];
         pinchGesture.delegate=self;
         [self.frameContainer addGestureRecognizer:pinchGesture];
-        
-//        UIRotationGestureRecognizer *rotationGesture= [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotateImage:)];
-//        rotationGesture.delegate=self;
-//        [self.frameContainer addGestureRecognizer:rotationGesture];
-    
+
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanImage:)];
         panGesture.delegate=self;
         [self.frameContainer addGestureRecognizer:panGesture];
         [self.frameContainer bringSubviewToFront:_watermarkOnImage];
-//        self.frameContainer.hidden=YES;
-//        if (frameCount < kFrameMax) {
-//            self.tapToAddAFrame.frame = CGRectMake(320*(frameCount)+5, 5, 310, 350);
-//            self.tapToAddAFrame.hidden = NO;
-//            self.frameSlider.contentSize = CGSizeMake(320 * (frameCount+1), 320);//SB
-//            cornerState=0;
-//            panState=0;
-//            borderState=0;
-//            vignetteState=1;
-//            brightenState=0;
-//            stickerState=1;
-//            textState=1;
-//            
-//            NSMutableDictionary *frameDimensionDictionary = [[NSMutableDictionary alloc ]  init];
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:nStyle] forKey:@"style"];
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:nSubStyle] forKey:@"sub"];
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:nMargin] forKey:@"nMargin"];
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:cornerState] forKey:@"cornerState"];
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:panState] forKey:@"panState"];
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:borderState] forKey:@"borderState"];
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:vignetteState] forKey:@"vignetteState"];
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:brightenState] forKey:@"brightenState"];
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:vignetteState] forKey:@"stickerState"];
-//            [frameDimensionDictionary setValue:[NSNumber numberWithInteger:brightenState] forKey:@"textState"];
-//            [frameDimensionArray addObject:frameDimensionDictionary];
-//        }
-    
-//        NSLog(@"done selection");
-        //        for (currentPage=0;currentPage<=frameCount;currentPage++){
-        //            for (UIScrollView *blockSlider in self.droppableAreas){
-        //                if (blockSlider.tag == currentPage*4) {
-        //                    for (UIImageView *imageView in blockSlider.subviews){
-        //                        NSMutableDictionary *dict =[self.arrImages objectAtIndex:(imageView.tag)];
-        //                        NSLog(@"dict selectFrame:SUB is %@",dict);
-        //                    }
-        //                }
-        //            }
-        //        }
-        
-//        _dragDropManager = [[DragDropManager alloc] initWithDragSubjects:draggableSubjects andDropAreas:droppableAreas andOriginalImages:originalImages andReplaceImages:replacableImages];
-//        UILongPressGestureRecognizer * longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:_dragDropManager action:@selector(dragging:)];
-//        longPressGestureRecognizer.minimumPressDuration=0.1;
-        //         UILongPressGestureRecognizer * longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(draggingLongPress:)];
-        //        panGestureRecognizer.minimumNumberOfTouches=1;
-//        [self.dragRegion addGestureRecognizer:longPressGestureRecognizer];
-        //        [self.view bringSubviewToFront:self.dragRegionFrames];
-        //        [self.dragRegionFrames addGestureRecognizer:longPressGestureRecognizer];
-        //        [self.blockSlider2 addGestureRecognizer:panGestureRecognizer];
-        //        [self.blockSlider3 addGestureRecognizer:panGestureRecognizer];
-        //        [self.blockSlider4 addGestureRecognizer:panGestureRecognizer];
-//        currentPage=0;
-//        lastPage=0;
-        //        [self loadOriginalVideos];
-        //        editedVideo1 = originalVideo1;
-        //        editedVideo2 = originalVideo2;
-        //        editedVideo3 = originalVideo3;
-        //        editedVideo4 = originalVideo4;
-        //        unrotatedVideo1 = originalVideo1;
-        //        unrotatedVideo2 = originalVideo2;
-        //        unrotatedVideo3 = originalVideo3;
-        //        unrotatedVideo4 = originalVideo4;
-//        [self performSelector:@selector(loadOriginalVideos) withObject:nil afterDelay:0.1];
-    
-        //        [self reloadAssets];
-//        [self helpAction:self];
-        //        [self performSelector:@selector(resetFrames) withObject:nil afterDelay:0.2];
-        //        [self resetFrames];
-        //        for (UIGestureRecognizer *gestureRecognizer in self.view.gestureRecognizers)
-        //            if ([gestureRecognizer isKindOfClass:UIPinchGestureRecognizer.class] || [gestureRecognizer isKindOfClass:UIRotationGestureRecognizer.class])
-        //                gestureRecognizer.enabled=NO;
     }
     else {
-//        self.frameContainer.hidden=NO;
-//        [self hideLabels];
-
-//        if  (currentPage == frameContainerArray.count) return;
-        
-        //        NSString *string1 = [NSString stringWithFormat:@"%d",style];
-        //        NSString *string2 = [NSString stringWithFormat:@"%d",sub];
-        //        NSDictionary *flurryParams = [NSDictionary dictionaryWithObjectsAndKeys:string1, @"style", string2,@"sub", nil];
-        //        NSString *string1and2 = [NSString stringWithFormat:@"Select Frame style = %d substyle = %d",style,sub];
-        //        [Flurry logEvent:string1and2 withParameters:flurryParams];
-        
         nStyle = style;
         nSubStyle = sub;
-//        [[frameDimensionArray objectAtIndex:currentPage] setValue:[NSNumber numberWithInteger:nStyle] forKey:@"style"];
-//        [[frameDimensionArray objectAtIndex:currentPage] setValue:[NSNumber numberWithInteger:nSubStyle] forKey:@"sub"];
-//        NSLog(@"selectFrame:SUB: frameDimensionArray is %@",frameDimensionArray);
-        
         for (UIScrollView *blockSlider in droppableAreas){
-//            NSLog(@ "currentPage is %d blockSlider.tag is %d",currentPage, blockSlider.tag);
             if (blockSlider.tag == 0) {
                 rectBlockSlider1 = [self getScrollFrame1:nStyle subStyle:nSubStyle];
                 blockSlider.frame = rectBlockSlider1;
-                //                int j=0;
-                
-                //                for (UIImageView *imageView in blockSlider.subviews){
-                //                    NSLog(@"blockslider subview # is %d",j);
-                ////                    [imageView removeFromSuperview];
-                //                    NSLog(@"bloackSlider 1 imageview is %@, and imageView.image is %@ imageView.class is %@",imageView, imageView.image, imageView.class);
-                ////                    if ([imageView isKindOfClass:[UIImageView class]] && imageView.image){
-                //                        UIImageView *replaceImage = [[UIImageView alloc] initWithImage:imageView.image];
-                //                        replaceImage.userInteractionEnabled = YES;
-                //                        replaceImage.tag=imageView.tag;
-                //                        [blockSlider addSubview:replaceImage];
-                //                    if(imageView.image!=nil  && imageView!=nil){
-                //                        NSLog(@"imageView is %@",imageView);
-                //                UIImageView *imageView = [blockSlider.subviews firstObject];
-                //                for (UIView *view in blockSlider.subviews)  {
-                //                    [view removeFromSuperview];
-                //                }
-                //                UIImageView *replaceImage = [[UIImageView alloc] initWithImage:[self.originalImages objectAtIndex:imageView.tag]];
-                //                replaceImage.tag = imageView.tag;
-                //                replaceImage.userInteractionEnabled = YES;
-                //                [blockSlider addSubview:replaceImage];
-                //                [self fitImageToScroll:replaceImage SCROLL:blockSlider scrollViewNumber:blockSlider.tag];
-                
-                //                         [blockSlider setContentMode:UIViewContentModeRedraw];
-                //                    }
-                //                    }
-                //                    for (UIGestureRecognizer *gestureRecognizer in imageView.gestureRecognizers)
-                //                        gestureRecognizer.enabled = NO;
-                
-                //                    j++;
-                //                }
             }
             else if (blockSlider.tag == 1) {
                 rectBlockSlider2 = [self getScrollFrame2:nStyle subStyle:nSubStyle];
                 blockSlider.frame = rectBlockSlider2;
-                
-                //                int j=0;
-                //                for (UIImageView *imageView in blockSlider.subviews){
-                //                    [imageView removeFromSuperview];
-                //                    NSLog(@"bloackSlider 2 imageview is %@",imageView);
-                //                    if ([imageView isKindOfClass:[UIImageView class]] && imageView.image){
-                //                        UIImageView *replaceImage = [[UIImageView alloc] initWithImage:imageView.image];
-                //                        replaceImage.userInteractionEnabled = YES;
-                //                        replaceImage.tag=imageView.tag;
-                //                        [blockSlider addSubview:replaceImage];
-                //                         [blockSlider setContentMode:UIViewContentModeRedraw];
-                //                        [self fitImageToScroll:replaceImage SCROLL:blockSlider scrollViewNumber:blockSlider.tag];
-                //                    }
-                ////                    for (UIGestureRecognizer *gestureRecognizer in imageView.gestureRecognizers)
-                ////                        gestureRecognizer.enabled = NO;
-                //                    j++;
-                //                }
             }
             else if (blockSlider.tag == 2) {
                 rectBlockSlider3 = [self getScrollFrame3:nStyle subStyle:nSubStyle];
                 blockSlider.frame = rectBlockSlider3;
-                //                int j=0;
-                //                for (UIImageView *imageView in blockSlider.subviews){
-                //                    NSLog(@"blockslider subview # is %d",j);
-                //                    [imageView removeFromSuperview];
-                //                    NSLog(@"bloackSlider 3 imageview is %@",imageView);
-                //                    if ([imageView isKindOfClass:[UIImageView class]] && imageView.image){
-                //                        UIImageView *replaceImage = [[UIImageView alloc] initWithImage:imageView.image];
-                //                        replaceImage.userInteractionEnabled = YES;
-                //                        replaceImage.tag=imageView.tag;
-                //                        [blockSlider addSubview:replaceImage];
-                //                         [blockSlider setContentMode:UIViewContentModeRedraw];
-                //                        [self fitImageToScroll:replaceImage SCROLL:blockSlider scrollViewNumber:blockSlider.tag];
-                //                    }
-                ////                    for (UIGestureRecognizer *gestureRecognizer in imageView.gestureRecognizers)
-                ////                        gestureRecognizer.enabled = NO;
-                //                    j++;
-                //                }
             }
             else if (blockSlider.tag == 3) {
                 rectBlockSlider4 = [self getScrollFrame4:nStyle subStyle:nSubStyle];
                 blockSlider.frame = rectBlockSlider4;
-                //                for (UIImageView *imageView in blockSlider.subviews){
-                //                    [imageView removeFromSuperview];
-                //                    NSLog(@"bloackSlider 4 imageview is %@",imageView);
-                //                    if ([imageView isKindOfClass:[UIImageView class]] && imageView.image){
-                //                        UIImageView *replaceImage = [[UIImageView alloc] initWithImage:imageView.image];
-                //                        replaceImage.userInteractionEnabled = YES;
-                //                        replaceImage.tag=imageView.tag;
-                //                        [blockSlider addSubview:replaceImage];
-                //                         [blockSlider setContentMode:UIViewContentModeRedraw];
-                //                        [self fitImageToScroll:replaceImage SCROLL:blockSlider scrollViewNumber:blockSlider.tag];
-                //                    }
-                //                    for (UIGestureRecognizer *gestureRecognizer in imageView.gestureRecognizers)
-                //                        gestureRecognizer.enabled = NO;
-                //                }
             }
             UIImageView *imageView = [blockSlider.subviews firstObject];
             for (UIView *view in blockSlider.subviews)  {
                 [view removeFromSuperview];
             }
-//            NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",blockSlider.tag];
             UIImageView *replaceImage = [[UIImageView alloc] initWithImage:imageView.image];
             replaceImage.tag = imageView.tag;
             replaceImage.userInteractionEnabled = YES;
             [blockSlider addSubview:replaceImage];
-            [self fitImageToScroll:replaceImage SCROLL:blockSlider scrollViewNumber:blockSlider.tag  angle:[defaults floatForKey:@"Rotate"] ];
+            [self fitImageToScroll:imageView SCROLL:blockSlider scrollViewNumber:blockSlider.tag  angle:[defaults floatForKey:@"Rotate"] ];
         }
         for (UIScrollView *blockSlider in droppableAreas)
             for (UIImageView *imageView in blockSlider.subviews){
@@ -2089,25 +1660,7 @@
 
     }
 }
-//- (IBAction)handleRotateImage:(UIRotationGestureRecognizer *)recognizer {
-//    for (UIScrollView *blockSlider in droppableAreas){
-//        if (blockSlider.tag == tapBlockNumber){
-//            if (blockSlider.subviews.count==0) return;
-//            UIImageView *imageView = blockSlider.subviews[0];
-//            imageView.transform = CGAffineTransformRotate(imageView.transform, recognizer.rotation);
-//        }
-//    }
-//    NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
-//    CGFloat rotateVideo=[defaults floatForKey:tagRotate]+ recognizer.rotation;
-//    rotateVideo = fmodf(rotateVideo, 2*M_PI);
-//    
-//    [defaults setFloat:rotateVideo forKey:tagRotate];
-//    NSLog(@"rotateVideo is %f and tag is %d, and tagRotate is %@, recognizer.rotation is %f",rotateVideo, tapBlockNumber,tagRotate,recognizer.rotation);
-//    sliderRotate.value=rotateVideo;
-//    recognizer.rotation = 0;
-//    labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(sliderRotate.value)];
-//    
-//}
+
 
 - (IBAction)handlePinchImage:(UIPinchGestureRecognizer *)sender {
     if (tapBlockNumber !=100){
@@ -2878,11 +2431,11 @@
     
     else if (style == 2) {
         if (sub == 1) {
-            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
-            scroll_height = self.frameContainer.frame.size.height - nMargin * 2;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2 + adjustedWidth1;
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 2+ adjustedHeight1;
         }
         else if (sub == 2) {
-            scroll_width = self.frameContainer.frame.size.width - nMargin * 2;
+            scroll_width = self.frameContainer.frame.size.width - nMargin * 2+ adjustedWidth1;
             scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) / 2;
         }
         else if (sub == 3){

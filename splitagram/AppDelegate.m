@@ -136,7 +136,7 @@
     counter++;
     NSLog(@"counter is %d",counter);
 
-    if (counter>1){
+    if (counter>4){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"showSurvey"];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"counter" ];
         counter = 0;

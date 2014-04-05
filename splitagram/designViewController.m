@@ -921,35 +921,29 @@
 - (void) fillEffectsSlider {
     labelEffectsArray = [[NSMutableArray alloc]initWithObjects: @"original", @"delight", @"sunny",@"night", @"beach",@"b&w-red",@"sepia",@"water", @"b&w",@"morning", @"sky",nil];
     labelSecondEffectsArray = [[NSMutableArray alloc]initWithObjects: @"2layer",@"warm",@"winter",@"gold",@"platinum",@"copper",@"film",@"white", @"crisp",@"candle",@"fall",@"vignette",@"foggy",@"cobalt",@"blue",@"bright",@"bleak",@"moon",@"cyan",@"soft",nil];
-    //    self.effectsSlider = (UIScrollView *)[self.view viewWithTag:10125];
-//    self.filterSelectionBar.contentSize = CGSizeMake(65 * 11+10, self.filterSelectionBar.frame.size.height);
-    if (!IS_TALL_SCREEN) {
+
+    if (!IS_TALL_SCREEN)
         self.filterSelectionBar.contentSize = CGSizeMake(55 * 11+10, self.frameSelectionBar.frame.size.height);
-    } else {
+    else
         self.filterSelectionBar.contentSize = CGSizeMake(70 * 11+10, 151);
-//        self.filterSelectionBar.frame=CGRectMake(0, 353, 320, 151);
-    }
+    
     
     for (int ind = 1; ind <= 11; ind++) {
-        @autoreleasepool {
      
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        btn.frame = CGRectMake((ind-1) * 55+5, 5, 50, 50);
         if (!IS_TALL_SCREEN)
             btn.frame = CGRectMake((ind - 1 ) * 55+5, 5, 50, 50);
         else
             btn.frame = CGRectMake((ind - 1 ) * 70+5, 5, 65, 65);
 
         btn.tag = ind;
-            [btn setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 13.0, 0.0)];
-        //        btn.showsTouchWhenHighlighted=YES;
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 13.0, 0.0)];
         btn.layer.frame = btn.frame;
         btn.layer.borderWidth=kBorderWidth;
         btn.layer.borderColor=[[UIColor clearColor] CGColor];
         NSLog(@"effects btn.tag is %d ",btn.tag);
         [btn addTarget:self action:@selector(effectsClicked:) forControlEvents:UIControlEventTouchUpInside];
         CGRect labelEffects;
-//        CGRect labelEffects = CGRectMake((ind - 1 )*55+5, 42, 50, 13);
         if (!IS_TALL_SCREEN)
             labelEffects = CGRectMake((ind - 1 ) * 55+5+kBorderWidth, 42-kBorderWidth, 50-2*kBorderWidth, 13);
         else
@@ -968,71 +962,63 @@
         label.layer.shadowOffset=CGSizeMake(1, 1);
         label.layer.shadowColor= [UIColor blackColor].CGColor;
         label.layer.shadowOpacity = 0.8;
-        //        label.layer.masksToBounds=NO;
-//        NSString *filters = [NSString stringWithFormat:@"filter #%d",ind];
-//        SDImageCache *imageCache = [SDImageCache.alloc initWithNamespace:@"Bookly"];
-        UIImage *quickFilteredImage;
-//        =[imageCache imageFromDiskCacheForKey:filters];
-//        if (quickFilteredImage==NULL) {
-            NSLog(@"generating images");
-            UIImage *inputImage = [UIImage imageNamed:@"mapleLeaf.png"];
-//        UIImage *inputImage = [self cropImage:self.selectedImage];
-        
-            switch (ind) {
-                case 1:{
-                    filter = [[GPUImageFilter alloc] init]; //original
-                } break;
-                case 2: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
-                } break;
-                case 3: {
-                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
-                } break;
-                case 10: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
-                } break;
-                case 11: {
-                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
-                } break;
-                case 4:{
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
-                } break;
-                case 5: {
-                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
-                } break;
-                case 6: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
-                } break;
-                case 7: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
-                } break;
-                case 8: {
-                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
-                } break;
-                case 9: {
-                    filter = [[GPUImageGrayscaleFilter alloc] init];
-                } break;
-                default:
-                    break;
-                    
-            }
-            
-            quickFilteredImage = [filter imageByFilteringImage:inputImage];
 
-//            SDImageCache *imageCache = [SDImageCache.alloc initWithNamespace:@"Bookly"];
-//            [imageCache storeImage:quickFilteredImage forKey:filters];
-//        }
-        [btn setImage:quickFilteredImage forState:UIControlStateNormal];
-            if (ind>10)
-//            [self saveImage:quickFilteredImage];
+//        UIImage *quickFilteredImage;
+//
+//            NSLog(@"generating images");
+//            UIImage *inputImage = [UIImage imageNamed:@"mapleLeaf.png"];
+////        UIImage *inputImage = [self cropImage:self.selectedImage];
+//        
+//            switch (ind) {
+//                case 1:{
+//                    filter = [[GPUImageFilter alloc] init]; //original
+//                } break;
+//                case 2: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
+//                } break;
+//                case 3: {
+//                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
+//                } break;
+//                case 10: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
+//                } break;
+//                case 11: {
+//                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
+//                } break;
+//                case 4:{
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
+//                } break;
+//                case 5: {
+//                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
+//                } break;
+//                case 6: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
+//                } break;
+//                case 7: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
+//                } break;
+//                case 8: {
+//                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
+//                } break;
+//                case 9: {
+//                    filter = [[GPUImageGrayscaleFilter alloc] init];
+//                } break;
+//                default:
+//                    break;
+//                    
+//            }
+//            
+//            quickFilteredImage = [filter imageByFilteringImage:inputImage];
+
+
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"filter%02d.png",ind]] forState:UIControlStateNormal];
+
             
 
         [btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
         [self.filterSelectionBar addSubview:btn];
         [self.filterSelectionBar addSubview:label];
-//            sleep(1);
         }
-    }
 }
 
 - (void) turnOnIndicator {
@@ -1092,15 +1078,10 @@
 //}
 
 - (void) fillSecondEffectsSlider {
-    
-//    self.filterSelectionBar.contentSize = CGSizeMake(65 * 20+10, self.filterSelectionBar.frame.size.height);
-    
-    
+
     for (int ind = 1; ind <= 11; ind++) {
-        @autoreleasepool {
-           
+        
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        btn.frame = CGRectMake((ind-1) * 55+5, 60, 50, 50);
         if (!IS_TALL_SCREEN)
             btn.frame = CGRectMake((ind - 1 ) * 55+5, 60, 50, 50);
         else
@@ -1108,13 +1089,10 @@
         btn.tag = ind+11;
         btn.layer.borderWidth=kBorderWidth;
         btn.layer.borderColor=[[UIColor clearColor] CGColor];
-            [btn setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 13.0, 0.0)];
-            btn.backgroundColor
-        //        btn.showsTouchWhenHighlighted=YES;
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 13.0, 0.0)];
         NSLog(@" second effects btn.tag is %d ",btn.tag);
         [btn addTarget:self action:@selector(secondEffectsClicked:) forControlEvents:UIControlEventTouchUpInside];
         CGRect labelEffects;
-//        = CGRectMake((ind - 1 )*55+5, 52+45, 50, 13);
         if (!IS_TALL_SCREEN)
             labelEffects = CGRectMake((ind - 1 ) * 55+5+kBorderWidth, 52+45-kBorderWidth, 50-2*kBorderWidth, 13);
         else
@@ -1126,130 +1104,98 @@
                 label.font = [UIFont boldSystemFontOfSize:10.0];
             else
                 label.font = [UIFont boldSystemFontOfSize:12.0];
-
-//        label.font = [UIFont boldSystemFontOfSize:12.0];
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = [UIColor whiteColor];
         label.text = [labelSecondEffectsArray objectAtIndex:ind-1];
         label.layer.shadowOffset=CGSizeMake(1, 1);
         label.layer.shadowColor= [UIColor blackColor].CGColor;
         label.layer.shadowOpacity = 0.8;
-//        NSString *filters = [NSString stringWithFormat:@"secondFilter #%d",ind];
-//        SDImageCache *imageCache = [SDImageCache.alloc initWithNamespace:@"Bookly"];
-        UIImage *quickFilteredImage;
-//        =[imageCache imageFromDiskCacheForKey:filters];
-//        if (quickFilteredImage==NULL) {
-//            NSLog(@"generating images");
-//            UIImage *inputImage = [UIImage imageNamed:@"filterImage.png"];
-            UIImage *inputImage = [UIImage imageNamed:@"mapleLeaf.png"];
+//        UIImage *quickFilteredImage;
+//        UIImage *inputImage = [UIImage imageNamed:@"mapleLeaf.png"];
+////            UIImage *inputImage =  [self cropImage:self.selectedImage];
+//            switch (ind) {
+//                case 1:{
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"2strip.png"];
+//                } break;
+//                case 2: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarmBleach.png"];
+//                } break;
+//                case 3: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWinter.png"];
+//                } break;
+//                case 9: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWarm.png"];
+//                } break;
+//                case 10: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"candlelight.png"];
+//                } break;
+//                case 11:{
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors.png"];
+//                } break;
+//                case 7: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
+//                } break;
+//                case 13: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"foggynight.png"];
+//                } break;
+//                case 14: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cobalt2Iron80Bleach.png"];
+//                } break;
+//                case 15: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"blue.png"];
+//                } break;
+//                case 16: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fuji2393.png"];
+//                } break;
+//                case 17: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleak.png"];
+//                } break;
+//                case 18: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachMoonlight.png"];
+//                } break;
+//                case 19: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cyanSeleniumBleachMoonlight.png"];
+//                } break;
+//                case 20: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarm.png"];
+//                } break;
+//                case 4: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"gold2.png"];
+//                } break;
+//                case 5: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"platinum.png"];
+//                } break;
+//                case 6: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
+//                } break;
+//                case 12: {
+//                    filter = [[GPUImageVignetteFilter alloc] init];
+//                    [(GPUImageVignetteFilter *) filter setVignetteEnd:0.6];
+//                } break;
+//                case 8: {
+//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
+//                } break;
+//                    
+//                default:
+//                    break;
+//            }
+//            quickFilteredImage = [filter imageByFilteringImage:inputImage];
 
-//            UIImage *inputImage =  [self cropImage:self.selectedImage];
-            switch (ind) {
-                case 1:{
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"2strip.png"];
-                } break;
-                case 2: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarmBleach.png"];
-                } break;
-                case 3: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWinter.png"];
-                } break;
-                case 9: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWarm.png"];
-                } break;
-                case 10: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"candlelight.png"];
-                } break;
-                case 11:{
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors.png"];
-                } break;
-                case 7: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
-                } break;
-                case 13: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"foggynight.png"];
-                } break;
-                case 14: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cobalt2Iron80Bleach.png"];
-                } break;
-                case 15: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"blue.png"];
-                } break;
-                case 16: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fuji2393.png"];
-                } break;
-                case 17: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleak.png"];
-                } break;
-                case 18: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachMoonlight.png"];
-                } break;
-                case 19: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cyanSeleniumBleachMoonlight.png"];
-                } break;
-                case 20: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarm.png"];
-                } break;
-                case 4: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"gold2.png"];
-                } break;
-                case 5: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"platinum.png"];
-                } break;
-                case 6: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
-                } break;
-                case 12: {
-                    filter = [[GPUImageVignetteFilter alloc] init];
-                    [(GPUImageVignetteFilter *) filter setVignetteEnd:0.6];
-                } break;
-                case 8: {
-                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
-                } break;
-                    
-                default:
-                    break;
-            }
-            
-            quickFilteredImage = [filter imageByFilteringImage:inputImage];
-            
-//            [self performSelector:@selector(saveImage:) withObject:quickFilteredImage afterDelay:0.1];
-//            [self saveImage:quickFilteredImage];
-            if (ind >10)
-            [self saveImage:quickFilteredImage];
-
-        [btn setImage:quickFilteredImage forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"filter%02d.png",ind+11]] forState:UIControlStateNormal];
         [btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
 
         [self.filterSelectionBar addSubview:btn];
         [self.filterSelectionBar addSubview:label];
-        //        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"com.guruhubb.bookly.subscription"]){
-        //        if(![[MKStoreManager sharedManager] isSubscriptionActive:kFeatureAId]){
         if (![defaults boolForKey:kFeature1]){
             UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockImage.png"]];
             imageView.alpha = 0.8;
             imageView.layer.shadowColor = [UIColor blackColor].CGColor;
             imageView.layer.shadowOffset = CGSizeMake(0, 1);
             imageView.layer.shadowOpacity = 1;
-//            imageView.layer.shadowRadius = 1.0;
-//            imageView.clipsToBounds = NO;
-//            imageView.layer.shadowOffset=CGSizeMake(1, 1);
-//            imageView.layer.shadowColor= [UIColor blackColor].CGColor;
             imageView.frame=CGRectMake(btn.frame.size.width-15, 2, 15, 15);
-            
-            //            [[NSUserDefaults standardUserDefaults] setBool:NO  forKey:@"booklySubscription"];
-            //            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"glyphicons_203_lock.png"]];
-            //            imageView.alpha = 0.5;
-            //            imageView.center = CGPointMake(btn.frame.size.width/2, btn.frame.size.height/2);
-            //            imageView.tag = ind;
             [btn addSubview:imageView];
         }
-        }
-        //        else
-        //            [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:@"booklySubscription"];
-        
-//    }
-}
+    }
 }
 - (void) saveImage : (UIImage *)image {
     NSLog(@"image is %@, image width is %f",image, image.size.width);

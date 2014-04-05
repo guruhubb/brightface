@@ -77,11 +77,13 @@ static VerificationController *singleton;
     }
     
     // The transaction looks ok, so start the verify process.
-    
+    NSData *data =[NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]];
     // Encode the receiptData for the itms receipt verification POST request.
-    NSString *jsonObjectString = [self encodeBase64:(uint8_t *)transaction.transactionReceipt.bytes
-                                             length:transaction.transactionReceipt.length];
-    
+//    NSString *jsonObjectString = [self encodeBase64:(uint8_t *)transaction.transactionReceipt.bytes
+//                                             length:transaction.transactionReceipt.length];
+    NSString *jsonObjectString = [self encodeBase64:(uint8_t *)data.bytes
+                                             length:data.length];
+
     // Create the POST request payload.
     NSString *payload = [NSString stringWithFormat:@"{\"receipt-data\" : \"%@\", \"password\" : \"%@\"}",
                          jsonObjectString, ITC_CONTENT_PROVIDER_SHARED_SECRET];
@@ -109,7 +111,10 @@ static VerificationController *singleton;
 // we haven't seen before and then decode and save the purchaseInfo from the receipt for later receipt validation.
 - (BOOL)isTransactionAndItsReceiptValid:(SKPaymentTransaction *)transaction
 {
-    if (!(transaction && transaction.transactionReceipt && [transaction.transactionReceipt length] > 0))
+//    if (!(transaction && transaction.transactionReceipt && [transaction.transactionReceipt length] > 0))
+    NSData *data =[NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]];
+
+    if (!(transaction && data && [data length] > 0))
     {
         // Transaction is not valid.
         return NO;
@@ -117,7 +122,8 @@ static VerificationController *singleton;
     
     // Pull the purchase-info out of the transaction receipt, decode it, and save it for later so
     // it can be cross checked with the verifyReceipt.
-    NSDictionary *receiptDict       = [self dictionaryFromPlistData:transaction.transactionReceipt];
+//    NSDictionary *receiptDict       = [self dictionaryFromPlistData:transaction.transactionReceipt];
+    NSDictionary *receiptDict       = [self dictionaryFromPlistData:data];
     NSString *transactionPurchaseInfo = [receiptDict objectForKey:@"purchase-info"];
     NSString *decodedPurchaseInfo   = [self decodeBase64:transactionPurchaseInfo length:nil];
     NSDictionary *purchaseInfoDict  = [self dictionaryFromPlistData:[decodedPurchaseInfo dataUsingEncoding:NSUTF8StringEncoding]];
@@ -272,7 +278,7 @@ static VerificationController *singleton;
     // The receipt is valid, so checked the receipt specifics now.
     
     NSDictionary *verifiedReceiptReceiptDictionary  = [verifiedReceiptDictionary objectForKey:@"receipt"];
-    NSString *verifiedReceiptUniqueIdentifier       = [verifiedReceiptReceiptDictionary objectForKey:@"unique_identifier"];
+//    NSString *verifiedReceiptUniqueIdentifier       = [verifiedReceiptReceiptDictionary objectForKey:@"unique_identifier"];
     NSString *transactionIdFromVerifiedReceipt      = [verifiedReceiptReceiptDictionary objectForKey:@"transaction_id"];
     
     // Get the transaction's receipt data from the transactionsReceiptStorageDictionary

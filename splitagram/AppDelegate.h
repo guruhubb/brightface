@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <Tapjoy/Tapjoy.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "MKStoreManager.h"
+#import "Flurry.h"
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

@@ -164,6 +164,16 @@
 		CCAC974718F051BE000B669B /* filter20.png in Resources */ = {isa = PBXBuildFile; fileRef = CCAC973118F051BE000B669B /* filter20.png */; };
 		CCAC974818F051BE000B669B /* filter21.png in Resources */ = {isa = PBXBuildFile; fileRef = CCAC973218F051BE000B669B /* filter21.png */; };
 		CCAC974918F051BE000B669B /* filter22.png in Resources */ = {isa = PBXBuildFile; fileRef = CCAC973318F051BE000B669B /* filter22.png */; };
+		CCAC975818F09124000B669B /* TapjoyResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CCAC975618F09124000B669B /* TapjoyResources.bundle */; };
+		CCAC975918F09124000B669B /* Tapjoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC975718F09124000B669B /* Tapjoy.framework */; };
+		CCAC975B18F09175000B669B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC975A18F09175000B669B /* AdSupport.framework */; };
+		CCAC975D18F0917E000B669B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC975C18F0917E000B669B /* CFNetwork.framework */; };
+		CCAC975F18F0919B000B669B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC975E18F0919B000B669B /* CoreLocation.framework */; };
+		CCAC976118F091AA000B669B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC976018F091AA000B669B /* CoreMotion.framework */; };
+		CCAC976318F091B1000B669B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC976218F091B1000B669B /* CoreTelephony.framework */; };
+		CCAC976518F091C4000B669B /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC976418F091C4000B669B /* EventKit.framework */; };
+		CCAC976718F091CA000B669B /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC976618F091CA000B669B /* EventKitUI.framework */; };
+		CCAC976918F091ED000B669B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC976818F091ED000B669B /* libsqlite3.0.dylib */; };
 		CCD28DE818DACD46001127EC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCD28DE718DACD46001127EC /* AssetsLibrary.framework */; };
 		CCD28DEB18DAD565001127EC /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28DEA18DAD565001127EC /* PhotoCell.m */; };
 		CCD28DEE18DB4421001127EC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28DED18DB4421001127EC /* ViewController.m */; };
@@ -187,6 +197,13 @@
 		CCD28E2718DCB512001127EC /* doneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28E2618DCB512001127EC /* doneViewController.m */; };
 		CCD28E2A18DCB533001127EC /* pageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28E2918DCB533001127EC /* pageViewController.m */; };
 		CCD28E2D18DD0CCB001127EC /* pageViewContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28E2C18DD0CCA001127EC /* pageViewContentViewController.m */; };
+		CCEA9B2E18F092BD00FF5771 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCEA9B2D18F092BD00FF5771 /* libxml2.dylib */; };
+		CCEA9B3218F092C800FF5771 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCEA9B3118F092C800FF5771 /* libz.dylib */; };
+		CCEA9B3418F092D500FF5771 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCEA9B3318F092D500FF5771 /* MapKit.framework */; };
+		CCEA9B3618F092DD00FF5771 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCEA9B3518F092DD00FF5771 /* MediaPlayer.framework */; };
+		CCEA9B3818F092F100FF5771 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCEA9B3718F092F100FF5771 /* MobileCoreServices.framework */; };
+		CCEA9B3A18F0931D00FF5771 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCEA9B3918F0931D00FF5771 /* Twitter.framework */; };
+		CCEA9B4018F09BD100FF5771 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCEA9B3F18F09BD100FF5771 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -385,6 +402,16 @@
 		CCAC973118F051BE000B669B /* filter20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter20.png; sourceTree = "<group>"; };
 		CCAC973218F051BE000B669B /* filter21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter21.png; sourceTree = "<group>"; };
 		CCAC973318F051BE000B669B /* filter22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter22.png; sourceTree = "<group>"; };
+		CCAC975618F09124000B669B /* TapjoyResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapjoyResources.bundle; sourceTree = "<group>"; };
+		CCAC975718F09124000B669B /* Tapjoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tapjoy.framework; sourceTree = "<group>"; };
+		CCAC975A18F09175000B669B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		CCAC975C18F0917E000B669B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		CCAC975E18F0919B000B669B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CCAC976018F091AA000B669B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		CCAC976218F091B1000B669B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		CCAC976418F091C4000B669B /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		CCAC976618F091CA000B669B /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		CCAC976818F091ED000B669B /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		CCD28DE718DACD46001127EC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		CCD28DE918DAD565001127EC /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		CCD28DEA18DAD565001127EC /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
@@ -423,6 +450,13 @@
 		CCD28E2918DCB533001127EC /* pageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pageViewController.m; sourceTree = "<group>"; };
 		CCD28E2B18DD0CCA001127EC /* pageViewContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pageViewContentViewController.h; sourceTree = "<group>"; };
 		CCD28E2C18DD0CCA001127EC /* pageViewContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pageViewContentViewController.m; sourceTree = "<group>"; };
+		CCEA9B2D18F092BD00FF5771 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		CCEA9B3118F092C800FF5771 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		CCEA9B3318F092D500FF5771 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CCEA9B3518F092DD00FF5771 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		CCEA9B3718F092F100FF5771 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		CCEA9B3918F0931D00FF5771 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		CCEA9B3F18F09BD100FF5771 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -430,9 +464,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCEA9B4018F09BD100FF5771 /* CoreData.framework in Frameworks */,
+				CCEA9B3A18F0931D00FF5771 /* Twitter.framework in Frameworks */,
 				CC0E479E18E15CA7003F2CAD /* QuartzCore.framework in Frameworks */,
-				CC205D9F18E62BD400EECDE8 /* StoreKit.framework in Frameworks */,
+				CCEA9B3818F092F100FF5771 /* MobileCoreServices.framework in Frameworks */,
 				CC205D9B18E62BA200EECDE8 /* MessageUI.framework in Frameworks */,
+				CCEA9B3618F092DD00FF5771 /* MediaPlayer.framework in Frameworks */,
+				CCEA9B3418F092D500FF5771 /* MapKit.framework in Frameworks */,
+				CCEA9B3218F092C800FF5771 /* libz.dylib in Frameworks */,
+				CCEA9B2E18F092BD00FF5771 /* libxml2.dylib in Frameworks */,
+				CCAC976918F091ED000B669B /* libsqlite3.0.dylib in Frameworks */,
+				CCAC976718F091CA000B669B /* EventKitUI.framework in Frameworks */,
+				CCAC976518F091C4000B669B /* EventKit.framework in Frameworks */,
+				CCAC976318F091B1000B669B /* CoreTelephony.framework in Frameworks */,
+				CCAC976118F091AA000B669B /* CoreMotion.framework in Frameworks */,
+				CCAC975F18F0919B000B669B /* CoreLocation.framework in Frameworks */,
+				CC2F4D7518D923590039E515 /* CoreGraphics.framework in Frameworks */,
+				CCAC975D18F0917E000B669B /* CFNetwork.framework in Frameworks */,
+				CCAC975B18F09175000B669B /* AdSupport.framework in Frameworks */,
+				CC205D9F18E62BD400EECDE8 /* StoreKit.framework in Frameworks */,
+				CCAC975918F09124000B669B /* Tapjoy.framework in Frameworks */,
 				CC205D7D18E6271A00EECDE8 /* Security.framework in Frameworks */,
 				CC205D7B18E6270900EECDE8 /* SystemConfiguration.framework in Frameworks */,
 				CC0E47A218E15CBC003F2CAD /* AVFoundation.framework in Frameworks */,
@@ -441,7 +492,6 @@
 				CC0E479C18E15C9F003F2CAD /* CoreMedia.framework in Frameworks */,
 				CC2B4BE118DF9CFB002CC198 /* Social.framework in Frameworks */,
 				CCD28DE818DACD46001127EC /* AssetsLibrary.framework in Frameworks */,
-				CC2F4D7518D923590039E515 /* CoreGraphics.framework in Frameworks */,
 				CC2F4D7718D923590039E515 /* UIKit.framework in Frameworks */,
 				CC0E48F418E2249F003F2CAD /* libGPUImage.a in Frameworks */,
 				CC2F4D7318D923590039E515 /* Foundation.framework in Frameworks */,
@@ -614,6 +664,7 @@
 		CC2F4D6618D923580039E515 = {
 			isa = PBXGroup;
 			children = (
+				CCAC975418F09124000B669B /* Tapjoy.embeddedframework */,
 				CC205D7618E6260F00EECDE8 /* Flurry */,
 				CCD28DF518DBE74E001127EC /* MKStoreKit-master */,
 				CC2F4D7818D923590039E515 /* splitagram */,
@@ -636,6 +687,21 @@
 		CC2F4D7118D923590039E515 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CCEA9B3F18F09BD100FF5771 /* CoreData.framework */,
+				CCEA9B3918F0931D00FF5771 /* Twitter.framework */,
+				CCEA9B3718F092F100FF5771 /* MobileCoreServices.framework */,
+				CCEA9B3518F092DD00FF5771 /* MediaPlayer.framework */,
+				CCEA9B3318F092D500FF5771 /* MapKit.framework */,
+				CCEA9B3118F092C800FF5771 /* libz.dylib */,
+				CCEA9B2D18F092BD00FF5771 /* libxml2.dylib */,
+				CCAC976818F091ED000B669B /* libsqlite3.0.dylib */,
+				CCAC976618F091CA000B669B /* EventKitUI.framework */,
+				CCAC976418F091C4000B669B /* EventKit.framework */,
+				CCAC976218F091B1000B669B /* CoreTelephony.framework */,
+				CCAC976018F091AA000B669B /* CoreMotion.framework */,
+				CCAC975E18F0919B000B669B /* CoreLocation.framework */,
+				CCAC975C18F0917E000B669B /* CFNetwork.framework */,
+				CCAC975A18F09175000B669B /* AdSupport.framework */,
 				CC205D9E18E62BD400EECDE8 /* StoreKit.framework */,
 				CC205D9A18E62BA200EECDE8 /* MessageUI.framework */,
 				CC205D7C18E6271A00EECDE8 /* Security.framework */,
@@ -743,6 +809,24 @@
 			);
 			name = "filter images";
 			path = "Resources/filter images";
+			sourceTree = "<group>";
+		};
+		CCAC975418F09124000B669B /* Tapjoy.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				CCAC975518F09124000B669B /* Resources */,
+				CCAC975718F09124000B669B /* Tapjoy.framework */,
+			);
+			name = Tapjoy.embeddedframework;
+			path = "TapjoySDK_iOS_v10.0-2.0/Libraries/Tapjoy.embeddedframework";
+			sourceTree = "<group>";
+		};
+		CCAC975518F09124000B669B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CCAC975618F09124000B669B /* TapjoyResources.bundle */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		CCD28DD718DAB635001127EC /* Resources */ = {
@@ -971,6 +1055,7 @@
 				CC0E493018E22AA1003F2CAD /* bleachMoonlight.png in Resources */,
 				CC0E493C18E22AA1003F2CAD /* curve01.acv in Resources */,
 				CCAC974218F051BE000B669B /* filter15.png in Resources */,
+				CCAC975818F09124000B669B /* TapjoyResources.bundle in Resources */,
 				CC0E493D18E22AA1003F2CAD /* cyanSeleniumBleachMoonlight.png in Resources */,
 				CC0E487F18E1E7F5003F2CAD /* secondFrame02.png in Resources */,
 				CCAC973B18F051BE000B669B /* filter08.png in Resources */,
@@ -1226,10 +1311,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/saswata_basu/Downloads/TapjoySDK_iOS_v10.0.0/Libraries/Tapjoy.embeddedframework,
-					/Users/saswata_basu/Documents/Developer/splitagram/Tapjoy.embeddedframework,
-					"/Users/saswata_basu/Dropbox/bookly\\ v3.0\\ SHIPPED/bookly\\ v0.98/Mometos-Int\\ 4/facebook-ios-sdk/sample/Hackbook/Tapjoy.embeddedframework",
-					/Users/saswata_basu/Documents/Developer/splitagram/splitagram/Tapjoy.embeddedframework,
+					"/Users/saswata_basu/Documents/Developer/splitagram/TapjoySDK_iOS_v10.0-2.0/Libraries/Tapjoy.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "splitagram/splitagram-Prefix.pch";
@@ -1242,10 +1324,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/saswata_basu/Documents/Developer/GPUImage-master/framework/../build/Debug-iphoneos",
 					/Users/saswata_basu/Documents/Developer/splitagram/Flurry,
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1263,10 +1345,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/saswata_basu/Downloads/TapjoySDK_iOS_v10.0.0/Libraries/Tapjoy.embeddedframework,
-					/Users/saswata_basu/Documents/Developer/splitagram/Tapjoy.embeddedframework,
-					"/Users/saswata_basu/Dropbox/bookly\\ v3.0\\ SHIPPED/bookly\\ v0.98/Mometos-Int\\ 4/facebook-ios-sdk/sample/Hackbook/Tapjoy.embeddedframework",
-					/Users/saswata_basu/Documents/Developer/splitagram/splitagram/Tapjoy.embeddedframework,
+					"/Users/saswata_basu/Documents/Developer/splitagram/TapjoySDK_iOS_v10.0-2.0/Libraries/Tapjoy.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "splitagram/splitagram-Prefix.pch";
@@ -1279,10 +1358,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/saswata_basu/Documents/Developer/GPUImage-master/framework/../build/Debug-iphoneos",
 					/Users/saswata_basu/Documents/Developer/splitagram/Flurry,
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

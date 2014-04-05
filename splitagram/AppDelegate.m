@@ -8,10 +8,7 @@
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 #import "AppDelegate.h"
-#import <AssetsLibrary/AssetsLibrary.h>
-#import "MKStoreManager.h"
-#import "Flurry.h"
-//#import <Tapjoy/Tapjoy.h>
+
 
 @implementation AppDelegate
 
@@ -41,9 +38,10 @@
     
 	// NOTE: This is the only step required if you're an advertiser.
 	// NOTE: This must be replaced by your App ID. It is retrieved from the Tapjoy website, in your account.
-//	[Tapjoy requestTapjoyConnect:@"076a56d4-4ec1-44ce-b4b4-89e03032c2c5"
-//					   secretKey:[@"BMgDZYR6Az8t23lCSQWf"
-//                                  options:@{ TJC_OPTION_ENABLE_LOGGING : @(YES) }];
+	[Tapjoy requestTapjoyConnect:@"076a56d4-4ec1-44ce-b4b4-89e03032c2c5"
+					   secretKey:@"BMgDZYR6Az8t23lCSQWf" options:@{ TJC_OPTION_ENABLE_LOGGING : @(YES) }];
+     
+ 
      // If you are not using Tapjoy Managed currency, you would set your own user ID here.
      // TJC_OPTION_USER_ID : @"A_UNIQUE_USER_ID"
      

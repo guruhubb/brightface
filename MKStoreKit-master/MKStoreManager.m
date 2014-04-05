@@ -61,7 +61,7 @@
 @property (nonatomic, strong) SKProductsRequest *productsRequest;
 
 - (void) requestProductData;
-- (void) startVerifyingSubscriptionReceipts;
+//- (void) startVerifyingSubscriptionReceipts;
 -(void) rememberPurchaseOfProduct:(NSString*) productIdentifier withReceipt:(NSData*) receiptData;
 -(void) addToQueue:(NSString*) productId;
 @end
@@ -580,22 +580,22 @@ static MKStoreManager* _sharedStoreManager;
     self.hostedContentDownloadStatusChangedHandler(self.hostedContents);
   
   // Finish any completed downloads
-  [hostedContents enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-    SKDownload *download = obj;
-    
-    switch (download.downloadState) {
-      case SKDownloadStateFinished:
-#ifndef NDEBUG
-        NSLog(@"Download finished: %@", [download description]);
-#endif
-        [self provideContent:download.transaction.payment.productIdentifier
-                  forReceipt:download.transaction.transactionReceipt
-               hostedContent:[NSArray arrayWithObject:download]];
-        
-        [[SKPaymentQueue defaultQueue] finishTransaction:download.transaction];
-        break;
-    }
-  }];
+//  [hostedContents enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//    SKDownload *download = obj;
+//    
+//    switch (download.downloadState) {
+//      case SKDownloadStateFinished:
+//#ifndef NDEBUG
+//        NSLog(@"Download finished: %@", [download description]);
+//#endif
+//        [self provideContent:download.transaction.payment.productIdentifier
+//                  forReceipt:download.transaction.transactionReceipt
+//               hostedContent:[NSArray arrayWithObject:download]];
+//        
+//        [[SKPaymentQueue defaultQueue] finishTransaction:download.transaction];
+//        break;
+//    }
+//  }];
 }
 #endif
 
@@ -779,10 +779,13 @@ static MKStoreManager* _sharedStoreManager;
     return;
   }
 #endif
-  
-  [self provideContent:transaction.payment.productIdentifier
-            forReceipt:transaction.transactionReceipt
-         hostedContent:downloads];
+
+//  [self provideContent:transaction.payment.productIdentifier
+//            forReceipt:transaction.transactionReceipt
+//         hostedContent:downloads];
+    [self provideContent:transaction.payment.productIdentifier
+              forReceipt:[NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]]
+           hostedContent:downloads];
 #elif TARGET_OS_MAC
   [self provideContent:transaction.payment.productIdentifier
             forReceipt:nil
@@ -812,9 +815,13 @@ static MKStoreManager* _sharedStoreManager;
   }
 #endif
   
-  [self provideContent: transaction.originalTransaction.payment.productIdentifier
-            forReceipt:transaction.transactionReceipt
-         hostedContent:downloads];
+//  [self provideContent: transaction.originalTransaction.payment.productIdentifier
+//            forReceipt:transaction.transactionReceipt
+//         hostedContent:downloads];
+    
+    [self provideContent: transaction.originalTransaction.payment.productIdentifier
+              forReceipt:[NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]]
+           hostedContent:downloads];
 #elif TARGET_OS_MAC
   [self provideContent: transaction.originalTransaction.payment.productIdentifier
             forReceipt:nil

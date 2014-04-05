@@ -478,7 +478,7 @@
         NSLog(@"Frame%02d.png",ind);
         
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"Frame%02d.png",ind]] forState:UIControlStateNormal];
-        btn.alpha = 0.5;
+        btn.alpha = 0.2;
         [btn.imageView setContentMode:UIViewContentModeScaleToFill];
 
         [self.frameSelectionBar addSubview:btn];
@@ -509,7 +509,7 @@
         [btn addTarget:self action:@selector(secondFrameClicked:) forControlEvents:UIControlEventTouchUpInside];
         NSLog(@"secondFrame%02d.png",ind);
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"secondFrame%02d.png",ind]] forState:UIControlStateNormal];
-        btn.alpha = 0.5;
+        btn.alpha = 0.2;
         [btn.imageView setContentMode:UIViewContentModeScaleToFill];
         [self.frameSelectionBar addSubview:btn];
         

@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+
 
 @interface designViewController : UIViewController <UIScrollViewDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *splitMenuView;

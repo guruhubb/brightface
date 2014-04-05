@@ -142,6 +142,7 @@
 		CC2F4D9418D9235A0039E515 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7618D923590039E515 /* UIKit.framework */; };
 		CC2F4D9C18D9235A0039E515 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC2F4D9A18D9235A0039E515 /* InfoPlist.strings */; };
 		CC2F4D9E18D9235A0039E515 /* splitagramTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2F4D9D18D9235A0039E515 /* splitagramTests.m */; };
+		CC6D2EB318EF811500FDF69A /* mapleLeaf.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6D2EB218EF811500FDF69A /* mapleLeaf.png */; };
 		CCD28DE818DACD46001127EC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCD28DE718DACD46001127EC /* AssetsLibrary.framework */; };
 		CCD28DEB18DAD565001127EC /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28DEA18DAD565001127EC /* PhotoCell.m */; };
 		CCD28DEE18DB4421001127EC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28DED18DB4421001127EC /* ViewController.m */; };
@@ -165,6 +166,8 @@
 		CCD28E2718DCB512001127EC /* doneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28E2618DCB512001127EC /* doneViewController.m */; };
 		CCD28E2A18DCB533001127EC /* pageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28E2918DCB533001127EC /* pageViewController.m */; };
 		CCD28E2D18DD0CCB001127EC /* pageViewContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28E2C18DD0CCA001127EC /* pageViewContentViewController.m */; };
+		CCEEDA7D18EE9C9100124AB5 /* filterImage.png in Resources */ = {isa = PBXBuildFile; fileRef = CCEEDA7C18EE9C9100124AB5 /* filterImage.png */; };
+		CCEEDA8118EEEDF000124AB5 /* sugarmapleleaf_sm.png in Resources */ = {isa = PBXBuildFile; fileRef = CCEEDA8018EEEDF000124AB5 /* sugarmapleleaf_sm.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -341,6 +344,7 @@
 		CC2F4D9918D9235A0039E515 /* splitagramTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "splitagramTests-Info.plist"; sourceTree = "<group>"; };
 		CC2F4D9B18D9235A0039E515 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CC2F4D9D18D9235A0039E515 /* splitagramTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = splitagramTests.m; sourceTree = "<group>"; };
+		CC6D2EB218EF811500FDF69A /* mapleLeaf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mapleLeaf.png; path = Resources/mapleLeaf.png; sourceTree = "<group>"; };
 		CCD28DE718DACD46001127EC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		CCD28DE918DAD565001127EC /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		CCD28DEA18DAD565001127EC /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
@@ -379,6 +383,8 @@
 		CCD28E2918DCB533001127EC /* pageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pageViewController.m; sourceTree = "<group>"; };
 		CCD28E2B18DD0CCA001127EC /* pageViewContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pageViewContentViewController.h; sourceTree = "<group>"; };
 		CCD28E2C18DD0CCA001127EC /* pageViewContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pageViewContentViewController.m; sourceTree = "<group>"; };
+		CCEEDA7C18EE9C9100124AB5 /* filterImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = filterImage.png; path = Resources/filterImage.png; sourceTree = "<group>"; };
+		CCEEDA8018EEEDF000124AB5 /* sugarmapleleaf_sm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sugarmapleleaf_sm.png; path = Resources/sugarmapleleaf_sm.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -674,6 +680,9 @@
 		CCD28DD718DAB635001127EC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CCEEDA7C18EE9C9100124AB5 /* filterImage.png */,
+				CC6D2EB218EF811500FDF69A /* mapleLeaf.png */,
+				CCEEDA8018EEEDF000124AB5 /* sugarmapleleaf_sm.png */,
 				CC0E490018E22A8F003F2CAD /* filters */,
 				CC0E47A418E1DF9B003F2CAD /* frame icons */,
 				CC0E47A318E1DF8C003F2CAD /* icons */,
@@ -887,6 +896,7 @@
 				CC0E493C18E22AA1003F2CAD /* curve01.acv in Resources */,
 				CC0E493D18E22AA1003F2CAD /* cyanSeleniumBleachMoonlight.png in Resources */,
 				CC0E487F18E1E7F5003F2CAD /* secondFrame02.png in Resources */,
+				CC6D2EB318EF811500FDF69A /* mapleLeaf.png in Resources */,
 				CC0E487518E1E7F5003F2CAD /* Frame22.png in Resources */,
 				CC0E487118E1E7F5003F2CAD /* Frame16.png in Resources */,
 				CC0E494F18E22AA1003F2CAD /* tealOrangePlusContrast.png in Resources */,
@@ -927,6 +937,7 @@
 				CC0E48B018E1E80D003F2CAD /* twitter_logo_white.png in Resources */,
 				CCD28E1418DBE74E001127EC /* DBSetup.sql in Resources */,
 				CC0E48A018E1E7F5003F2CAD /* secondFrame26.png in Resources */,
+				CCEEDA7D18EE9C9100124AB5 /* filterImage.png in Resources */,
 				CC0E489E18E1E7F5003F2CAD /* secondFrame25.png in Resources */,
 				CC0E486C18E1E7F5003F2CAD /* Frame11.png in Resources */,
 				CCD28E1618DBE74E001127EC /* requestAccess.php in Resources */,
@@ -943,6 +954,7 @@
 				CC0E488D18E1E7F5003F2CAD /* secondFrame16a.png in Resources */,
 				CC0E493118E22AA1003F2CAD /* bleachNight.png in Resources */,
 				CC0E494918E22AA1003F2CAD /* maximumWhite.png in Resources */,
+				CCEEDA8118EEEDF000124AB5 /* sugarmapleleaf_sm.png in Resources */,
 				CCD28E1518DBE74E001127EC /* featureCheck.php in Resources */,
 				CC0E488018E1E7F5003F2CAD /* secondFrame03.png in Resources */,
 				CC0E492B18E22AA1003F2CAD /* 3strip.png in Resources */,

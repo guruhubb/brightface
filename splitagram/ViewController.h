@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MKStoreManager.h"
+#import "Flurry.h"
 
-@interface ViewController : UIViewController 
+@interface ViewController : UIViewController < UIActionSheetDelegate,SKStoreProductViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *launchView;
 
 @end

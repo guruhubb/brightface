@@ -12,18 +12,20 @@
 #define kBorderWidth 3.0
 #define kBlockWidth 7.0
 #define kZoomMin 0.5
-#define kZoomMax 2.5
+#define kZoomMax 4
 #define kSplitMin 0.0
 #define kSplitMax 20
-#define kRotateMin -M_PI
-#define kRotateMax M_PI
+#define kRotateMin -M_PI/16
+#define kRotateMax M_PI/16
 #import "designViewController.h"
 #import "doneViewController.h"
 #import "GPUImage.h"
 #import "MKStoreManager.h"
 #import "Flurry.h"
 
+
 @interface designViewController (){
+    ALAssetsLibrary *library;
     
     NSMutableArray *labelEffectsArray;
     NSMutableArray *labelSecondEffectsArray;
@@ -62,6 +64,7 @@
     CGFloat zoom2;
     CGFloat zoom3;
     CGFloat zoom4;
+    CGFloat scale;
     
     GPUImageOutput<GPUImageInput> *filter;
     NSUserDefaults *defaults;
@@ -87,6 +90,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    library = [designViewController defaultAssetsLibrary];
+
 	// Do any additional setup after loading the view.
 //    self.selectedImageView.image=self.selectedImage;
     CGRect frame = CGRectMake(0, 0, 125, 40);
@@ -108,7 +113,8 @@
     [self fillRotateMenu];
     [self fillSplitMenu];
     [self resetGestureParameters ];
-    
+    NSLog (@"image resolution is width = %f, height = %f",self.selectedImage.size.width,self.selectedImage.size.height);
+    NSLog(@"image size is %d",[UIImageJPEGRepresentation(self.selectedImage,1.0) length] );
    
     if ([defaults boolForKey:@"watermark"]) //if 0 then watermark is ON
         _watermarkOnImage.hidden=YES;
@@ -125,15 +131,16 @@
 
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    btn.tag = 19;
-//    [self frameClicked:btn];
     btn.tag=[defaults integerForKey:@"frame"];
+    if (btn.tag==0) btn.tag = 19;
+    NSLog(@"initial btn.tag is %d",btn.tag);
     [self frameClicked:btn];
+    [self frameClicked:btn];
+    [self centerImage];
     firstTimeDesign = YES;
 //    [self performSelector:@selector(frameClicked:) withObject:btn afterDelay:0.1];
 
-    if (![defaults boolForKey:@"filter"])
-        [self randomFilterPick];
-
+    
     
 //    [defaults setBool:YES forKey:kFeature0];  //test
 //    [defaults setBool:YES forKey:kFeature1];  //test
@@ -210,6 +217,9 @@
     
 }
 - (void)viewDidAppear:(BOOL)animated   {
+    if (![defaults boolForKey:@"filter"])
+        [self randomFilterPick];
+
     if (!firstTimeFilter){
         firstTimeFilter = YES;
         [self fillEffectsSlider];
@@ -410,14 +420,39 @@
     UIGraphicsEndImageContext();
     
     /* Render the screen shot at custom resolution */
-    CGRect cropRect = CGRectMake(0 ,0 ,1435 ,1435);
+    CGRect cropRect;
+    if ([defaults integerForKey:@"pixel"]==0)
+        cropRect= CGRectMake(0 ,0 ,640,640);
+    else if ([defaults integerForKey:@"pixel"]==1)
+        cropRect= CGRectMake(0 ,0 ,1280,1280);
+    else if ([defaults integerForKey:@"pixel"]==2)
+        cropRect= CGRectMake(0 ,0 ,2560,2560);
+
+
     UIGraphicsBeginImageContextWithOptions(cropRect.size, captureView.opaque, 1.0f);
     [screenshot drawInRect:cropRect];
     UIImage * customScreenShot = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return customScreenShot;
 }
-
+- (UIImage *) captureImageFromButton : (UIButton *) captureView{
+//    UIView* captureView = self.frameContainer;
+    
+    /* Capture the screen shoot at native resolution */
+    UIGraphicsBeginImageContextWithOptions(captureView.bounds.size, captureView.opaque, 0.0);
+    [captureView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage * screenshot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    /* Render the screen shot at custom resolution */
+    CGRect cropRect=CGRectMake(0 ,0 ,100,100);
+    
+    UIGraphicsBeginImageContextWithOptions(cropRect.size, captureView.opaque, 1.0f);
+    [screenshot drawInRect:cropRect];
+    UIImage * customScreenShot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return customScreenShot;
+}
 - (void) fillFrameSelectionSlider {
     //    self.frameSelectionSlider = (UIScrollView *)[self.view viewWithTag:10120];
     if (!IS_TALL_SCREEN) {
@@ -441,6 +476,7 @@
         NSLog(@"btn.tag is %d ",btn.tag);
         [btn addTarget:self action:@selector(frameClicked:) forControlEvents:UIControlEventTouchUpInside];
         NSLog(@"Frame%02d.png",ind);
+        
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"Frame%02d.png",ind]] forState:UIControlStateNormal];
         btn.alpha = 0.5;
         [btn.imageView setContentMode:UIViewContentModeScaleToFill];
@@ -450,6 +486,16 @@
     
     
 }
+
++ (UIImage *)inverseColor:(UIImage *)image
+{
+    CIImage *coreImage = [CIImage imageWithCGImage:image.CGImage];
+    CIFilter *filter = [CIFilter filterWithName:@"CIColorInvert"];
+    [filter setValue:coreImage forKey:kCIInputImageKey];
+    CIImage *result = [filter valueForKey:kCIOutputImageKey];
+    return [UIImage imageWithCIImage:result];
+}
+
 - (void) fillSecondFrameSelectionSlider {
     for (int ind = 8; ind <= 26; ind++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -863,7 +909,7 @@
 }
 
 - (UIImage *) cropImage: (UIImage *) image {
-    CGRect rect = CGRectMake(0,0,75,75);
+    CGRect rect = CGRectMake(0,0,65,65);
     UIGraphicsBeginImageContext( rect.size );
     [image drawInRect:rect];
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
@@ -874,7 +920,7 @@
 
 - (void) fillEffectsSlider {
     labelEffectsArray = [[NSMutableArray alloc]initWithObjects: @"original", @"delight", @"sunny",@"night", @"beach",@"b&w-red",@"sepia",@"water", @"b&w",@"morning", @"sky",nil];
-    labelSecondEffectsArray = [[NSMutableArray alloc]initWithObjects: @"2layer",@"warm",@"winter",@"gold",@"platinum",@"copper",@"vignette",@"white", @"crisp",@"candle",@"fall",@"film",@"foggy",@"cobalt",@"blue",@"bright",@"bleak",@"moon",@"cyan",@"soft",nil];
+    labelSecondEffectsArray = [[NSMutableArray alloc]initWithObjects: @"2layer",@"warm",@"winter",@"gold",@"platinum",@"copper",@"film",@"white", @"crisp",@"candle",@"fall",@"vignette",@"foggy",@"cobalt",@"blue",@"bright",@"bleak",@"moon",@"cyan",@"soft",nil];
     //    self.effectsSlider = (UIScrollView *)[self.view viewWithTag:10125];
 //    self.filterSelectionBar.contentSize = CGSizeMake(65 * 11+10, self.filterSelectionBar.frame.size.height);
     if (!IS_TALL_SCREEN) {
@@ -895,6 +941,7 @@
             btn.frame = CGRectMake((ind - 1 ) * 70+5, 5, 65, 65);
 
         btn.tag = ind;
+            [btn setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 13.0, 0.0)];
         //        btn.showsTouchWhenHighlighted=YES;
         btn.layer.frame = btn.frame;
         btn.layer.borderWidth=kBorderWidth;
@@ -904,14 +951,17 @@
         CGRect labelEffects;
 //        CGRect labelEffects = CGRectMake((ind - 1 )*55+5, 42, 50, 13);
         if (!IS_TALL_SCREEN)
-            labelEffects = CGRectMake((ind - 1 ) * 55+5, 42, 50, 13);
+            labelEffects = CGRectMake((ind - 1 ) * 55+5+kBorderWidth, 42-kBorderWidth, 50-2*kBorderWidth, 13);
         else
-            labelEffects = CGRectMake((ind - 1 ) * 70+5, 57, 65, 13);
+            labelEffects = CGRectMake((ind - 1 ) * 70+5+kBorderWidth, 57-kBorderWidth, 65-2*kBorderWidth, 13);
 
         UILabel *label = [[UILabel alloc] initWithFrame:labelEffects];
-        label.backgroundColor = [UIColor darkGrayColor];
+        label.backgroundColor = [UIColor lightGrayColor];
         label.alpha=0.8;
-        label.font = [UIFont boldSystemFontOfSize:12.0];
+            if (!IS_TALL_SCREEN)
+                label.font = [UIFont boldSystemFontOfSize:10.0];
+            else
+                label.font = [UIFont boldSystemFontOfSize:12.0];
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = [UIColor whiteColor];
         label.text = [labelEffectsArray objectAtIndex:ind-1];
@@ -925,8 +975,8 @@
 //        =[imageCache imageFromDiskCacheForKey:filters];
 //        if (quickFilteredImage==NULL) {
             NSLog(@"generating images");
-//            UIImage *inputImage = [UIImage imageNamed:@"balloons1.png"];
-        UIImage *inputImage = [self cropImage:self.selectedImage];
+            UIImage *inputImage = [UIImage imageNamed:@"mapleLeaf.png"];
+//        UIImage *inputImage = [self cropImage:self.selectedImage];
         
             switch (ind) {
                 case 1:{
@@ -968,13 +1018,19 @@
             }
             
             quickFilteredImage = [filter imageByFilteringImage:inputImage];
+
 //            SDImageCache *imageCache = [SDImageCache.alloc initWithNamespace:@"Bookly"];
 //            [imageCache storeImage:quickFilteredImage forKey:filters];
 //        }
         [btn setImage:quickFilteredImage forState:UIControlStateNormal];
+            if (ind>10)
+//            [self saveImage:quickFilteredImage];
+            
+
         [btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
         [self.filterSelectionBar addSubview:btn];
         [self.filterSelectionBar addSubview:label];
+//            sleep(1);
         }
     }
 }
@@ -1052,20 +1108,26 @@
         btn.tag = ind+11;
         btn.layer.borderWidth=kBorderWidth;
         btn.layer.borderColor=[[UIColor clearColor] CGColor];
-        
+            [btn setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 13.0, 0.0)];
+            btn.backgroundColor
         //        btn.showsTouchWhenHighlighted=YES;
         NSLog(@" second effects btn.tag is %d ",btn.tag);
         [btn addTarget:self action:@selector(secondEffectsClicked:) forControlEvents:UIControlEventTouchUpInside];
         CGRect labelEffects;
 //        = CGRectMake((ind - 1 )*55+5, 52+45, 50, 13);
         if (!IS_TALL_SCREEN)
-            labelEffects = CGRectMake((ind - 1 ) * 55+5, 52+45, 50, 13);
+            labelEffects = CGRectMake((ind - 1 ) * 55+5+kBorderWidth, 52+45-kBorderWidth, 50-2*kBorderWidth, 13);
         else
-            labelEffects = CGRectMake((ind - 1 ) * 70+5, 75+65-13, 65, 13);
+            labelEffects = CGRectMake((ind - 1 ) * 70+5+kBorderWidth, 75+65-13-kBorderWidth, 65-2*kBorderWidth, 13);
         UILabel *label = [[UILabel alloc] initWithFrame:labelEffects];
-        label.backgroundColor = [UIColor darkGrayColor];
+        label.backgroundColor = [UIColor lightGrayColor];
         label.alpha=0.8;
-        label.font = [UIFont boldSystemFontOfSize:12.0];
+            if (!IS_TALL_SCREEN)
+                label.font = [UIFont boldSystemFontOfSize:10.0];
+            else
+                label.font = [UIFont boldSystemFontOfSize:12.0];
+
+//        label.font = [UIFont boldSystemFontOfSize:12.0];
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = [UIColor whiteColor];
         label.text = [labelSecondEffectsArray objectAtIndex:ind-1];
@@ -1078,7 +1140,10 @@
 //        =[imageCache imageFromDiskCacheForKey:filters];
 //        if (quickFilteredImage==NULL) {
 //            NSLog(@"generating images");
-            UIImage *inputImage =  [self cropImage:self.selectedImage];
+//            UIImage *inputImage = [UIImage imageNamed:@"filterImage.png"];
+            UIImage *inputImage = [UIImage imageNamed:@"mapleLeaf.png"];
+
+//            UIImage *inputImage =  [self cropImage:self.selectedImage];
             switch (ind) {
                 case 1:{
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"2strip.png"];
@@ -1098,7 +1163,7 @@
                 case 11:{
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors.png"];
                 } break;
-                case 12: {
+                case 7: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
                 } break;
                 case 13: {
@@ -1134,7 +1199,7 @@
                 case 6: {
                     filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
                 } break;
-                case 7: {
+                case 12: {
                     filter = [[GPUImageVignetteFilter alloc] init];
                     [(GPUImageVignetteFilter *) filter setVignetteEnd:0.6];
                 } break;
@@ -1147,10 +1212,12 @@
             }
             
             quickFilteredImage = [filter imageByFilteringImage:inputImage];
-//            SDImageCache *imageCache = [SDImageCache.alloc initWithNamespace:@"Bookly"];
-//            [imageCache storeImage:quickFilteredImage forKey:filters];
-//        }
-        
+            
+//            [self performSelector:@selector(saveImage:) withObject:quickFilteredImage afterDelay:0.1];
+//            [self saveImage:quickFilteredImage];
+            if (ind >10)
+            [self saveImage:quickFilteredImage];
+
         [btn setImage:quickFilteredImage forState:UIControlStateNormal];
         [btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
 
@@ -1184,9 +1251,27 @@
 //    }
 }
 }
+- (void) saveImage : (UIImage *)image {
+    NSLog(@"image is %@, image width is %f",image, image.size.width);
+    
+    CGImageRef img = [image CGImage];
+    [library writeImageToSavedPhotosAlbum:img
+                                 metadata:nil
+                          completionBlock:nil];
+}
 
++ (ALAssetsLibrary *)defaultAssetsLibrary
+{
+    static dispatch_once_t pred = 0;
+    static ALAssetsLibrary *library = nil;
+    dispatch_once(&pred, ^{
+        library = [[ALAssetsLibrary alloc] init];
+    });
+    return library;
+}
 - (void)effectsClicked:(UIButton *)clickedBtn {
     NSLog(@"block number %d",tapBlockNumber);
+    @autoreleasepool {
 
 //    [  Flurry logEvent:@"Frame - Effects"];
 //    [labelToApplyFilterToVideo removeFromSuperview];
@@ -1206,6 +1291,7 @@
 //    effectsBtnClicked=YES;
     for (UIScrollView *blockSlider in droppableAreas){
         if (blockSlider.tag == tapBlockNumber){
+            
             if (blockSlider.subviews.count==0) return;
             UIImageView *imageView = blockSlider.subviews[0];
 //            for (int i=0;i<[self.originalImages count];i++){
@@ -1263,13 +1349,13 @@
             
                 }
             }
-//        }
+        }
 //    }
 }
 - (void)secondEffectsClicked:(UIButton *)clickedBtn {
 
 //    [Flurry logEvent:@"Frame - Second Effects"];
-    
+    @autoreleasepool {
     if (![defaults boolForKey:kFeature1]){
         [self filterAction];
         return;
@@ -1289,6 +1375,8 @@
     clickedBtn.layer.borderColor=[[UIColor blackColor] CGColor];
     for (UIScrollView *blockSlider in droppableAreas){
         if (blockSlider.tag == tapBlockNumber){
+            
+                
             if (blockSlider.subviews.count==0) return;
             UIImageView *imageView = blockSlider.subviews[0];
 //            for (int i=0;i<[self.originalImages count];i++){
@@ -1325,7 +1413,7 @@
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors.png"];
                             
                         } break;
-                        case 12: {
+                        case 7: {
                             filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
                             
@@ -1386,7 +1474,7 @@
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
                             
                         } break;
-                        case 7: {
+                        case 12: {
                             filter = [[GPUImageVignetteFilter alloc] init];
                             [(GPUImageVignetteFilter *) filter setVignetteEnd:0.6];
 //                            videoFilter = [[GPUImageVignetteFilter alloc] init];
@@ -1452,7 +1540,7 @@
                     //                                    }
                 }
 //            }
-//        }
+        }
     }
 }
 //- (void) originalClicked {
@@ -2189,6 +2277,25 @@
     NSLog(@"panY is %f",ptY);
     [sender setTranslation:CGPointMake(0, 0) inView:self.view];
 }
+- (void)centerImage {
+
+    CGPoint translation;
+
+    translation.x = -(self.selectedImage.size.width*scale - self.frameContainer.frame.size.width)/2;
+    translation.y = -(self.selectedImage.size.height*scale - self.frameContainer.frame.size.height)/2;
+    [defaults setFloat:translation.x forKey:@"PanX"];
+    [defaults setFloat:translation.y forKey:@"PanY"];
+
+    for (UIScrollView *blockSlider in droppableAreas){
+        for (UIImageView *imageView in blockSlider.subviews){
+            imageView.center = CGPointMake(imageView.center.x + translation.x,
+                                           imageView.center.y + translation.y);
+        }
+    }
+    NSLog(@"panX is %f",translation.x);
+    NSLog(@"panY is %f",translation.y);
+
+}
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     
     if ([gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]])
@@ -2275,6 +2382,7 @@
         imageWidth=imgView.frame.size.width;
         imageHeight=imgView.frame.size.height;
     }
+    scale = rate;
     //        NSLog(@"scrView content .width%f,imgView content .width%f",scrView.frame.size.width,imgView.frame.size.height);
     //        scrView.frame = CGRectMake(imgView.center.x, imgView.center.y, imgView.frame.size.width*1.25, imgView.frame.size.height*1.25);
 //    [scrView setContentSize:CGSizeMake(imgView.frame.size.width*1.2, imgView.frame.size.height*1.2)];
@@ -2393,7 +2501,7 @@
     //    resetButton.showsTouchWhenHighlighted=YES;
     [resetButton setTitle:@"reset" forState:UIControlStateNormal];
     resetButton.titleLabel.font = [UIFont systemFontOfSize:18];
-    resetButton.backgroundColor=[UIColor darkGrayColor];
+    resetButton.backgroundColor=[UIColor lightGrayColor];
     resetButton.titleLabel.textColor= [UIColor whiteColor];
     [resetButton addTarget:self action:@selector(resetRotate) forControlEvents:UIControlEventTouchUpInside];
     [self.rotateMenuView addSubview:resetButton];
@@ -2404,7 +2512,7 @@
     //    rightAngleButton.layer.borderWidth=kBorderWidth;
     //    rightAngleButton.layer.borderColor=[[UIColor clearColor] CGColor];
     [minusAngleButton setTitle:@"-10°" forState:UIControlStateNormal];
-    minusAngleButton.backgroundColor=[UIColor darkGrayColor];
+    minusAngleButton.backgroundColor=[UIColor lightGrayColor];
     [minusAngleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [minusAngleButton addTarget:self action:@selector(minusTenDegreeRotate) forControlEvents:UIControlEventTouchUpInside];
     [self.rotateMenuView addSubview:minusAngleButton];
@@ -2416,7 +2524,7 @@
     //    rightAngleButton.layer.borderWidth=kBorderWidth;
     //    rightAngleButton.layer.borderColor=[[UIColor clearColor] CGColor];
     [rightAngleButton setTitle:@"90°" forState:UIControlStateNormal];
-    rightAngleButton.backgroundColor=[UIColor darkGrayColor];
+    rightAngleButton.backgroundColor=[UIColor lightGrayColor];
     [rightAngleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [rightAngleButton addTarget:self action:@selector(rightAngleRotate) forControlEvents:UIControlEventTouchUpInside];
     [self.rotateMenuView addSubview:rightAngleButton];
@@ -2428,7 +2536,7 @@
     //    rightAngleButton.layer.borderWidth=kBorderWidth;
     //    rightAngleButton.layer.borderColor=[[UIColor clearColor] CGColor];
     [plusAngleButton setTitle:@"10°" forState:UIControlStateNormal];
-    plusAngleButton.backgroundColor=[UIColor darkGrayColor];
+    plusAngleButton.backgroundColor=[UIColor lightGrayColor];
     [plusAngleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [plusAngleButton addTarget:self action:@selector(plusTenDegreeRotate) forControlEvents:UIControlEventTouchUpInside];
     [self.rotateMenuView addSubview:plusAngleButton];
@@ -2440,7 +2548,7 @@
     //    flipButton.layer.borderWidth=kBorderWidth;
     //    flipButton.layer.borderColor=[[UIColor clearColor] CGColor];
     [flipButton setTitle:@"flip" forState:UIControlStateNormal];
-    flipButton.backgroundColor=[UIColor darkGrayColor];
+    flipButton.backgroundColor=[UIColor lightGrayColor];
     [flipButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [flipButton addTarget:self action:@selector(flip) forControlEvents:UIControlEventTouchUpInside];
     [self.rotateMenuView addSubview:flipButton];
@@ -2580,22 +2688,27 @@
 //        NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
 //        NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
 //    NSString *tagRotate;
+    NSLog(@"rotate value is %f",[defaults floatForKey:@"Rotate"]);
+     NSLog(@"sliderRotate value is %f",sliderRotate.value);
         CGFloat zoomFactor = [defaults floatForKey:@"Zoom"];
+    CGFloat totalRotate = sliderRotate.value +[defaults floatForKey:@"Rotate"];
+
         for (UIScrollView *blockSlider in droppableAreas){
 //            tagRotate = [NSString stringWithFormat:@"Rotate%d",blockSlider.tag];
 //            if (blockSlider.tag == tapBlockNumber){//split
                 if (blockSlider.subviews.count==0) return;
                 UIImageView *imageView = blockSlider.subviews[0];
                 imageView.transform = CGAffineTransformIdentity;
-                imageView.transform = CGAffineTransformRotate(imageView.transform, sliderRotate.value);
+                imageView.transform = CGAffineTransformRotate(imageView.transform, totalRotate);
                 if ([defaults boolForKey:@"Flip"])
                     imageView.transform = CGAffineTransformScale(imageView.transform, -zoomFactor, zoomFactor);
                 else
                     imageView.transform = CGAffineTransformScale(imageView.transform, zoomFactor, zoomFactor);
 //            }
         }
-        [defaults setFloat:sliderRotate.value forKey:@"Rotate"];
-    labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(sliderRotate.value)];
+//        [defaults setFloat:totalRotate  forKey:@"Rotate"];
+    totalRotate = fmodf(totalRotate, 2*M_PI);
+    labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(totalRotate)];
 }
 - (void) rightAngleRotate {
     [Flurry logEvent:@"rightAngle"];
@@ -2619,8 +2732,8 @@
 //            }
         }
         rotateAngle = fmodf(rotateAngle, 2*M_PI);
-        sliderRotate.value=rotateAngle;
-    labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(sliderRotate.value)];
+//        sliderRotate.value=rotateAngle;
+    labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(rotateAngle)];
 
 }
 
@@ -2646,8 +2759,8 @@
 //        }
     }
     rotateAngle = fmodf(rotateAngle, 2*M_PI);
-    sliderRotate.value=rotateAngle;
-    labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(sliderRotate.value)];
+//    sliderRotate.value=rotateAngle;
+    labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(rotateAngle)];
 
 }
 
@@ -2673,8 +2786,8 @@
 //        }
     }
     rotateAngle = fmodf(rotateAngle, 2*M_PI);
-    sliderRotate.value=rotateAngle;
-    labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(sliderRotate.value)];
+//    sliderRotate.value=rotateAngle;
+    labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(rotateAngle)];
 
 }
 

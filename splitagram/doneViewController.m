@@ -66,8 +66,8 @@
 }
 - (IBAction)saveImageAction:(id)sender {
     [self saveImage];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"saved to camera roll" message:nil
-                                                   delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"saved to your camera roll" message:nil
+                                                   delegate:self cancelButtonTitle:@"okay" otherButtonTitles: nil];
     [alert show];
 
 }
@@ -75,6 +75,7 @@
 - (void) saveImage {
     //save image to library and then put it in album
     CGImageRef img = [self.image CGImage];
+    NSLog(@"savedImage size is %d", [UIImageJPEGRepresentation(self.image,1.0) length]);
     [library writeImageToSavedPhotosAlbum:img
                                       metadata:nil //[info objectForKey:UIImagePickerControllerMediaMetadata]
                                completionBlock:^(NSURL* assetURL, NSError* error) {
@@ -141,7 +142,6 @@
 		shareViewController *vc = [[navigationController viewControllers] objectAtIndex:0];
         vc.image=self.image;
         NSLog(@"vc.imageDone is %@",vc.image);
-        
         //		vc.delegate = self;
 	}
 //

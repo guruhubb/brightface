@@ -30,6 +30,29 @@
     if (!IS_TALL_SCREEN) {
         self.collectionView.frame = CGRectMake(0, 95+64, 320, 480-(95+64));  // for 3.5 screen; remove autolayout
     }
+
+}
+
+- (void) showSurvey {
+    NSLog(@"showSurvey");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"are you enjoying splitagram? please rate us" message:nil
+                                                   delegate:self cancelButtonTitle:@"remind me later" otherButtonTitles:@"yes, I will rate now", @"don't ask me again", nil];
+    [alert show];
+
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"buttonIndex is %d",buttonIndex);
+    if (buttonIndex == 1) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"rateDone"];
+        [self rateApp];
+    }
+    else if (buttonIndex == 2 ){
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"rateDone"];
+    }
+    else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"showSurvey"];
+
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -37,7 +60,7 @@
     _assets = [@[] mutableCopy];
     __block NSMutableArray *tmpAssets = [@[] mutableCopy];
     ALAssetsLibrary *assetsLibrary = [ViewController defaultAssetsLibrary];
-    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         [group setAssetsFilter:[ALAssetsFilter allPhotos]];
         [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if(result)
@@ -50,7 +73,9 @@
     } failureBlock:^(NSError *error) {
         NSLog(@"Error loading images %@", error);
     }];
-
+    NSLog(@"showSurvey is %d and rateDone is %d",[[NSUserDefaults standardUserDefaults] boolForKey:@"showSurvey"],![[NSUserDefaults standardUserDefaults] boolForKey:@"rateDone"]);
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"showSurvey"]&&![[NSUserDefaults standardUserDefaults] boolForKey:@"rateDone"])
+        [self performSelector:@selector(showSurvey) withObject:nil afterDelay:0.1];
     [self performSelector:@selector(scrollToBottom) withObject:nil afterDelay:0.01];
     
 }
@@ -100,12 +125,38 @@
 
     ALAsset *asset = self.assets[selectedPhotoIndex];
     ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
-    UIImage *image = [UIImage imageWithCGImage:[defaultRep fullResolutionImage] scale:[defaultRep scale] orientation:0];
+//    UIImageOrientation orientation = UIImageOrientationUp;
+//    NSNumber* orientationValue = [asset valueForProperty:@"ALAssetPropertyOrientation"];
+//    if (orientationValue != nil) {
+//        orientation = [orientationValue intValue];
+//    }
+    
+    UIImage *image = [UIImage imageWithCGImage:[defaultRep fullResolutionImage] scale:[defaultRep scale] orientation:(UIImageOrientation)[defaultRep orientation]];
     if ([[segue identifier] isEqualToString:@"showDesign"])
     {
         designViewController *vc = [segue destinationViewController];
         vc.selectedImage=image;
     }
+}
+- (void)rateApp {
+    
+    [Flurry logEvent:@"Rate App" ];
+    
+    // Initialize Product View Controller
+    SKStoreProductViewController *storeProductViewController = [[SKStoreProductViewController alloc] init];
+    // Configure View Controller  850204569
+    [storeProductViewController setDelegate:self];
+    [storeProductViewController loadProductWithParameters:@{SKStoreProductParameterITunesItemIdentifier : @"850204569"} completionBlock:^(BOOL result, NSError *error) {
+        if (error) {
+            NSLog(@"Error %@ with User Info %@.", error, [error userInfo]);
+        } else {
+            // Present Store Product View Controller
+            [[UINavigationBar appearance] setTintColor:[UIColor blueColor]];
+            
+            [self presentViewController:storeProductViewController animated:YES completion:nil];
+        }
+    }];
+    
 }
 
 #pragma mark - assets

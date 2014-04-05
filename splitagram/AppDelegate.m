@@ -17,6 +17,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    static dispatch_once_t pred;
+    dispatch_once(&pred, ^{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"rateDone"];
+    });
 //    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)
 //    {
 //    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
@@ -56,6 +60,8 @@
 //    UINavigationController *navigationController;
 //    [navigationController.interactivePopGestureRecognizer setEnabled:NO];
 //    }
+
+
     [MKStoreManager sharedManager];
     //create album
     NSString *albumName = @"splitagram";
@@ -120,11 +126,24 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+  
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSInteger counter = [[NSUserDefaults standardUserDefaults] integerForKey:@"counter" ];
+    counter++;
+    NSLog(@"counter is %d",counter);
+
+    if (counter>1){
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"showSurvey"];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"counter" ];
+        counter = 0;
+    }
+    [[NSUserDefaults standardUserDefaults] setInteger:counter forKey:@"counter" ];
+    
+   
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

@@ -53,6 +53,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"showSurvey"];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"counter" ];
     }
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void) viewDidAppear:(BOOL)animated {

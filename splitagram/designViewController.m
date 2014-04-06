@@ -159,7 +159,7 @@
     if (btn.tag==0 || btn.tag > 25) btn.tag = 19;
     NSLog(@"initial btn.tag is %d",btn.tag);
     [self frameClicked:btn];
-    [self frameClicked:btn];
+//    [self frameClicked:btn];
     [self centerImage];
     firstTimeDesign = YES;
 //    if (![defaults boolForKey:@"filter"])
@@ -1624,6 +1624,7 @@
         nStyle = style;
         nSubStyle = sub;
         for (UIScrollView *blockSlider in droppableAreas){
+
             if (blockSlider.tag == 0) {
                 rectBlockSlider1 = [self getScrollFrame1:nStyle subStyle:nSubStyle];
                 blockSlider.frame = rectBlockSlider1;
@@ -1640,23 +1641,39 @@
                 rectBlockSlider4 = [self getScrollFrame4:nStyle subStyle:nSubStyle];
                 blockSlider.frame = rectBlockSlider4;
             }
-            UIImageView *imageView = [blockSlider.subviews firstObject];
-            for (UIView *view in blockSlider.subviews)  {
-                [view removeFromSuperview];
-            }
-            UIImageView *replaceImage = [[UIImageView alloc] initWithImage:imageView.image];
-            replaceImage.tag = imageView.tag;
-            replaceImage.userInteractionEnabled = YES;
-            [blockSlider addSubview:replaceImage];
-            [self fitImageToScroll:imageView SCROLL:blockSlider scrollViewNumber:blockSlider.tag  angle:[defaults floatForKey:@"Rotate"] ];
-        }
-        for (UIScrollView *blockSlider in droppableAreas)
-            for (UIImageView *imageView in blockSlider.subviews){
-                imageView.center = CGPointMake(imageView.center.x + [defaults floatForKey:@"PanX"],
-                                               imageView.center.y + [defaults floatForKey:@"PanY"]);
-            }
 
-        [self.frameContainer bringSubviewToFront:_watermarkOnImage];
+            [blockSlider setContentOffset:CGPointMake(blockSlider.frame.origin.x, blockSlider.frame.origin.y) animated:NO];
+//            UIImageView *imageView = [blockSlider.subviews firstObject];
+//            for (UIImageView *imageView in blockSlider.subviews){
+//                 [imageView setFrame:CGRectMake([defaults floatForKey:@"PanX"],[defaults floatForKey:@"PanY"], imageView.frame.size.width, imageView.frame.size.height)];
+//            }
+//            imageView.center = CGPointMake(imageView.center.x + [defaults floatForKey:@"PanX"],
+//                                           imageView.center.y + [defaults floatForKey:@"PanY"]);
+            
+//            float zoomFactor = [defaults floatForKey:@"Zoom"];
+//            imageView.transform = CGAffineTransformRotate(imageView.transform, [defaults floatForKey:@"Rotate"]);
+//            if ([defaults boolForKey:@"Flip"])
+//                imageView.transform = CGAffineTransformScale(imageView.transform, -zoomFactor, zoomFactor);
+//            else
+//                imageView.transform = CGAffineTransformScale(imageView.transform, zoomFactor, zoomFactor);
+            
+//            UIImageView *imageView = [blockSlider.subviews firstObject];
+//            for (UIView *view in blockSlider.subviews)  {
+//                [view removeFromSuperview];
+//            }
+//            UIImageView *replaceImage = [[UIImageView alloc] initWithImage:imageView.image];
+//            replaceImage.tag = imageView.tag;
+//            replaceImage.userInteractionEnabled = YES;
+//            [blockSlider addSubview:replaceImage];
+//            [self fitImageToScroll:imageView SCROLL:blockSlider scrollViewNumber:blockSlider.tag  angle:[defaults floatForKey:@"Rotate"] ];
+        }
+//        for (UIScrollView *blockSlider in droppableAreas)
+//            for (UIImageView *imageView in blockSlider.subviews){
+//                imageView.center = CGPointMake(imageView.center.x + [defaults floatForKey:@"PanX"],
+//                                               imageView.center.y + [defaults floatForKey:@"PanY"]);
+//            }
+//
+//        [self.frameContainer bringSubviewToFront:_watermarkOnImage];
 
     }
 }
@@ -1870,6 +1887,7 @@
     //        [imgView setFrame:CGRectMake(scrView.center.x, scrView.center.y, szImage.width, szImage.height)];
 //    [imgView setFrame:CGRectMake(0.0, 0.0, szImage.width, szImage.height)]; //split
 //    NSLog (@"imageView frame size is %f width %f height",szImage.width,szImage.height);
+    
     if(!isinf(rate)) {
      [imgView setFrame:CGRectMake(0.0,0.0, imgView.frame.size.width*rate, imgView.frame.size.height*rate)];  //split
         NSLog (@"imageView frame size is %f width %f height",imgView.frame.size.width,imgView.frame.size.height);
@@ -1877,10 +1895,10 @@
         imageHeight=imgView.frame.size.height;
     }
     scale = rate;
+    
     //        NSLog(@"scrView content .width%f,imgView content .width%f",scrView.frame.size.width,imgView.frame.size.height);
     //        scrView.frame = CGRectMake(imgView.center.x, imgView.center.y, imgView.frame.size.width*1.25, imgView.frame.size.height*1.25);
 //    [scrView setContentSize:CGSizeMake(imgView.frame.size.width*1.2, imgView.frame.size.height*1.2)];
-    CGPoint pt;
     //        if (scrView.frame.size.width-2 <= scrView.frame.size.height){
     //        if ((imgView.frame.size.width >= imgView.frame.size.height)|| (scrView.frame.size.width <= scrView.frame.size.height)){
     
@@ -1892,6 +1910,7 @@
 //    pt.y = (imgView.frame.size.height - scrView.frame.size.height)/2;
     //        }
     
+    CGPoint pt;
     pt.x =   scrView.frame.origin.x ;//splitagram
     pt.y =   scrView.frame.origin.y;//splitagram
     
@@ -1940,6 +1959,7 @@
     //    [self resetPostionZoomParameters];
     //    [self resetGestureParameters];
 //    NSLog(@"angle is %f",angle);
+    
     float zoomFactor = [defaults floatForKey:@"Zoom"];
     imgView.transform = CGAffineTransformRotate(imgView.transform, angle);
     if ([defaults boolForKey:@"Flip"])
@@ -2302,6 +2322,36 @@
         }
 }
 
+- (void) buttonOnFrame {
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, 0, 10, 10);
+    [btn addTarget:self action:@selector(frameBorderTouched:) forControlEvents:UIControlEventTouchUpInside];    
+    [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"lockImage.png"]] forState:UIControlStateNormal];
+    btn.alpha = 0.5;
+    [blockSlider1 addSubview:btn];
+    
+    if (nStyle == 1) {
+        switch (nSubStyle) {
+            case 1:
+                break;
+                
+            default:
+                break;
+        }
+        
+    }
+    else if (nStyle == 2) {
+        switch (nSubStyle) {
+            case 1:
+                
+                break;
+                
+            default:
+                break;
+        }
+
+    }
+}
 
 - (CGRect) getScrollFrame1:(int)style subStyle:(int)sub
 {
@@ -2431,11 +2481,11 @@
     
     else if (style == 2) {
         if (sub == 1) {
-            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2 + adjustedWidth1;
-            scroll_height = self.frameContainer.frame.size.height - nMargin * 2+ adjustedHeight1;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2 ;
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 2;
         }
         else if (sub == 2) {
-            scroll_width = self.frameContainer.frame.size.width - nMargin * 2+ adjustedWidth1;
+            scroll_width = self.frameContainer.frame.size.width - nMargin * 2;
             scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) / 2;
         }
         else if (sub == 3){
@@ -2679,10 +2729,8 @@
             rc = CGRectMake(5, 5, 75+nMargin, 75 );
             return rc;
         }
-        
     }
-    
-    rc = CGRectMake(nMargin, nMargin, scroll_width, scroll_height );
+    rc = CGRectMake(nMargin+adjustedPtX1, nMargin+adjustedPtY1, scroll_width+adjustedWidth1, scroll_height+adjustedHeight1 );
     NSLog(@"nMargin=%d, nMargin=%d,width=%f , height=%f",nMargin, nMargin,scroll_width,scroll_height);
     return rc;
 }

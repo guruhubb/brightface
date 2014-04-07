@@ -385,7 +385,7 @@
 }
 - (void)restorePurchases {
     
-        if( [[NSUserDefaults standardUserDefaults] boolForKey:@"restorePurchases"]) {
+        if( [defaults boolForKey:@"restorePurchases"]) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"already restored" message:nil
                                                            delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
             [alert show];
@@ -397,7 +397,7 @@
                                                            delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
             [alert show];
             [self updateAppViewAndDefaults];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"restorePurchases"];
+            [defaults setBool:YES forKey:@"restorePurchases"];
         } onError:nil];
     
 }

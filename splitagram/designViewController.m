@@ -147,6 +147,7 @@
     dispatch_once(&pred, ^{
         nMargin = 5;
         [defaults setInteger:5 forKey:@"Split"];
+        sliderSplit.value = nMargin;
     });
 
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -169,7 +170,8 @@
  
     btn.tag = number;
     tapBlockNumber=1;
-    [self effectsClicked:btn];
+    if (![defaults boolForKey:@"filter"])
+        [self effectsClicked:btn];
 }
 - (void) randomFilterPick {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -241,14 +243,14 @@
 - (void) updateAppViewAndDefaults {
     
         if ([MKStoreManager isFeaturePurchased:kFeature0])
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFeature0];
+            [defaults setBool:YES forKey:kFeature0];
         else
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFeature0];
+            [defaults setBool:NO forKey:kFeature0];
         
         if([MKStoreManager isFeaturePurchased:kFeature1])
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFeature1];
+            [defaults setBool:YES forKey:kFeature1];
         else
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFeature1];
+            [defaults setBool:NO forKey:kFeature1];
 }
 
 - (void)inAppBuyAction:(int)tag {
@@ -277,7 +279,7 @@
    
              UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Successful" message:nil
                                                             delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-             [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:string];
+             [defaults setBool:YES  forKey:string];
              [alert show];
              [self updateAppViewAndDefaults];
 
@@ -357,14 +359,13 @@
         self.frameSelectionBar.contentSize = CGSizeMake(55 * 19+10, self.frameSelectionBar.frame.size.height);
     else
         self.frameSelectionBar.contentSize = CGSizeMake(70 * 19+10, 151);
-    
     for (int ind = 7; ind <= 25; ind++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         if (!IS_TALL_SCREEN)
             btn.frame = CGRectMake((ind - 7 ) * 55+5, 5, 50, 50);
         else
             btn.frame = CGRectMake((ind - 7 ) * 70+5, 5, 65, 65);
-        
+
         btn.tag = ind;
         btn.layer.borderWidth=kBorderWidth;
         btn.layer.borderColor=[[UIColor clearColor] CGColor];
@@ -372,7 +373,7 @@
         NSLog(@"Frame%02d.png",ind);
         
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"Frame%02d.png",ind]] forState:UIControlStateNormal];
-        btn.alpha = 0.2;
+        btn.alpha = 0.4;
         [btn.imageView setContentMode:UIViewContentModeScaleToFill];
 
         [self.frameSelectionBar addSubview:btn];
@@ -392,8 +393,8 @@
         [btn addTarget:self action:@selector(secondFrameClicked:) forControlEvents:UIControlEventTouchUpInside];
         NSLog(@"secondFrame%02d.png",ind);
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"secondFrame%02d.png",ind]] forState:UIControlStateNormal];
-        btn.alpha = 0.2;
         [btn.imageView setContentMode:UIViewContentModeScaleToFill];
+        btn.alpha = 0.4;
         [self.frameSelectionBar addSubview:btn];
         
         if (![defaults boolForKey:kFeature0]){
@@ -416,7 +417,7 @@
         frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
     }
     
-    clickedBtn.layer.borderColor=[[UIColor blackColor] CGColor];
+    clickedBtn.layer.borderColor=[[UIColor redColor] CGColor];
     
     switch (clickedBtn.tag) {
         case 1:
@@ -533,8 +534,8 @@
             UIButton *frameButton = (UIButton *)[_frameSelectionBar viewWithTag:i];
             frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
         }
-        clickedBtn.layer.borderColor=[[UIColor blackColor] CGColor];
-        
+        clickedBtn.layer.borderColor=[[UIColor redColor] CGColor];
+
         switch (clickedBtn.tag-25) {
             case 1:
                 
@@ -1189,7 +1190,6 @@
         nStyle = style;
         nSubStyle = sub;
         for (UIScrollView *blockSlider in droppableAreas){
-
             if (blockSlider.tag == 0) {
                 rectBlockSlider1 = [self getScrollFrame1:nStyle subStyle:nSubStyle];
                 blockSlider.frame = rectBlockSlider1;
@@ -1206,7 +1206,6 @@
                 rectBlockSlider4 = [self getScrollFrame4:nStyle subStyle:nSubStyle];
                 blockSlider.frame = rectBlockSlider4;
             }
-
             [blockSlider setContentOffset:CGPointMake(blockSlider.frame.origin.x, blockSlider.frame.origin.y) animated:NO];
         }
     }
@@ -1271,21 +1270,22 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     
-    if ([gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]])
-        return YES;
-    else
+//    if ([gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]])
+//        return YES;
+//    else
         return NO;
 }
 // this allows you to dispatch touches
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    return YES;
-}
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+//    return YES;
+//}
 
 -(void) tapBlock :(UITapGestureRecognizer *)recognizer{
     for (UIScrollView *blockSlider in droppableAreas) {
         CGPoint tappedBlock = [recognizer locationInView:blockSlider];
         if ([blockSlider pointInside:tappedBlock withEvent:nil]) {
             tapBlockNumber = blockSlider.tag;
+            NSLog(@"tapblocknumber is %d",tapBlockNumber);
         }
     }
     [UIView animateWithDuration:2.0
@@ -2129,15 +2129,15 @@
             nLeftMargin = self.frameContainer.frame.size.width - nMargin - scroll_width;
             nTopMargin = nMargin;
         } else if (sub == 5) {
-            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3+2;
             scroll_height = self.frameContainer.frame.size.height - nMargin * 2;
             nTopMargin = nMargin;
-            nLeftMargin = nMargin * 2 + scroll_width;
+            nLeftMargin = nMargin * 2 + scroll_width-3;
         } else if (sub == 6) {
             scroll_width = self.frameContainer.frame.size.width - nMargin * 2;
-            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 ) / 3;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 ) / 3+2;
             nLeftMargin = nMargin;
-            nTopMargin = nMargin * 2 + scroll_height;
+            nTopMargin = nMargin * 2 + scroll_height-3;
         }
         else if (sub == 7) {
             rc = CGRectMake(70-nMargin,106-nMargin/4,150+nMargin*3,98+nMargin/2 );
@@ -2220,10 +2220,10 @@
             nTopMargin = self.frameContainer.frame.size.height - nMargin - scroll_height;
             nLeftMargin = nMargin;
         } else if (sub == 7) {
-            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3+2;
             scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
             nTopMargin = nMargin;
-            nLeftMargin = nMargin * 2 + scroll_width;
+            nLeftMargin = nMargin * 2 + scroll_width-3;
         }else if (sub == 8){
             scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
             scroll_height = (self.frameContainer.frame.size.height - nMargin * 3)*6/17;
@@ -2395,19 +2395,19 @@
             nTopMargin = nMargin * 3 + scroll_height * 2;
         } else if (sub == 4) {
             scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
-            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 ) / 3;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 ) / 3+3;
             nLeftMargin = self.frameContainer.frame.size.width - nMargin - scroll_width;
-            nTopMargin = nMargin * 2 + scroll_height;
+            nTopMargin = nMargin * 2 + scroll_height-4;
         } else if (sub == 5) {
             scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) * 3 / 5;
-            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 ) / 3;
-            nTopMargin = nMargin * 2 + scroll_height;
+            scroll_height = (self.frameContainer.frame.size.height - nMargin * 4 ) / 3+3;
+            nTopMargin = nMargin * 2 + scroll_height-4;
             nLeftMargin = nMargin;
         } else if (sub == 6) {
-            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3+3;
             scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;
             nTopMargin = self.frameContainer.frame.size.height - nMargin - scroll_height;
-            nLeftMargin = nMargin * 2 + scroll_width;
+            nLeftMargin = nMargin * 2 + scroll_width-4;
         } else if (sub == 7) {
             scroll_width = (self.frameContainer.frame.size.width - nMargin * 4 ) / 3;
             scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) * 3 / 5;

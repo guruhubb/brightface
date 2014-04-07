@@ -14,10 +14,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    static dispatch_once_t pred;
-    dispatch_once(&pred, ^{
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"rateDone"];
-    });
+//    static dispatch_once_t pred;
+//    dispatch_once(&pred, ^{
+//    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"rateDone"];
+//    });
 //    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)
 //    {
 //    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {

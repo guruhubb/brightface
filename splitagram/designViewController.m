@@ -1216,18 +1216,14 @@
 - (IBAction)handlePinchImage:(UIPinchGestureRecognizer *)sender {
     if (tapBlockNumber !=100){
         CGFloat factor = [(UIPinchGestureRecognizer *)sender scale];
-//        NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
         CGFloat factorVideo = [defaults floatForKey:@"Zoom"]*factor;
         if (factorVideo > kZoomMin && factorVideo < kZoomMax){
             for (UIScrollView *blockSlider in droppableAreas){
-//                if (blockSlider.tag == tapBlockNumber){  //split
                     if (blockSlider.subviews.count==0) return;
                     UIImageView *imageView = blockSlider.subviews[0];
                     imageView.transform = CGAffineTransformScale(imageView.transform, factor, factor);
-//                }
             }
             [defaults setFloat:factorVideo forKey:@"Zoom"];
-//            NSLog(@"factor is %f and %f and %@",factorVideo, factor, tagZoom);
             sliderZoom.value = factorVideo;
         }
         sender.scale = 1;
@@ -1292,7 +1288,6 @@
             tapBlockNumber = blockSlider.tag;
         }
     }
-//    __block CGPoint tappedBlock;
     [UIView animateWithDuration:2.0
                      animations:^{
                          for (UIScrollView *blockSlider in droppableAreas){

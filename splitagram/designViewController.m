@@ -114,8 +114,6 @@
     [super viewDidLoad];
     library = [designViewController defaultAssetsLibrary];
 
-	// Do any additional setup after loading the view.
-//    self.selectedImageView.image=self.selectedImage;
     CGRect frame = CGRectMake(0, 0, 125, 40);
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.backgroundColor = [UIColor clearColor];
@@ -137,9 +135,7 @@
     [self fillRotateMenu];
     [self fillSplitMenu];
     [self resetGestureParameters ];
-    NSLog (@"image resolution is width = %f, height = %f",self.selectedImage.size.width,self.selectedImage.size.height);
-    NSLog(@"image size is %d",[UIImageJPEGRepresentation(self.selectedImage,1.0) length] );
-   
+    
     if ([defaults boolForKey:@"watermark"]) //if 0 then watermark is ON
         _watermarkOnImage.hidden=YES;
     
@@ -154,16 +150,13 @@
     });
 
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    btn.tag = 19;
     btn.tag=[defaults integerForKey:@"frame"];
     if (btn.tag==0 || btn.tag > 25) btn.tag = 19;
-    NSLog(@"initial btn.tag is %d",btn.tag);
     [self frameClicked:btn];
-//    [self frameClicked:btn];
+    [self frameClicked:btn];
     [self centerImage];
     firstTimeDesign = YES;
-//    if (![defaults boolForKey:@"filter"])
-//        [self randomFilterPick];
+
 //    [defaults setBool:YES forKey:kFeature0];  //test
 //    [defaults setBool:YES forKey:kFeature1];  //test
     
@@ -173,10 +166,7 @@
         number = 1;
     }
     [defaults setInteger:number forKey:@"number"];
-
-    //    dispatch_queue_t queue = dispatch_queue_create("com.saswata.queue", DISPATCH_QUEUE_CONCURRENT);
-    //    dispatch_async(queue, ^{
-    
+ 
     btn.tag = number;
     tapBlockNumber=1;
     [self effectsClicked:btn];
@@ -185,15 +175,6 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     int number = [defaults integerForKey:@"number"];
     NSLog(@"number is %d",number);
-//    if (number > 9) {
-//        number = 1;
-//    }
-//    dispatch_queue_t queue = dispatch_queue_create("com.saswata.queue", DISPATCH_QUEUE_CONCURRENT);
-//    dispatch_async(queue, ^{
-
-//    btn.tag = number;
-//    tapBlockNumber=1;
-//    [self effectsClicked:btn];
 
     btn.tag = number+1;
     tapBlockNumber=2;
@@ -216,21 +197,6 @@
     [defaults setFloat:0.0f forKey:@"Rotate"];
     [defaults setFloat:1.0f forKey:@"Zoom"];
     [defaults setBool:NO forKey:@"Flip"];
-    
-//    [defaults setFloat:0.0f forKey:@"PanX1"];
-//    [defaults setFloat:0.0f forKey:@"PanY1"];
-//    [defaults setFloat:0.0f forKey:@"Rotate1"];
-//    [defaults setFloat:1.0f forKey:@"Zoom1"];
-//    
-//    [defaults setFloat:0.0f forKey:@"PanX2"];
-//    [defaults setFloat:0.0f forKey:@"PanY2"];
-//    [defaults setFloat:0.0f forKey:@"Rotate2"];
-//    [defaults setFloat:1.0f forKey:@"Zoom2"];
-//    
-//    [defaults setFloat:0.0f forKey:@"PanX3"];
-//    [defaults setFloat:0.0f forKey:@"PanY3"];
-//    [defaults setFloat:0.0f forKey:@"Rotate3"];
-//    [defaults setFloat:1.0f forKey:@"Zoom3"];
     
 }
 - (void)viewWillAppear:(BOOL)animated   {
@@ -266,66 +232,11 @@
     popupQuery.tag=1;
     [popupQuery showInView:self.view];
 }
-//-(void)watermarkAction
-//{
-//    UIActionSheet *popupQuery;
-//    if (![defaults boolForKey:kFeature2]){  //if not purchased
-//        popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"remove watermark",@"buy for $1.99",nil];
-//        popupQuery.tag=2;
-//        [popupQuery showInView:self.view];
-//        _watermark.on = YES;
-//    }
-//    else {  //if purchased
-//        if (_watermark.on) {
-//            _watermark.on = NO;
-//            _watermarkOnImage.hidden=YES;
-//        }
-//        else {
-//            _watermark.on = YES;
-//            _watermarkOnImage.hidden=NO;
-//        }
-//    }
-//}
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-//    if (actionSheet.tag == 0) {
         if (buttonIndex==1){
             [self inAppBuyAction:actionSheet.tag];
         }
-//        else if (buttonIndex==1)[defaults setBool:YES forKey:@"crop"];
-        
-//    }
-//    else if (actionSheet.tag == 1) {
-//        if (buttonIndex==0){
-//            [self inAppBuyAction:actionSheet.tag];
-//        }
-////        else if (buttonIndex==1)[defaults setBool:YES forKey:@"white"];
-//    }
-//    if (actionSheet.tag == 2) {
-//        if (buttonIndex==0 || buttonIndex ==2){
-//            if (_watermark.on) {
-//                _watermark.on = NO;
-//                _watermarkOnImage.hidden=YES;
-//            }
-//            else {
-//                _watermark.on = YES;
-//                _watermarkOnImage.hidden=NO;
-//            }
-//        }
-//    }
-//            [self inAppBuyAction:actionSheet.tag];
-//        }
-//        //        else if (buttonIndex==1)[defaults setBool:YES forKey:@"white"];
-//    }
-//    
-//    UILabel *label1 = (UILabel *) [self.view viewWithTag:100];
-//    UILabel *label2 = (UILabel *) [self.view viewWithTag:101];
-//    [label1 removeFromSuperview];
-//    [label2 removeFromSuperview];
-//    
-//    [self.settingsTableView reloadData];
-    
 }
-
 
 - (void) updateAppViewAndDefaults {
     
@@ -338,7 +249,6 @@
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFeature1];
         else
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFeature1];
-    
 }
 
 - (void)inAppBuyAction:(int)tag {
@@ -384,35 +294,13 @@
     {
         firstTimeDesign=NO;
         doneViewController *vc = [segue destinationViewController];
-//        vc.image = [self captureScreenshot];
         vc.image = [self captureImage];
-//        NSData *imageData = [[NSData alloc] initWithData:UIImageJPEGRepresentation((vc.image), 1.0)];
-//        
-//        int imageSize = imageData.length;
-//        NSLog(@"SIZE OF IMAGE: %i ", imageSize);
-
-        
-//        for (UIScrollView *blockSlider in droppableAreas)
-//            [blockSlider.layer setBorderColor:[[UIColor clearColor] CGColor]];
-//        doneViewController *vc = [segue destinationViewController];
-//        CGRect rect = _frameContainer.frame;//[[UIScreen mainScreen] bounds];
-//        //    UIGraphicsBeginImageContext(rect.size);
-//        UIGraphicsBeginImageContextWithOptions(rect.size, YES, 2.0);  //v1.0 bookly use this instead of withoutOptions and 2.0 magnification to give a sharper image  //v1.0g bookly Scaling at 2.0 is too much pixels and too big of an image to email.  0.0 goes to default image size of the device which makes it pretty large.  So the optimum is 1.25 scaling with 0.6 compression to keep most images at around 50kB.
-//        CGContextRef context = UIGraphicsGetCurrentContext();
-//        
-//        [_frameContainer.layer renderInContext:context];
-//        vc.image = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();
-//        vc.image=self.selectedImage;
     }
 }
 
 - (UIImage *) captureScreenshot {
-    //        for (UIScrollView *blockSlider in droppableAreas)
-    //            [blockSlider.layer setBorderColor:[[UIColor clearColor] CGColor]];
     CGRect rect = _frameContainer.frame;//[[UIScreen mainScreen] bounds];
-    //    UIGraphicsBeginImageContext(rect.size);
-    UIGraphicsBeginImageContextWithOptions(rect.size, YES, 2.0);  //v1.0 bookly use this instead of withoutOptions and 2.0 magnification to give a sharper image  //v1.0g bookly Scaling at 2.0 is too much pixels and too big of an image to email.  0.0 goes to default image size of the device which makes it pretty large.  So the optimum is 1.25 scaling with 0.6 compression to keep most images at around 50kB.
+    UIGraphicsBeginImageContextWithOptions(rect.size, YES, 2.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     [_frameContainer.layer renderInContext:context];
@@ -440,7 +328,6 @@
     else if ([defaults integerForKey:@"pixel"]==2)
         cropRect= CGRectMake(0 ,0 ,2560,2560);
 
-
     UIGraphicsBeginImageContextWithOptions(cropRect.size, captureView.opaque, 1.0f);
     [screenshot drawInRect:cropRect];
     UIImage * customScreenShot = UIGraphicsGetImageFromCurrentImageContext();
@@ -466,26 +353,21 @@
     return customScreenShot;
 }
 - (void) fillFrameSelectionSlider {
-    //    self.frameSelectionSlider = (UIScrollView *)[self.view viewWithTag:10120];
-    if (!IS_TALL_SCREEN) {
+    if (!IS_TALL_SCREEN)
         self.frameSelectionBar.contentSize = CGSizeMake(55 * 19+10, self.frameSelectionBar.frame.size.height);
-    } else {
+    else
         self.frameSelectionBar.contentSize = CGSizeMake(70 * 19+10, 151);
-//        self.frameSelectionBar.frame=CGRectMake(0, 353, 320, 151);
-    }
+    
     for (int ind = 7; ind <= 25; ind++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         if (!IS_TALL_SCREEN)
             btn.frame = CGRectMake((ind - 7 ) * 55+5, 5, 50, 50);
         else
             btn.frame = CGRectMake((ind - 7 ) * 70+5, 5, 65, 65);
-            
         
         btn.tag = ind;
-        //            btn.showsTouchWhenHighlighted=YES;
         btn.layer.borderWidth=kBorderWidth;
         btn.layer.borderColor=[[UIColor clearColor] CGColor];
-        NSLog(@"btn.tag is %d ",btn.tag);
         [btn addTarget:self action:@selector(frameClicked:) forControlEvents:UIControlEventTouchUpInside];
         NSLog(@"Frame%02d.png",ind);
         
@@ -495,17 +377,6 @@
 
         [self.frameSelectionBar addSubview:btn];
     }
-    
-    
-}
-
-+ (UIImage *)inverseColor:(UIImage *)image
-{
-    CIImage *coreImage = [CIImage imageWithCGImage:image.CGImage];
-    CIFilter *filter = [CIFilter filterWithName:@"CIColorInvert"];
-    [filter setValue:coreImage forKey:kCIInputImageKey];
-    CIImage *result = [filter valueForKey:kCIOutputImageKey];
-    return [UIImage imageWithCIImage:result];
 }
 
 - (void) fillSecondFrameSelectionSlider {
@@ -539,56 +410,12 @@
 
 - (void)frameClicked:(UIButton *)clickedBtn
 {
-//    NSLog(@"draggable %@, originalimagescount is %d, arrImagescount is %d",self.draggableSubjects, self.originalImages.count, self.arrImages.count);
-    //    if (self.originalImages.count !=self.arrImages.count) return;
-    
-//    if (firstTime){
-//        [self setupTextBox];
-//        
-//        
-//        _textOne.hidden=YES;
-//        [self photoFrameView:nil];
-//        //        [self.dragRegion setFrame:CGRectMake(self.dragRegion.frame.origin.x, 400, self.dragRegion.frame.size.width, self.dragRegion.frame.size.height)];
-//        //        self.photoSlider.hidden=NO;
-//        //        [self fillSolidColorSelectionSlider];
-//        //        [self fillBlendSlider];
-//        //        [self fillFontColorSlider];
-//        //        [self fillFontSlider];
-//        //        [self fillStickerSlider];
-//        //        [self setUpFontsAndColors];
-//        //
-//        //        [self fillSecondBlendSlider];
-//        //        [self fillSecondFontSlider];
-//        //        [self fillSecondStickerSlider];
-//    }
-//    else
-//        [Flurry logEvent:@"Frame - Frames"];
-    
-//    if (![self.draggableSubjects count]) return;
-//    _firstHelpView.hidden=YES;
-    //    [self unHideSideButtons];
-    
-    
-    //    [self.view bringSubviewToFront:self.panView];
-    
-//    UIScrollView *scrllFrame = (UIScrollView *)[self.view viewWithTag:10120];
-//    for (int i = 1; i <= 25; i++) {
-//        UIButton *frameButton = (UIButton *)[scrllFrame viewWithTag:i];
-//        frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
-//        
-//        //        if (frameButton.highlighted==YES)
-//        //            frameButton.highlighted=NO;
-//    }
     [defaults setInteger:clickedBtn.tag forKey:@"frame"];
     for (int i = 1; i <= 35+25; i++) {
         UIButton *frameButton = (UIButton *)[_frameSelectionBar viewWithTag:i];
         frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
-        
-        //        if (frameButton.highlighted==YES)
-        //            frameButton.highlighted=NO;
     }
     
-    //    [self performSelector:@selector(highlightButton:) withObject:clickedBtn afterDelay:0.0];
     clickedBtn.layer.borderColor=[[UIColor blackColor] CGColor];
     
     switch (clickedBtn.tag) {
@@ -698,54 +525,14 @@
 {
     [defaults setInteger:clickedBtn.tag forKey:@"frame"];
 
-//    NSLog(@"second frame clicked ");
     if (![defaults boolForKey:kFeature0]){
         [self frameAction];
         return;
     }
-//    else {
-//
-//        if (firstTime){
-//            [self setupTextBox];
-//            
-//            _textOne.hidden=YES;
-//            //        [self fillPhotoSlider];
-//            [self photoFrameView:nil];
-            //        [self.dragRegion setFrame:CGRectMake(self.dragRegion.frame.origin.x, 400, self.dragRegion.frame.size.width, self.dragRegion.frame.size.height)];
-            //        self.photoSlider.hidden=NO;
-            //        [self fillSolidColorSelectionSlider];
-            //        [self fillBlendSlider];
-            //        [self fillFontColorSlider];
-            //        [self fillFontSlider];
-            //        [self fillStickerSlider];
-            //        [self setUpFontsAndColors];
-            //
-            //        [self fillSecondBlendSlider];
-            //        [self fillSecondFontSlider];
-            //        [self fillSecondStickerSlider];
-//        }
-//        else
-//            [Flurry logEvent:@"Frame - Second Frames"];
-//        
-//        if (![self.draggableSubjects count]) return;
-//        _firstHelpView.hidden=YES;
-//        [self unHideSideButtons];
-    
-//        for (int i = 1; i <= 25; i++) {
-//            UIButton *frameButton = (UIButton *)[frameSelectionSlider viewWithTag:i];
-//            frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
-//            
-//            //        if (frameButton.highlighted==YES)
-//            //            frameButton.highlighted=NO;
-//        }
         for (int i = 1; i <= 35+25; i++) {
             UIButton *frameButton = (UIButton *)[_frameSelectionBar viewWithTag:i];
             frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
-            
-            //        if (frameButton.highlighted==YES)
-            //            frameButton.highlighted=NO;
         }
-        //    [self performSelector:@selector(highlightButton:) withObject:clickedBtn afterDelay:0.0];
         clickedBtn.layer.borderColor=[[UIColor blackColor] CGColor];
         
         switch (clickedBtn.tag-25) {
@@ -975,119 +762,13 @@
         label.layer.shadowColor= [UIColor blackColor].CGColor;
         label.layer.shadowOpacity = 0.8;
 
-//        UIImage *quickFilteredImage;
-//
-//            NSLog(@"generating images");
-//            UIImage *inputImage = [UIImage imageNamed:@"mapleLeaf.png"];
-////        UIImage *inputImage = [self cropImage:self.selectedImage];
-//        
-//            switch (ind) {
-//                case 1:{
-//                    filter = [[GPUImageFilter alloc] init]; //original
-//                } break;
-//                case 2: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
-//                } break;
-//                case 3: {
-//                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
-//                } break;
-//                case 10: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
-//                } break;
-//                case 11: {
-//                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
-//                } break;
-//                case 4:{
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
-//                } break;
-//                case 5: {
-//                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
-//                } break;
-//                case 6: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
-//                } break;
-//                case 7: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
-//                } break;
-//                case 8: {
-//                    filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
-//                } break;
-//                case 9: {
-//                    filter = [[GPUImageGrayscaleFilter alloc] init];
-//                } break;
-//                default:
-//                    break;
-//                    
-//            }
-//            
-//            quickFilteredImage = [filter imageByFilteringImage:inputImage];
-
-
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"filter%02d.png",ind]] forState:UIControlStateNormal];
-
-            
-
         [btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
         [self.filterSelectionBar addSubview:btn];
         [self.filterSelectionBar addSubview:label];
         }
 }
 
-- (void) turnOnIndicator {
-    UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc]     initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    activityView.center=self.view.center;
-    activityView.layer.shadowOffset = CGSizeMake(1, 1);
-    activityView.layer.shadowColor = [UIColor blackColor].CGColor;
-    activityView.layer.shadowOpacity=0.8 ;
-    
-    
-    activityView.tag = 10001;
-    activityView.transform = CGAffineTransformScale(activityView.transform, 1.5, 1.5);
-    [activityView startAnimating];
-    [self.view addSubview:activityView];
-    //
-    //    UIView *view = [[UIView alloc ] initWithFrame: CGRectMake(0, 0, 50, 50)];
-    //    view.layer.cornerRadius=5.0;
-    //    view.layer.shadowOffset = CGSizeMake(2, 2);
-    //    view.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-    //    view.layer.shadowOpacity = 1.0;
-    //    view.layer.shouldRasterize = NO;
-    //    view.center = self.view.center;
-    //    view.tag = 10002;
-    ////    view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"blue.jpg"]];
-    //    view.alpha=0.9;
-    //    [self.view addSubview:view];
-    
-}
-
-- (void) turnOffIndicator {
-    UIActivityIndicatorView *activityView=(UIActivityIndicatorView *) [self.view viewWithTag:10001];
-    [activityView removeFromSuperview];
-    [activityView stopAnimating];
-}
-
-//- (IBAction)effectsButton:(id)sender {
-//    if (firstTimeEffects){
-//        [self turnOnIndicator];
-//        //        [self hideHelp];
-//        //        _effectsHelp.hidden=NO;
-//        //        [self.view bringSubviewToFront:_effectsHelp];
-//        [self performSelector:@selector(fillEffectsSlider) withObject:nil afterDelay:0.1];
-////        [self performSelector:@selector(fillSecondEffectsSlider) withObject:nil afterDelay:0.2];
-//        [self performSelector:@selector(turnOffIndicator) withObject:nil afterDelay:0.3];
-//        //        [self fillEffectsSlider];
-//        //        [self fillSecondEffectsSlider];
-//        //        [self performSelector:@selector(turnOffIndicator) withObject:nil afterDelay:0.1];
-//        //        [self setUpBlends];
-//    }
-//    firstTimeEffects = NO;
-////    [self hideSliders];
-//    //    [self.dragRegion setFrame:CGRectMake(self.dragRegion.frame.origin.x, 90, self.dragRegion.frame.size.width, self.dragRegion.frame.size.height)];
-//    self.filterSelectionBar.hidden = NO;
-////    self.secondEffectsSlider.hidden=NO;
-//    //    self.blendSlider.hidden=NO;
-//    
-//}
 
 - (void) fillSecondEffectsSlider {
 
@@ -1122,77 +803,6 @@
         label.layer.shadowOffset=CGSizeMake(1, 1);
         label.layer.shadowColor= [UIColor blackColor].CGColor;
         label.layer.shadowOpacity = 0.8;
-//        UIImage *quickFilteredImage;
-//        UIImage *inputImage = [UIImage imageNamed:@"mapleLeaf.png"];
-////            UIImage *inputImage =  [self cropImage:self.selectedImage];
-//            switch (ind) {
-//                case 1:{
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"2strip.png"];
-//                } break;
-//                case 2: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarmBleach.png"];
-//                } break;
-//                case 3: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWinter.png"];
-//                } break;
-//                case 9: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWarm.png"];
-//                } break;
-//                case 10: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"candlelight.png"];
-//                } break;
-//                case 11:{
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors.png"];
-//                } break;
-//                case 7: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
-//                } break;
-//                case 13: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"foggynight.png"];
-//                } break;
-//                case 14: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cobalt2Iron80Bleach.png"];
-//                } break;
-//                case 15: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"blue.png"];
-//                } break;
-//                case 16: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fuji2393.png"];
-//                } break;
-//                case 17: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleak.png"];
-//                } break;
-//                case 18: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachMoonlight.png"];
-//                } break;
-//                case 19: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cyanSeleniumBleachMoonlight.png"];
-//                } break;
-//                case 20: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarm.png"];
-//                } break;
-//                case 4: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"gold2.png"];
-//                } break;
-//                case 5: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"platinum.png"];
-//                } break;
-//                case 6: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
-//                } break;
-//                case 12: {
-//                    filter = [[GPUImageVignetteFilter alloc] init];
-//                    [(GPUImageVignetteFilter *) filter setVignetteEnd:0.6];
-//                } break;
-//                case 8: {
-//                    filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
-//                } break;
-//                    
-//                default:
-//                    break;
-//            }
-//            quickFilteredImage = [filter imageByFilteringImage:inputImage];
-
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"filter%02d.png",ind+11]] forState:UIControlStateNormal];
         [btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
 
@@ -1323,13 +933,7 @@
         UIButton *frameButton = (UIButton *)[_filterSelectionBar viewWithTag:i];
         frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
     }
-//    for (int i = 1; i <= 11; i++) {
-//        UIButton *frameButton = (UIButton *)[_filterSelectionBar viewWithTag:i];
-//        frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
-//    }
-//    NSInteger clickedBtnTag= 11+clickedBtn.tag;
-//    blendBtnClicked=NO;
-//    effectsBtnClicked=YES;
+
     clickedBtn.layer.borderColor=[[UIColor blackColor] CGColor];
     for (UIScrollView *blockSlider in droppableAreas){
         if (blockSlider.tag == tapBlockNumber){
@@ -1337,8 +941,6 @@
                 
             if (blockSlider.subviews.count==0) return;
             UIImageView *imageView = blockSlider.subviews[0];
-//            for (int i=0;i<[self.originalImages count];i++){
-//                if ( (i == imageView.tag) && imageView.image ){
                     UIImage *inputImage = self.selectedImage;
                     switch (clickedBtn.tag-11) {
                         case 1:{
@@ -1450,59 +1052,13 @@
                     UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                     [filter removeAllTargets];
                     imageView.image=quickFilteredImage;
-//                    filterVideo=nil;
-//                    app=_videoArray[imageView.tag];
-//                    if ([app.appURLString isEqualToString:@"video"]){
-//                        switch (tapBlockNumber) {
-//                            case 0:
-//                                if(trimmedVideo1)
-//                                    filterVideo=trimmedVideo1;
-//                                break;
-//                            case 1:
-//                                if(trimmedVideo2)
-//                                    filterVideo=trimmedVideo2;
-//                                break;
-//                            case 2:
-//                                if(trimmedVideo3)
-//                                    filterVideo=trimmedVideo3;
-//                                break;
-//                            case 3:
-//                                if(trimmedVideo4)
-//                                    filterVideo=trimmedVideo4;
-//                                break;
-//                        }
-//                        if (!filterVideo)
-//                            filterVideo = app.appURL;
-//                        [self.frameContainerSlider addSubview:labelToApplyFilterToVideo];
-//                    }
-            
-                    
-                    //                                        if (app.appURL){
-                    //                                            filterVideo = app.appURL;
-                    ////                                            [self.bottomView addSubview:labelToApplyFilterToVideo];
-                    //
-                    //                                            labelToApplyFilterToVideo.hidden=NO;
-                    //                                            [self.bottomView bringSubviewToFront:labelToApplyFilterToVideo];
-                    
-                    //                                        }
-                    //                                        if (!brightenState) {
-                    //                                            blurFilter = [[GPUImageBrightnessFilter alloc] init];
-                    //                                            [(GPUImageBrightnessFilter *) blurFilter setBrightness:0.15];
-                    //                                            quickFilteredImage = [blurFilter imageByFilteringImage:quickFilteredImage];
-                    //                                            [blurFilter removeAllTargets];
-                    //                                        }
-                    //                                        if (clickedBtn.tag==1)
-                    //                                            quickFilteredImage = [self.originalImages objectAtIndex:i];
-                    
-                    //                                        imageView.image=quickFilteredImage;
-                    //                                    }
                 }
-//            }
         }
     }
 }
 
 #pragma mark Autoload
+
 - (void) hideLabels {
     _rotateBtn.hidden=NO;
     _frameBtn.hidden=NO;
@@ -1548,38 +1104,37 @@
         nStyle= 4;
         nSubStyle = 1;
         
-            rectBlockSlider1 = [self getScrollFrame1:style subStyle:sub];
-            rectBlockSlider2 = [self getScrollFrame2:style subStyle:sub];
-            rectBlockSlider3 = [self getScrollFrame3:style subStyle:sub];
-            rectBlockSlider4 = [self getScrollFrame4:style subStyle:sub];
-            
-            blockSlider1 = [[UIScrollView alloc] initWithFrame:rectBlockSlider1];
-            blockSlider2 = [[UIScrollView alloc] initWithFrame:rectBlockSlider2];
-            blockSlider3 = [[UIScrollView alloc] initWithFrame:rectBlockSlider3];
-            blockSlider4 = [[UIScrollView alloc] initWithFrame:rectBlockSlider4];
-            
-            blockSlider1.scrollEnabled=NO;
-            blockSlider2.scrollEnabled=NO;
-            blockSlider3.scrollEnabled=NO;
-            blockSlider4.scrollEnabled=NO;
+        rectBlockSlider1 = [self getScrollFrame1:style subStyle:sub];
+        rectBlockSlider2 = [self getScrollFrame2:style subStyle:sub];
+        rectBlockSlider3 = [self getScrollFrame3:style subStyle:sub];
+        rectBlockSlider4 = [self getScrollFrame4:style subStyle:sub];
         
-            blockSlider1.tag = 0;
-            blockSlider2.tag = 1;
-            blockSlider3.tag = 2;
-            blockSlider4.tag = 3;
-            
-            [blockSlider1.layer setBorderColor:[[UIColor clearColor] CGColor]];
-            [blockSlider1.layer setBorderWidth:kBlockWidth];
-            
-            [blockSlider2.layer setBorderColor:[[UIColor clearColor] CGColor]];
-            [blockSlider2.layer setBorderWidth:kBlockWidth];
-            
-            [blockSlider3.layer setBorderColor:[[UIColor clearColor] CGColor]];
-            [blockSlider3.layer setBorderWidth:kBlockWidth];
-            
-            [blockSlider4.layer setBorderColor:[[UIColor clearColor] CGColor]];
-            [blockSlider4.layer setBorderWidth:kBlockWidth];
+        blockSlider1 = [[UIScrollView alloc] initWithFrame:rectBlockSlider1];
+        blockSlider2 = [[UIScrollView alloc] initWithFrame:rectBlockSlider2];
+        blockSlider3 = [[UIScrollView alloc] initWithFrame:rectBlockSlider3];
+        blockSlider4 = [[UIScrollView alloc] initWithFrame:rectBlockSlider4];
         
+        blockSlider1.scrollEnabled=NO;
+        blockSlider2.scrollEnabled=NO;
+        blockSlider3.scrollEnabled=NO;
+        blockSlider4.scrollEnabled=NO;
+    
+        blockSlider1.tag = 0;
+        blockSlider2.tag = 1;
+        blockSlider3.tag = 2;
+        blockSlider4.tag = 3;
+        
+        [blockSlider1.layer setBorderColor:[[UIColor clearColor] CGColor]];
+        [blockSlider1.layer setBorderWidth:kBlockWidth];
+        
+        [blockSlider2.layer setBorderColor:[[UIColor clearColor] CGColor]];
+        [blockSlider2.layer setBorderWidth:kBlockWidth];
+        
+        [blockSlider3.layer setBorderColor:[[UIColor clearColor] CGColor]];
+        [blockSlider3.layer setBorderWidth:kBlockWidth];
+        
+        [blockSlider4.layer setBorderColor:[[UIColor clearColor] CGColor]];
+        [blockSlider4.layer setBorderWidth:kBlockWidth];
         
         image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
         image1.tag =0;
@@ -1597,6 +1152,16 @@
         image4.tag =3;
         [blockSlider4 addSubview:image4];
         [self fitImageToScroll:image4 SCROLL:blockSlider4 scrollViewNumber:blockSlider4.tag angle:0.0 ];
+        
+//        UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(blockSlider1.center.x, blockSlider1.center.y, 30, 30)];
+//        btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"lockImage.png"]];
+//        btn.tag = 200;
+//        btn.alpha = 0.5;
+//        UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+//        panGestureBtn.delegate=self;
+//        [btn addGestureRecognizer:panGestureBtn];
+//        [blockSlider1 addSubview:btn];
+        
         [self.frameContainer addSubview:blockSlider1];
         [self.frameContainer addSubview:blockSlider2];
         [self.frameContainer addSubview:blockSlider3];
@@ -1643,38 +1208,7 @@
             }
 
             [blockSlider setContentOffset:CGPointMake(blockSlider.frame.origin.x, blockSlider.frame.origin.y) animated:NO];
-//            UIImageView *imageView = [blockSlider.subviews firstObject];
-//            for (UIImageView *imageView in blockSlider.subviews){
-//                 [imageView setFrame:CGRectMake([defaults floatForKey:@"PanX"],[defaults floatForKey:@"PanY"], imageView.frame.size.width, imageView.frame.size.height)];
-//            }
-//            imageView.center = CGPointMake(imageView.center.x + [defaults floatForKey:@"PanX"],
-//                                           imageView.center.y + [defaults floatForKey:@"PanY"]);
-            
-//            float zoomFactor = [defaults floatForKey:@"Zoom"];
-//            imageView.transform = CGAffineTransformRotate(imageView.transform, [defaults floatForKey:@"Rotate"]);
-//            if ([defaults boolForKey:@"Flip"])
-//                imageView.transform = CGAffineTransformScale(imageView.transform, -zoomFactor, zoomFactor);
-//            else
-//                imageView.transform = CGAffineTransformScale(imageView.transform, zoomFactor, zoomFactor);
-            
-//            UIImageView *imageView = [blockSlider.subviews firstObject];
-//            for (UIView *view in blockSlider.subviews)  {
-//                [view removeFromSuperview];
-//            }
-//            UIImageView *replaceImage = [[UIImageView alloc] initWithImage:imageView.image];
-//            replaceImage.tag = imageView.tag;
-//            replaceImage.userInteractionEnabled = YES;
-//            [blockSlider addSubview:replaceImage];
-//            [self fitImageToScroll:imageView SCROLL:blockSlider scrollViewNumber:blockSlider.tag  angle:[defaults floatForKey:@"Rotate"] ];
         }
-//        for (UIScrollView *blockSlider in droppableAreas)
-//            for (UIImageView *imageView in blockSlider.subviews){
-//                imageView.center = CGPointMake(imageView.center.x + [defaults floatForKey:@"PanX"],
-//                                               imageView.center.y + [defaults floatForKey:@"PanY"]);
-//            }
-//
-//        [self.frameContainer bringSubviewToFront:_watermarkOnImage];
-
     }
 }
 
@@ -1702,90 +1236,22 @@
     
 }
 
-//- (IBAction)handlePanImage:(UIPanGestureRecognizer *)sender {
-//    NSString *tagPanX = [NSString stringWithFormat:@"PanX%d",tapBlockNumber];
-//    NSString *tagPanY = [NSString stringWithFormat:@"PanY%d",tapBlockNumber];
-//    CGPoint pointVideo;
-//    pointVideo.x = [[_imageObject objectForKey:tagPanX] floatValue];
-//    pointVideo.y = [[_imageObject objectForKey:tagPanX] floatValue];
-//    NSLog(@"pointVideo.x is %f and y is %f",pointVideo.x, pointVideo.y);
-//    CGFloat width;
-//    CGFloat height;
-//    for (UIScrollView *blockSlider in self.droppableAreas){
-//        if (blockSlider.tag == tapBlockNumber){
-//            if (blockSlider.subviews.count==0) return;
-//            UIImageView *imageView = blockSlider.subviews[0];
-//            width = imageView.frame.size.width;
-//            height = imageView.frame.size.height;
-//
-//            CGPoint translation = [sender translationInView:[imageView superview]];
-//            NSLog(@"pt.x is %f and y is %f",translation.x  , translation.y);
-//
-//                CGFloat ptX = pointVideo.x + translation.x;
-//                CGFloat ptY = pointVideo.y + translation.y;
-//            if ((ptX < -width/2 || ptX > width/2) || (ptY < -height/2 || ptY > height/2 ))
-//                return;
-//            imageView.center = CGPointMake(imageView.center.x + translation.x,
-//                                           imageView.center.y + translation.y);
-//            NSLog(@"pt.x is %f and y is %f",ptX, ptY);
-//
-//            [_imageObject setObject:[NSNumber numberWithFloat:ptX] forKey:tagPanX];
-//            [_imageObject setObject:[NSNumber numberWithFloat:ptY] forKey:tagPanY];
-//
-//
-//            [sender setTranslation:CGPointMake(0, 0) inView:[imageView superview]];
-//
-////            CGPoint translation = [sender translationInView:self.view];
-////            imageView.center = CGPointMake(imageView.center.x + translation.x,
-////                                                 imageView.center.y + translation.y);
-////            [sender setTranslation:CGPointMake(0, 0) inView:imageView.superview];
-//        }
-//    }
-//}
 - (IBAction)handlePanImage:(UIPanGestureRecognizer *)sender {
-    //    if (currentStickerTag!=1000  || currentLabelTag != 1000  || currentDoodleTag!=1000) return;
-    //
-    //      [self tapBlock:(UITapGestureRecognizer *)sender];
-//    NSString *tagPanX = [NSString stringWithFormat:@"PanX%d",tapBlockNumber];
-//    NSString *tagPanY = [NSString stringWithFormat:@"PanY%d",tapBlockNumber];
-    CGPoint pointVideo;
-    pointVideo.x = [defaults floatForKey:@"PanX"];
-    pointVideo.y = [defaults floatForKey:@"PanY"];
+  
     CGPoint translation = [sender translationInView:self.view];
-//    CGFloat width;
-//    CGFloat height;
-//    width = imageView.frame.size.width;
-//    height = imageView.frame.size.height;
-    CGFloat ptX = pointVideo.x + translation.x;
-    CGFloat ptY = pointVideo.y + translation.y;
+
+    CGFloat ptX = [defaults floatForKey:@"PanX"] + translation.x;
+    CGFloat ptY = [defaults floatForKey:@"PanY"] + translation.y;
     [defaults setFloat:ptX forKey:@"PanX"];
     [defaults setFloat:ptY forKey:@"PanY"];
-//    if ((ptX < -imageWidth*0.8 || ptX > imageWidth*.8) || (ptY < -imageHeight*.8 || ptY > imageHeight*.8 ))
-//        return;
-    //    pointVideo.x = [[_imageObject objectForKey:tagPanX] floatValue];//does not save values
-    //    pointVideo.y = [[_imageObject objectForKey:tagPanY] floatValue];
 
     for (UIScrollView *blockSlider in droppableAreas){
-//        if (blockSlider.tag == tapBlockNumber){   //split
         NSLog(@"blockSlider is %@, count is %d",blockSlider,blockSlider.subviews.count);
-
-//        if (blockSlider.subviews.count!=0) {
-//            UIImageView *imageView = blockSlider.subviews[0];
-        for (UIImageView *imageView in blockSlider.subviews){
-
-            
-            
+        if (blockSlider.subviews.count==0) return;
+        UIImageView *imageView = blockSlider.subviews[0];
             imageView.center = CGPointMake(imageView.center.x + translation.x,
                                            imageView.center.y + translation.y);
- 
-            //            [_imageObject setObject:[NSNumber numberWithFloat:ptX] forKey:tagPanX];
-            //            [_imageObject setObject:[NSNumber numberWithFloat:ptY] forKey:tagPanX];
-
-        }
-//        }
     }
-    NSLog(@"panX is %f",ptX);
-    NSLog(@"panY is %f",ptY);
     [sender setTranslation:CGPointMake(0, 0) inView:self.view];
 }
 - (void)centerImage {
@@ -1805,8 +1271,8 @@
     }
     NSLog(@"panX is %f",translation.x);
     NSLog(@"panY is %f",translation.y);
-
 }
+
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     
     if ([gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]])
@@ -1830,11 +1296,6 @@
     [UIView animateWithDuration:2.0
                      animations:^{
                          for (UIScrollView *blockSlider in droppableAreas){
-//                             tappedBlock = [recognizer locationInView:blockSlider];
-//                             if ([blockSlider pointInside:tappedBlock withEvent:nil]) {
-//                                 tapBlockNumber = blockSlider.tag;
-////                             }
-//
                              if (blockSlider.tag == tapBlockNumber){
                                  CABasicAnimation *color = [CABasicAnimation animationWithKeyPath:@"borderColor"];
                                  // animate from red to blue border ...
@@ -1843,8 +1304,6 @@
                                  // ... and change the model value
                                  color.duration = 1;
                                  [blockSlider.layer addAnimation:color forKey:@"AnimateFrame"];
-//                                 if (tapBlockNumber >1)
-//                                     break;
                              }
                          }
                      }
@@ -1871,23 +1330,6 @@
     else
         rate = rateImageFill;
     
-//    float rateScr=0, rateImg=0, rateWidth=0, rateHeight=0;
-//    if (scrView.frame.size.width > 0 && imgView.frame.size.width >0){
-//        rateScr = scrView.frame.size.height / scrView.frame.size.width;
-//        rateImg = imgView.frame.size.height / imgView.frame.size.width;
-//    }
-//    if (imgView.frame.size.width > 0 && imgView.frame.size.height > 0){
-//        rateWidth = scrView.frame.size.width / imgView.frame.size.width;
-//        rateHeight = scrView.frame.size.height / imgView.frame.size.height;
-//    }
-    NSLog(@"imgView is width=%f, height=%f, imageWidthSmaller is %f, imageWidthGreater is %f",imgView.frame.size.width, imgView.frame.size.height,imageWidthSmaller,imageWidthGreater);
-//    CGFloat rateFit = rateScr < rateImg ? rateWidth : rateHeight;
-    NSLog (@"rateFit is %f, rateFill is %f, rate is %f",rateImageFit,rateImageFill,rate);
-//    CGSize szImage = CGSizeMake(imgView.frame.size.width*rateFit, imgView.frame.size.height*rateFit);
-    //        [imgView setFrame:CGRectMake(scrView.center.x, scrView.center.y, szImage.width, szImage.height)];
-//    [imgView setFrame:CGRectMake(0.0, 0.0, szImage.width, szImage.height)]; //split
-//    NSLog (@"imageView frame size is %f width %f height",szImage.width,szImage.height);
-    
     if(!isinf(rate)) {
      [imgView setFrame:CGRectMake(0.0,0.0, imgView.frame.size.width*rate, imgView.frame.size.height*rate)];  //split
         NSLog (@"imageView frame size is %f width %f height",imgView.frame.size.width,imgView.frame.size.height);
@@ -1896,20 +1338,6 @@
     }
     scale = rate;
     
-    //        NSLog(@"scrView content .width%f,imgView content .width%f",scrView.frame.size.width,imgView.frame.size.height);
-    //        scrView.frame = CGRectMake(imgView.center.x, imgView.center.y, imgView.frame.size.width*1.25, imgView.frame.size.height*1.25);
-//    [scrView setContentSize:CGSizeMake(imgView.frame.size.width*1.2, imgView.frame.size.height*1.2)];
-    //        if (scrView.frame.size.width-2 <= scrView.frame.size.height){
-    //        if ((imgView.frame.size.width >= imgView.frame.size.height)|| (scrView.frame.size.width <= scrView.frame.size.height)){
-    
-//    pt.x = (imgView.frame.size.width - scrView.frame.size.width)/2;
-    //            pt.y = 0;
-    //        }
-    //        else {
-    //            pt.x = 0;
-//    pt.y = (imgView.frame.size.height - scrView.frame.size.height)/2;
-    //        }
-    
     CGPoint pt;
     pt.x =   scrView.frame.origin.x ;//splitagram
     pt.y =   scrView.frame.origin.y;//splitagram
@@ -1917,79 +1345,14 @@
     NSLog(@"pt is x=%f and y=%f",pt.x, pt.y);
     [scrView setContentOffset:pt animated:NO];
     
-//    NSString *tagPtX = [NSString stringWithFormat:@"PtX%d",tagNumber];
-//    NSString *tagPtY = [NSString stringWithFormat:@"PtY%d",tagNumber];
-//    NSString *tagScale = [NSString stringWithFormat:@"Scale%d",tagNumber];
-//    [defaults setFloat:pt.x  forKey:@"PanX"];
-//    [defaults setFloat:pt.y forKey:@"PanY"];
-//    [defaults setFloat:1.0f forKey:@"Zoom"];
-    
-//    [defaults setFloat:rateFit forKey:tagScale];
-//    switch (tagNumber) {
-//        case 0:{
-//            zoom1 = [defaults floatForKey:@"Scale0"];
-//            [defaults setFloat:0.0f forKey:@"PanX0"];
-//            [defaults setFloat:0.0f forKey:@"PanY0"];
-//            [defaults setFloat:1.0f forKey:@"Zoom0"];
-//        }
-//            break;
-//        case 1:{
-//            zoom2 = [defaults floatForKey:@"Scale1"];
-//            [defaults setFloat:0.0f forKey:@"PanX1"];
-//            [defaults setFloat:0.0f forKey:@"PanY1"];
-//            [defaults setFloat:1.0f forKey:@"Zoom1"];
-//        }
-//            break;
-//        case 2:{
-//            zoom3 = [defaults floatForKey:@"Scale2"];
-//            [defaults setFloat:0.0f forKey:@"PanX2"];
-//            [defaults setFloat:0.0f forKey:@"PanY2"];
-//            [defaults setFloat:1.0f forKey:@"Zoom2"];
-//        }
-//            break;
-//        case 3:{
-//            zoom4 = [defaults floatForKey:@"Scale3"];
-//            [defaults setFloat:0.0f forKey:@"PanX3"];
-//            [defaults setFloat:0.0f forKey:@"PanY3"];
-//            [defaults setFloat:1.0f forKey:@"Zoom3"];
-//        }
-//            break;
-    
-//    }
-    //    [self resetPostionZoomParameters];
-    //    [self resetGestureParameters];
-//    NSLog(@"angle is %f",angle);
-    
     float zoomFactor = [defaults floatForKey:@"Zoom"];
     imgView.transform = CGAffineTransformRotate(imgView.transform, angle);
     if ([defaults boolForKey:@"Flip"])
         imgView.transform = CGAffineTransformScale(imgView.transform, -zoomFactor, zoomFactor);
     else
         imgView.transform = CGAffineTransformScale(imgView.transform, zoomFactor, zoomFactor);
-    
-    
-//    imgView.transform = CGAffineTransformTranslate(imgView.transform, [defaults floatForKey:@"PanX"], [defaults floatForKey:@"PanY"]);
 }
 - (void) fillRotateMenu {
-//    _rotateMenuView = [[UIScrollView alloc] initWithFrame:self.frameSelectionBar.frame];
-    //    _rotateMenuView.contentSize=CGSizeMake(320, self.photoSlider.frame.size.height);
-//    _rotateMenuView.backgroundColor=[UIColor darkGrayColor];
-    
-//    [self.bottomView addSubview:_rotateMenuView];
-    
-//    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    backButton.frame = CGRectMake(5, 5, 60, 60);
-//    //    backButton.showsTouchWhenHighlighted=YES;
-//    backButton.tag=1;
-//    [backButton setImage:[UIImage imageNamed:@"back-icon-614x460.png"]  forState:UIControlStateNormal];
-//    backButton.backgroundColor=[UIColor scrollViewTexturedBackgroundColor];
-//    backButton.titleLabel.textColor= [UIColor whiteColor];
-//    [backButton addTarget:self action:@selector(goBackToPreviousMenu) forControlEvents:UIControlEventTouchUpInside];
-//    [self.rotateMenuView addSubview:backButton];
-//    if (IS_TALL_SCREEN) {
-//        
-//        self.rotateMenuView.frame=CGRectMake(0, 353, 320, 151);
-//    }
     CGRect frame = CGRectMake(5.0, 5.0, 310.0, 47.0);
     sliderRotate = [[UISlider alloc] initWithFrame:frame];
     [sliderRotate addTarget:self action:@selector(rotateChanged:) forControlEvents:UIControlEventValueChanged];
@@ -2012,7 +1375,6 @@
     
     UIButton *resetButton = [UIButton buttonWithType:UIButtonTypeCustom];
     resetButton.frame = CGRectMake(5*5+58*4, 57,  58, 58);
-    //    resetButton.showsTouchWhenHighlighted=YES;
     [resetButton setTitle:@"reset" forState:UIControlStateNormal];
     resetButton.titleLabel.font = [UIFont systemFontOfSize:18];
     resetButton.backgroundColor=[UIColor lightGrayColor];
@@ -2022,9 +1384,6 @@
     UIButton *minusAngleButton = [UIButton buttonWithType:UIButtonTypeCustom];
     minusAngleButton.frame = CGRectMake(5, 57,  58, 58);
     minusAngleButton.titleLabel.font = [UIFont systemFontOfSize:18];
-    //    rightAngleButton.showsTouchWhenHighlighted=YES;
-    //    rightAngleButton.layer.borderWidth=kBorderWidth;
-    //    rightAngleButton.layer.borderColor=[[UIColor clearColor] CGColor];
     [minusAngleButton setTitle:@"-10°" forState:UIControlStateNormal];
     minusAngleButton.backgroundColor=[UIColor lightGrayColor];
     [minusAngleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -2034,9 +1393,6 @@
     UIButton *rightAngleButton = [UIButton buttonWithType:UIButtonTypeCustom];
     rightAngleButton.frame = CGRectMake(5*2+58, 57,  58, 58);
     rightAngleButton.titleLabel.font = [UIFont systemFontOfSize:18];
-    //    rightAngleButton.showsTouchWhenHighlighted=YES;
-    //    rightAngleButton.layer.borderWidth=kBorderWidth;
-    //    rightAngleButton.layer.borderColor=[[UIColor clearColor] CGColor];
     [rightAngleButton setTitle:@"90°" forState:UIControlStateNormal];
     rightAngleButton.backgroundColor=[UIColor lightGrayColor];
     [rightAngleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -2046,9 +1402,6 @@
     UIButton *plusAngleButton = [UIButton buttonWithType:UIButtonTypeCustom];
     plusAngleButton.frame = CGRectMake(5*3+58*2, 57,  58, 58);
     plusAngleButton.titleLabel.font = [UIFont systemFontOfSize:18];
-    //    rightAngleButton.showsTouchWhenHighlighted=YES;
-    //    rightAngleButton.layer.borderWidth=kBorderWidth;
-    //    rightAngleButton.layer.borderColor=[[UIColor clearColor] CGColor];
     [plusAngleButton setTitle:@"10°" forState:UIControlStateNormal];
     plusAngleButton.backgroundColor=[UIColor lightGrayColor];
     [plusAngleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -2058,9 +1411,6 @@
     UIButton *flipButton = [UIButton buttonWithType:UIButtonTypeCustom];
     flipButton.frame = CGRectMake(5*4+58*3, 57,  58, 58);
     flipButton.titleLabel.font = [UIFont systemFontOfSize:18];
-    //    flipButton.showsTouchWhenHighlighted=YES;
-    //    flipButton.layer.borderWidth=kBorderWidth;
-    //    flipButton.layer.borderColor=[[UIColor clearColor] CGColor];
     [flipButton setTitle:@"flip" forState:UIControlStateNormal];
     flipButton.backgroundColor=[UIColor lightGrayColor];
     [flipButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -2069,9 +1419,7 @@
     
 }
 - (void) fillSplitMenu {
-//    if (IS_TALL_SCREEN) {
-//        self.splitMenuView.frame=CGRectMake(0, 353, 320, 151);
-//    }
+
     CGRect frame = CGRectMake(5.0, 5.0, 310.0, 47.0);
     sliderSplit = [[UISlider alloc] initWithFrame:frame];
     [sliderSplit addTarget:self action:@selector(splitChanged:) forControlEvents:UIControlEventValueChanged];
@@ -2091,63 +1439,6 @@
     labelSplit.layer.shadowColor= [UIColor blackColor].CGColor;
     labelSplit.layer.shadowOpacity = 0.8;
     [self.splitMenuView addSubview:labelSplit];
-    
-//    UIButton *resetButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    resetButton.frame = CGRectMake(5*5+58*4, 57,  58, 58);
-//    //    resetButton.showsTouchWhenHighlighted=YES;
-//    [resetButton setTitle:@"reset" forState:UIControlStateNormal];
-//    resetButton.titleLabel.font = [UIFont systemFontOfSize:18];
-//    resetButton.backgroundColor=[UIColor scrollViewTexturedBackgroundColor];
-//    resetButton.titleLabel.textColor= [UIColor whiteColor];
-//    [resetButton addTarget:self action:@selector(resetRotate) forControlEvents:UIControlEventTouchUpInside];
-//    [self.rotateMenuView addSubview:resetButton];
-//    UIButton *minusAngleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    minusAngleButton.frame = CGRectMake(5, 57,  58, 58);
-//    minusAngleButton.titleLabel.font = [UIFont systemFontOfSize:18];
-//    //    rightAngleButton.showsTouchWhenHighlighted=YES;
-//    //    rightAngleButton.layer.borderWidth=kBorderWidth;
-//    //    rightAngleButton.layer.borderColor=[[UIColor clearColor] CGColor];
-//    [minusAngleButton setTitle:@"-10°" forState:UIControlStateNormal];
-//    minusAngleButton.backgroundColor=[UIColor scrollViewTexturedBackgroundColor];
-//    [minusAngleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [minusAngleButton addTarget:self action:@selector(minusTenDegreeRotate) forControlEvents:UIControlEventTouchUpInside];
-//    [self.rotateMenuView addSubview:minusAngleButton];
-//    
-//    UIButton *rightAngleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    rightAngleButton.frame = CGRectMake(5*2+58, 57,  58, 58);
-//    rightAngleButton.titleLabel.font = [UIFont systemFontOfSize:18];
-//    //    rightAngleButton.showsTouchWhenHighlighted=YES;
-//    //    rightAngleButton.layer.borderWidth=kBorderWidth;
-//    //    rightAngleButton.layer.borderColor=[[UIColor clearColor] CGColor];
-//    [rightAngleButton setTitle:@"90°" forState:UIControlStateNormal];
-//    rightAngleButton.backgroundColor=[UIColor scrollViewTexturedBackgroundColor];
-//    [rightAngleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [rightAngleButton addTarget:self action:@selector(rightAngleRotate) forControlEvents:UIControlEventTouchUpInside];
-//    [self.rotateMenuView addSubview:rightAngleButton];
-//    
-//    UIButton *plusAngleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    plusAngleButton.frame = CGRectMake(5*3+58*2, 57,  58, 58);
-//    plusAngleButton.titleLabel.font = [UIFont systemFontOfSize:18];
-//    //    rightAngleButton.showsTouchWhenHighlighted=YES;
-//    //    rightAngleButton.layer.borderWidth=kBorderWidth;
-//    //    rightAngleButton.layer.borderColor=[[UIColor clearColor] CGColor];
-//    [plusAngleButton setTitle:@"10°" forState:UIControlStateNormal];
-//    plusAngleButton.backgroundColor=[UIColor scrollViewTexturedBackgroundColor];
-//    [plusAngleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [plusAngleButton addTarget:self action:@selector(plusTenDegreeRotate) forControlEvents:UIControlEventTouchUpInside];
-//    [self.rotateMenuView addSubview:plusAngleButton];
-//    
-//    UIButton *flipButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    flipButton.frame = CGRectMake(5*4+58*3, 57,  58, 58);
-//    flipButton.titleLabel.font = [UIFont systemFontOfSize:18];
-//    //    flipButton.showsTouchWhenHighlighted=YES;
-//    //    flipButton.layer.borderWidth=kBorderWidth;
-//    //    flipButton.layer.borderColor=[[UIColor clearColor] CGColor];
-//    [flipButton setTitle:@"flip" forState:UIControlStateNormal];
-//    flipButton.backgroundColor=[UIColor scrollViewTexturedBackgroundColor];
-//    [flipButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [flipButton addTarget:self action:@selector(flip) forControlEvents:UIControlEventTouchUpInside];
-//    [self.rotateMenuView addSubview:flipButton];
     
 }
 - (void) resetRotate {
@@ -2172,18 +1463,6 @@
     
     sliderSplit = (UISlider *)sender;
     nMargin = sliderSplit.value;
-//    CGFloat splitLevel = [defaults floatForKey:@"Split"];
-//    for (UIScrollView *blockSlider in droppableAreas){
-//               if (blockSlider.subviews.count==0) return;
-//        UIImageView *imageView = blockSlider.subviews[0];
-//        imageView.transform = CGAffineTransformIdentity;
-//        imageView.transform = CGAffineTransformRotate(imageView.transform, sliderRotate.value);
-//        if ([defaults boolForKey:@"Flip"])
-//            imageView.transform = CGAffineTransformScale(imageView.transform, -zoomFactor, zoomFactor);
-//        else
-//            imageView.transform = CGAffineTransformScale(imageView.transform, zoomFactor, zoomFactor);
-//        //            }
-//    }
     [sliderSplit setValue:(int)(sliderSplit.value) animated:NO];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.tag=[defaults integerForKey:@"frame"];
@@ -2195,22 +1474,13 @@
     labelSplit.text = [NSString stringWithFormat:@"%.0f",sliderSplit.value];
 }
 - (void)rotateChanged:(id)sender {
-    
-//    [Flurry logEvent:@"Frame - Rotate"];
-    
+
     sliderRotate = (UISlider *)sender;
-//        NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
-//        NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
-//    NSString *tagRotate;
-    NSLog(@"rotate value is %f",[defaults floatForKey:@"Rotate"]);
-     NSLog(@"sliderRotate value is %f",sliderRotate.value);
-        CGFloat zoomFactor = [defaults floatForKey:@"Zoom"];
+    CGFloat zoomFactor = [defaults floatForKey:@"Zoom"];
     CGFloat totalRotate = sliderRotate.value +[defaults floatForKey:@"Rotate"];
 
         for (UIScrollView *blockSlider in droppableAreas){
-//            tagRotate = [NSString stringWithFormat:@"Rotate%d",blockSlider.tag];
-//            if (blockSlider.tag == tapBlockNumber){//split
-                if (blockSlider.subviews.count==0) return;
+            if (blockSlider.subviews.count==0) return;
                 UIImageView *imageView = blockSlider.subviews[0];
                 imageView.transform = CGAffineTransformIdentity;
                 imageView.transform = CGAffineTransformRotate(imageView.transform, totalRotate);
@@ -2218,35 +1488,26 @@
                     imageView.transform = CGAffineTransformScale(imageView.transform, -zoomFactor, zoomFactor);
                 else
                     imageView.transform = CGAffineTransformScale(imageView.transform, zoomFactor, zoomFactor);
-//            }
         }
-//        [defaults setFloat:totalRotate  forKey:@"Rotate"];
     totalRotate = fmodf(totalRotate, 2*M_PI);
     labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(totalRotate)];
 }
 - (void) rightAngleRotate {
     [Flurry logEvent:@"rightAngle"];
-
-//        NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
-//        NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
         CGFloat rotateAngle = [defaults floatForKey:@"Rotate"]+M_PI_2;
         [defaults setFloat:rotateAngle forKey:@"Rotate"];
         CGFloat zoomFactor = [defaults floatForKey:@"Zoom"];
         for (UIScrollView *blockSlider in droppableAreas){
-//            if (blockSlider.tag == tapBlockNumber){//split
                 if (blockSlider.subviews.count==0) return;
                 UIImageView *imageView = blockSlider.subviews[0];
                 imageView.transform = CGAffineTransformIdentity;
-//                NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
                 imageView.transform = CGAffineTransformRotate(imageView.transform, rotateAngle);
                 if ([defaults boolForKey:@"Flip"])
                     imageView.transform = CGAffineTransformScale(imageView.transform, -zoomFactor, zoomFactor);
                 else
                     imageView.transform = CGAffineTransformScale(imageView.transform, zoomFactor, zoomFactor);
-//            }
         }
         rotateAngle = fmodf(rotateAngle, 2*M_PI);
-//        sliderRotate.value=rotateAngle;
     labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(rotateAngle)];
 
 }
@@ -2254,26 +1515,20 @@
 - (void) plusTenDegreeRotate {
     [Flurry logEvent:@"plusTen"];
 
-//    NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
-//    NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
     CGFloat rotateAngle = [defaults floatForKey:@"Rotate"]+M_PI_2/9;
     [defaults setFloat:rotateAngle forKey:@"Rotate"];
     CGFloat zoomFactor = [defaults floatForKey:@"Zoom"];
     for (UIScrollView *blockSlider in droppableAreas){
-//        if (blockSlider.tag == tapBlockNumber){//split
             if (blockSlider.subviews.count==0) return;
             UIImageView *imageView = blockSlider.subviews[0];
             imageView.transform = CGAffineTransformIdentity;
-//            NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
             imageView.transform = CGAffineTransformRotate(imageView.transform, rotateAngle);
             if ([defaults boolForKey:@"Flip"])
                 imageView.transform = CGAffineTransformScale(imageView.transform, -zoomFactor, zoomFactor);
             else
                 imageView.transform = CGAffineTransformScale(imageView.transform, zoomFactor, zoomFactor);
-//        }
     }
     rotateAngle = fmodf(rotateAngle, 2*M_PI);
-//    sliderRotate.value=rotateAngle;
     labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(rotateAngle)];
 
 }
@@ -2281,26 +1536,20 @@
 - (void) minusTenDegreeRotate {
     [Flurry logEvent:@"minusTen"];
 
-//    NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
-//    NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
     CGFloat rotateAngle = [defaults floatForKey:@"Rotate"]-M_PI_2/9;
     [defaults setFloat:rotateAngle forKey:@"Rotate"];
     CGFloat zoomFactor = [defaults floatForKey:@"Zoom"];
     for (UIScrollView *blockSlider in droppableAreas){
-//        if (blockSlider.tag == tapBlockNumber){ //split
             if (blockSlider.subviews.count==0) return;
             UIImageView *imageView = blockSlider.subviews[0];
             imageView.transform = CGAffineTransformIdentity;
-//            NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
             imageView.transform = CGAffineTransformRotate(imageView.transform, rotateAngle);
             if ([defaults boolForKey:@"Flip"])
                 imageView.transform = CGAffineTransformScale(imageView.transform, -zoomFactor, zoomFactor);
             else
                 imageView.transform = CGAffineTransformScale(imageView.transform, zoomFactor, zoomFactor);
-//        }
     }
     rotateAngle = fmodf(rotateAngle, 2*M_PI);
-//    sliderRotate.value=rotateAngle;
     labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(rotateAngle)];
 
 }
@@ -2308,28 +1557,27 @@
 - (void) flip {
     [Flurry logEvent:@"Flip"];
     
-//        NSString *tagFlip = [NSString stringWithFormat:@"flipImage%d",tapBlockNumber];
         if (![defaults boolForKey:@"Flip"])
             [defaults setBool:YES forKey:@"Flip"];
         else
             [defaults setBool:NO forKey:@"Flip"];
         for (UIScrollView *blockSlider in droppableAreas){
-//            if (blockSlider.tag == tapBlockNumber){  //split
                 if (blockSlider.subviews.count==0) return;
                 UIImageView *imageView = blockSlider.subviews[0];
                 imageView.transform = CGAffineTransformScale(imageView.transform, -1,1);
-//            }
         }
 }
-
-- (void) buttonOnFrame {
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, 0, 10, 10);
-    [btn addTarget:self action:@selector(frameBorderTouched:) forControlEvents:UIControlEventTouchUpInside];    
-    [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"lockImage.png"]] forState:UIControlStateNormal];
-    btn.alpha = 0.5;
-    [blockSlider1 addSubview:btn];
+- (void) unselectFrame {
     
+}
+
+- (void) moveBtn :(UIPanGestureRecognizer *)sender  {
+    
+    CGPoint translation = [sender translationInView:self.view];
+    adjustedPtX1 = adjustedPtX1 + translation.x;
+    adjustedPtY1 = adjustedPtY1 + translation.y;
+    adjustedWidth1 = adjustedWidth1 + translation.x;
+    adjustedHeight1 = adjustedHeight1 + translation.y;
     if (nStyle == 1) {
         switch (nSubStyle) {
             case 1:

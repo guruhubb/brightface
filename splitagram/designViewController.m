@@ -163,8 +163,8 @@
     
     int number = [defaults integerForKey:@"number"];
     NSLog(@"number is %d",number);
-    if (number > 9) {
-        number = 1;
+    if (number > 9 || number == 0) {
+        number = 2;
     }
     [defaults setInteger:number forKey:@"number"];
  
@@ -173,6 +173,7 @@
     if (![defaults boolForKey:@"filter"])
         [self effectsClicked:btn];
 }
+
 - (void) randomFilterPick {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     int number = [defaults integerForKey:@"number"];
@@ -1154,14 +1155,14 @@
         [blockSlider4 addSubview:image4];
         [self fitImageToScroll:image4 SCROLL:blockSlider4 scrollViewNumber:blockSlider4.tag angle:0.0 ];
         
-//        UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(blockSlider1.center.x, blockSlider1.center.y, 30, 30)];
-//        btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"lockImage.png"]];
-//        btn.tag = 200;
+        UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(blockSlider1.center.x, blockSlider1.center.y, 30, 30)];
+        btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"lockImage.png"]];
+        btn.tag = 200;
 //        btn.alpha = 0.5;
-//        UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
-//        panGestureBtn.delegate=self;
-//        [btn addGestureRecognizer:panGestureBtn];
-//        [blockSlider1 addSubview:btn];
+        UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+        panGestureBtn.delegate=self;
+        [btn addGestureRecognizer:panGestureBtn];
+        [blockSlider1 addSubview:btn];
         
         [self.frameContainer addSubview:blockSlider1];
         [self.frameContainer addSubview:blockSlider2];
@@ -1573,6 +1574,11 @@
     adjustedPtY1 = adjustedPtY1 + translation.y;
     adjustedWidth1 = adjustedWidth1 + translation.x;
     adjustedHeight1 = adjustedHeight1 + translation.y;
+    UIButton *btn = (UIButton *) sender;
+    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y + translation.y);
+    
+    [sender setTranslation:CGPointMake(0, 0) inView:self.view];
+
     if (nStyle == 1) {
         switch (nSubStyle) {
             case 1:

@@ -207,10 +207,11 @@
     if (!firstTimeDesign){
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag=[defaults integerForKey:@"frame"];
-        if (btn.tag <= 25)
-            [self frameClicked:btn];
-        else
-            [self secondFrameClicked:btn];
+        [self resizeFrames];
+//        if (btn.tag <= 25)
+//            [self frameClicked:btn];
+//        else
+//            [self secondFrameClicked:btn];
     }
     else {
         if (![defaults boolForKey:@"filter"])
@@ -293,6 +294,12 @@
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    for (int i = 0; i <= 25; i++) {
+        UIImageView *imageView= (UIImageView *)[self.frameContainer viewWithTag:200+i];
+        [imageView removeFromSuperview];
+    }
+    UIButton *btn= (UIButton *)[self.frameContainer viewWithTag:300];
+    [btn removeFromSuperview];
     if ([[segue identifier] isEqualToString:@"doneDesign"])
     {
         firstTimeDesign=NO;
@@ -412,6 +419,10 @@
 
 - (void)frameClicked:(UIButton *)clickedBtn
 {
+    for (int i = 0; i <= 25; i++) {
+        UIImageView *imageView= (UIImageView *)[self.frameContainer viewWithTag:200+i];
+        [imageView removeFromSuperview];
+    }
     [defaults setInteger:clickedBtn.tag forKey:@"frame"];
     for (int i = 1; i <= 35+25; i++) {
         UIButton *frameButton = (UIButton *)[_frameSelectionBar viewWithTag:i];
@@ -443,11 +454,11 @@
             [self selectFrame:1 SUB:6];
             break;
         case 7:
-            
+            [self resetAdjustedStyle2Values];
             [self selectFrame:2 SUB:1];
             break;
         case 8:
-            
+            [self resetAdjustedStyle2Values];
             [self selectFrame:2 SUB:2];
             break;
         case 9:
@@ -526,7 +537,10 @@
 - (void)secondFrameClicked:(UIButton *)clickedBtn
 {
     [defaults setInteger:clickedBtn.tag forKey:@"frame"];
-
+    for (int i = 0; i <= 25; i++) {
+        UIImageView *imageView= (UIImageView *)[self.frameContainer viewWithTag:200+i];
+        [imageView removeFromSuperview];
+    }
     if (![defaults boolForKey:kFeature0]){
         [self frameAction];
         return;
@@ -1155,15 +1169,6 @@
         [blockSlider4 addSubview:image4];
         [self fitImageToScroll:image4 SCROLL:blockSlider4 scrollViewNumber:blockSlider4.tag angle:0.0 ];
         
-        UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(blockSlider1.center.x, blockSlider1.center.y, 30, 30)];
-        btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"lockImage.png"]];
-        btn.tag = 200;
-//        btn.alpha = 0.5;
-        UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
-        panGestureBtn.delegate=self;
-        [btn addGestureRecognizer:panGestureBtn];
-        [blockSlider1 addSubview:btn];
-        
         [self.frameContainer addSubview:blockSlider1];
         [self.frameContainer addSubview:blockSlider2];
         [self.frameContainer addSubview:blockSlider3];
@@ -1172,6 +1177,8 @@
         [droppableAreas addObject:blockSlider2];
         [droppableAreas addObject:blockSlider3];
         [droppableAreas addObject:blockSlider4];
+        
+
 
         UITapGestureRecognizer *tapBlock = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBlock:)];
         tapBlock.numberOfTapsRequired = 1;
@@ -1190,28 +1197,52 @@
     else {
         nStyle = style;
         nSubStyle = sub;
-        for (UIScrollView *blockSlider in droppableAreas){
-            if (blockSlider.tag == 0) {
-                rectBlockSlider1 = [self getScrollFrame1:nStyle subStyle:nSubStyle];
-                blockSlider.frame = rectBlockSlider1;
-            }
-            else if (blockSlider.tag == 1) {
-                rectBlockSlider2 = [self getScrollFrame2:nStyle subStyle:nSubStyle];
-                blockSlider.frame = rectBlockSlider2;
-            }
-            else if (blockSlider.tag == 2) {
-                rectBlockSlider3 = [self getScrollFrame3:nStyle subStyle:nSubStyle];
-                blockSlider.frame = rectBlockSlider3;
-            }
-            else if (blockSlider.tag == 3) {
-                rectBlockSlider4 = [self getScrollFrame4:nStyle subStyle:nSubStyle];
-                blockSlider.frame = rectBlockSlider4;
-            }
-            [blockSlider setContentOffset:CGPointMake(blockSlider.frame.origin.x, blockSlider.frame.origin.y) animated:NO];
-        }
+        [self resizeFrames];
+
+//        for (UIScrollView *blockSlider in droppableAreas){
+//            if (blockSlider.tag == 0) {
+//                rectBlockSlider1 = [self getScrollFrame1:nStyle subStyle:nSubStyle];
+//                blockSlider.frame = rectBlockSlider1;
+//            }
+//            else if (blockSlider.tag == 1) {
+//                rectBlockSlider2 = [self getScrollFrame2:nStyle subStyle:nSubStyle];
+//                blockSlider.frame = rectBlockSlider2;
+//            }
+//            else if (blockSlider.tag == 2) {
+//                rectBlockSlider3 = [self getScrollFrame3:nStyle subStyle:nSubStyle];
+//                blockSlider.frame = rectBlockSlider3;
+//            }
+//            else if (blockSlider.tag == 3) {
+//                rectBlockSlider4 = [self getScrollFrame4:nStyle subStyle:nSubStyle];
+//                blockSlider.frame = rectBlockSlider4;
+//            }
+//            [blockSlider setContentOffset:CGPointMake(blockSlider.frame.origin.x, blockSlider.frame.origin.y) animated:NO];
+//        }
     }
 }
 
+- (void) resizeFrames {
+
+    for (UIScrollView *blockSlider in droppableAreas){
+        if (blockSlider.tag == 0) {
+            rectBlockSlider1 = [self getScrollFrame1:nStyle subStyle:nSubStyle];
+            blockSlider.frame = rectBlockSlider1;
+        }
+        else if (blockSlider.tag == 1) {
+            rectBlockSlider2 = [self getScrollFrame2:nStyle subStyle:nSubStyle];
+            blockSlider.frame = rectBlockSlider2;
+        }
+        else if (blockSlider.tag == 2) {
+            rectBlockSlider3 = [self getScrollFrame3:nStyle subStyle:nSubStyle];
+            blockSlider.frame = rectBlockSlider3;
+        }
+        else if (blockSlider.tag == 3) {
+            rectBlockSlider4 = [self getScrollFrame4:nStyle subStyle:nSubStyle];
+            blockSlider.frame = rectBlockSlider4;
+        }
+        [blockSlider setContentOffset:CGPointMake(blockSlider.frame.origin.x, blockSlider.frame.origin.y) animated:NO];
+    }
+}
 
 - (IBAction)handlePinchImage:(UIPinchGestureRecognizer *)sender {
     if (tapBlockNumber !=100){
@@ -1281,14 +1312,23 @@
 //    return YES;
 //}
 
+
+
 -(void) tapBlock :(UITapGestureRecognizer *)recognizer{
+    [self closeBtnClicked];
+//    for (UIScrollView *blockSlider in droppableAreas)
+//        [blockSlider.layer setBorderColor:[[UIColor clearColor] CGColor]];
+    
     for (UIScrollView *blockSlider in droppableAreas) {
         CGPoint tappedBlock = [recognizer locationInView:blockSlider];
         if ([blockSlider pointInside:tappedBlock withEvent:nil]) {
             tapBlockNumber = blockSlider.tag;
             NSLog(@"tapblocknumber is %d",tapBlockNumber);
+            [blockSlider.layer setBorderColor:[[UIColor cyanColor] CGColor]];
         }
     }
+    [self addButtons];
+    
     [UIView animateWithDuration:2.0
                      animations:^{
                          for (UIScrollView *blockSlider in droppableAreas){
@@ -1438,43 +1478,38 @@
     
 }
 - (void) resetRotate {
-//        NSString *tagZoom = [NSString stringWithFormat:@"Zoom%d",tapBlockNumber];
         sliderRotate.value = 0.0;
-//        NSString *tagRotate = [NSString stringWithFormat:@"Rotate%d",tapBlockNumber];
         [defaults setFloat:sliderRotate.value forKey:@"Rotate"];
         CGFloat zoomFactor = [defaults floatForKey:@"Zoom"];
         for (UIScrollView *blockSlider in droppableAreas){
-//            if (blockSlider.tag == tapBlockNumber){//split
                 if (blockSlider.subviews.count==0) return;
                 UIImageView *imageView = blockSlider.subviews[0];
                 imageView.transform = CGAffineTransformIdentity;
                 imageView.transform = CGAffineTransformScale(imageView.transform, zoomFactor,zoomFactor);
             [defaults setBool:NO forKey:@"Flip"];
-//            }
         }
     labelRotate.text = [NSString stringWithFormat:@"%.0f",radiansToDegrees(sliderRotate.value)];
 }
+
 - (void)splitChanged:(id)sender {
-    //    [Flurry logEvent:@"Frame - Rotate"];
-    
     sliderSplit = (UISlider *)sender;
     nMargin = sliderSplit.value;
     [sliderSplit setValue:(int)(sliderSplit.value) animated:NO];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.tag=[defaults integerForKey:@"frame"];
-    if (btn.tag <= 25)
-        [self frameClicked:btn];
-    else
-        [self secondFrameClicked:btn];
+    [self resizeFrames];
+//    if (btn.tag <= 25)
+//        [self frameClicked:btn];
+//    else
+//        [self secondFrameClicked:btn];
     [defaults setFloat:sliderSplit.value forKey:@"Split"];
     labelSplit.text = [NSString stringWithFormat:@"%.0f",sliderSplit.value];
 }
-- (void)rotateChanged:(id)sender {
 
+- (void)rotateChanged:(id)sender {
     sliderRotate = (UISlider *)sender;
     CGFloat zoomFactor = [defaults floatForKey:@"Zoom"];
     CGFloat totalRotate = sliderRotate.value +[defaults floatForKey:@"Rotate"];
-
         for (UIScrollView *blockSlider in droppableAreas){
             if (blockSlider.subviews.count==0) return;
                 UIImageView *imageView = blockSlider.subviews[0];
@@ -1563,45 +1598,97 @@
                 imageView.transform = CGAffineTransformScale(imageView.transform, -1,1);
         }
 }
-- (void) unselectFrame {
-    
-}
+- (void) closeBtnClicked {
+    UIButton *btn= (UIButton *)[self.frameContainer viewWithTag:300];
+    [btn removeFromSuperview];
+    for (int i = 0; i <= 25; i++) {
+        UIImageView *imageView= (UIImageView *)[self.frameContainer viewWithTag:200+i];
+        [imageView removeFromSuperview];
+    }
 
+}
+- (void) addButtons {
+    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [closeBtn addTarget:self action:@selector(closeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    closeBtn.frame = CGRectMake(310-30,310-30, 30, 30);
+    [closeBtn setImage:[UIImage imageNamed:@"lockImage.png"] forState:UIControlStateNormal];
+    [closeBtn.imageView setContentMode:UIViewContentModeScaleAspectFill];
+    closeBtn.tag = 300;
+//    closeBtn.userInteractionEnabled=YES;
+    [self.frameContainer addSubview:closeBtn];
+
+    if (tapBlockNumber==0){
+        if (nStyle==2) {
+            switch (nSubStyle) {
+                case 1:{
+                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,155-15, 30, 30)];
+                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"lockImage.png"]];
+                    btn.tag = 200;
+                    btn.userInteractionEnabled=YES;
+                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                    panGestureBtn.delegate=self;
+                    [btn addGestureRecognizer:panGestureBtn];
+                    [self.frameContainer addSubview:btn];
+                    break;
+                }
+                case 2:{
+                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,155-15+adjustedHeight1, 30, 30)];
+                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"lockImage.png"]];
+                    btn.tag = 201;
+                    btn.userInteractionEnabled=YES;
+                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                    panGestureBtn.delegate=self;
+                    [btn addGestureRecognizer:panGestureBtn];
+                    [self.frameContainer addSubview:btn];
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+}
 - (void) moveBtn :(UIPanGestureRecognizer *)sender  {
     
     CGPoint translation = [sender translationInView:self.view];
-    adjustedPtX1 = adjustedPtX1 + translation.x;
-    adjustedPtY1 = adjustedPtY1 + translation.y;
-    adjustedWidth1 = adjustedWidth1 + translation.x;
-    adjustedHeight1 = adjustedHeight1 + translation.y;
-    UIButton *btn = (UIButton *) sender;
-    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y + translation.y);
-    
     [sender setTranslation:CGPointMake(0, 0) inView:self.view];
-
-    if (nStyle == 1) {
+    if (nStyle == 2) {
         switch (nSubStyle) {
-            case 1:
+            case 1:{
+                UIButton *btn = (UIButton *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 40)){
+                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
+                    adjustedWidth1= adjustedWidth1+translation.x;
+                    adjustedWidth2=adjustedWidth2 - translation.x;
+                    adjustedPtX2=adjustedPtX2 + translation.x;
+                    [self resizeFrames];
+                }
                 break;
+            }
+            case 2:{
+                UIButton *btn = (UIButton *) [self.frameContainer viewWithTag:201];
+                NSLog(@"btn center y =%f ", btn.center.y + translation.y);
+                if ((btn.center.y + translation.y< 270) && (btn.center.y + translation.y > 40)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y +translation.y);
+                    adjustedHeight1= adjustedHeight1+translation.y;
+                    adjustedHeight2=adjustedHeight2 - translation.y;
+                    adjustedPtY2=adjustedPtY2 + translation.y;
+                    [self resizeFrames];
+                }
+                break;
+            }
                 
             default:
                 break;
         }
-        
-    }
-    else if (nStyle == 2) {
-        switch (nSubStyle) {
-            case 1:
-                
-                break;
-                
-            default:
-                break;
-        }
-
     }
 }
-
+- (void) resetAdjustedStyle2Values {
+    adjustedPtX1 = adjustedPtX2 = 0.0;
+    adjustedPtY1 = adjustedPtY2 = 0.0;
+    adjustedWidth1 = adjustedWidth2 = 0.0;
+    adjustedHeight1 = adjustedHeight2 = 0.0;
+}
 - (CGRect) getScrollFrame1:(int)style subStyle:(int)sub
 {
     CGRect rc;
@@ -2285,7 +2372,7 @@
         
     }
     
-    rc = CGRectMake(nLeftMargin, nTopMargin, scroll_width, scroll_height);
+    rc = CGRectMake(nLeftMargin+adjustedPtX2, nTopMargin+adjustedPtY2, scroll_width+adjustedWidth2, scroll_height+adjustedHeight2);
     NSLog(@"Scroll 2 outside nLeftMargin=%f nTopMargin=%f width=%f,height=%f",nLeftMargin,nTopMargin,scroll_width,scroll_height);
     return rc;
 }
@@ -2474,8 +2561,9 @@
         }
         
     }
-    
-    rc = CGRectMake(nLeftMargin, nTopMargin, scroll_width, scroll_height);
+    rc = CGRectMake(nLeftMargin+adjustedPtX3, nTopMargin+adjustedPtY3, scroll_width+adjustedWidth3, scroll_height+adjustedHeight3);
+
+//    rc = CGRectMake(nLeftMargin, nTopMargin, scroll_width, scroll_height);
     NSLog(@"Scroll 3 outside nLeftMargin=%f nTopMargin=%f width=%f,height=%f",nLeftMargin,nTopMargin,scroll_width,scroll_height);
     return rc;
 }
@@ -2583,7 +2671,9 @@
             return rc;
         }
     }
-    rc = CGRectMake(nLeftMargin, nTopMargin, scroll_width, scroll_height);
+    rc = CGRectMake(nLeftMargin+adjustedPtX4, nTopMargin+adjustedPtY4, scroll_width+adjustedWidth4, scroll_height+adjustedHeight4);
+
+//    rc = CGRectMake(nLeftMargin, nTopMargin, scroll_width, scroll_height);
     NSLog(@"Scroll 4 outside nLeftMargin=%f nTopMargin=%f width=%f,height=%f",nLeftMargin,nTopMargin,scroll_width,scroll_height);
     return rc;
 }

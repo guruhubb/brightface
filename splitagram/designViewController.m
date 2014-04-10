@@ -419,10 +419,7 @@
 
 - (void)frameClicked:(UIButton *)clickedBtn
 {
-    for (int i = 0; i <= 25; i++) {
-        UIImageView *imageView= (UIImageView *)[self.frameContainer viewWithTag:200+i];
-        [imageView removeFromSuperview];
-    }
+    [self closeBtnClicked];
     [defaults setInteger:clickedBtn.tag forKey:@"frame"];
     for (int i = 1; i <= 35+25; i++) {
         UIButton *frameButton = (UIButton *)[_frameSelectionBar viewWithTag:i];
@@ -537,10 +534,7 @@
 - (void)secondFrameClicked:(UIButton *)clickedBtn
 {
     [defaults setInteger:clickedBtn.tag forKey:@"frame"];
-    for (int i = 0; i <= 25; i++) {
-        UIImageView *imageView= (UIImageView *)[self.frameContainer viewWithTag:200+i];
-        [imageView removeFromSuperview];
-    }
+    [self closeBtnClicked];
     if (![defaults boolForKey:kFeature0]){
         [self frameAction];
         return;

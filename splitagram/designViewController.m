@@ -441,13 +441,10 @@
         case 4:
             [self selectFrame:1 SUB:4];
             break;
-            
         case 5:
             [self selectFrame:1 SUB:5];
             break;
-            
         case 6:
-            
             [self selectFrame:1 SUB:6];
             break;
         case 7:
@@ -459,7 +456,7 @@
             [self selectFrame:2 SUB:2];
             break;
         case 9:
-            
+            [self resetAdjustedStyle2Values];
             [self selectFrame:2 SUB:3];
             break;
         case 10:
@@ -1192,26 +1189,6 @@
         nStyle = style;
         nSubStyle = sub;
         [self resizeFrames];
-
-//        for (UIScrollView *blockSlider in droppableAreas){
-//            if (blockSlider.tag == 0) {
-//                rectBlockSlider1 = [self getScrollFrame1:nStyle subStyle:nSubStyle];
-//                blockSlider.frame = rectBlockSlider1;
-//            }
-//            else if (blockSlider.tag == 1) {
-//                rectBlockSlider2 = [self getScrollFrame2:nStyle subStyle:nSubStyle];
-//                blockSlider.frame = rectBlockSlider2;
-//            }
-//            else if (blockSlider.tag == 2) {
-//                rectBlockSlider3 = [self getScrollFrame3:nStyle subStyle:nSubStyle];
-//                blockSlider.frame = rectBlockSlider3;
-//            }
-//            else if (blockSlider.tag == 3) {
-//                rectBlockSlider4 = [self getScrollFrame4:nStyle subStyle:nSubStyle];
-//                blockSlider.frame = rectBlockSlider4;
-//            }
-//            [blockSlider setContentOffset:CGPointMake(blockSlider.frame.origin.x, blockSlider.frame.origin.y) animated:NO];
-//        }
     }
 }
 
@@ -1296,9 +1273,9 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     
-//    if ([gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]])
-//        return YES;
-//    else
+    if ([gestureRecognizer isKindOfClass:[UIButton class]])
+        return YES;
+    else
         return NO;
 }
 // this allows you to dispatch touches
@@ -1605,10 +1582,9 @@
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [closeBtn addTarget:self action:@selector(closeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     closeBtn.frame = CGRectMake(310-30,310-30, 30, 30);
-    [closeBtn setImage:[UIImage imageNamed:@"lockImage.png"] forState:UIControlStateNormal];
-    [closeBtn.imageView setContentMode:UIViewContentModeScaleAspectFill];
+    [closeBtn setImage:[UIImage imageNamed:@"cross_red.png"] forState:UIControlStateNormal];
+    closeBtn.alpha = 0.5;
     closeBtn.tag = 300;
-//    closeBtn.userInteractionEnabled=YES;
     [self.frameContainer addSubview:closeBtn];
 
     if (tapBlockNumber==0){
@@ -1616,7 +1592,8 @@
             switch (nSubStyle) {
                 case 1:{
                     UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,155-15, 30, 30)];
-                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"lockImage.png"]];
+                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                    btn.alpha = 0.5;
                     btn.tag = 200;
                     btn.userInteractionEnabled=YES;
                     UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
@@ -1627,8 +1604,9 @@
                 }
                 case 2:{
                     UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,155-15+adjustedHeight1, 30, 30)];
-                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"lockImage.png"]];
+                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                     btn.tag = 201;
+                    btn.alpha = 0.5;
                     btn.userInteractionEnabled=YES;
                     UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
                     panGestureBtn.delegate=self;
@@ -1636,6 +1614,41 @@
                     [self.frameContainer addSubview:btn];
                     break;
                 }
+                case 3: {
+                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,77-15+adjustedHeight1, 30, 30)];
+                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                    btn.tag = 200;
+                    btn.alpha = 0.5;
+                    btn.userInteractionEnabled=YES;
+                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                    panGestureBtn.delegate=self;
+                    [btn addGestureRecognizer:panGestureBtn];
+                    [self.frameContainer addSubview:btn];
+                    
+                    UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth2,155+75-15+adjustedHeight1, 30, 30)];
+                    btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                    btn1.tag = 201;
+                    btn1.alpha = 0.5;
+                    btn1.userInteractionEnabled=YES;
+                    UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                    panGestureBtn1.delegate=self;
+                    [btn1 addGestureRecognizer:panGestureBtn1];
+                    [self.frameContainer addSubview:btn1];
+                    break;
+                }
+                case 4:{
+                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,155-15, 30, 30)];
+                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                    btn.alpha = 0.5;
+                    btn.tag = 200;
+                    btn.userInteractionEnabled=YES;
+                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                    panGestureBtn.delegate=self;
+                    [btn addGestureRecognizer:panGestureBtn];
+                    [self.frameContainer addSubview:btn];
+                    break;
+                }
+
                 default:
                     break;
             }
@@ -1671,12 +1684,82 @@
                 }
                 break;
             }
+            case 3:{
+                UIButton *btn = (UIButton *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 40)){
+                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
+                    adjustedWidth1= adjustedWidth1+translation.x;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 4:{
+                UIButton *btn = (UIButton *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 40)){
+                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
+                    adjustedWidth1= adjustedWidth1+translation.x;
+                    adjustedWidth2=adjustedWidth2 - translation.x;
+                    adjustedPtX2=adjustedPtX2 + translation.x;
+                    [self resizeFrames];
+                }
+                break;
+            }
+
                 
             default:
                 break;
         }
     }
 }
+- (void) moveBtn1 :(UIPanGestureRecognizer *)sender  {
+    
+    CGPoint translation = [sender translationInView:self.view];
+    [sender setTranslation:CGPointMake(0, 0) inView:self.view];
+    if (nStyle == 2) {
+        switch (nSubStyle) {
+            case 3:{
+                UIButton *btn = (UIButton *) [self.frameContainer viewWithTag:201];
+                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 40)){
+                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
+                    adjustedWidth2= adjustedWidth2+translation.x;
+                    [self resizeFrames];
+                }
+                break;
+            }
+                
+            default:
+                break;
+        }
+    }
+}
+- (void) moveBtn2 :(UIPanGestureRecognizer *)sender  {
+    CGPoint translation = [sender translationInView:self.view];
+    [sender setTranslation:CGPointMake(0, 0) inView:self.view];
+    if (nStyle == 2) {
+        switch (nSubStyle) {
+            case 3:{
+                UIButton *btn = (UIButton *) [self.frameContainer viewWithTag:202];
+                NSLog(@"btn center y =%f ", btn.center.y + translation.y);
+                if ((btn.center.y + translation.y< 270) && (btn.center.y + translation.y > 40)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y +translation.y);
+                    adjustedHeight1= adjustedHeight1+translation.y;
+                    adjustedHeight2=adjustedHeight2 - translation.y;
+                    adjustedPtY2=adjustedPtY2 + translation.y;
+                    [self resizeFrames];
+                    UIButton *btn1 = (UIButton *) [self.frameContainer viewWithTag:201];
+                    btn1.center = CGPointMake(btn1.center.x,btn1.center.y +translation.y/2 );
+                    UIButton *btn2 = (UIButton *) [self.frameContainer viewWithTag:200];
+                    btn2.center = CGPointMake(btn2.center.x,btn2.center.y +translation.y/2 );
+                }
+                break;
+            }
+                
+            default:
+                break;
+        }
+    }
+}
+
 - (void) resetAdjustedStyle2Values {
     adjustedPtX1 = adjustedPtX2 = 0.0;
     adjustedPtY1 = adjustedPtY2 = 0.0;
@@ -1823,12 +1906,12 @@
             scroll_height = (self.frameContainer.frame.size.height - nMargin * 3 ) / 2;
         }
         else if(sub == 4){
-            scroll_width = (self.frameContainer.frame.size.width - 10 * 3 ) / 2;
-            scroll_height = self.frameContainer.frame.size.height - 10 * 4;
-            nTopMargin=10 *2+10;
-
-            rc = CGRectMake(20-nMargin, nTopMargin, scroll_width, scroll_height );
-            return rc;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 )/2;
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 2;
+//            nTopMargin=10 *2+10;
+//
+//            rc = CGRectMake(20-nMargin, nTopMargin, scroll_width, scroll_height );
+//            return rc;
         }
         else if(sub == 5){
             scroll_width = (self.frameContainer.frame.size.width - 10 * 3 ) / 2;
@@ -2101,12 +2184,11 @@
             
         }
         else if (sub == 4){
-            scroll_width = (self.frameContainer.frame.size.width - 10 * 3 ) / 2;
-            scroll_height = self.frameContainer.frame.size.height - 10 * 10;
-            nLeftMargin = self.frameContainer.frame.size.width - scroll_width ;
-            nTopMargin = 10 *5+10;
-            rc = CGRectMake(nLeftMargin - (20-nMargin), nTopMargin, scroll_width, scroll_height );
-            return rc;
+            scroll_width = (self.frameContainer.frame.size.width - nMargin * 3 ) / 2;
+            scroll_height = self.frameContainer.frame.size.height - nMargin * 2 - 100;
+            nLeftMargin = self.frameContainer.frame.size.width - nMargin - scroll_width;
+            nTopMargin = nMargin+100/2;
+
         }
         else if (sub == 5){
             scroll_width = (self.frameContainer.frame.size.width - 10 * 3 ) / 2;

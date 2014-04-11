@@ -142,6 +142,10 @@
 		CC2F4D9418D9235A0039E515 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7618D923590039E515 /* UIKit.framework */; };
 		CC2F4D9C18D9235A0039E515 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC2F4D9A18D9235A0039E515 /* InfoPlist.strings */; };
 		CC2F4D9E18D9235A0039E515 /* splitagramTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2F4D9D18D9235A0039E515 /* splitagramTests.m */; };
+		CC99FE9918F75F60001F7CBE /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = CC99FE9818F75F60001F7CBE /* circle.png */; };
+		CC99FE9E18F76193001F7CBE /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = CC99FE9D18F76193001F7CBE /* cancel.png */; };
+		CC99FEA118F76A87001F7CBE /* cross_red.png in Resources */ = {isa = PBXBuildFile; fileRef = CC99FE9F18F76A86001F7CBE /* cross_red.png */; };
+		CC99FEA218F76A87001F7CBE /* square.png in Resources */ = {isa = PBXBuildFile; fileRef = CC99FEA018F76A87001F7CBE /* square.png */; };
 		CCAC973418F051BE000B669B /* filter01.png in Resources */ = {isa = PBXBuildFile; fileRef = CCAC971E18F051BE000B669B /* filter01.png */; };
 		CCAC973518F051BE000B669B /* filter02.png in Resources */ = {isa = PBXBuildFile; fileRef = CCAC971F18F051BE000B669B /* filter02.png */; };
 		CCAC973618F051BE000B669B /* filter03.png in Resources */ = {isa = PBXBuildFile; fileRef = CCAC972018F051BE000B669B /* filter03.png */; };
@@ -380,6 +384,10 @@
 		CC2F4D9918D9235A0039E515 /* splitagramTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "splitagramTests-Info.plist"; sourceTree = "<group>"; };
 		CC2F4D9B18D9235A0039E515 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CC2F4D9D18D9235A0039E515 /* splitagramTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = splitagramTests.m; sourceTree = "<group>"; };
+		CC99FE9818F75F60001F7CBE /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = circle.png; path = Resources/icons/circle.png; sourceTree = "<group>"; };
+		CC99FE9D18F76193001F7CBE /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cancel.png; path = Resources/icons/cancel.png; sourceTree = "<group>"; };
+		CC99FE9F18F76A86001F7CBE /* cross_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cross_red.png; path = Resources/icons/cross_red.png; sourceTree = "<group>"; };
+		CC99FEA018F76A87001F7CBE /* square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = square.png; path = Resources/icons/square.png; sourceTree = "<group>"; };
 		CCAC971E18F051BE000B669B /* filter01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter01.png; sourceTree = "<group>"; };
 		CCAC971F18F051BE000B669B /* filter02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter02.png; sourceTree = "<group>"; };
 		CCAC972018F051BE000B669B /* filter03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter03.png; sourceTree = "<group>"; };
@@ -514,7 +522,11 @@
 		CC0E47A318E1DF8C003F2CAD /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				CC99FE9F18F76A86001F7CBE /* cross_red.png */,
+				CC99FEA018F76A87001F7CBE /* square.png */,
+				CC99FE9D18F76193001F7CBE /* cancel.png */,
 				CC0E48A118E1E80D003F2CAD /* comments-icon-614x460.png */,
+				CC99FE9818F75F60001F7CBE /* circle.png */,
 				CC0E48A218E1E80D003F2CAD /* facebook-70251b04a4be865178ab592bc9586c83.png */,
 				CC0E495618E26587003F2CAD /* lockImage.png */,
 				CC205D7018E61D1700EECDE8 /* glyphicons_012_heart.png */,
@@ -1024,6 +1036,7 @@
 				CC0E493418E22AA1003F2CAD /* BWhighContrastRed.png in Resources */,
 				CC0E494A18E22AA1003F2CAD /* platinum.png in Resources */,
 				CC0E486318E1E7F5003F2CAD /* Frame02.png in Resources */,
+				CC99FEA118F76A87001F7CBE /* cross_red.png in Resources */,
 				CC0E489718E1E7F5003F2CAD /* secondFrame26a.png in Resources */,
 				CC0E48AD18E1E80D003F2CAD /* icon-letter-mail-hi.png in Resources */,
 				CC0E488718E1E7F5003F2CAD /* secondFrame10a.png in Resources */,
@@ -1056,6 +1069,7 @@
 				CC0E493C18E22AA1003F2CAD /* curve01.acv in Resources */,
 				CCAC974218F051BE000B669B /* filter15.png in Resources */,
 				CCAC975818F09124000B669B /* TapjoyResources.bundle in Resources */,
+				CC99FEA218F76A87001F7CBE /* square.png in Resources */,
 				CC0E493D18E22AA1003F2CAD /* cyanSeleniumBleachMoonlight.png in Resources */,
 				CC0E487F18E1E7F5003F2CAD /* secondFrame02.png in Resources */,
 				CCAC973B18F051BE000B669B /* filter08.png in Resources */,
@@ -1073,6 +1087,7 @@
 				CCAC974618F051BE000B669B /* filter19.png in Resources */,
 				CC0E488418E1E7F5003F2CAD /* secondFrame07.png in Resources */,
 				CCAC973C18F051BE000B669B /* filter09.png in Resources */,
+				CC99FE9918F75F60001F7CBE /* circle.png in Resources */,
 				CCD28E1318DBE74E001127EC /* AddDevice.html in Resources */,
 				CC0E486818E1E7F5003F2CAD /* Frame07.png in Resources */,
 				CCAC973D18F051BE000B669B /* filter10.png in Resources */,
@@ -1085,6 +1100,7 @@
 				CC0E487218E1E7F5003F2CAD /* Frame17.png in Resources */,
 				CC2F4D7D18D923590039E515 /* InfoPlist.strings in Resources */,
 				CC0E494718E22AA1003F2CAD /* lookup_miss_etikate.png in Resources */,
+				CC99FE9E18F76193001F7CBE /* cancel.png in Resources */,
 				CC0E493818E22AA1003F2CAD /* crispWarm.png in Resources */,
 				CCAC974418F051BE000B669B /* filter17.png in Resources */,
 				CC0E48AC18E1E80D003F2CAD /* glyphicons_136_cogwheel.png in Resources */,

@@ -34,6 +34,7 @@
     BOOL firstTime;
     BOOL firstTimeFilter;
     BOOL firstTimeDesign;
+    BOOL resizeOn;
     NSInteger tapBlockNumber;
     NSInteger nStyle;
     NSInteger nSubStyle;
@@ -420,6 +421,7 @@
 - (void)frameClicked:(UIButton *)clickedBtn
 {
     [self closeBtnClicked];
+    resizeOn=NO;
     [defaults setInteger:clickedBtn.tag forKey:@"frame"];
     for (int i = 1; i <= 35+25; i++) {
         UIButton *frameButton = (UIButton *)[_frameSelectionBar viewWithTag:i];
@@ -430,21 +432,27 @@
     
     switch (clickedBtn.tag) {
         case 1:
+            [self resetAdjustedValues];
             [self selectFrame:1 SUB:1];
             break;
         case 2:
+            [self resetAdjustedValues];
             [self selectFrame:1 SUB:2];
             break;
         case 3:
+            [self resetAdjustedValues];
             [self selectFrame:1 SUB:3];
             break;
         case 4:
+            [self resetAdjustedValues];
             [self selectFrame:1 SUB:4];
             break;
         case 5:
+            [self resetAdjustedValues];
             [self selectFrame:1 SUB:5];
             break;
         case 6:
+            [self resetAdjustedValues];
             [self selectFrame:1 SUB:6];
             break;
         case 7:
@@ -478,18 +486,22 @@
             [self selectFrame:3 SUB:1];
             break;
         case 14:
+            [self resetAdjustedValues];
             [self selectFrame:3 SUB:2];
             break;
         case  15:
             
+            [self resetAdjustedValues];
             [self selectFrame:3 SUB:3];
             break;
         case 16:
             
+            [self resetAdjustedValues];
             [self selectFrame:3 SUB:4];
             break;
         case 17:
             
+            [self resetAdjustedValues];
             [self selectFrame:3 SUB:5];
             break;
         case 18:
@@ -498,30 +510,37 @@
             break;
         case 19:
             
+            [self resetAdjustedValues];
             [self selectFrame:4 SUB:1];
             break;
         case 20:
             
+            [self resetAdjustedValues];
             [self selectFrame:4 SUB:2];
             break;
         case 21:
             
+            [self resetAdjustedValues];
             [self selectFrame:4 SUB:3];
             break;
         case 22:
             
+            [self resetAdjustedValues];
             [self selectFrame:4 SUB:4];
             break;
         case 23:
             
+            [self resetAdjustedValues];
             [self selectFrame:4 SUB:5];
             break;
         case 24:
             
+            [self resetAdjustedValues];
             [self selectFrame:4 SUB:6];
             break;
         case 25:
             
+            [self resetAdjustedValues];
             [self selectFrame:4 SUB:7];
             break;
             
@@ -533,6 +552,7 @@
 {
     [defaults setInteger:clickedBtn.tag forKey:@"frame"];
     [self closeBtnClicked];
+    resizeOn=NO;
     if (![defaults boolForKey:kFeature0]){
         [self frameAction];
         return;
@@ -545,47 +565,47 @@
 
         switch (clickedBtn.tag-25) {
             case 1:
-                
+                [self resetAdjustedValues];
                 [self selectFrame:1 SUB:7];
                 break;
-                //        case 2:
-                //            [self selectFrame:1 SUB:8];
-                //            break;
-                
             case 2: 
+                [self resetAdjustedValues];
                 [self selectFrame:1 SUB:9];
                 break;
             case 3:
+                [self resetAdjustedValues];
                 [self selectFrame:1 SUB:10];
                 break;
             case 4:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:1 SUB:11];
                 break;
                 
             case 5:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:1 SUB:12];
                 break;
             case 6:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:1 SUB:13];
                 break;
             case 7:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:1 SUB:14];
                 break;
-                //        case 9:
-                //
-                //            [self selectFrame:1 SUB:15];
-                //            break;
             case 12:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:2 SUB:7];
                 break;
                 
             case 9:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:2 SUB:8];
                 break;
 //
@@ -596,6 +616,7 @@
                 
             case 8:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:2 SUB:10];
                 break;
 //            case 9:
@@ -604,10 +625,12 @@
 //                break;
             case 10:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:2 SUB:12];
                 break;
             case 11:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:2 SUB:13];
                 break;
 //            case 15:
@@ -626,26 +649,32 @@
 //                break;
             case 13:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:3 SUB:7];
                 break;
             case 14:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:3 SUB:8];
                 break;
             case 15:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:3 SUB:9];
                 break;
             case 16:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:3 SUB:10];
                 break;
             case 17:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:3 SUB:11];
                 break;
             case 18:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:3 SUB:12];
                 break;
 //            case 18:
@@ -654,6 +683,7 @@
 //                break;
                 
             case 19:
+                [self resetAdjustedValues];
                 [self selectFrame:3 SUB:14];
                 break;
 //            case 26:
@@ -674,22 +704,27 @@
                 //            break;
             case 20:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:4 SUB:10];
                 break;
             case 21:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:4 SUB:11];
                 break;
             case 22:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:4 SUB:12];
                 break;
             case 23:
                 
+                [self resetAdjustedValues];
                 [self selectFrame:4 SUB:13];
                 break;
                 
             case 24:
+                [self resetAdjustedValues];
                 [self selectFrame:4 SUB:14];
                 break;
                 //        case 33:
@@ -697,6 +732,7 @@
                 //            [self selectFrame:4 SUB:15];
                 //            break;
             case 25:
+                [self resetAdjustedValues];
                 [self selectFrame:4 SUB:16];
                 
                 break;
@@ -705,6 +741,7 @@
 //                
 //                break;
             case 26:
+                [self resetAdjustedValues];
                 [self selectFrame:4 SUB:18];
                 
                 break;
@@ -1100,6 +1137,20 @@
     [self hideBars];
     _splitMenuView.hidden=NO;
 }
+- (IBAction)resizeButton:(id)sender {
+    [Flurry logEvent:@"resize"];
+    if (resizeOn){
+        [self closeBtnClicked];
+        resizeOn = NO;
+    }
+    else {
+        [self addButtons];
+        resizeOn = YES;
+    }
+
+//    [self hideBars];
+//    _splitMenuView.hidden=NO;
+}
 
 - (void) selectFrame:(int)style SUB:(int)sub
 {
@@ -1287,7 +1338,8 @@
 
 
 -(void) tapBlock :(UITapGestureRecognizer *)recognizer{
-    [self closeBtnClicked];
+//    [self closeBtnClicked];
+//    resizeOn = NO;
 //    for (UIScrollView *blockSlider in droppableAreas)
 //        [blockSlider.layer setBorderColor:[[UIColor clearColor] CGColor]];
     
@@ -1296,10 +1348,10 @@
         if ([blockSlider pointInside:tappedBlock withEvent:nil]) {
             tapBlockNumber = blockSlider.tag;
             NSLog(@"tapblocknumber is %d",tapBlockNumber);
-            [blockSlider.layer setBorderColor:[[UIColor cyanColor] CGColor]];
+//            [blockSlider.layer setBorderColor:[[UIColor cyanColor] CGColor]];
         }
     }
-    [self addButtons];
+//    [self addButtons];
     
     [UIView animateWithDuration:2.0
                      animations:^{
@@ -1571,8 +1623,8 @@
         }
 }
 - (void) closeBtnClicked {
-    UIButton *btn= (UIButton *)[self.frameContainer viewWithTag:300];
-    [btn removeFromSuperview];
+//    UIButton *btn= (UIButton *)[self.frameContainer viewWithTag:300];
+//    [btn removeFromSuperview];
     for (int i = 0; i <= 25; i++) {
         UIImageView *imageView= (UIImageView *)[self.frameContainer viewWithTag:200+i];
         [imageView removeFromSuperview];
@@ -1580,13 +1632,13 @@
 
 }
 - (void) addButtons {
-    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeBtn addTarget:self action:@selector(closeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    closeBtn.frame = CGRectMake(310-30,310-30, 30, 30);
-    [closeBtn setImage:[UIImage imageNamed:@"cross_red.png"] forState:UIControlStateNormal];
-    closeBtn.alpha = 0.5;
-    closeBtn.tag = 300;
-    [self.frameContainer addSubview:closeBtn];
+//    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [closeBtn addTarget:self action:@selector(closeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+//    closeBtn.frame = CGRectMake(310-30,310-30, 30, 30);
+//    [closeBtn setImage:[UIImage imageNamed:@"cross_red.png"] forState:UIControlStateNormal];
+//    closeBtn.alpha = 0.5;
+//    closeBtn.tag = 300;
+//    [self.frameContainer addSubview:closeBtn];
 
     if (tapBlockNumber==0){
         if (nStyle==2) {
@@ -1713,7 +1765,8 @@
                     break;
                 }
                 case 2: {
-                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,77-15+adjustedHeight1, 30, 30)];
+                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(177/2-15+adjustedWidth1/2,155-15+adjustedHeight1, 30, 30)];
+                    
                     btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                     btn.tag = 200;
                     btn.alpha = 0.5;
@@ -1723,10 +1776,10 @@
                     [btn addGestureRecognizer:panGestureBtn];
                     [self.frameContainer addSubview:btn];
                     
-                    UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth2,155+75-15+adjustedHeight1, 30, 30)];
+                    UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(177-7+adjustedWidth1,155-15, 30, 30)];
                     btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn1.tag = 201;
                     btn1.alpha = 0.5;
+                    btn1.tag = 201;
                     btn1.userInteractionEnabled=YES;
                     UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
                     panGestureBtn1.delegate=self;
@@ -1873,64 +1926,25 @@
                     adjustedPtX3= adjustedPtX3 + translation.x;
                     UIImageView *btn1 = (UIImageView *) [self.frameContainer viewWithTag:201];
                     btn1.center = CGPointMake(btn1.center.x +translation.x/2,btn.center.y+adjustedHeight2 );
-
                     [self resizeFrames];
-                    
                 }
                 break;
             }
             case 2:{
-                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:201];
-                NSLog(@"btn center y =%f ", btn.center.y + translation.y);
-                if ((btn.center.y + translation.y< 270) && (btn.center.y + translation.y > 40)){
-                    btn.center = CGPointMake(btn.center.x ,btn.center.y +translation.y);
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.y + translation.y< 270) && (btn.center.y+ translation.y > 40)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
                     adjustedHeight1= adjustedHeight1+translation.y;
-                    adjustedHeight2=adjustedHeight2 - translation.y;
-                    adjustedPtY2=adjustedPtY2 + translation.y;
+                    adjustedHeight3=adjustedHeight3 - translation.y;
+//                    adjustedWidth3=adjustedWidth3 - translation.x;
+//                    adjustedPtY1=adjustedPtX2 + translation.x;
+                    adjustedPtY3= adjustedPtY3 + translation.y;
+                    
                     [self resizeFrames];
                 }
                 break;
             }
-            case 3:{
-                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 40)){
-                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
-                    adjustedWidth1= adjustedWidth1+translation.x;
-                    [self resizeFrames];
-                }
-                break;
-            }
-            case 4:{
-                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 40)){
-                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
-                    adjustedWidth1= adjustedWidth1+translation.x;
-                    adjustedWidth2=adjustedWidth2 - translation.x;
-                    adjustedPtX2=adjustedPtX2 + translation.x;
-                    [self resizeFrames];
-                }
-                break;
-            }
-            case 5:{
-                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 40)){
-                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
-                    adjustedWidth1= adjustedWidth1+translation.x;
-                    adjustedWidth2=adjustedWidth2 - translation.x;
-                    adjustedPtX2=adjustedPtX2 + translation.x;
-                    [self resizeFrames];
-                }
-                break;
-            }
-            case 6:{
-                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 40)){
-                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
-                    adjustedWidth1= adjustedWidth1+translation.x;
-                    [self resizeFrames];
-                }
-                break;
-            }
+
             default:
                 break;
         }
@@ -1983,13 +1997,28 @@
             case 2:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:201];
                 if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 40)){
-                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
+                    btn.center = CGPointMake(btn.center.x+translation.x, btn.center.y );
+                    adjustedWidth1= adjustedWidth1+translation.x;
                     adjustedWidth2= adjustedWidth2-translation.x;
-                    adjustedPtX2 = adjustedPtX2 + translation.x;
+                    adjustedWidth3= adjustedWidth3+translation.x;
+                    adjustedPtX2 = adjustedPtX2 +translation.x;
+                    UIImageView *btn1 = (UIImageView *) [self.frameContainer viewWithTag:200];
+                    btn1.center = CGPointMake(btn1.center.x +translation.x/2,btn.center.y+adjustedHeight1 );
                     [self resizeFrames];
                 }
                 break;
             }
+
+//            case 2:{
+//                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:201];
+//                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 40)){
+//                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
+//                    adjustedWidth2= adjustedWidth2-translation.x;
+//                    adjustedPtX2 = adjustedPtX2 + translation.x;
+//                    [self resizeFrames];
+//                }
+//                break;
+//            }
                 
             default:
                 break;

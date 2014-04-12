@@ -1623,8 +1623,7 @@
         }
 }
 - (void) closeBtnClicked {
-//    UIButton *btn= (UIButton *)[self.frameContainer viewWithTag:300];
-//    [btn removeFromSuperview];
+
     for (int i = 0; i <= 25; i++) {
         UIImageView *imageView= (UIImageView *)[self.frameContainer viewWithTag:200+i];
         [imageView removeFromSuperview];
@@ -1632,13 +1631,6 @@
 
 }
 - (void) addButtons {
-//    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [closeBtn addTarget:self action:@selector(closeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-//    closeBtn.frame = CGRectMake(310-30,310-30, 30, 30);
-//    [closeBtn setImage:[UIImage imageNamed:@"cross_red.png"] forState:UIControlStateNormal];
-//    closeBtn.alpha = 0.5;
-//    closeBtn.tag = 300;
-//    [self.frameContainer addSubview:closeBtn];
 
     if (tapBlockNumber==0){
         if (nStyle==2) {
@@ -1735,7 +1727,6 @@
                     [self.frameContainer addSubview:btn1];
                     break;
                 }
-
                 default:
                     break;
             }
@@ -1787,32 +1778,9 @@
                     [self.frameContainer addSubview:btn1];
                     break;
                 }
-                case 4:{
-                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,155-15, 30, 30)];
-                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn.alpha = 0.5;
-                    btn.tag = 200;
-                    btn.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
-                    panGestureBtn.delegate=self;
-                    [btn addGestureRecognizer:panGestureBtn];
-                    [self.frameContainer addSubview:btn];
-                    break;
-                }
-                case 5:{
-                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,155-15, 30, 30)];
-                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn.alpha = 0.5;
-                    btn.tag = 200;
-                    btn.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
-                    panGestureBtn.delegate=self;
-                    [btn addGestureRecognizer:panGestureBtn];
-                    [self.frameContainer addSubview:btn];
-                    break;
-                }
-                case 6:{
-                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,77-15+adjustedHeight1, 30, 30)];
+                case 3: {
+                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,112+adjustedHeight1, 30, 30)];
+                    
                     btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                     btn.tag = 200;
                     btn.alpha = 0.5;
@@ -1822,10 +1790,10 @@
                     [btn addGestureRecognizer:panGestureBtn];
                     [self.frameContainer addSubview:btn];
                     
-                    UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth2,155+75-15+adjustedHeight1, 30, 30)];
+                    UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+ adjustedWidth2,211-15-adjustedHeight2/2, 30, 30)];
                     btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn1.tag = 201;
                     btn1.alpha = 0.5;
+                    btn1.tag = 201;
                     btn1.userInteractionEnabled=YES;
                     UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
                     panGestureBtn1.delegate=self;
@@ -1833,7 +1801,29 @@
                     [self.frameContainer addSubview:btn1];
                     break;
                 }
+                case 4: {
+                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,77+adjustedHeight3, 30, 30)];
                     
+                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                    btn.tag = 200;
+                    btn.alpha = 0.5;
+                    btn.userInteractionEnabled=YES;
+                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                    panGestureBtn.delegate=self;
+                    [btn addGestureRecognizer:panGestureBtn];
+                    [self.frameContainer addSubview:btn];
+                    
+                    UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,184-15-adjustedHeight3/2, 30, 30)];
+                    btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                    btn1.alpha = 0.5;
+                    btn1.tag = 201;
+                    btn1.userInteractionEnabled=YES;
+                    UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                    panGestureBtn1.delegate=self;
+                    [btn1 addGestureRecognizer:panGestureBtn1];
+                    [self.frameContainer addSubview:btn1];
+                    break;
+                }
                 default:
                     break;
             }
@@ -1936,10 +1926,40 @@
                     btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
                     adjustedHeight1= adjustedHeight1+translation.y;
                     adjustedHeight3=adjustedHeight3 - translation.y;
-//                    adjustedWidth3=adjustedWidth3 - translation.x;
-//                    adjustedPtY1=adjustedPtX2 + translation.x;
                     adjustedPtY3= adjustedPtY3 + translation.y;
-                    
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 3:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.y + translation.y< 270) && (btn.center.y+ translation.y > 40)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
+                    adjustedHeight1= adjustedHeight1+translation.y;
+                    adjustedHeight2=adjustedHeight2 - translation.y;
+                    adjustedHeight3=adjustedHeight3 - translation.y;
+                    adjustedPtY2= adjustedPtY2 + translation.y;
+                    adjustedPtY3= adjustedPtY3 + translation.y;
+                    UIImageView *btn1 = (UIImageView *) [self.frameContainer viewWithTag:201];
+                    btn1.center = CGPointMake(btn1.center.x ,btn1.center.y+translation.y/2 );
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 4:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.x + translation.x< 270) && (btn.center.x+ translation.x > 40)){
+                    btn.center = CGPointMake(btn.center.x+translation.x ,btn.center.y );
+                    adjustedWidth1= adjustedWidth1+translation.x;
+                    adjustedWidth2= adjustedWidth2-translation.x;
+                    adjustedPtX2 = adjustedPtX2 + translation.x;
+
+//                    adjustedHeight2=adjustedHeight2 - translation.y;
+//                    adjustedHeight3=adjustedHeight3 - translation.y;
+//                    adjustedPtY2= adjustedPtY2 + translation.y;
+//                    adjustedPtY3= adjustedPtY3 + translation.y;
+//                    UIImageView *btn1 = (UIImageView *) [self.frameContainer viewWithTag:201];
+//                    btn1.center = CGPointMake(btn1.center.x ,btn1.center.y+translation.y/2 );
                     [self resizeFrames];
                 }
                 break;
@@ -2008,17 +2028,32 @@
                 }
                 break;
             }
+            case 3:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:201];
+                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 40)){
+                    btn.center = CGPointMake(btn.center.x+translation.x, btn.center.y );
+                    adjustedWidth2= adjustedWidth2+translation.x;
+                    adjustedWidth3= adjustedWidth3-translation.x;
+                    adjustedPtX3 = adjustedPtX3 +translation.x;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 4:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:201];
+                if ((btn.center.y + translation.y< 270) && (btn.center.y + translation.y > 40)){
+                    btn.center = CGPointMake(btn.center.x, btn.center.y +translation.y);
+                    adjustedHeight3= adjustedHeight3-translation.y;
+                    adjustedHeight1= adjustedHeight1+translation.y;
+                    adjustedHeight2= adjustedHeight2+translation.y;
+                    adjustedPtY3= adjustedPtY3+ translation.y;
+                    UIImageView *btn1 = (UIImageView *) [self.frameContainer viewWithTag:200];
+                    btn1.center = CGPointMake(btn1.center.x ,btn1.center.y+translation.y/2 );
 
-//            case 2:{
-//                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:201];
-//                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 40)){
-//                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
-//                    adjustedWidth2= adjustedWidth2-translation.x;
-//                    adjustedPtX2 = adjustedPtX2 + translation.x;
-//                    [self resizeFrames];
-//                }
-//                break;
-//            }
+                    [self resizeFrames];
+                }
+                break;
+            }
                 
             default:
                 break;

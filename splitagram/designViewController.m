@@ -1750,6 +1750,30 @@
                 [self.frameContainer addSubview:btn];
                 break;
             }
+            case 13:{
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,180-15+adjustedHeight1, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                break;
+            }
+            case 7:{
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,180-15+adjustedHeight1, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                break;
+            }
             default:
                 break;
         }
@@ -2240,6 +2264,28 @@
                     adjustedWidth1= adjustedWidth1+translation.x;
                     adjustedWidth2= adjustedWidth2+translation.x;
                     adjustedPtX2 = adjustedPtX2 - translation.x;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 13:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.y + translation.y< 220) && (btn.center.y + translation.y > 90)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
+                    adjustedHeight1= adjustedHeight1+translation.y;
+                    adjustedHeight2= adjustedHeight2+translation.y;
+                    adjustedPtY2 = adjustedPtY2 - translation.y;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 7:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.y + translation.y< 301) && (btn.center.y + translation.y > 80)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
+//                    adjustedHeight1= adjustedHeight1+translation.y;
+                    adjustedHeight2= adjustedHeight2+translation.y;
+//                    adjustedPtY2 = adjustedPtY2 - translation.y;
                     [self resizeFrames];
                 }
                 break;
@@ -2899,7 +2945,7 @@
         else if (sub == 7) { //secondFrameSlider stuff
             scroll_width = 155;//155
             scroll_height = 310;//350
-            rc = CGRectMake(adjustedPtX1, adjustedPtY1, scroll_width+adjustedWidth1-nMargin, scroll_height+adjustedHeight1-nMargin );
+            rc = CGRectMake(adjustedPtX1, adjustedPtY1, scroll_width+adjustedWidth1, scroll_height+adjustedHeight1 );
 
 //            rc = CGRectMake(0, 0, scroll_width, scroll_height );
             return rc;
@@ -3177,11 +3223,11 @@
 //            nTopMargin = nMargin * 2 + scroll_height;
         }
         else if (sub == 7) {  //secondFrameSlider stuff
-            scroll_width = 120+nMargin*2;
+            scroll_width = 115+nMargin*2;
             scroll_height = 150+nMargin*2;
-            rc = CGRectMake(175+adjustedPtX1, 20+adjustedPtY1, scroll_width+adjustedWidth1-nMargin, scroll_height+adjustedHeight1-nMargin );
+            rc = CGRectMake(175+adjustedPtX2-nMargin, 20+adjustedPtY2-nMargin, scroll_width+adjustedWidth2, scroll_height+adjustedHeight2);
 
-            rc = CGRectMake(175-nMargin, 20-nMargin, scroll_width, scroll_height );
+//            rc = CGRectMake(175-nMargin, 20-nMargin, scroll_width, scroll_height );
             return rc;
         }
         else if (sub == 8) {  //secondFrameSlider stuff
@@ -3221,7 +3267,7 @@
         else if (sub == 13) {  //secondFrameSlider stuff
             scroll_width = 155;
             scroll_height =150;
-            rc = CGRectMake(155+adjustedPtX1, 160+adjustedPtY1, scroll_width+adjustedWidth1-nMargin, scroll_height+adjustedHeight1-nMargin );
+            rc = CGRectMake(155+adjustedPtX2+nMargin/2, 160+adjustedPtY2+nMargin/2, scroll_width+adjustedWidth2-nMargin, scroll_height+adjustedHeight2-nMargin );
 
 //            rc = CGRectMake(155, 160-nMargin*3, scroll_width, scroll_height+nMargin*3 );
             return rc;

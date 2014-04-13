@@ -1146,6 +1146,7 @@
     else {
         [self addButtons];
         resizeOn = YES;
+        NSLog(@"resizeButton ON");
     }
 
 //    [self hideBars];
@@ -1154,35 +1155,27 @@
 
 - (void) selectFrame:(int)style SUB:(int)sub
 {
-    
-    
     if (!firstTime){
-        
         droppableAreas = [[NSMutableArray alloc] init];
         firstTime = YES;
         nStyle= 4;
         nSubStyle = 1;
-        
         rectBlockSlider1 = [self getScrollFrame1:style subStyle:sub];
         rectBlockSlider2 = [self getScrollFrame2:style subStyle:sub];
         rectBlockSlider3 = [self getScrollFrame3:style subStyle:sub];
         rectBlockSlider4 = [self getScrollFrame4:style subStyle:sub];
-        
         blockSlider1 = [[UIScrollView alloc] initWithFrame:rectBlockSlider1];
         blockSlider2 = [[UIScrollView alloc] initWithFrame:rectBlockSlider2];
         blockSlider3 = [[UIScrollView alloc] initWithFrame:rectBlockSlider3];
         blockSlider4 = [[UIScrollView alloc] initWithFrame:rectBlockSlider4];
-        
         blockSlider1.scrollEnabled=NO;
         blockSlider2.scrollEnabled=NO;
         blockSlider3.scrollEnabled=NO;
         blockSlider4.scrollEnabled=NO;
-    
         blockSlider1.tag = 0;
         blockSlider2.tag = 1;
         blockSlider3.tag = 2;
         blockSlider4.tag = 3;
-        
         [blockSlider1.layer setBorderColor:[[UIColor clearColor] CGColor]];
         [blockSlider1.layer setBorderWidth:kBlockWidth];
         
@@ -1221,8 +1214,6 @@
         [droppableAreas addObject:blockSlider3];
         [droppableAreas addObject:blockSlider4];
         
-
-
         UITapGestureRecognizer *tapBlock = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBlock:)];
         tapBlock.numberOfTapsRequired = 1;
         [tapBlock setDelegate:self];
@@ -1624,7 +1615,7 @@
 }
 - (void) closeBtnClicked {
 
-    for (int i = 0; i <= 25; i++) {
+    for (int i = 0; i <= 3; i++) {
         UIImageView *imageView= (UIImageView *)[self.frameContainer viewWithTag:200+i];
         [imageView removeFromSuperview];
     }
@@ -1632,206 +1623,492 @@
 }
 - (void) addButtons {
 
-    if (tapBlockNumber==0){
-        if (nStyle==2) {
-            switch (nSubStyle) {
-                case 1:{
-                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,155-15, 30, 30)];
-                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn.alpha = 0.5;
-                    btn.tag = 200;
-                    btn.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
-                    panGestureBtn.delegate=self;
-                    [btn addGestureRecognizer:panGestureBtn];
-                    [self.frameContainer addSubview:btn];
-                    break;
-                }
-                case 2:{
-                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,155-15+adjustedHeight1, 30, 30)];
-                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn.tag = 201;
-                    btn.alpha = 0.5;
-                    btn.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
-                    panGestureBtn.delegate=self;
-                    [btn addGestureRecognizer:panGestureBtn];
-                    [self.frameContainer addSubview:btn];
-                    break;
-                }
-                case 3: {
-                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,77-15+adjustedHeight1, 30, 30)];
-                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn.tag = 200;
-                    btn.alpha = 0.5;
-                    btn.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
-                    panGestureBtn.delegate=self;
-                    [btn addGestureRecognizer:panGestureBtn];
-                    [self.frameContainer addSubview:btn];
-                    
-                    UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth2,155+75-15+adjustedHeight1, 30, 30)];
-                    btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn1.tag = 201;
-                    btn1.alpha = 0.5;
-                    btn1.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
-                    panGestureBtn1.delegate=self;
-                    [btn1 addGestureRecognizer:panGestureBtn1];
-                    [self.frameContainer addSubview:btn1];
-                    break;
-                }
-                case 4:{
-                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,155-15, 30, 30)];
-                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn.alpha = 0.5;
-                    btn.tag = 200;
-                    btn.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
-                    panGestureBtn.delegate=self;
-                    [btn addGestureRecognizer:panGestureBtn];
-                    [self.frameContainer addSubview:btn];
-                    break;
-                }
-                case 5:{
-                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,155-15, 30, 30)];
-                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn.alpha = 0.5;
-                    btn.tag = 200;
-                    btn.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
-                    panGestureBtn.delegate=self;
-                    [btn addGestureRecognizer:panGestureBtn];
-                    [self.frameContainer addSubview:btn];
-                    break;
-                }
-                case 6:{
-                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,77-15+adjustedHeight1, 30, 30)];
-                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn.tag = 200;
-                    btn.alpha = 0.5;
-                    btn.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
-                    panGestureBtn.delegate=self;
-                    [btn addGestureRecognizer:panGestureBtn];
-                    [self.frameContainer addSubview:btn];
-                    
-                    UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15-adjustedWidth2,155+75-15+adjustedHeight1, 30, 30)];
-                    btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn1.tag = 201;
-                    btn1.alpha = 0.5;
-                    btn1.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
-                    panGestureBtn1.delegate=self;
-                    [btn1 addGestureRecognizer:panGestureBtn1];
-                    [self.frameContainer addSubview:btn1];
-                    break;
-                }
-                default:
-                    break;
+    if (nStyle==2) {
+        switch (nSubStyle) {
+            case 1:{
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,155-15, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.alpha = 0.5;
+                btn.tag = 200;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                break;
             }
-        }
-        if (nStyle==3) {
-            switch (nSubStyle) {
-                case 1:{
-                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(112+adjustedWidth1,155-15, 30, 30)];
-                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn.alpha = 0.5;
-                    btn.tag = 200;
-                    btn.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
-                    panGestureBtn.delegate=self;
-                    [btn addGestureRecognizer:panGestureBtn];
-                    [self.frameContainer addSubview:btn];
+            case 2:{
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,155-15+adjustedHeight1, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 201;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                break;
+            }
+            case 3:{
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,77-15+adjustedHeight1, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
                 
-                    UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+77+adjustedWidth1/2,155-15+adjustedHeight2, 30, 30)];
-                    btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn1.tag = 201;
-                    btn1.alpha = 0.5;
-                    btn1.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
-                    panGestureBtn1.delegate=self;
-                    [btn1 addGestureRecognizer:panGestureBtn1];
-                    [self.frameContainer addSubview:btn1];
-                    break;
-                }
-                case 2: {
-                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(177/2-15+adjustedWidth1/2,155-15+adjustedHeight1, 30, 30)];
-                    
-                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn.tag = 200;
-                    btn.alpha = 0.5;
-                    btn.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
-                    panGestureBtn.delegate=self;
-                    [btn addGestureRecognizer:panGestureBtn];
-                    [self.frameContainer addSubview:btn];
-                    
-                    UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(177-7+adjustedWidth1,155-15, 30, 30)];
-                    btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn1.alpha = 0.5;
-                    btn1.tag = 201;
-                    btn1.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
-                    panGestureBtn1.delegate=self;
-                    [btn1 addGestureRecognizer:panGestureBtn1];
-                    [self.frameContainer addSubview:btn1];
-                    break;
-                }
-                case 3: {
-                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,112+adjustedHeight1, 30, 30)];
-                    
-                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn.tag = 200;
-                    btn.alpha = 0.5;
-                    btn.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
-                    panGestureBtn.delegate=self;
-                    [btn addGestureRecognizer:panGestureBtn];
-                    [self.frameContainer addSubview:btn];
-                    
-                    UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+ adjustedWidth2,211-15-adjustedHeight2/2, 30, 30)];
-                    btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn1.alpha = 0.5;
-                    btn1.tag = 201;
-                    btn1.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
-                    panGestureBtn1.delegate=self;
-                    [btn1 addGestureRecognizer:panGestureBtn1];
-                    [self.frameContainer addSubview:btn1];
-                    break;
-                }
-                case 4: {
-                    UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,77+adjustedHeight3, 30, 30)];
-                    
-                    btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn.tag = 200;
-                    btn.alpha = 0.5;
-                    btn.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
-                    panGestureBtn.delegate=self;
-                    [btn addGestureRecognizer:panGestureBtn];
-                    [self.frameContainer addSubview:btn];
-                    
-                    UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,184-15-adjustedHeight3/2, 30, 30)];
-                    btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
-                    btn1.alpha = 0.5;
-                    btn1.tag = 201;
-                    btn1.userInteractionEnabled=YES;
-                    UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
-                    panGestureBtn1.delegate=self;
-                    [btn1 addGestureRecognizer:panGestureBtn1];
-                    [self.frameContainer addSubview:btn1];
-                    break;
-                }
-                default:
-                    break;
+                UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth2,155+75-15+adjustedHeight1, 30, 30)];
+                btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn1.tag = 201;
+                btn1.alpha = 0.5;
+                btn1.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                panGestureBtn1.delegate=self;
+                [btn1 addGestureRecognizer:panGestureBtn1];
+                [self.frameContainer addSubview:btn1];
+                break;
             }
+            case 4:{
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,155-15, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.alpha = 0.5;
+                btn.tag = 200;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                break;
+            }
+            case 5:{
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,155-15, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.alpha = 0.5;
+                btn.tag = 200;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                break;
+            }
+            case 6:{
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,77-15+adjustedHeight1, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                
+                UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15-adjustedWidth2,155+75-15+adjustedHeight1, 30, 30)];
+                btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn1.tag = 201;
+                btn1.alpha = 0.5;
+                btn1.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                panGestureBtn1.delegate=self;
+                [btn1 addGestureRecognizer:panGestureBtn1];
+                [self.frameContainer addSubview:btn1];
+                break;
+            }
+            default:
+                break;
         }
     }
+    else if (nStyle==3) {
+        switch (nSubStyle) {
+            case 1: {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(112+adjustedWidth1,155-15, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.alpha = 0.5;
+                btn.tag = 200;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+            
+                UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+77+adjustedWidth1/2,155-15+adjustedHeight2, 30, 30)];
+                btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn1.tag = 201;
+                btn1.alpha = 0.5;
+                btn1.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                panGestureBtn1.delegate=self;
+                [btn1 addGestureRecognizer:panGestureBtn1];
+                [self.frameContainer addSubview:btn1];
+                break;
+            }
+            case 2: {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(177/2-15+adjustedWidth1/2,155-15+adjustedHeight1, 30, 30)];
+                
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                
+                UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(177-7+adjustedWidth1,155-15, 30, 30)];
+                btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn1.alpha = 0.5;
+                btn1.tag = 201;
+                btn1.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                panGestureBtn1.delegate=self;
+                [btn1 addGestureRecognizer:panGestureBtn1];
+                [self.frameContainer addSubview:btn1];
+                break;
+            }
+            case 3: {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,112+adjustedHeight1, 30, 30)];
+                
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                
+                UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+ adjustedWidth2,211-15-adjustedHeight2/2, 30, 30)];
+                btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn1.alpha = 0.5;
+                btn1.tag = 201;
+                btn1.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                panGestureBtn1.delegate=self;
+                [btn1 addGestureRecognizer:panGestureBtn1];
+                [self.frameContainer addSubview:btn1];
+                break;
+            }
+            case 4: {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,77-adjustedHeight3/2, 30, 30)];
+                
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                
+                UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,184-15-adjustedHeight3, 30, 30)];
+                btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn1.alpha = 0.5;
+                btn1.tag = 201;
+                btn1.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                panGestureBtn1.delegate=self;
+                [btn1 addGestureRecognizer:panGestureBtn1];
+                [self.frameContainer addSubview:btn1];
+                break;
+            }
+            case 5: {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(103-15+adjustedWidth1,155, 30, 30)];
+                
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                
+                UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(206-15-adjustedWidth3,155, 30, 30)];
+                btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn1.alpha = 0.5;
+                btn1.tag = 201;
+                btn1.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                panGestureBtn1.delegate=self;
+                [btn1 addGestureRecognizer:panGestureBtn1];
+                [self.frameContainer addSubview:btn1];
+                break;
+            }
+            case 6: {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,103-15+adjustedHeight1, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                
+                UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,206-15-adjustedHeight3, 30, 30)];
+                btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn1.alpha = 0.5;
+                btn1.tag = 201;
+                btn1.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                panGestureBtn1.delegate=self;
+                [btn1 addGestureRecognizer:panGestureBtn1];
+                [self.frameContainer addSubview:btn1];
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    else if (nStyle==4) {
+        switch (nSubStyle) {
+            case 1: {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,77-15, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.alpha = 0.5;
+                btn.tag = 200;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                
+                UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(77-15,155-15+adjustedHeight1, 30, 30)];
+                btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn1.tag = 201;
+                btn1.alpha = 0.5;
+                btn1.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                panGestureBtn1.delegate=self;
+                [btn1 addGestureRecognizer:panGestureBtn1];
+                [self.frameContainer addSubview:btn1];
+                
+                UIImageView *btn2 = [[UIImageView alloc] initWithFrame:CGRectMake(155+77-15,155-15+adjustedHeight2, 30, 30)];
+                btn2.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn2.tag = 202;
+                btn2.alpha = 0.5;
+                btn2.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn2 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn2:)];
+                panGestureBtn2.delegate=self;
+                [btn2 addGestureRecognizer:panGestureBtn2];
+                [self.frameContainer addSubview:btn2];
+                
+                UIImageView *btn3 = [[UIImageView alloc] initWithFrame:CGRectMake(155+adjustedWidth3-15,155+77-15, 30, 30)];
+                btn3.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn3.tag = 203;
+                btn3.alpha = 0.5;
+                btn3.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn3 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn3:)];
+                panGestureBtn3.delegate=self;
+                [btn3 addGestureRecognizer:panGestureBtn3];
+                [self.frameContainer addSubview:btn3];
+                break;
+            }
+            case 2: {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(77-15+adjustedWidth1,155-15, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                
+                UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1+adjustedWidth2,155-15, 30, 30)];
+                btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn1.alpha = 0.5;
+                btn1.tag = 201;
+                btn1.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                panGestureBtn1.delegate=self;
+                [btn1 addGestureRecognizer:panGestureBtn1];
+                [self.frameContainer addSubview:btn1];
+                
+                UIImageView *btn2 = [[UIImageView alloc] initWithFrame:CGRectMake(155+77-15-adjustedWidth4,155-15, 30, 30)];
+                btn2.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn2.tag = 202;
+                btn2.alpha = 0.5;
+                btn2.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn2 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn2:)];
+                panGestureBtn2.delegate=self;
+                [btn2 addGestureRecognizer:panGestureBtn2];
+                [self.frameContainer addSubview:btn2];
+
+                break;
+            }
+            case 3: {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,77-15+adjustedHeight1, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                
+                UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,adjustedHeight1+adjustedHeight2+155-15, 30, 30)];
+                btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn1.alpha = 0.5;
+                btn1.tag = 201;
+                btn1.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                panGestureBtn1.delegate=self;
+                [btn1 addGestureRecognizer:panGestureBtn1];
+                [self.frameContainer addSubview:btn1];
+                
+                UIImageView *btn2 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,155+77-15-adjustedHeight4, 30, 30)];
+                btn2.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn2.tag = 202;
+                btn2.alpha = 0.5;
+                btn2.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn2 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn2:)];
+                panGestureBtn2.delegate=self;
+                [btn2 addGestureRecognizer:panGestureBtn2];
+                [self.frameContainer addSubview:btn2];
+                break;
+            
+            }
+            case 4: {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(110+adjustedWidth1,155-15, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                
+                UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(200+adjustedWidth1/2,adjustedHeight2+103-15, 30, 30)];
+                btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn1.alpha = 0.5;
+                btn1.tag = 201;
+                btn1.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                panGestureBtn1.delegate=self;
+                [btn1 addGestureRecognizer:panGestureBtn1];
+                [self.frameContainer addSubview:btn1];
+                
+                UIImageView *btn2 = [[UIImageView alloc] initWithFrame:CGRectMake(200+adjustedWidth1/2,206-15-adjustedHeight4, 30, 30)];
+                btn2.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn2.tag = 202;
+                btn2.alpha = 0.5;
+                btn2.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn2 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn2:)];
+                panGestureBtn2.delegate=self;
+                [btn2 addGestureRecognizer:panGestureBtn2];
+                [self.frameContainer addSubview:btn2];
+                break;
+            }
+            case 5: {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(200/2-22-adjustedWidth2/2,103-15+adjustedHeight1, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                
+                UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(200/2-adjustedWidth2/2-22,adjustedHeight3+206-15+adjustedHeight1, 30, 30)];
+                btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn1.alpha = 0.5;
+                btn1.tag = 201;
+                btn1.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                panGestureBtn1.delegate=self;
+                [btn1 addGestureRecognizer:panGestureBtn1];
+                [self.frameContainer addSubview:btn1];
+                
+                UIImageView *btn2 = [[UIImageView alloc] initWithFrame:CGRectMake(200-adjustedWidth2-30,155-15, 30, 30)];
+                btn2.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn2.tag = 202;
+                btn2.alpha = 0.5;
+                btn2.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn2 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn2:)];
+                panGestureBtn2.delegate=self;
+                [btn2 addGestureRecognizer:panGestureBtn2];
+                [self.frameContainer addSubview:btn2];
+                break;
+            }
+            case 6: {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,110+adjustedHeight1, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                
+                UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(103+adjustedWidth2-15,210-7+adjustedHeight1/2, 30, 30)];
+                btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn1.alpha = 0.5;
+                btn1.tag = 201;
+                btn1.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                panGestureBtn1.delegate=self;
+                [btn1 addGestureRecognizer:panGestureBtn1];
+                [self.frameContainer addSubview:btn1];
+                
+                UIImageView *btn2 = [[UIImageView alloc] initWithFrame:CGRectMake(206+adjustedWidth2+adjustedWidth3-15,210-7+adjustedHeight1/2, 30, 30)];
+                btn2.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn2.tag = 202;
+                btn2.alpha = 0.5;
+                btn2.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn2 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn2:)];
+                panGestureBtn2.delegate=self;
+                [btn2 addGestureRecognizer:panGestureBtn2];
+                [self.frameContainer addSubview:btn2];
+                break;
+            }
+            case 7: {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(103+adjustedWidth1-15,200/2-15-7-adjustedHeight4/2, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                
+                UIImageView *btn1 = [[UIImageView alloc] initWithFrame:CGRectMake(206+adjustedWidth2+adjustedWidth1-15,200/2-15-7-adjustedHeight4/2, 30, 30)];
+                btn1.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn1.alpha = 0.5;
+                btn1.tag = 201;
+                btn1.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn1:)];
+                panGestureBtn1.delegate=self;
+                [btn1 addGestureRecognizer:panGestureBtn1];
+                [self.frameContainer addSubview:btn1];
+                
+                UIImageView *btn2 = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,-adjustedHeight4+200-15-15, 30, 30)];
+                btn2.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn2.tag = 202;
+                btn2.alpha = 0.5;
+                btn2.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn2 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn2:)];
+                panGestureBtn2.delegate=self;
+                [btn2 addGestureRecognizer:panGestureBtn2];
+                [self.frameContainer addSubview:btn2];
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+//    }
 }
 - (void) moveBtn :(UIPanGestureRecognizer *)sender  {
-    
     CGPoint translation = [sender translationInView:self.view];
     [sender setTranslation:CGPointMake(0, 0) inView:self.view];
     if (nStyle == 2) {
@@ -1903,7 +2180,7 @@
                 break;
         }
     }
-    if (nStyle == 3) {
+    else if (nStyle == 3) {
         switch (nSubStyle) {
             case 1:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
@@ -1953,18 +2230,139 @@
                     adjustedWidth1= adjustedWidth1+translation.x;
                     adjustedWidth2= adjustedWidth2-translation.x;
                     adjustedPtX2 = adjustedPtX2 + translation.x;
-
-//                    adjustedHeight2=adjustedHeight2 - translation.y;
-//                    adjustedHeight3=adjustedHeight3 - translation.y;
-//                    adjustedPtY2= adjustedPtY2 + translation.y;
-//                    adjustedPtY3= adjustedPtY3 + translation.y;
-//                    UIImageView *btn1 = (UIImageView *) [self.frameContainer viewWithTag:201];
-//                    btn1.center = CGPointMake(btn1.center.x ,btn1.center.y+translation.y/2 );
                     [self resizeFrames];
                 }
                 break;
             }
-
+            case 5:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.x + translation.x< 155) && (btn.center.x+ translation.x > 40)){
+                    btn.center = CGPointMake(btn.center.x+translation.x ,btn.center.y );
+                    adjustedWidth1= adjustedWidth1+translation.x;
+                    adjustedWidth2= adjustedWidth2-translation.x;
+                    adjustedPtX2 = adjustedPtX2 + translation.x;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 6:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.y + translation.y< 155) && (btn.center.y+ translation.y > 40)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
+                    adjustedHeight1= adjustedHeight1+translation.y;
+                    adjustedHeight2= adjustedHeight2-translation.y;
+                    adjustedPtY2 = adjustedPtY2 + translation.y;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    else if (nStyle == 4) {
+        switch (nSubStyle) {
+            case 1:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 40)){
+                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
+                    adjustedWidth1= adjustedWidth1+translation.x;
+                    adjustedWidth2=adjustedWidth2 - translation.x;
+                    adjustedPtX2=adjustedPtX2 + translation.x;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 2:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.x + translation.x< 155) && (btn.center.x + translation.x > 40)){
+                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
+                    adjustedWidth1= adjustedWidth1+translation.x;
+                    adjustedWidth2=adjustedWidth2 - translation.x;
+                    adjustedPtX2=adjustedPtX2 + translation.x;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 3:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.y + translation.y< 155) && (btn.center.y + translation.y > 40)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y +translation.y);
+                    adjustedHeight1= adjustedHeight1+translation.y;
+                    adjustedHeight2= adjustedHeight2-translation.y;
+                    adjustedPtY2=adjustedPtY2 + translation.y;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 4:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.x + translation.x< 270) && (btn.center.x+ translation.x > 40)){
+                    btn.center = CGPointMake(btn.center.x+translation.x ,btn.center.y );
+                    adjustedWidth1= adjustedWidth1+translation.x;
+                    adjustedWidth2= adjustedWidth2-translation.x;
+                    adjustedWidth3= adjustedWidth3-translation.x;
+                    adjustedWidth4= adjustedWidth4-translation.x;
+                    adjustedPtX2 = adjustedPtX2 + translation.x;
+                    adjustedPtX3 = adjustedPtX3 + translation.x;
+                    adjustedPtX4 = adjustedPtX4 + translation.x;
+                    UIImageView *btn1 = (UIImageView *) [self.frameContainer viewWithTag:201];
+                    btn1.center = CGPointMake(btn1.center.x+translation.x/2 ,btn1.center.y );
+                    UIImageView *btn2 = (UIImageView *) [self.frameContainer viewWithTag:202];
+                    btn2.center = CGPointMake(btn2.center.x+translation.x/2 ,btn2.center.y );
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 5:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.y + translation.y< 155) && (btn.center.y + translation.y > 40)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y +translation.y);
+                    adjustedHeight1= adjustedHeight1+translation.y;
+                    adjustedHeight3= adjustedHeight3-translation.y;
+                    adjustedPtY3=adjustedPtY3 + translation.y;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 6:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.y + translation.y< 270) && (btn.center.y + translation.y > 40)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y +translation.y);
+                    adjustedHeight1= adjustedHeight1+translation.y;
+                    adjustedHeight2= adjustedHeight2-translation.y;
+                    adjustedHeight3= adjustedHeight3-translation.y;
+                    adjustedHeight4= adjustedHeight4-translation.y;
+                    adjustedPtY2=adjustedPtY2 + translation.y;
+                    adjustedPtY3=adjustedPtY3 + translation.y;
+                    adjustedPtY4=adjustedPtY4 + translation.y;
+                    UIImageView *btn1 = (UIImageView *) [self.frameContainer viewWithTag:201];
+                    btn1.center = CGPointMake(btn1.center.x,btn1.center.y +translation.y/2 );
+                    UIImageView *btn2 = (UIImageView *) [self.frameContainer viewWithTag:202];
+                    btn2.center = CGPointMake(btn2.center.x,btn2.center.y +translation.y/2 );
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 7:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.x + translation.x< 155) && (btn.center.x + translation.x > 40)){
+                    btn.center = CGPointMake(btn.center.x +translation.x ,btn.center.y);
+                    adjustedWidth1= adjustedWidth1+translation.x;
+                    adjustedWidth2= adjustedWidth2-translation.x;
+//                    adjustedHeight3= adjustedHeight3-translation.y;
+//                    adjustedHeight4= adjustedHeight4-translation.y;
+                    adjustedPtX2=adjustedPtX2 + translation.x;
+//                    adjustedPtY3=adjustedPtY3 + translation.y;
+//                    adjustedPtY4=adjustedPtY4 + translation.y;
+//                    UIImageView *btn1 = (UIImageView *) [self.frameContainer viewWithTag:201];
+//                    btn1.center = CGPointMake(btn1.center.x,btn1.center.y +translation.y/2 );
+//                    UIImageView *btn2 = (UIImageView *) [self.frameContainer viewWithTag:202];
+//                    btn2.center = CGPointMake(btn2.center.x,btn2.center.y +translation.y/2 );
+                    [self resizeFrames];
+                }
+                break;
+            }
             default:
                 break;
         }
@@ -2000,7 +2398,7 @@
                 break;
         }
     }
-    if (nStyle == 3) {
+    else if (nStyle == 3) {
         switch (nSubStyle) {
             case 1:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:201];
@@ -2049,12 +2447,119 @@
                     adjustedPtY3= adjustedPtY3+ translation.y;
                     UIImageView *btn1 = (UIImageView *) [self.frameContainer viewWithTag:200];
                     btn1.center = CGPointMake(btn1.center.x ,btn1.center.y+translation.y/2 );
-
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 5:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:201];
+                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 155)){
+                    btn.center = CGPointMake(btn.center.x+translation.x, btn.center.y );
+                    adjustedWidth2= adjustedWidth2+translation.x;
+                    adjustedWidth3= adjustedWidth3-translation.x;
+                    adjustedPtX3 = adjustedPtX3 + translation.x;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 6:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:201];
+                if ((btn.center.y + translation.y< 270) && (btn.center.y + translation.y > 155)){
+                    btn.center = CGPointMake(btn.center.x, btn.center.y+translation.y );
+                    adjustedHeight2= adjustedHeight2+translation.y;
+                    adjustedHeight3= adjustedHeight3-translation.y;
+                    adjustedPtY3 = adjustedPtY3 + translation.y;                    [self resizeFrames];
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    else if (nStyle == 4) {
+        switch (nSubStyle) {
+            case 1:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:201];
+                if ((btn.center.y + translation.y< 270) && (btn.center.y + translation.y > 40)){
+                    btn.center = CGPointMake(btn.center.x, btn.center.y+translation.y );
+                    adjustedHeight1= adjustedHeight1+translation.y;
+                    adjustedHeight3= adjustedHeight3-translation.y;
+                    adjustedPtY3 = adjustedPtY3 +translation.y;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 2:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:201];
+                if ((btn.center.x + translation.x< 155+77) && (btn.center.x + translation.x > 77)){
+                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
+                    adjustedWidth2= adjustedWidth2+translation.x;
+                    adjustedWidth3=adjustedWidth3 - translation.x;
+                    adjustedPtX3=adjustedPtX3 + translation.x;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 3:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:201];
+                if ((btn.center.y + translation.y< 155+77) && (btn.center.y + translation.y > 77)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y +translation.y);
+                    adjustedHeight2= adjustedHeight2+translation.y;
+                    adjustedHeight3= adjustedHeight3-translation.y;
+                    adjustedPtY3=adjustedPtY3 + translation.y;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 4:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:201];
+                if ((btn.center.y + translation.y< 155) && (btn.center.y + translation.y > 40)){
+                    btn.center = CGPointMake(btn.center.x, btn.center.y +translation.y);
+                    adjustedHeight3= adjustedHeight3-translation.y;
+//                    adjustedHeight1= adjustedHeight1+translation.y;
+                    adjustedHeight2= adjustedHeight2+translation.y;
+                    adjustedPtY3= adjustedPtY3+ translation.y;
+//                    UIImageView *btn1 = (UIImageView *) [self.frameContainer viewWithTag:200];
+//                    btn1.center = CGPointMake(btn1.center.x ,btn1.center.y+translation.y/2 );
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 5:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:201];
+                if ((btn.center.y + translation.y< 270) && (btn.center.y + translation.y > 155)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y +translation.y);
+                    adjustedHeight3= adjustedHeight3+translation.y;
+                    adjustedHeight4= adjustedHeight4-translation.y;
+                    adjustedPtY4=adjustedPtY4 + translation.y;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 6:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:201];
+                if ((btn.center.x + translation.x< 155) && (btn.center.x + translation.x > 40)){
+                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
+                    adjustedWidth2= adjustedWidth2+translation.x;
+                    adjustedWidth3=adjustedWidth3 - translation.x;
+                    adjustedPtX3=adjustedPtX3 + translation.x;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 7:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:201];
+                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 155)){
+                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
+                    adjustedWidth2= adjustedWidth2+translation.x;
+                    adjustedWidth3=adjustedWidth3 - translation.x;
+                    adjustedPtX3=adjustedPtX3 + translation.x;
                     [self resizeFrames];
                 }
                 break;
             }
                 
+            
             default:
                 break;
         }
@@ -2063,21 +2568,119 @@
 - (void) moveBtn2 :(UIPanGestureRecognizer *)sender  {
     CGPoint translation = [sender translationInView:self.view];
     [sender setTranslation:CGPointMake(0, 0) inView:self.view];
-    if (nStyle == 2) {
+    if (nStyle == 4) {
         switch (nSubStyle) {
-            case 3:{
+            case 1:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:202];
-                NSLog(@"btn center y =%f ", btn.center.y + translation.y);
                 if ((btn.center.y + translation.y< 270) && (btn.center.y + translation.y > 40)){
                     btn.center = CGPointMake(btn.center.x ,btn.center.y +translation.y);
-                    adjustedHeight1= adjustedHeight1+translation.y;
-                    adjustedHeight2=adjustedHeight2 - translation.y;
-                    adjustedPtY2=adjustedPtY2 + translation.y;
+                    adjustedHeight2= adjustedHeight2+translation.y;
+                    adjustedHeight4=adjustedHeight4 - translation.y;
+                    adjustedPtY4=adjustedPtY4 + translation.y;
                     [self resizeFrames];
-                    UIButton *btn1 = (UIButton *) [self.frameContainer viewWithTag:201];
+                }
+                break;
+            }
+            case 2:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:202];
+                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 155)){
+                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
+                    adjustedWidth3= adjustedWidth3+translation.x;
+                    adjustedWidth4=adjustedWidth4 - translation.x;
+                    adjustedPtX4=adjustedPtX4 + translation.x;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 3: {
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:202];
+                if ((btn.center.y + translation.y< 270) && (btn.center.y + translation.y > 155)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y +translation.y);
+                    adjustedHeight3= adjustedHeight3+translation.y;
+                    adjustedHeight4= adjustedHeight4-translation.y;
+                    adjustedPtY4=adjustedPtY4 + translation.y;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 4:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:202];
+                if ((btn.center.y + translation.y< 270) && (btn.center.y + translation.y > 155)){
+                    btn.center = CGPointMake(btn.center.x, btn.center.y +translation.y);
+                    adjustedHeight4= adjustedHeight4-translation.y;
+                    //                    adjustedHeight1= adjustedHeight1+translation.y;
+                    adjustedHeight3= adjustedHeight3+translation.y;
+                    adjustedPtY4= adjustedPtY4+ translation.y;
+                    //                    UIImageView *btn1 = (UIImageView *) [self.frameContainer viewWithTag:200];
+                    //                    btn1.center = CGPointMake(btn1.center.x ,btn1.center.y+translation.y/2 );
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 5:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:202];
+                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 40)){
+                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
+                    adjustedWidth2= adjustedWidth2-translation.x;
+                    adjustedWidth1= adjustedWidth1+translation.x;
+                    adjustedWidth3= adjustedWidth3+translation.x;
+                    adjustedWidth4= adjustedWidth4+translation.x;
+                    adjustedPtX2=adjustedPtX2 + translation.x;
+                    UIImageView *btn1 = (UIImageView *) [self.frameContainer viewWithTag:200];
+                    btn1.center = CGPointMake(btn1.center.x+translation.x/2 ,btn1.center.y );
+                    UIImageView *btn2 = (UIImageView *) [self.frameContainer viewWithTag:201];
+                    btn2.center = CGPointMake(btn2.center.x+translation.x/2 ,btn2.center.y );
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 6:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:202];
+                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 155)){
+                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
+                    adjustedWidth3= adjustedWidth3+translation.x;
+                    adjustedWidth4=adjustedWidth4 - translation.x;
+                    adjustedPtX4=adjustedPtX4 + translation.x;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 7:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:202];
+                if ((btn.center.y + translation.y< 270) && (btn.center.y + translation.y > 40)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
+                    adjustedHeight1= adjustedHeight1+translation.y;
+                    adjustedHeight2= adjustedHeight2+translation.y;
+                    adjustedHeight3= adjustedHeight3+translation.y;
+                    adjustedHeight4= adjustedHeight4-translation.y;
+                    adjustedPtY4=adjustedPtY4 + translation.y;
+                    UIImageView *btn1 = (UIImageView *) [self.frameContainer viewWithTag:200];
                     btn1.center = CGPointMake(btn1.center.x,btn1.center.y +translation.y/2 );
-                    UIButton *btn2 = (UIButton *) [self.frameContainer viewWithTag:200];
+                    UIImageView *btn2 = (UIImageView *) [self.frameContainer viewWithTag:201];
                     btn2.center = CGPointMake(btn2.center.x,btn2.center.y +translation.y/2 );
+                    [self resizeFrames];
+
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
+}
+- (void) moveBtn3 :(UIPanGestureRecognizer *)sender  {
+    CGPoint translation = [sender translationInView:self.view];
+    [sender setTranslation:CGPointMake(0, 0) inView:self.view];
+    if (nStyle == 4) {
+        switch (nSubStyle) {
+            case 1:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:203];
+                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 40)){
+                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
+                    adjustedWidth3= adjustedWidth3+translation.x;
+                    adjustedWidth4= adjustedWidth4-translation.x;
+                    adjustedPtX4=adjustedPtX4 + translation.x;
+                    [self resizeFrames];
                 }
                 break;
             }

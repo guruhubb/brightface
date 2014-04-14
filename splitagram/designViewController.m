@@ -1968,6 +1968,45 @@
                 
                 break;
             }
+            case 11: {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedHeight1,155-15, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                
+                break;
+            }
+            case 12: {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedHeight1,155-15, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                
+                break;
+            }
+            case 14: {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedHeight1,155-15, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                
+                break;
+            }
 
             default:
                 break;
@@ -2464,7 +2503,7 @@
             }
             case 10:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.y + translation.y< 250) && (btn.center.y+ translation.y > 100)){
+                if ((btn.center.y + translation.y< 251) && (btn.center.y+ translation.y > 100)){
                     btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
                     adjustedHeight1= adjustedHeight1+translation.y;
                     adjustedHeight2= adjustedHeight2+translation.y;
@@ -2475,6 +2514,49 @@
                 }
                 break;
             }
+            case 11:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.y + translation.y< 228) && (btn.center.y+ translation.y > 100)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
+                    adjustedHeight1= adjustedHeight1+translation.y;
+                    adjustedHeight2= adjustedHeight2+translation.y;
+                    adjustedHeight3= adjustedHeight3+translation.y;
+                    adjustedPtY2 = adjustedPtY2 - translation.y;
+//                    adjustedPtY3 = adjustedPtY3 - translation.y;
+//                    adjustedPtY3 = adjustedPtY3 - translation.y;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 12:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.y + translation.y< 229) && (btn.center.y+ translation.y > 100)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
+                    adjustedHeight1= adjustedHeight1-2*translation.y;
+                    adjustedHeight2= adjustedHeight2-translation.y;
+                    adjustedHeight3= adjustedHeight3-2*translation.y;
+                    adjustedPtY2 = adjustedPtY2 + translation.y/2;
+                    adjustedPtY3 = adjustedPtY3 + translation.y;
+                    adjustedPtY1 = adjustedPtY1 + translation.y;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 14:{
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.y + translation.y< 200) && (btn.center.y+ translation.y > 99)){
+                    btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
+                    adjustedHeight1= adjustedHeight1-2*translation.y;
+                    adjustedHeight2= adjustedHeight2-2*translation.y;
+                    adjustedHeight3= adjustedHeight3-2*translation.y;
+                    adjustedPtY2 = adjustedPtY2 + translation.y;
+                    adjustedPtY3 = adjustedPtY3 + translation.y;
+                    adjustedPtY1 = adjustedPtY1 + translation.y;
+                    [self resizeFrames];
+                }
+                break;
+            }
+
 
             default:
                 break;
@@ -3167,13 +3249,15 @@
         else if (sub == 11){
             scroll_width = 100;
             scroll_height = 200;
-            rc = CGRectMake(5, 20, scroll_width, scroll_height+nMargin*2 );
+             rc = CGRectMake(5+adjustedPtX1, 22+adjustedPtY1, scroll_width-nMargin+adjustedWidth1, scroll_height -nMargin+adjustedHeight1);
+//            rc = CGRectMake(5, 20, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 12){
             scroll_width = 100;
             scroll_height = 100;
-            rc = CGRectMake(5, 105-nMargin, scroll_width, scroll_height+nMargin*2 );
+            rc = CGRectMake(5+adjustedPtX1, 108+adjustedPtY1, scroll_width-nMargin+adjustedWidth1, scroll_height -nMargin+adjustedHeight1);
+//            rc = CGRectMake(5, 105-nMargin, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 13){
@@ -3184,8 +3268,9 @@
         }
         else if (sub == 14){
             scroll_width = 150;
-            scroll_height = 200;
-            rc = CGRectMake(0, 55-nMargin, scroll_width, scroll_height+nMargin*2 );
+            scroll_height = 220;
+            rc = CGRectMake(0+adjustedPtX1, 55+adjustedPtY1, scroll_width-nMargin+adjustedWidth1, scroll_height -nMargin+adjustedHeight1);
+//            rc = CGRectMake(0, 55-nMargin, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 15){
@@ -3448,19 +3533,21 @@
         }
         else if (sub == 10) {
 //            rc = CGRectMake(106-nMargin/4,100-nMargin,96+nMargin/2,150+nMargin*2 );
-            rc = CGRectMake(105+adjustedPtX2+nMargin/2,100+adjustedPtY2+nMargin/2,100-nMargin+adjustedWidth2,150-nMargin+adjustedHeight2 );
+            rc = CGRectMake(105+adjustedPtX2+nMargin/2,80+adjustedPtY2+nMargin/2,100-nMargin+adjustedWidth2,150-nMargin+adjustedHeight2 );
             return rc;
         }
         else if (sub == 11){
             scroll_width = 100;
             scroll_height = 200;
-            rc = CGRectMake(105, 90-nMargin, scroll_width, scroll_height+nMargin*2 );
+            rc = CGRectMake(105+adjustedPtX2+nMargin/2,92+adjustedPtY2+nMargin/2,100-nMargin+adjustedWidth2,200-nMargin+adjustedHeight2 );
+//            rc = CGRectMake(105, 90-nMargin, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 12){
             scroll_width = 100;
             scroll_height = 260;//300
-            rc = CGRectMake(105,25-nMargin, scroll_width, scroll_height+nMargin*2 );
+            rc = CGRectMake(105+adjustedPtX2+nMargin/2,25+adjustedPtY2+nMargin/2,100-nMargin+adjustedWidth2,261-nMargin+adjustedHeight2 );
+//            rc = CGRectMake(105,25-nMargin, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 13){
@@ -3471,8 +3558,9 @@
         }
         else if (sub == 14){
             scroll_width = 75;
-            scroll_height = 200;
-            rc = CGRectMake(155-nMargin/2, 55-nMargin, scroll_width+nMargin, scroll_height+nMargin*2 );
+            scroll_height = 220;
+            rc = CGRectMake(155+adjustedPtX2+nMargin/2,55+adjustedPtY2,75-nMargin+adjustedWidth2,220-nMargin+adjustedHeight2 );
+//            rc = CGRectMake(155-nMargin/2, 55-nMargin, scroll_width+nMargin, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 15){
@@ -3643,20 +3731,22 @@
 //            return rc;
         }
         else if (sub == 10) {
-            rc = CGRectMake(205+adjustedPtX2+nMargin,155+adjustedPtY2+nMargin,100-nMargin+adjustedWidth2,150-nMargin+adjustedHeight2 );
+            rc = CGRectMake(205+adjustedPtX3+nMargin,155+adjustedPtY3+nMargin,100-nMargin+adjustedWidth3,150-nMargin+adjustedHeight3 );
 //            rc = CGRectMake(206,155-nMargin*2,96,150+nMargin*2 );
             return rc;
         }
         else if (sub == 11){
             scroll_width = 100;
             scroll_height = 200;
-            rc = CGRectMake(205, 20, scroll_width, scroll_height+nMargin*2 );
+            rc = CGRectMake(205+adjustedPtX3+nMargin,22+adjustedPtY3,100-nMargin+adjustedWidth3,200-nMargin+adjustedHeight3 );
+//            rc = CGRectMake(205, 20, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 12){
             scroll_width = 100;
             scroll_height = 100;
-            rc = CGRectMake(205, 105-nMargin, scroll_width, scroll_height+nMargin*2 );
+             rc = CGRectMake(205+adjustedPtX3+nMargin,108+adjustedPtY3,100-nMargin+adjustedWidth3,100-nMargin+adjustedHeight3 );
+//            rc = CGRectMake(205, 105-nMargin, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 13){
@@ -3667,8 +3757,9 @@
         }
         else if (sub == 14){
             scroll_width = 75;
-            scroll_height = 200;
-            rc = CGRectMake(235, 55-nMargin, scroll_width, scroll_height+nMargin*2 );
+            scroll_height = 220;
+            rc = CGRectMake(235+adjustedPtX3+nMargin,55+adjustedPtY3,75-nMargin+adjustedWidth3,220-nMargin+adjustedHeight3 );
+//            rc = CGRectMake(235, 55-nMargin, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
         else if (sub == 15){

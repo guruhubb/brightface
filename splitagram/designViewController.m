@@ -146,7 +146,7 @@
     nMargin = [defaults integerForKey:@"Split"];
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
-        nMargin = 5;
+        nMargin = 3;
         [defaults setInteger:5 forKey:@"Split"];
         sliderSplit.value = nMargin;
     });
@@ -157,6 +157,9 @@
 
     if (btn.tag==0 || btn.tag > 25+35) btn.tag = 19;
     [self frameClicked:btn];
+    if (![defaults boolForKey:kFeature0])
+        btn.tag = 19;
+
     if (btn.tag >25) {
         NSLog(@" btn.tag is %d; nstyle = %d, nsubstyle = %d",btn.tag, nStyle,nSubStyle);
 
@@ -179,7 +182,7 @@
     }
     [defaults setInteger:number forKey:@"number"];
  
-    btn.tag = number;
+//    btn.tag = number;
     btn.tag=9;//black and white
     tapBlockNumber=0;
     if (![defaults boolForKey:@"filter"])
@@ -191,12 +194,12 @@
     int number = [defaults integerForKey:@"number"];
     NSLog(@"number is %d",number);
 
-    btn.tag = number+1;
+    btn.tag = number;
 //    btn.tag = 9;  //test
     tapBlockNumber=1;
     [self effectsClicked:btn];
 
-    btn.tag = number+2;
+    btn.tag = number+1;
 //    btn.tag = 9;  //test
     tapBlockNumber=2;
     [self effectsClicked:btn];
@@ -258,7 +261,7 @@
 -(void)frameAction
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"resize, get more frames",@"buy for $0.99",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"resize + frames pack",@"buy for $0.99",nil];
     popupQuery.tag=0;
     [popupQuery showInView:self.view];
 }
@@ -1541,9 +1544,9 @@
     
     float rate;
     if ([defaults boolForKey:@"fill"])
-        rate = rateImageFit;
-    else
         rate = rateImageFill;
+    else
+        rate = rateImageFit;
     
     if(!isinf(rate)) {
      [imgView setFrame:CGRectMake(0.0,0.0, imgView.frame.size.width*rate, imgView.frame.size.height*rate)];  //split

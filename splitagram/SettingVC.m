@@ -159,9 +159,9 @@
                 label.tag = 100;
                 [cell.contentView addSubview:label];
                 if ([defaults boolForKey:@"fill"])
-                    label.text = @"fit";
-                else
                     label.text = @"fill";
+                else
+                    label.text = @"fit";
             
             }
             if (indexPath.row==1) {
@@ -277,7 +277,7 @@
 {
     if (indexPath.section == 0) {
         if (indexPath.row==0) {
-            [self frameAction];
+            [self frameActionSettings];
         }
 
         if (indexPath.row==1) {
@@ -441,7 +441,7 @@
 
 
 
--(void)frameAction
+-(void)frameActionSettings
 {
     UIActionSheet *popupQuery;
     popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"fill frame",@"fit frame",nil];
@@ -473,9 +473,9 @@
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
         if (actionSheet.tag == 0) {
             if (buttonIndex==0){
-                [defaults setBool:NO forKey:@"fill"];
+                [defaults setBool:YES forKey:@"fill"];
             }
-            else if (buttonIndex==1)[defaults setBool:YES forKey:@"fill"];
+            else if (buttonIndex==1)[defaults setBool:NO forKey:@"fill"];
             
         }
         else if (actionSheet.tag == 1){

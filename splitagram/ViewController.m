@@ -140,6 +140,7 @@
     {
         designViewController *vc = [segue destinationViewController];
         vc.selectedImage=image;
+        NSLog(@"image size is %d",[UIImageJPEGRepresentation(image, 1.0) length]);
     }
 }
 - (void)rateApp {

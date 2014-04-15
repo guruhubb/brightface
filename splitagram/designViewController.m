@@ -89,7 +89,7 @@
     CGFloat adjustedHeight4;
     
     
-    GPUImageOutput<GPUImageInput> *filter;
+//    GPUImageOutput<GPUImageInput> *filter;
     NSUserDefaults *defaults;
     
     CGFloat imageWidth;
@@ -170,7 +170,8 @@
 
 //    [defaults setBool:YES forKey:kFeature0];  //test
 //    [defaults setBool:YES forKey:kFeature1];  //test
-    
+//    [defaults setBool:YES forKey:kFeature3];  //test
+
     int number = [defaults integerForKey:@"number"];
     NSLog(@"number is %d",number);
     if (number > 9 || number == 0) {
@@ -179,7 +180,8 @@
     [defaults setInteger:number forKey:@"number"];
  
     btn.tag = number;
-    tapBlockNumber=1;
+    btn.tag=9;
+    tapBlockNumber=0;
     if (![defaults boolForKey:@"filter"])
         [self effectsClicked:btn];
 }
@@ -190,11 +192,13 @@
     NSLog(@"number is %d",number);
 
     btn.tag = number+1;
-    tapBlockNumber=2;
+//    btn.tag = 9;  //test
+    tapBlockNumber=1;
     [self effectsClicked:btn];
 
     btn.tag = number+2;
-    tapBlockNumber=3;
+    btn.tag = 9;  //test
+    tapBlockNumber=2;
     [self effectsClicked:btn];
 
     tapBlockNumber=0;
@@ -236,17 +240,27 @@
 -(void)frameAction
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"get more frames",@"buy for $1.99",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"resize, get more frames",@"buy for $0.99",nil];
     popupQuery.tag=0;
     [popupQuery showInView:self.view];
 }
+
 -(void)filterAction
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"get more filters",@"buy for $1.99",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"get more filters",@"buy for $0.99",nil];
     popupQuery.tag=1;
     [popupQuery showInView:self.view];
 }
+
+-(void)resizeAction
+{
+    UIActionSheet *popupQuery;
+    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"resize to create frames",@"buy for $0.99",nil];
+    popupQuery.tag=2;
+    [popupQuery showInView:self.view];
+}
+
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
         if (buttonIndex==1){
             [self inAppBuyAction:actionSheet.tag];
@@ -264,6 +278,11 @@
             [defaults setBool:YES forKey:kFeature1];
         else
             [defaults setBool:NO forKey:kFeature1];
+    
+//    if([MKStoreManager isFeaturePurchased:kFeature3])
+//        [defaults setBool:YES forKey:kFeature3];
+//    else
+//        [defaults setBool:NO forKey:kFeature3];
 }
 
 - (void)inAppBuyAction:(int)tag {
@@ -278,6 +297,10 @@
             string = kFeature1;
             [Flurry logEvent:@"InApp Filters"];
             break;
+//        case 2:
+//            string = kFeature3;
+//            [Flurry logEvent:@"InApp Resize"];
+//            break;
         default:
             break;
     }
@@ -758,6 +781,11 @@
                 [self selectFrame:4 SUB:18];
                 
                 break;
+            case 27:
+                [self resetAdjustedValues];
+                [self selectFrame:2 SUB:17];
+                
+                break;
                 
             default:
                 break;
@@ -925,53 +953,95 @@
                     UIImage *inputImage = self.selectedImage;
                     switch (clickedBtn.tag) {
                         case 1:{
-                            filter = [[GPUImageFilter alloc] init]; //original
+                            GPUImageFilter *filter = [[GPUImageFilter alloc] init]; //original
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageFilter alloc] init]; //original
                         } break;
                         case 2: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
+                          GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
                         } break;
                         case 3: {
-                            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
+                           GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
                         } break;
                         case 10: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
+                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
                         } break;
                         case 11: {
-                            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
+                           GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
                         } break;
                         case 4:{
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
+                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
                         } break;
                         case 5: {
-                            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
+                           GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
                         } break;
                         case 6: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
+                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
                         } break;
                         case 7: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
+                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
+                            
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
+//                            quickFilteredImage=nil;
+//                            filter=nil;
+//                            [filter removeAllTargets];
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
                         } break;
                         case 8: {
-                            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
+                            GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
+                            
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
+//                            quickFilteredImage=nil;
+//                            filter=nil;
+//                            [filter removeAllTargets];
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
                         } break;
                         case 9: {
-                            filter = [[GPUImageGrayscaleFilter alloc] init];
+                            GPUImageGrayscaleFilter * filter = [[GPUImageGrayscaleFilter alloc] init];
+                            
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
+//                            quickFilteredImage=nil;
+//                            filter=nil;
+//                            [filter removeAllTargets];
 //                            videoFilter = [[GPUImageGrayscaleFilter alloc] init];
                         } break;
+                        default:{
+                            GPUImageFilter *filter = [[GPUImageFilter alloc] init]; //original
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
+                            
+                        }
+                            break;
                     }
-                    UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
-                    imageView.image=quickFilteredImage;
-                    [filter removeAllTargets];
+//            [filter prepareForImageCapture];
+//                    UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+//                    imageView.image=quickFilteredImage;
+//                    [filter removeAllTargets];
             
                 }
             }
@@ -1002,114 +1072,159 @@
                     UIImage *inputImage = self.selectedImage;
                     switch (clickedBtn.tag-11) {
                         case 1:{
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"2strip.png"];
+                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"2strip.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"2strip.png"];
                             
                         } break;
                         case 2: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarmBleach.png"];
+                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarmBleach.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarmBleach.png"];
                             
                         } break;
                         case 3: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWinter.png"];
+                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWinter.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWinter.png"];
                             
                         } break;
                         case 9: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWarm.png"];
+                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWarm.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWarm.png"];
                             
                         } break;
                         case 10: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"candlelight.png"];
+                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"candlelight.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"candlelight.png"];
                             
                         } break;
                         case 11:{
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors.png"];
+                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors.png"];
                             
                         } break;
                         case 7: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
+                          GPUImageAmatorkaFilter*   filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"filmstock.png"];
                             
                         } break;
                             
                         case 13: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"foggynight.png"];
+                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"foggynight.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"foggynight.png"];
                             
                         } break;
                         case 14: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cobalt2Iron80Bleach.png"];
+                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cobalt2Iron80Bleach.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cobalt2Iron80Bleach.png"];
                             
                         } break;
                         case 15: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"blue.png"];
+                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"blue.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"blue.png"];
                             
                         } break;
                         case 16: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fuji2393.png"];
+                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fuji2393.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fuji2393.png"];
                             
                         } break;
                         case 17: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleak.png"];
+                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleak.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleak.png"];
                             
                         } break;
                         case 18: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachMoonlight.png"];
+                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachMoonlight.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachMoonlight.png"];
                             
                         } break;
                         case 19: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cyanSeleniumBleachMoonlight.png"];
+                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cyanSeleniumBleachMoonlight.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"cyanSeleniumBleachMoonlight.png"];
                             
                         } break;
                         case 20: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarm.png"];
+                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarm.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarm.png"];
                             
                         } break;
                         case 4: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"gold2.png"];
+                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"gold2.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"gold2.png"];
                             
                         } break;
                         case 5: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"platinum.png"];
+                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"platinum.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"platinum.png"];
                             
                         } break;
                         case 6: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
+                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
                             
                         } break;
                         case 12: {
-                            filter = [[GPUImageVignetteFilter alloc] init];
+                           GPUImageVignetteFilter* filter = [[GPUImageVignetteFilter alloc] init];
                             [(GPUImageVignetteFilter *) filter setVignetteEnd:0.6];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageVignetteFilter alloc] init];
 //                            [(GPUImageVignetteFilter *) videoFilter setVignetteEnd:0.6];
                         } break;
                         case 8: {
-                            filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
+                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
                             
                         } break;
                             
-                        default:
+                        default:{
+                            GPUImageFilter *filter = [[GPUImageFilter alloc] init]; //original
+                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                            imageView.image=quickFilteredImage;
+                            
+                        }
                             break;
                     }
-                    UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
-                    [filter removeAllTargets];
-                    imageView.image=quickFilteredImage;
+//                    UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+//                    [filter removeAllTargets];
+//                    imageView.image=quickFilteredImage;
                 }
         }
     }
@@ -1152,6 +1267,11 @@
 }
 - (IBAction)resizeButton:(id)sender {
     [Flurry logEvent:@"resize"];
+    if (![defaults boolForKey:kFeature0]){
+        [self frameAction];
+        return;
+    }
+    
     if (resizeOn){
         [self closeBtnClicked];
         resizeOn = NO;
@@ -1202,6 +1322,13 @@
         [blockSlider4.layer setBorderWidth:kBlockWidth];
         
         image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
+//        CALayer *mask = [CALayer layer];
+//        mask.contents = (id)[[UIImage imageNamed:@"mask.png"] CGImage];
+//        mask.frame = CGRectMake(0, 0, 31, 31);
+//        blockSlider1.layer.mask=mask;
+//        image1.layer.mask=mask;
+//        self.frameContainer.layer.mask = mask;
+//        image1.layer.masksToBounds = YES;
         image1.tag =0;
         [blockSlider1 addSubview:image1];
         [self fitImageToScroll:image1 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:0.0 ];
@@ -1344,6 +1471,10 @@
 
 
 -(void) tapBlock :(UITapGestureRecognizer *)recognizer{
+    if (resizeOn){
+        [self closeBtnClicked];
+        resizeOn = NO;
+    }
 //    [self closeBtnClicked];
 //    resizeOn = NO;
 //    for (UIScrollView *blockSlider in droppableAreas)
@@ -2636,7 +2767,7 @@
             }
             case 14:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.y + translation.y< 200) && (btn.center.y+ translation.y > 99)){
+                if ((btn.center.y + translation.y< 200) && (btn.center.y+ translation.y > 106)){
                     btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
                     adjustedHeight1= adjustedHeight1-2*translation.y;
                     adjustedHeight2= adjustedHeight2-2*translation.y;
@@ -2751,7 +2882,7 @@
             }
             case 10:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.y + translation.y< 200) && (btn.center.y+ translation.y > 98)){
+                if ((btn.center.y + translation.y< 200) && (btn.center.y+ translation.y > 148)){
                     btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
                     adjustedHeight1= adjustedHeight1-2*translation.y;
                     adjustedHeight2= adjustedHeight2-2*translation.y;
@@ -2769,7 +2900,7 @@
             }
             case 11:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.y + translation.y< 200) && (btn.center.y+ translation.y > 80)){
+                if ((btn.center.y + translation.y< 220) && (btn.center.y+ translation.y > 80)){
                     btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
                     adjustedHeight1= adjustedHeight1+translation.y;
                     adjustedHeight2= adjustedHeight2+translation.y;
@@ -2787,7 +2918,7 @@
             }
             case 12:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.x + translation.x< 155) && (btn.center.x+ translation.x > 80)){
+                if ((btn.center.x + translation.x< 155) && (btn.center.x+ translation.x > 110)){
                     btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
                     adjustedWidth1= adjustedWidth1+2*translation.x;
                     adjustedWidth2= adjustedWidth2+2*translation.x;
@@ -2805,7 +2936,7 @@
             }
             case 13:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.y + translation.y< 200) && (btn.center.y+ translation.y > 80)){
+                if ((btn.center.y + translation.y< 200) && (btn.center.y+ translation.y > 122)){
                     btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
                     adjustedWidth1= adjustedWidth1-translation.y;
                     adjustedHeight1= adjustedHeight1-translation.y;
@@ -2832,7 +2963,7 @@
             }
             case 14:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.y + translation.y< 190) && (btn.center.y+ translation.y > 99)){
+                if ((btn.center.y + translation.y< 220) && (btn.center.y+ translation.y > 99)){
                     btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
                     adjustedHeight1= adjustedHeight1+translation.y;
                     adjustedHeight2= adjustedHeight2+translation.y;
@@ -2850,7 +2981,7 @@
             }
             case 16:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.y + translation.y< 200) && (btn.center.y+ translation.y > 155)){
+                if ((btn.center.y + translation.y< 250) && (btn.center.y+ translation.y > 155)){
                     btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
                     adjustedHeight1= adjustedHeight1-translation.y;
                     adjustedHeight2= adjustedHeight2+translation.y/2;
@@ -2868,7 +2999,7 @@
             }
             case 18:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.y + translation.y< 200) && (btn.center.y+ translation.y > 98)){
+                if ((btn.center.y + translation.y< 250) && (btn.center.y+ translation.y > 120)){
                     btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
                     adjustedHeight1= adjustedHeight1+translation.y;
                     adjustedHeight2= adjustedHeight2-translation.y;
@@ -3425,6 +3556,12 @@
             rc = CGRectMake(0, 0, scroll_width, scroll_height );
             return rc;
         }
+        else if (sub == 17) {  //secondFrameSlider stuff
+            scroll_width = 310;
+            scroll_height =310;
+            rc = CGRectMake(0, 0, scroll_width, scroll_height );
+            return rc;
+        }
         
     }
     else if (style == 3) {
@@ -3496,7 +3633,7 @@
         else if (sub == 14){
             scroll_width = 150;
             scroll_height = 220;
-            rc = CGRectMake(0+adjustedPtX1, 55+adjustedPtY1, scroll_width-nMargin+adjustedWidth1, scroll_height -nMargin+adjustedHeight1);
+            rc = CGRectMake(0+adjustedPtX1, 47+adjustedPtY1, scroll_width-nMargin+adjustedWidth1, scroll_height -nMargin+adjustedHeight1);
 //            rc = CGRectMake(0, 55-nMargin, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
@@ -3715,6 +3852,16 @@
             rc = CGRectMake(0, 155, scroll_width, scroll_height );
             return rc;
         }
+        else if ( sub == 17) { // star frame
+            scroll_width = 50;
+            scroll_height =50;
+            rc = CGRectMake(155-50/2-nMargin*2+adjustedPtX2, 155-50/2-nMargin*2+adjustedPtY2, scroll_width+nMargin*4, scroll_height+nMargin*4 );
+//            CALayer *mask = [CALayer layer];
+//            mask.contents = (id)[[UIImage imageNamed:@"mask.png"] CGImage];
+//            mask.frame = rc;
+//            blockSlider1.layer.mask=mask;
+            return rc;
+        }
         
     }
     else if (style == 3) {
@@ -3793,7 +3940,7 @@
         else if (sub == 14){
             scroll_width = 75;
             scroll_height = 220;
-            rc = CGRectMake(155+adjustedPtX2+nMargin/2,55+adjustedPtY2,75-nMargin+adjustedWidth2,220-nMargin+adjustedHeight2 );
+            rc = CGRectMake(155+adjustedPtX2+nMargin/2,47+adjustedPtY2,75-nMargin+adjustedWidth2,220-nMargin+adjustedHeight2 );
 //            rc = CGRectMake(155-nMargin/2, 55-nMargin, scroll_width+nMargin, scroll_height+nMargin*2 );
             return rc;
         }
@@ -3999,7 +4146,7 @@
         else if (sub == 14){
             scroll_width = 75;
             scroll_height = 220;
-            rc = CGRectMake(235+adjustedPtX3+nMargin,55+adjustedPtY3,75-nMargin+adjustedWidth3,220-nMargin+adjustedHeight3 );
+            rc = CGRectMake(235+adjustedPtX3+nMargin,47+adjustedPtY3,75-nMargin+adjustedWidth3,220-nMargin+adjustedHeight3 );
 //            rc = CGRectMake(235, 55-nMargin, scroll_width, scroll_height+nMargin*2 );
             return rc;
         }
@@ -4196,7 +4343,7 @@
             return rc;
         }
         else if (sub == 12){
-            rc = CGRectMake(130+adjustedPtX4+nMargin,310-80+adjustedPtY4+nMargin,175-nMargin+adjustedWidth4,75+adjustedHeight4-nMargin );
+            rc = CGRectMake(130+adjustedPtX4,310-80+adjustedPtY4+nMargin,175-nMargin+adjustedWidth4,75+adjustedHeight4-nMargin );
 //            rc = CGRectMake(130-nMargin*2, 310-80, 175+nMargin*2, 75 );
             return rc;
         }

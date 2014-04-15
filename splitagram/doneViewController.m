@@ -75,7 +75,7 @@
 - (void) saveImage {
     //save image to library and then put it in album
     CGImageRef img = [self.image CGImage];
-    NSLog(@"savedImage size is %d", [UIImageJPEGRepresentation(self.image,1.0) length]);
+//    NSLog(@"savedImage size is %d", [UIImageJPEGRepresentation(self.image,1.0) length]);
     [library writeImageToSavedPhotosAlbum:img
                                       metadata:nil //[info objectForKey:UIImagePickerControllerMediaMetadata]
                                completionBlock:^(NSURL* assetURL, NSError* error) {

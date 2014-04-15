@@ -180,7 +180,7 @@
     [defaults setInteger:number forKey:@"number"];
  
     btn.tag = number;
-    btn.tag=9;
+    btn.tag=9;//black and white
     tapBlockNumber=0;
     if (![defaults boolForKey:@"filter"])
         [self effectsClicked:btn];
@@ -197,11 +197,11 @@
     [self effectsClicked:btn];
 
     btn.tag = number+2;
-    btn.tag = 9;  //test
+//    btn.tag = 9;  //test
     tapBlockNumber=2;
     [self effectsClicked:btn];
 
-    tapBlockNumber=0;
+    tapBlockNumber=1;
     number ++;
     [defaults setInteger:number forKey:@"number"];
 
@@ -216,25 +216,43 @@
     [defaults setBool:NO forKey:@"Flip"];
     
 }
-- (void)viewWillAppear:(BOOL)animated   {
-
-    if (!firstTimeDesign){
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.tag=[defaults integerForKey:@"frame"];
-        NSLog(@"VWA btn.tag is %d; nstyle = %d, nsubstyle = %d",btn.tag, nStyle,nSubStyle);
-        [self resizeFrames];
+- (void)viewDidAppear:(BOOL)animated   {
+    [super viewDidAppear:NO];
+    if (firstTimeDesign)
+    {
+//        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        btn.tag=[defaults integerForKey:@"frame"];
+//        NSLog(@"VWA btn.tag is %d; nstyle = %d, nsubstyle = %d",btn.tag, nStyle,nSubStyle);
+//        [self resizeFrames];
 //        if (btn.tag <= 25)
 //            [self frameClicked:btn];
 //        else
 //            [self secondFrameClicked:btn];
-    }
-    else {
+//    }
+//    else {
         if (![defaults boolForKey:@"filter"])
             [self randomFilterPick];
     }
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
+}
+- (void) viewWillAppear:(BOOL)animated {
+    if (!firstTimeDesign){
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.tag=[defaults integerForKey:@"frame"];
+        NSLog(@"VWA btn.tag is %d; nstyle = %d, nsubstyle = %d",btn.tag, nStyle,nSubStyle);
+        [self resizeFrames];
+        //        if (btn.tag <= 25)
+        //            [self frameClicked:btn];
+        //        else
+        //            [self secondFrameClicked:btn];
+    }
+//    else {
+//        if (![defaults boolForKey:@"filter"])
+//            [self randomFilterPick];
+//    }
+
 }
 
 -(void)frameAction

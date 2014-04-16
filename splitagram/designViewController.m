@@ -173,7 +173,6 @@
 
 //    [defaults setBool:YES forKey:kFeature0];  //test
 //    [defaults setBool:YES forKey:kFeature1];  //test
-//    [defaults setBool:YES forKey:kFeature3];  //test
 
     int number = [defaults integerForKey:@"number"];
     NSLog(@"number is %d",number);
@@ -261,7 +260,7 @@
 -(void)frameAction
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"resize + frames pack",@"buy for $0.99",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"resize, move + frames pack",@"buy for $0.99",nil];
     popupQuery.tag=0;
     [popupQuery showInView:self.view];
 }
@@ -418,15 +417,15 @@
 }
 - (void) fillFrameSelectionSlider {
     if (!IS_TALL_SCREEN)
-        self.frameSelectionBar.contentSize = CGSizeMake(55 * 19+10, self.frameSelectionBar.frame.size.height);
+        self.frameSelectionBar.contentSize = CGSizeMake(55 * 22+10, self.frameSelectionBar.frame.size.height);
     else
-        self.frameSelectionBar.contentSize = CGSizeMake(70 * 19+10, 151);
-    for (int ind = 7; ind <= 25; ind++) {
+        self.frameSelectionBar.contentSize = CGSizeMake(70 * 22+10, 151);
+    for (int ind = 6; ind <= 25; ind++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         if (!IS_TALL_SCREEN)
-            btn.frame = CGRectMake((ind - 7 ) * 55+5, 5, 50, 50);
+            btn.frame = CGRectMake((ind - 6 ) * 55+5, 5, 50, 50);
         else
-            btn.frame = CGRectMake((ind - 7 ) * 70+5, 5, 65, 65);
+            btn.frame = CGRectMake((ind - 6 ) * 70+5, 5, 65, 65);
 
         btn.tag = ind;
         btn.layer.borderWidth=kBorderWidth;
@@ -440,15 +439,68 @@
 
         [self.frameSelectionBar addSubview:btn];
     }
+    for (int ind = 25; ind <= 26; ind++) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        if (!IS_TALL_SCREEN)
+            btn.frame = CGRectMake((ind - 25 ) * 55+5+ 20*55, 5, 50, 50);
+        else
+            btn.frame = CGRectMake((ind - 25 ) * 70+5+ 20*70, 5, 65, 65);
+        btn.tag = ind+25;
+        btn.layer.borderWidth=kBorderWidth;
+        btn.layer.borderColor=[[UIColor clearColor] CGColor];
+        [btn addTarget:self action:@selector(secondFrameClicked:) forControlEvents:UIControlEventTouchUpInside];
+        NSLog(@"secondFrame%02d.png",ind);
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"secondFrame%02d.png",ind]] forState:UIControlStateNormal];
+        [btn.imageView setContentMode:UIViewContentModeScaleToFill];
+        btn.alpha = 0.4;
+        [self.frameSelectionBar addSubview:btn];
+        
+        if (![defaults boolForKey:kFeature0]){
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockImage.png"]];
+            imageView.alpha = 0.8;
+            imageView.layer.shadowColor = [UIColor blackColor].CGColor;
+            imageView.layer.shadowOffset = CGSizeMake(0, 1);
+            imageView.layer.shadowOpacity = 1;
+            imageView.frame=CGRectMake(btn.frame.size.width-15, 2, 15, 15);
+            [btn addSubview:imageView];
+        }
+    }
 }
 
 - (void) fillSecondFrameSelectionSlider {
-    for (int ind = 8; ind <= 26; ind++) {
+    for (int ind = 27; ind <= 32; ind++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         if (!IS_TALL_SCREEN)
-            btn.frame = CGRectMake((ind - 8 ) * 55+5, 60, 50, 50);
+            btn.frame = CGRectMake((ind - 27 ) * 55+5, 60, 50, 50);
         else
-            btn.frame = CGRectMake((ind - 8 ) * 70+5, 75, 65, 65);
+            btn.frame = CGRectMake((ind - 27 ) * 70+5, 75, 65, 65);
+        btn.tag = ind+25;
+        btn.layer.borderWidth=kBorderWidth;
+        btn.layer.borderColor=[[UIColor clearColor] CGColor];
+        [btn addTarget:self action:@selector(secondFrameClicked:) forControlEvents:UIControlEventTouchUpInside];
+        NSLog(@"secondFrame%02d.png",ind);
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"secondFrame%02d.png",ind]] forState:UIControlStateNormal];
+        [btn.imageView setContentMode:UIViewContentModeScaleToFill];
+        btn.alpha = 0.4;
+        [self.frameSelectionBar addSubview:btn];
+        
+        if (![defaults boolForKey:kFeature0]){
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockImage.png"]];
+            imageView.alpha = 0.8;
+            imageView.layer.shadowColor = [UIColor blackColor].CGColor;
+            imageView.layer.shadowOffset = CGSizeMake(0, 1);
+            imageView.layer.shadowOpacity = 1;
+            imageView.frame=CGRectMake(btn.frame.size.width-15, 2, 15, 15);
+            [btn addSubview:imageView];
+        }
+    }
+
+    for (int ind = 9; ind <= 24; ind++) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        if (!IS_TALL_SCREEN)
+            btn.frame = CGRectMake((ind - 9 ) * 55+5+6*55, 60, 50, 50);
+        else
+            btn.frame = CGRectMake((ind - 9 ) * 70+5+6*70, 75, 65, 65);
         btn.tag = ind+25;
         btn.layer.borderWidth=kBorderWidth;
         btn.layer.borderColor=[[UIColor clearColor] CGColor];
@@ -476,6 +528,7 @@
     [self closeBtnClicked];
     resizeOn=NO;
     [defaults setInteger:clickedBtn.tag forKey:@"frame"];
+    
     for (int i = 1; i <= 35+25; i++) {
         UIButton *frameButton = (UIButton *)[_frameSelectionBar viewWithTag:i];
         frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
@@ -506,11 +559,13 @@
             break;
         case 6:
             [self resetAdjustedValues];
-            [self selectFrame:1 SUB:6];
+//            [self selectFrame:1 SUB:6];
+              [self selectFrame:2 SUB:10];
             break;
         case 7:
             [self resetAdjustedValues];
             [self selectFrame:2 SUB:1];
+          
             break;
         case 8:
             [self resetAdjustedValues];
@@ -674,7 +729,8 @@
             case 8:
                 
                 [self resetAdjustedValues];
-                [self selectFrame:2 SUB:10];
+                [self selectFrame:2 SUB:18];
+                
                 break;
 //            case 9:
 //                
@@ -793,12 +849,7 @@
                 [self selectFrame:4 SUB:16];
                 
                 break;
-//            case 34:
-//                [self selectFrame:4 SUB:17];
-//                
-//                break;
             case 26:
-                [self resetAdjustedValues];
                 [self selectFrame:4 SUB:18];
                 
                 break;
@@ -807,6 +858,32 @@
                 [self selectFrame:2 SUB:17];
                 
                 break;
+            case 28:
+                [self resetAdjustedValues];
+                [self selectFrame:2 SUB:18];
+                
+                break;
+            case 29:
+                [self resetAdjustedValues];
+                [self selectFrame:2 SUB:19];
+                
+                break;
+            case 30:
+                [self resetAdjustedValues];
+                [self selectFrame:2 SUB:20];
+                
+                break;
+            case 31:
+                [self resetAdjustedValues];
+                [self selectFrame:2 SUB:21];
+                
+                break;
+            case 32:
+                [self resetAdjustedValues];
+                [self selectFrame:2 SUB:22];
+                
+                break;
+
                 
             default:
                 break;
@@ -980,50 +1057,58 @@
 //                            videoFilter = [[GPUImageFilter alloc] init]; //original
                         } break;
                         case 2: {
-                          GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
+//                          GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
+                            GPUImageiOSBlurFilter * filter = [[GPUImageiOSBlurFilter alloc] init];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
                         } break;
                         case 3: {
-                           GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
+//                           GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
+                            GPUImageSobelEdgeDetectionFilter *filter= [[GPUImageSobelEdgeDetectionFilter alloc] init];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
                         } break;
                         case 10: {
-                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
+//                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
+                            
+                            GPUImagePixellateFilter *filter = [[GPUImagePixellateFilter alloc] init];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
                         } break;
                         case 11: {
-                           GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
+//                           GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
+                            GPUImageHalftoneFilter *filter = [[GPUImageHalftoneFilter alloc] init];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
                         } break;
                         case 4:{
-                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
+//                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
+                            GPUImageSketchFilter *filter = [[GPUImageSketchFilter alloc] init];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
                         } break;
                         case 5: {
-                           GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
+//                           GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
+                            GPUImageToonFilter *filter = [[GPUImageToonFilter alloc] init];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
                         } break;
                         case 6: {
-                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
+//                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
+                            GPUImageSphereRefractionFilter *filter = [[GPUImageSphereRefractionFilter alloc] init];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
                         } break;
                         case 7: {
-                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
-                            
+//                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
+                            GPUImageKuwaharaRadius3Filter *filter = [[GPUImageKuwaharaRadius3Filter alloc] init];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
 //                            quickFilteredImage=nil;
@@ -1032,7 +1117,8 @@
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
                         } break;
                         case 8: {
-                            GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
+//                            GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
+                            GPUImageSwirlFilter *filter = [[GPUImageSwirlFilter alloc] init];
                             
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
@@ -1288,6 +1374,20 @@
 }
 - (IBAction)resizeButton:(id)sender {
     [Flurry logEvent:@"resize"];
+    if (nStyle ==2){
+        if (nSubStyle == 1  || nSubStyle == 10) {
+            if (resizeOn){
+                [self closeBtnClicked];
+                resizeOn = NO;
+            }
+            else {
+                [self addButtons];
+                resizeOn = YES;
+                NSLog(@"resizeButton ON");
+            }
+            return;
+        }
+    }
     if (![defaults boolForKey:kFeature0]){
         [self frameAction];
         return;
@@ -1401,6 +1501,8 @@
 - (void) resizeFrames {
 
     for (UIScrollView *blockSlider in droppableAreas){
+        blockSlider.layer.mask=nil;
+
         if (blockSlider.tag == 0) {
             rectBlockSlider1 = [self getScrollFrame1:nStyle subStyle:nSubStyle];
             blockSlider.frame = rectBlockSlider1;
@@ -1916,6 +2018,24 @@
             }
             case 7:{
                 UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,180-15+adjustedHeight1, 30, 30)];
+                btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
+                btn.tag = 200;
+                btn.alpha = 0.5;
+                btn.userInteractionEnabled=YES;
+                UIPanGestureRecognizer *panGestureBtn = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBtn:)];
+                panGestureBtn.delegate=self;
+                [btn addGestureRecognizer:panGestureBtn];
+                [self.frameContainer addSubview:btn];
+                break;
+            }
+            case 17:
+            case 18:
+                case 19:
+                case 20:
+                case 21:
+                case 22:
+            {
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedPtX2,155-15+adjustedPtY2, 30, 30)];
                 btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                 btn.tag = 200;
                 btn.alpha = 0.5;
@@ -2622,6 +2742,23 @@
 //                    adjustedHeight1= adjustedHeight1+translation.y;
                     adjustedHeight2= adjustedHeight2+translation.y;
 //                    adjustedPtY2 = adjustedPtY2 - translation.y;
+                    [self resizeFrames];
+                }
+                break;
+            }
+            case 17:
+                case 18:
+                case 19:
+                case 20:
+                case 21:
+                case 22:
+            
+            {
+                UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
+                if ((btn.center.x + translation.x< 270) && (btn.center.x + translation.x > 40)&&(btn.center.y + translation.y< 270) && (btn.center.y + translation.y > 40) ){
+                    btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y+translation.y );
+                    adjustedPtX2=adjustedPtX2 + translation.x;
+                    adjustedPtY2=adjustedPtY2 + translation.y;
                     [self resizeFrames];
                 }
                 break;
@@ -3583,6 +3720,36 @@
             rc = CGRectMake(0, 0, scroll_width, scroll_height );
             return rc;
         }
+        else if (sub == 18) {  //secondFrameSlider stuff
+            scroll_width = 310;
+            scroll_height =310;
+            rc = CGRectMake(0, 0, scroll_width, scroll_height );
+            return rc;
+        }
+        else if (sub == 19) {  //secondFrameSlider stuff
+            scroll_width = 310;
+            scroll_height =310;
+            rc = CGRectMake(0, 0, scroll_width, scroll_height );
+            return rc;
+        }
+        else if (sub == 20) {  //secondFrameSlider stuff
+            scroll_width = 310;
+            scroll_height =310;
+            rc = CGRectMake(0, 0, scroll_width, scroll_height );
+            return rc;
+        }
+        else if (sub == 21) {  //secondFrameSlider stuff
+            scroll_width = 310;
+            scroll_height =310;
+            rc = CGRectMake(0, 0, scroll_width, scroll_height );
+            return rc;
+        }
+        else if (sub == 22) {  //secondFrameSlider stuff
+            scroll_width = 310;
+            scroll_height =310;
+            rc = CGRectMake(0, 0, scroll_width, scroll_height );
+            return rc;
+        }
         
     }
     else if (style == 3) {
@@ -3830,7 +3997,12 @@
         else if (sub == 10) {  //secondFrameSlider stuff
             scroll_width = 50;
             scroll_height =50;
-            rc = CGRectMake(155-50/2-nMargin*2+adjustedPtX2, 155-50/2-nMargin*2+adjustedPtY2, scroll_width+nMargin*4, scroll_height+nMargin*4 );
+            rc = CGRectMake(155-50/2-nMargin*4+adjustedPtX2, 155-50/2-nMargin*4+adjustedPtY2, scroll_width+nMargin*8, scroll_height+nMargin*8 );
+            CALayer *mask = [CALayer layer];
+            mask.contents = (id)[[UIImage imageNamed:@"maskSquare.png"] CGImage];
+            mask.frame = rc;
+            blockSlider2.layer.mask=mask;
+
             return rc;
         }
         else if (sub == 11) {  //secondFrameSlider stuff
@@ -3873,14 +4045,70 @@
             rc = CGRectMake(0, 155, scroll_width, scroll_height );
             return rc;
         }
-        else if ( sub == 17) { // star frame
+        else if ( sub == 18) { // star frame
             scroll_width = 50;
             scroll_height =50;
-            rc = CGRectMake(155-50/2-nMargin*2+adjustedPtX2, 155-50/2-nMargin*2+adjustedPtY2, scroll_width+nMargin*4, scroll_height+nMargin*4 );
-//            CALayer *mask = [CALayer layer];
-//            mask.contents = (id)[[UIImage imageNamed:@"mask.png"] CGImage];
-//            mask.frame = rc;
-//            blockSlider1.layer.mask=mask;
+            rc = CGRectMake(155-50/2-nMargin*6+adjustedPtX2, 155-50/2-nMargin*6+adjustedPtY2, scroll_width+nMargin*12, scroll_height+nMargin*12 );
+            
+            CALayer *mask = [CALayer layer];
+            mask.contents = (id)[[UIImage imageNamed:@"maskCircle.png"] CGImage];
+            mask.frame = rc;
+            blockSlider2.layer.mask=mask;
+            return rc;
+        }
+        else if ( sub == 17) { // heart frame
+            scroll_width = 50;
+            scroll_height =50;
+            rc = CGRectMake(155-50/2-nMargin*6+adjustedPtX2, 155-50/2-nMargin*6+adjustedPtY2, scroll_width+nMargin*12, scroll_height+nMargin*12 );
+            
+            CALayer *mask = [CALayer layer];
+            mask.contents = (id)[[UIImage imageNamed:@"maskHeart.png"] CGImage];
+            mask.frame = rc;
+            blockSlider2.layer.mask=mask;
+            return rc;
+        }
+        else if ( sub == 19) { // heart frame
+            scroll_width = 50;
+            scroll_height =50;
+            rc = CGRectMake(155-50/2-nMargin*6+adjustedPtX2, 155-50/2-nMargin*6+adjustedPtY2, scroll_width+nMargin*12, scroll_height+nMargin*12 );
+            
+            CALayer *mask = [CALayer layer];
+            mask.contents = (id)[[UIImage imageNamed:@"maskStar.png"] CGImage];
+            mask.frame = rc;
+            blockSlider2.layer.mask=mask;
+            return rc;
+        }
+        else if ( sub == 20) { // heart frame
+            scroll_width = 50;
+            scroll_height =50;
+            rc = CGRectMake(155-50/2-nMargin*6+adjustedPtX2, 155-50/2-nMargin*6+adjustedPtY2, scroll_width+nMargin*12, scroll_height+nMargin*12 );
+            
+            CALayer *mask = [CALayer layer];
+            mask.contents = (id)[[UIImage imageNamed:@"maskDiamond.png"] CGImage];
+            mask.frame = rc;
+            blockSlider2.layer.mask=mask;
+            return rc;
+        }
+        else if ( sub == 22) { // heart frame
+            scroll_width = 50;
+            scroll_height =50;
+            rc = CGRectMake(155-50/2-nMargin*6+adjustedPtX2, 155-50/2-nMargin*6+adjustedPtY2, scroll_width+nMargin*12, scroll_height+nMargin*12 );
+            
+            CALayer *mask = [CALayer layer];
+            mask.contents = (id)[[UIImage imageNamed:@"maskTriangle.png"] CGImage];
+            mask.frame = rc;
+            blockSlider2.layer.mask=mask;
+            return rc;
+        }
+        else if ( sub == 21) { // heart frame
+            scroll_width = 50;
+            scroll_height =50;
+            rc = CGRectMake(155-50/2-nMargin*6+adjustedPtX2, 155-50/2-nMargin*6+adjustedPtY2, scroll_width+nMargin*12, scroll_height+nMargin*12 );
+            
+            CALayer *mask = [CALayer layer];
+            mask.contents = (id)[[UIImage imageNamed:@"maskInvertedTriangle.png"] CGImage];
+            mask.frame = rc;
+            blockSlider2.layer.mask=mask;
             return rc;
         }
         
@@ -4075,6 +4303,7 @@
     
     rc = CGRectMake(nLeftMargin+adjustedPtX2, nTopMargin+adjustedPtY2, scroll_width+adjustedWidth2, scroll_height+adjustedHeight2);
     NSLog(@"Scroll 2 outside nLeftMargin=%f nTopMargin=%f width=%f,height=%f",nLeftMargin,nTopMargin,scroll_width,scroll_height);
+    
     return rc;
 }
 

@@ -66,8 +66,8 @@
 }
 - (IBAction)saveImageAction:(id)sender {
     [self saveImage];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"saved to your camera roll" message:nil
-                                                   delegate:self cancelButtonTitle:@"okay" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Saved to your camera roll" message:nil
+                                                   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
 
 }

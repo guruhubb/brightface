@@ -386,15 +386,15 @@
 - (void)restorePurchases {
     
         if( [defaults boolForKey:@"restorePurchases"]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"already restored" message:nil
-                                                           delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Already Restored" message:nil
+                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             return;
         }
         [[MKStoreManager sharedManager]restorePreviousTransactionsOnComplete:^{
             NSLog(@"RESTORED PREVIOUS PURCHASE");
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"restore successful" message:nil
-                                                           delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Restore Successful" message:nil
+                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             [self updateAppViewAndDefaults];
             [defaults setBool:YES forKey:@"restorePurchases"];

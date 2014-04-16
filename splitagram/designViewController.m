@@ -147,7 +147,7 @@
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
         nMargin = 3;
-        [defaults setInteger:5 forKey:@"Split"];
+        [defaults setInteger:3 forKey:@"Split"];
         sliderSplit.value = nMargin;
     });
 

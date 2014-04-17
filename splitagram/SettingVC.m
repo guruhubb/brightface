@@ -55,7 +55,11 @@
 - (void)rateApp {
     
     [Flurry logEvent:@"Rate App" ];
+//[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/app/850204569"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=850204569&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"]];
 
+
+    return;
     // Initialize Product View Controller
     SKStoreProductViewController *storeProductViewController = [[SKStoreProductViewController alloc] init];
     // Configure View Controller  850204569

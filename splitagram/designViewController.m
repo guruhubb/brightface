@@ -155,12 +155,12 @@
     btn.tag=[defaults integerForKey:@"frame"];
     NSLog(@"VDL btn.tag is %d",btn.tag);
 
-    if (btn.tag==0 || btn.tag > 25+35) btn.tag = 19;
+    if (btn.tag==0 || btn.tag > 25+35) btn.tag = 20;
     [self frameClicked:btn];
-    if (![defaults boolForKey:kFeature0])
-        btn.tag = 19;
+//    if (![defaults boolForKey:kFeature0])
+//        btn.tag = 20;
 
-    if (btn.tag >25) {
+    if (btn.tag >25  && [defaults boolForKey:kFeature0]) {
         NSLog(@" btn.tag is %d; nstyle = %d, nsubstyle = %d",btn.tag, nStyle,nSubStyle);
 
         [self secondFrameClicked:btn];
@@ -174,12 +174,12 @@
 //    [defaults setBool:YES forKey:kFeature0];  //test
 //    [defaults setBool:YES forKey:kFeature1];  //test
 
-    int number = [defaults integerForKey:@"number"];
-    NSLog(@"number is %d",number);
-    if (number > 9 || number == 0) {
-        number = 2;
-    }
-    [defaults setInteger:number forKey:@"number"];
+//    int number = [defaults integerForKey:@"number"];
+//    NSLog(@"number is %d",number);
+//    if (number > 9 || number == 0) {
+//        number = 2;
+//    }
+//    [defaults setInteger:number forKey:@"number"];
  
 //    btn.tag = number;
     btn.tag=9;//black and white
@@ -190,22 +190,22 @@
 
 - (void) randomFilterPick {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    int number = [defaults integerForKey:@"number"];
-    NSLog(@"number is %d",number);
+//    int number = [defaults integerForKey:@"number"];
+//    NSLog(@"number is %d",number);
 
-    btn.tag = number;
+//    btn.tag = number;
 //    btn.tag = 9;  //test
-    tapBlockNumber=1;
+//    tapBlockNumber=1;
+//    [self effectsClicked:btn];
+
+//    btn.tag = number;
+    btn.tag = 9;  //test
+    tapBlockNumber=3;
     [self effectsClicked:btn];
 
-    btn.tag = number+1;
-//    btn.tag = 9;  //test
-    tapBlockNumber=2;
-    [self effectsClicked:btn];
-
     tapBlockNumber=1;
-    number ++;
-    [defaults setInteger:number forKey:@"number"];
+//    number ++;
+//    [defaults setInteger:number forKey:@"number"];
 
 }
 - (void) resetGestureParameters {
@@ -260,7 +260,7 @@
 -(void)frameAction
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"resize, move + frames pack",@"buy for $0.99",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"move + frames pack",@"buy for $0.99",nil];
     popupQuery.tag=0;
     [popupQuery showInView:self.view];
 }
@@ -1057,58 +1057,58 @@
 //                            videoFilter = [[GPUImageFilter alloc] init]; //original
                         } break;
                         case 2: {
-//                          GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
-                            GPUImageiOSBlurFilter * filter = [[GPUImageiOSBlurFilter alloc] init];
+                          GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
+//                            GPUImageiOSBlurFilter * filter = [[GPUImageiOSBlurFilter alloc] init];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
                         } break;
                         case 3: {
-//                           GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
-                            GPUImageSobelEdgeDetectionFilter *filter= [[GPUImageSobelEdgeDetectionFilter alloc] init];
+                           GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
+//                            GPUImageSobelEdgeDetectionFilter *filter= [[GPUImageSobelEdgeDetectionFilter alloc] init];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
                         } break;
                         case 10: {
-//                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
+                           GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
                             
-                            GPUImagePixellateFilter *filter = [[GPUImagePixellateFilter alloc] init];
+//                            GPUImageRGBClosingFilter *filter = [[GPUImageRGBClosingFilter alloc] init];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
                         } break;
                         case 11: {
-//                           GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
-                            GPUImageHalftoneFilter *filter = [[GPUImageHalftoneFilter alloc] init];
+                           GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
+//                            GPUImagePinchDistortionFilter *filter = [[GPUImagePinchDistortionFilter alloc] init];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
                         } break;
                         case 4:{
-//                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
-                            GPUImageSketchFilter *filter = [[GPUImageSketchFilter alloc] init];
+                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
+//                            GPUImageSketchFilter *filter = [[GPUImageSketchFilter alloc] init];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
                         } break;
                         case 5: {
-//                           GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
-                            GPUImageToonFilter *filter = [[GPUImageToonFilter alloc] init];
+                           GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
+//                            GPUImageSmoothToonFilter *filter = [[GPUImageSmoothToonFilter alloc] init];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
                         } break;
                         case 6: {
-//                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
-                            GPUImageSphereRefractionFilter *filter = [[GPUImageSphereRefractionFilter alloc] init];
+                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
+//                            GPUImageGlassSphereFilter *filter = [[GPUImageGlassSphereFilter alloc] init];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
                         } break;
                         case 7: {
-//                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
-                            GPUImageKuwaharaRadius3Filter *filter = [[GPUImageKuwaharaRadius3Filter alloc] init];
+                            GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
+//                            GPUImageSepiaFilter *filter = [[GPUImageSepiaFilter alloc] init];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
 //                            quickFilteredImage=nil;
@@ -1117,8 +1117,8 @@
 //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
                         } break;
                         case 8: {
-//                            GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
-                            GPUImageSwirlFilter *filter = [[GPUImageSwirlFilter alloc] init];
+                            GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
+//                            GPUImageColorInvertFilter *filter = [[GPUImageColorInvertFilter alloc] init];
                             
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;

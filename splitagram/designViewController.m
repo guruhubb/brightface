@@ -850,6 +850,7 @@
                 
                 break;
             case 26:
+                [self resetAdjustedValues];
                 [self selectFrame:4 SUB:18];
                 
                 break;
@@ -1646,9 +1647,9 @@
     
     float rate;
     if ([defaults boolForKey:@"fill"])
-        rate = rateImageFill;
-    else
         rate = rateImageFit;
+    else
+        rate = rateImageFill;
     
     if(!isinf(rate)) {
      [imgView setFrame:CGRectMake(0.0,0.0, imgView.frame.size.width*rate, imgView.frame.size.height*rate)];  //split
@@ -2017,7 +2018,7 @@
                 break;
             }
             case 7:{
-                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,180-15+adjustedHeight1, 30, 30)];
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,180-15+adjustedHeight2, 30, 30)];
                 btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                 btn.tag = 200;
                 btn.alpha = 0.5;
@@ -2202,7 +2203,7 @@
                 break;
             }
             case 8: {
-                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,155-15, 30, 30)];
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,155-15+adjustedHeight1, 30, 30)];
                 btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                 btn.tag = 200;
                 btn.alpha = 0.5;
@@ -2215,7 +2216,7 @@
                 break;
             }
             case 9: {
-                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(130+adjustedHeight1-13,175-13, 30, 30)];
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(130-13+adjustedWidth3,175-13, 30, 30)];
                 btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                 btn.tag = 200;
                 btn.alpha = 0.5;
@@ -2228,7 +2229,7 @@
                 break;
             }
             case 10: {
-                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedHeight1,155-15, 30, 30)];
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,155-15+adjustedHeight1, 30, 30)];
                 btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                 btn.tag = 200;
                 btn.alpha = 0.5;
@@ -2241,7 +2242,7 @@
                 break;
             }
             case 11: {
-                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedHeight1,155-15, 30, 30)];
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,155-15+adjustedHeight1, 30, 30)];
                 btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                 btn.tag = 200;
                 btn.alpha = 0.5;
@@ -2254,7 +2255,7 @@
                 break;
             }
             case 12: {
-                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedHeight1,155-15, 30, 30)];
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,155-15-adjustedHeight1/2, 30, 30)];
                 btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                 btn.tag = 200;
                 btn.alpha = 0.5;
@@ -2267,7 +2268,7 @@
                 break;
             }
             case 14: {
-                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedHeight1,155-15, 30, 30)];
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,155-15-adjustedHeight1/2, 30, 30)];
                 btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                 btn.tag = 200;
                 btn.alpha = 0.5;
@@ -2523,7 +2524,7 @@
                 break;
             }
             case 10: {
-                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedHeight1,155-15, 30, 30)];
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,155-15-adjustedHeight1/2, 30, 30)];
                 btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                 btn.tag = 200;
                 btn.alpha = 0.5;
@@ -2536,7 +2537,7 @@
                 break;
             }
             case 11: {
-                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedHeight1,155-15, 30, 30)];
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,155-15+adjustedHeight1, 30, 30)];
                 btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                 btn.tag = 200;
                 btn.alpha = 0.5;
@@ -2549,7 +2550,7 @@
                 break;
             }
             case 12: {
-                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedHeight1,155-15, 30, 30)];
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedWidth1,155-15, 30, 30)];
                 btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                 btn.tag = 200;
                 btn.alpha = 0.5;
@@ -2562,7 +2563,7 @@
                 break;
             }
             case 13: {
-                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedHeight1,155-15, 30, 30)];
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,155-15-adjustedHeight1, 30, 30)];
                 btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                 btn.tag = 200;
                 btn.alpha = 0.5;
@@ -2575,7 +2576,7 @@
                 break;
             }
             case 14: {
-                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedHeight1,155-15, 30, 30)];
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,155-15+adjustedHeight1, 30, 30)];
                 btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                 btn.tag = 200;
                 btn.alpha = 0.5;
@@ -2588,7 +2589,7 @@
                 break;
             }
             case 16: {
-                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedHeight1,155-15, 30, 30)];
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,155-15-adjustedHeight1, 30, 30)];
                 btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                 btn.tag = 200;
                 btn.alpha = 0.5;
@@ -2601,7 +2602,7 @@
                 break;
             }
             case 18: {
-                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15+adjustedHeight1,155-15, 30, 30)];
+                UIImageView *btn = [[UIImageView alloc] initWithFrame:CGRectMake(155-15,155-15+adjustedHeight1, 30, 30)];
                 btn.image =[UIImage imageNamed:[NSString stringWithFormat:@"square.png"]];
                 btn.tag = 200;
                 btn.alpha = 0.5;
@@ -2897,7 +2898,7 @@
             }
             case 11:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.y + translation.y< 228) && (btn.center.y+ translation.y > 100)){
+                if ((btn.center.y + translation.y< 227) && (btn.center.y+ translation.y > 100)){
                     btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
                     adjustedHeight1= adjustedHeight1+translation.y;
                     adjustedHeight2= adjustedHeight2+translation.y;
@@ -3076,12 +3077,12 @@
             }
             case 12:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.x + translation.x< 155) && (btn.center.x+ translation.x > 110)){
+                if ((btn.center.x + translation.x< 250) && (btn.center.x+ translation.x > 70)){
                     btn.center = CGPointMake(btn.center.x +translation.x,btn.center.y );
-                    adjustedWidth1= adjustedWidth1+2*translation.x;
-                    adjustedWidth2= adjustedWidth2+2*translation.x;
-                    adjustedWidth3= adjustedWidth3+2*translation.x;
-                    adjustedWidth4= adjustedWidth4+2*translation.x;
+                    adjustedWidth1= adjustedWidth1+translation.x;
+                    adjustedWidth2= adjustedWidth2+translation.x;
+                    adjustedWidth3= adjustedWidth3+translation.x;
+                    adjustedWidth4= adjustedWidth4+translation.x;
                     
                     adjustedPtX2 = adjustedPtX2 - translation.x;
 //                    adjustedPtY3 = adjustedPtY3 + translation.y;
@@ -3121,7 +3122,7 @@
             }
             case 14:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.y + translation.y< 220) && (btn.center.y+ translation.y > 99)){
+                if ((btn.center.y + translation.y< 220) && (btn.center.y+ translation.y > 97)){
                     btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
                     adjustedHeight1= adjustedHeight1+translation.y;
                     adjustedHeight2= adjustedHeight2+translation.y;
@@ -3157,14 +3158,14 @@
             }
             case 18:{
                 UIImageView *btn = (UIImageView *) [self.frameContainer viewWithTag:200];
-                if ((btn.center.y + translation.y< 250) && (btn.center.y+ translation.y > 120)){
+                if ((btn.center.y + translation.y< 236) && (btn.center.y+ translation.y > 120)){
                     btn.center = CGPointMake(btn.center.x ,btn.center.y+translation.y );
                     adjustedHeight1= adjustedHeight1+translation.y;
-                    adjustedHeight2= adjustedHeight2-translation.y;
+                    adjustedHeight2= adjustedHeight2+translation.y;
                     adjustedHeight3= adjustedHeight3-translation.y;
                     adjustedHeight4= adjustedHeight4+translation.y;
                     
-                    adjustedPtY2 = adjustedPtY2 + translation.y;
+                    adjustedPtY2 = adjustedPtY2 - translation.y;
 //                    adjustedPtY3 = adjustedPtY3 + translation.y;
 //                    adjustedPtY1 = adjustedPtY1 + translation.y;
                     adjustedPtY4 = adjustedPtY4 - translation.y;
@@ -3691,7 +3692,7 @@
         else if (sub == 13) {  //secondFrameSlider stuff
             scroll_width = 150;
             scroll_height =250;
-            rc = CGRectMake(adjustedPtX1, adjustedPtY1, scroll_width+adjustedWidth1-nMargin, scroll_height+adjustedHeight1-nMargin );
+            rc = CGRectMake(adjustedPtX1, adjustedPtY1, scroll_width+adjustedWidth1-nMargin+5, scroll_height+adjustedHeight1-nMargin );
 
 //            rc = CGRectMake(0, 0, scroll_width+nMargin/4, scroll_height+nMargin*2 );
             return rc;
@@ -3787,7 +3788,7 @@
         }else if (sub == 9) {
             scroll_width = 105;
             scroll_height = 105;
-            rc = CGRectMake(25+nMargin/2+adjustedPtX1, 70+nMargin/2 +adjustedPtY1, scroll_width-nMargin+adjustedWidth1, scroll_height-nMargin+adjustedHeight1  );
+            rc = CGRectMake(25+nMargin/2+adjustedPtX1+5, 70+nMargin/2 +adjustedPtY1, scroll_width-nMargin+adjustedWidth1, scroll_height-nMargin+adjustedHeight1  );
             return rc;
             
         }
@@ -3887,7 +3888,7 @@
             return rc;
         }
         else if (sub == 13){
-            rc = CGRectMake(10+adjustedPtX1+nMargin/2, 75+adjustedPtY1, 100-nMargin+adjustedWidth1, 100 - nMargin +adjustedHeight1);
+            rc = CGRectMake(10+adjustedPtX1+nMargin/2+5, 75+adjustedPtY1, 100-nMargin+adjustedWidth1, 100 - nMargin +adjustedHeight1);
 //            rc = CGRectMake(10-nMargin/4,75-nMargin/2,100+nMargin/2,100+nMargin/2 );
             return rc;
         }
@@ -3910,7 +3911,7 @@
             return rc;
         }
         else if (sub == 18){
-            rc = CGRectMake(5+adjustedPtX1, 5+adjustedPtY1, 75-nMargin+adjustedWidth1, 75 - nMargin +adjustedHeight1);
+            rc = CGRectMake(5+adjustedPtX1, 5+adjustedPtY1-1, 75-nMargin+adjustedWidth1, 75 - nMargin +adjustedHeight1);
 //            rc = CGRectMake(5, 5, 75+nMargin, 75 );
             return rc;
         }
@@ -3973,9 +3974,9 @@
 //            nTopMargin = nMargin * 2 + scroll_height;
         }
         else if (sub == 7) {  //secondFrameSlider stuff
-            scroll_width = 115+nMargin*2;
-            scroll_height = 150+nMargin*2;
-            rc = CGRectMake(175+adjustedPtX2-nMargin, 20+adjustedPtY2-nMargin, scroll_width+adjustedWidth2, scroll_height+adjustedHeight2);
+            scroll_width = 115-nMargin*2+40;
+            scroll_height = 150-nMargin*2+40;
+            rc = CGRectMake(175+adjustedPtX2+nMargin-20, 20+adjustedPtY2+nMargin-20, scroll_width+adjustedWidth2, scroll_height+adjustedHeight2);
 
 //            rc = CGRectMake(175-nMargin, 20-nMargin, scroll_width, scroll_height );
             return rc;
@@ -4189,7 +4190,7 @@
         else if (sub == 14){
             scroll_width = 75;
             scroll_height = 220;
-            rc = CGRectMake(155+adjustedPtX2+nMargin/2,47+adjustedPtY2,75-nMargin+adjustedWidth2,220-nMargin+adjustedHeight2 );
+            rc = CGRectMake(155+adjustedPtX2+nMargin/2-5,47+adjustedPtY2,75-nMargin+adjustedWidth2+10,220-nMargin+adjustedHeight2 );
 //            rc = CGRectMake(155-nMargin/2, 55-nMargin, scroll_width+nMargin, scroll_height+nMargin*2 );
             return rc;
         }
@@ -4271,7 +4272,7 @@
             return rc;
         }
         else if (sub == 13){
-             rc = CGRectMake(10+adjustedPtX2+nMargin/2,180+adjustedPtY2,100-nMargin+adjustedWidth2,100+adjustedHeight2-nMargin );
+             rc = CGRectMake(10+adjustedPtX2+nMargin/2+5,180+adjustedPtY2-5,100-nMargin+adjustedWidth2,100+adjustedHeight2-nMargin );
 //            rc = CGRectMake(10-nMargin/4, 180-nMargin/4, 100+nMargin/2, 100+nMargin/2 );
             return rc;
         }
@@ -4285,7 +4286,7 @@
             return rc;
         }
         else if (sub == 16){
-             rc = CGRectMake(106+adjustedPtX2+nMargin/2,5+adjustedPtY2+nMargin/2,96-nMargin+adjustedWidth2,96+adjustedHeight2-nMargin );
+             rc = CGRectMake(106+adjustedPtX2+nMargin/2-5,5+adjustedPtY2+nMargin/2,96-nMargin+adjustedWidth2+10,96+adjustedHeight2-nMargin +7);
 //            rc = CGRectMake(106-nMargin/4, 5, 96+nMargin/2, 96+nMargin );
             return rc;
         }
@@ -4294,7 +4295,7 @@
             return rc;
         }
         else if (sub == 18){
-             rc = CGRectMake(80+adjustedPtX2+nMargin/2,85+adjustedPtY2,110-nMargin+adjustedWidth2,310-90+adjustedHeight2-nMargin );
+             rc = CGRectMake(80+adjustedPtX2+nMargin/2,85+adjustedPtY2,110-nMargin+adjustedWidth2+5,310-90+adjustedHeight2-nMargin );
 //            rc = CGRectMake(80-nMargin/4, 85-nMargin/4, 110+nMargin/2, 310-90+nMargin/4 );
             return rc;
         }
@@ -4363,7 +4364,7 @@
         } else if (sub == 9) {
             scroll_width = 105;
             scroll_height = 105;
-            rc = CGRectMake(135+nMargin/2+adjustedPtX3, 180+nMargin/2 +adjustedPtY3, scroll_width-nMargin+adjustedWidth3, scroll_height-nMargin+adjustedHeight3  );
+            rc = CGRectMake(135+nMargin/2+adjustedPtX3, 180+nMargin/2 +adjustedPtY3-5, scroll_width-nMargin+adjustedWidth3, scroll_height-nMargin+adjustedHeight3  );
             return rc;
 //            rc = CGRectMake(135,180-nMargin/4,100+nMargin+nMargin/4,100+nMargin+nMargin/4 );
 //            return rc;
@@ -4479,12 +4480,12 @@
             return rc;
         }
         else if (sub == 13){
-            rc = CGRectMake(115+adjustedPtX3+nMargin,180+adjustedPtY3,100-nMargin+adjustedWidth3,100+adjustedHeight3-nMargin );
+            rc = CGRectMake(115+adjustedPtX3+nMargin,180+adjustedPtY3-5,100-nMargin+adjustedWidth3,100+adjustedHeight3-nMargin );
 //            rc = CGRectMake(115, 180-nMargin/4, 100+nMargin/2, 100+nMargin/2 );
             return rc;
         }
         else if (sub == 14){
-            rc = CGRectMake(105+adjustedPtX3+nMargin/2,10+adjustedPtY3,100-nMargin+adjustedWidth3,100+adjustedHeight3-nMargin );
+            rc = CGRectMake(105+adjustedPtX3+nMargin/2,10+adjustedPtY3,100-nMargin+adjustedWidth3,100+adjustedHeight3-nMargin+10 );
 //            rc = CGRectMake(105, 10, 100, 100 );
             return rc;
         }
@@ -4493,7 +4494,7 @@
             return rc;
         }
         else if (sub == 16){
-            rc = CGRectMake(106+adjustedPtX3+nMargin/2,310-96-5+adjustedPtY3+nMargin/2,96-nMargin+adjustedWidth3,96+adjustedHeight3-nMargin );
+            rc = CGRectMake(106+adjustedPtX3+nMargin/2-5,310-96-5+adjustedPtY3+nMargin/2-7,96-nMargin+adjustedWidth3+10,96+adjustedHeight3-nMargin +7);
 //            rc = CGRectMake(106-nMargin/4, 310-96-5-nMargin, 96+nMargin/2, 96+nMargin );
             return rc;
         }
@@ -4503,7 +4504,7 @@
             return rc;
         }
         else if (sub == 18){
-            rc = CGRectMake(195+adjustedPtX3+nMargin,5+adjustedPtY3,110-nMargin+adjustedWidth3,310-75-15+adjustedHeight3-nMargin );
+            rc = CGRectMake(195+adjustedPtX3+nMargin,5+adjustedPtY3,110-nMargin+adjustedWidth3,310-75-15+adjustedHeight3-nMargin+5 );
 //            rc = CGRectMake(195, 5, 110, 310-75-15+nMargin/4 );
             return rc;
         }
@@ -4603,7 +4604,7 @@
             return rc;
         }
         else if (sub == 14){
-            rc = CGRectMake(105+adjustedPtX4+nMargin/2,310-180+adjustedPtY4,100-nMargin+adjustedWidth4,165+adjustedHeight4-nMargin );
+            rc = CGRectMake(105+adjustedPtX4+nMargin/2,310-180+adjustedPtY4-10,100-nMargin+adjustedWidth4,165+adjustedHeight4-nMargin+10 );
 //            rc = CGRectMake(105, 310-180-nMargin, 100, 175+nMargin );
             return rc;
         }
@@ -4621,7 +4622,7 @@
             return rc;
         }
         else if (sub == 18){
-            rc = CGRectMake(195+adjustedPtX4+nMargin,310-80+adjustedPtY4,75-nMargin+adjustedWidth4,75+adjustedHeight4-nMargin );
+            rc = CGRectMake(195+adjustedPtX4+nMargin,310-80+adjustedPtY4-1+nMargin,75-nMargin+adjustedWidth4,75+adjustedHeight4-nMargin+1 );
 //            rc = CGRectMake(195, 310-80, 75+nMargin, 75 );
             return rc;
         }

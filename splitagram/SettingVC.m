@@ -163,9 +163,9 @@
                 label.tag = 100;
                 [cell.contentView addSubview:label];
                 if ([defaults boolForKey:@"fill"])
-                    label.text = @"fill";
-                else
                     label.text = @"fit";
+                else
+                    label.text = @"fill";
             
             }
             if (indexPath.row==1) {
@@ -477,9 +477,9 @@
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
         if (actionSheet.tag == 0) {
             if (buttonIndex==0){
-                [defaults setBool:YES forKey:@"fill"];
+                [defaults setBool:NO forKey:@"fill"];
             }
-            else if (buttonIndex==1)[defaults setBool:NO forKey:@"fill"];
+            else if (buttonIndex==1)[defaults setBool:YES forKey:@"fill"];
             
         }
         else if (actionSheet.tag == 1){

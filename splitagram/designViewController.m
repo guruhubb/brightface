@@ -1034,7 +1034,7 @@
 //    [labelToApplyFilterToVideo removeFromSuperview];
     if (tapBlockNumber==100) tapBlockNumber=0;
 //    AppRecord *app = [[AppRecord alloc] init];
-    for (int i = 1; i <= 11+20; i++) {
+    for (int i = 1; i <= 11+11; i++) {
         UIButton *frameButton = (UIButton *)[_filterSelectionBar viewWithTag:i];
         frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
     }
@@ -1169,7 +1169,7 @@
         return;
     }
     NSLog(@"block number %d",tapBlockNumber);
-    for (int i = 1; i <= 20+11; i++) {
+    for (int i = 1; i <= 11+11; i++) {
         UIButton *frameButton = (UIButton *)[_filterSelectionBar viewWithTag:i];
         frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
     }
@@ -1311,13 +1311,24 @@
                             
                         } break;
                         case 12: {
-                           GPUImageVignetteFilter* filter = [[GPUImageVignetteFilter alloc] init];
-                            [(GPUImageVignetteFilter *) filter setVignetteEnd:0.6];
+                            GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"crossprocess"];
+                            //                            GPUImageColorInvertFilter *filter = [[GPUImageColorInvertFilter alloc] init];
+                            
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                             imageView.image=quickFilteredImage;
-//                            videoFilter = [[GPUImageVignetteFilter alloc] init];
-//                            [(GPUImageVignetteFilter *) videoFilter setVignetteEnd:0.6];
-                        } break;
+                            //                            quickFilteredImage=nil;
+                            //                            filter=nil;
+                            //                            [filter removeAllTargets];
+                            //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
+                        }
+//                        case 12: {
+//                           GPUImageVignetteFilter* filter = [[GPUImageVignetteFilter alloc] init];
+//                            [(GPUImageVignetteFilter *) filter setVignetteEnd:0.6];
+//                            UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+//                            imageView.image=quickFilteredImage;
+////                            videoFilter = [[GPUImageVignetteFilter alloc] init];
+////                            [(GPUImageVignetteFilter *) videoFilter setVignetteEnd:0.6];
+//                        } break;
                         case 8: {
                            GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
                             UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
@@ -1759,7 +1770,7 @@
     labelSplit = [[UILabel alloc] initWithFrame:CGRectMake(265, 0, 50, 15)];
     labelSplit.textAlignment = NSTextAlignmentRight;
     labelSplit.textColor = [UIColor lightGrayColor];
-//    labelSplit.font = [UIFont systemFontOfSize:12];
+    labelSplit.font = [UIFont systemFontOfSize:12];
 //    labelSplit.backgroundColor=[UIColor clearColor];
 //    labelSplit.layer.shadowOffset=CGSizeMake(1, 1);
 //    labelSplit.layer.shadowColor= [UIColor blackColor].CGColor;

@@ -31,10 +31,10 @@
     label.font = [UIFont systemFontOfSize:18.0];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
-    label.text = @"APPS WE LIKE";
+    label.text = @"apps we like";
     self.navigationItem.titleView = label;
 	// Do any additional setup after loading the view.
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"CANCEL" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
    
 }
 - (IBAction)lookAtApp:(id)sender {

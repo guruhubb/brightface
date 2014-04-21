@@ -202,7 +202,7 @@
 //    NSString *temp = @"bookly";
 //    NSString *booklyMediaId = [temp stringByAppendingString:[labelContents objectForKey:@"id"]];
 //    NSString *encodedString = [inputData base64EncodedString];      //encode
-    NSString *string= @"Check it out!  \n\n______\nCreated using splitagram app.  Download for free! \nwww.splitagram.com";
+    NSString *string= @"Check it out!  \n\n______\nCreated using splitagram app.  Download for free! \nhttp://itunes.apple.com/app/id850204569";
 //    if (isImage)
 //        string= [NSString stringWithFormat:@"http://getbooklyapp.com/image.php?mediaId=%@",encodedString];
 //    else
@@ -256,7 +256,7 @@
         return;
     }
 //    NSArray *recipents = @[@"12345678", @"72345524"];
-    NSString *message = [NSString stringWithFormat:@"created using splitagram app.  download for free! www.splitagram.com"];
+    NSString *message = [NSString stringWithFormat:@"created using splitagram app.  download for free! \nhttp://itunes.apple.com/app/id850204569"];
     MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
     [messageController addAttachmentData:UIImagePNGRepresentation(self.image) typeIdentifier:@"public.data" filename:@"image.png"];
     messageController.messageComposeDelegate = self;

@@ -123,6 +123,9 @@
     label.textColor = [UIColor whiteColor];
     label.text = @"create";
     self.navigationItem.titleView = label;
+    NSDictionary *attrs = @{ NSFontAttributeName : [UIFont systemFontOfSize:18] };
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:attrs forState:UIControlStateNormal];
+
     
     defaults = [NSUserDefaults standardUserDefaults];
     if (!IS_TALL_SCREEN) {
@@ -182,10 +185,7 @@
 //    [defaults setInteger:number forKey:@"number"];
  
 //    btn.tag = number;
-    btn.tag=9;//black and white
-    tapBlockNumber=0;
-    if (![defaults boolForKey:@"filter"])
-        [self effectsClicked:btn];
+
 }
 
 - (void) randomFilterPick {
@@ -199,9 +199,13 @@
 //    [self effectsClicked:btn];
 
 //    btn.tag = number;
-    btn.tag = 9;  //test
-    tapBlockNumber=3;
-    [self effectsClicked:btn];
+    btn.tag=9;//black and white
+    tapBlockNumber=0;
+    if (![defaults boolForKey:@"filter"]){
+        [self effectsClicked:btn];
+        tapBlockNumber=3;
+        [self effectsClicked:btn];
+    }
 
     tapBlockNumber=1;
 //    number ++;
@@ -1521,6 +1525,7 @@
             blockSlider.frame = rectBlockSlider4;
         }
         [blockSlider setContentOffset:CGPointMake(blockSlider.frame.origin.x, blockSlider.frame.origin.y) animated:NO];
+        
     }
 }
 
@@ -1686,12 +1691,12 @@
     
     labelRotate = [[UILabel alloc] initWithFrame:CGRectMake(265, 0, 50, 15)];
     labelRotate.textAlignment = NSTextAlignmentRight;
-    labelRotate.textColor = [UIColor whiteColor];
+    labelRotate.textColor = [UIColor lightGrayColor];
     labelRotate.font = [UIFont systemFontOfSize:12];
-    labelRotate.backgroundColor=[UIColor clearColor];
-    labelRotate.layer.shadowOffset=CGSizeMake(1, 1);
-    labelRotate.layer.shadowColor= [UIColor blackColor].CGColor;
-    labelRotate.layer.shadowOpacity = 0.8;
+//    labelRotate.backgroundColor=[UIColor clearColor];
+//    labelRotate.layer.shadowOffset=CGSizeMake(1, 1);
+//    labelRotate.layer.shadowColor= [UIColor blackColor].CGColor;
+//    labelRotate.layer.shadowOpacity = 0.8;
     [self.rotateMenuView addSubview:labelRotate];
     
     UIButton *resetButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -1753,12 +1758,12 @@
     
     labelSplit = [[UILabel alloc] initWithFrame:CGRectMake(265, 0, 50, 15)];
     labelSplit.textAlignment = NSTextAlignmentRight;
-    labelSplit.textColor = [UIColor whiteColor];
-    labelSplit.font = [UIFont systemFontOfSize:12];
-    labelSplit.backgroundColor=[UIColor clearColor];
-    labelSplit.layer.shadowOffset=CGSizeMake(1, 1);
-    labelSplit.layer.shadowColor= [UIColor blackColor].CGColor;
-    labelSplit.layer.shadowOpacity = 0.8;
+    labelSplit.textColor = [UIColor lightGrayColor];
+//    labelSplit.font = [UIFont systemFontOfSize:12];
+//    labelSplit.backgroundColor=[UIColor clearColor];
+//    labelSplit.layer.shadowOffset=CGSizeMake(1, 1);
+//    labelSplit.layer.shadowColor= [UIColor blackColor].CGColor;
+//    labelSplit.layer.shadowOpacity = 0.8;
     [self.splitMenuView addSubview:labelSplit];
     
 }
@@ -2213,6 +2218,7 @@
                 [btn addGestureRecognizer:panGestureBtn];
                 [self.frameContainer addSubview:btn];
                 
+                
                 break;
             }
             case 9: {
@@ -2619,7 +2625,6 @@
                 break;
         }
     }
-
 //    }
 }
 - (void) moveBtn :(UIPanGestureRecognizer *)sender  {

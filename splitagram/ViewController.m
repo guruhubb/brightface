@@ -38,7 +38,7 @@
 
 - (void) showSurvey {
     NSLog(@"showSurvey");
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"like splitagram? please rate us" message:nil
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"like splitagram? please rate" message:nil
                                                    delegate:self cancelButtonTitle:@"remind me later" otherButtonTitles:@"yes, I will rate now", @"don't ask me again", nil];
     [alert show];
 
@@ -81,8 +81,13 @@
     NSLog(@"showSurvey is %d and rateDone is %d",[defaults boolForKey:@"showSurvey"],[defaults boolForKey:@"rateDone"]);
     if ([defaults boolForKey:@"showSurvey"]&&![defaults boolForKey:@"rateDone"])
         [self performSelector:@selector(showSurvey) withObject:nil afterDelay:0.1];
-    [self performSelector:@selector(scrollToBottom) withObject:nil afterDelay:0.1];
-    
+//    [self performSelector:@selector(scrollToBottom) withObject:nil afterDelay:0.1];
+    static dispatch_once_t pred;
+    dispatch_once(&pred, ^{
+        [self performSelector:@selector(scrollToBottom) withObject:nil afterDelay:0.1];
+        
+    });
+
 }
 -(void)scrollToBottom
 {

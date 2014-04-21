@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC0A5A2C1905529A001745F9 /* adViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0A5A2B1905529A001745F9 /* adViewController.m */; };
+		CC0A5A301905549F001745F9 /* iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0A5A2E1905549F001745F9 /* iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png */; };
+		CC0A5A311905549F001745F9 /* One Frame 1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0A5A2F1905549F001745F9 /* One Frame 1024x1024.png */; };
 		CC0E479C18E15C9F003F2CAD /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0E479B18E15C9F003F2CAD /* CoreMedia.framework */; };
 		CC0E479E18E15CA7003F2CAD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0E479D18E15CA7003F2CAD /* QuartzCore.framework */; };
 		CC0E47A018E15CB5003F2CAD /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0E479F18E15CB5003F2CAD /* OpenGLES.framework */; };
@@ -224,26 +227,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CC0E48FA18E2251A003F2CAD /* PBXContainerItemProxy */ = {
+		CC0A5A251904DB47001745F9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CC0E48D918E214C7003F2CAD /* GPUImage.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = BCF1A33414DDB1EC00852800;
 			remoteInfo = GPUImage;
 		};
-		CC0E48FC18E2251A003F2CAD /* PBXContainerItemProxy */ = {
+		CC0A5A271904DB47001745F9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CC0E48D918E214C7003F2CAD /* GPUImage.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = BCF1A34414DDB1EC00852800;
 			remoteInfo = GPUImageTests;
-		};
-		CC0E48FE18E2252D003F2CAD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC0E48D918E214C7003F2CAD /* GPUImage.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BCF1A33314DDB1EC00852800;
-			remoteInfo = GPUImage;
 		};
 		CC2F4D9518D9235A0039E515 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -255,6 +251,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC0A5A2A1905529A001745F9 /* adViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adViewController.h; sourceTree = "<group>"; };
+		CC0A5A2B1905529A001745F9 /* adViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = adViewController.m; sourceTree = "<group>"; };
+		CC0A5A2E1905549F001745F9 /* iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png"; path = "Resources/ad images/iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png"; sourceTree = "<group>"; };
+		CC0A5A2F1905549F001745F9 /* One Frame 1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "One Frame 1024x1024.png"; path = "Resources/ad images/One Frame 1024x1024.png"; sourceTree = "<group>"; };
 		CC0E479B18E15C9F003F2CAD /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		CC0E479D18E15CA7003F2CAD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CC0E479F18E15CB5003F2CAD /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -324,7 +324,7 @@
 		CC0E48A618E1E80D003F2CAD /* instagram-512-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "instagram-512-2.png"; path = "Resources/icons/instagram-512-2.png"; sourceTree = "<group>"; };
 		CC0E48A718E1E80D003F2CAD /* more-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "more-512.png"; path = "Resources/icons/more-512.png"; sourceTree = "<group>"; };
 		CC0E48A818E1E80D003F2CAD /* twitter_logo_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitter_logo_white.png; path = Resources/icons/twitter_logo_white.png; sourceTree = "<group>"; };
-		CC0E48D918E214C7003F2CAD /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = "../../GPUImage-master/framework/GPUImage.xcodeproj"; sourceTree = "<group>"; };
+		CC0E48D918E214C7003F2CAD /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = "../GPUImage-master/framework/GPUImage.xcodeproj"; sourceTree = "<group>"; };
 		CC0E48F318E2249F003F2CAD /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGPUImage.a; path = "/Users/saswata_basu/Documents/Developer/GPUImage-master/framework/../build/Debug-iphoneos/libGPUImage.a"; sourceTree = "<absolute>"; };
 		CC0E490118E22AA1003F2CAD /* 02.acv */ = {isa = PBXFileReference; lastKnownFileType = file; name = 02.acv; path = Resources/filters/02.acv; sourceTree = "<group>"; };
 		CC0E490218E22AA1003F2CAD /* 2strip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2strip.png; path = Resources/filters/2strip.png; sourceTree = "<group>"; };
@@ -545,6 +545,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC0A5A201904DB47001745F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CC0A5A261904DB47001745F9 /* libGPUImage.a */,
+				CC0A5A281904DB47001745F9 /* GPUImageTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CC0A5A2D19055486001745F9 /* ad images */ = {
+			isa = PBXGroup;
+			children = (
+				CC0A5A2E1905549F001745F9 /* iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png */,
+				CC0A5A2F1905549F001745F9 /* One Frame 1024x1024.png */,
+			);
+			name = "ad images";
+			sourceTree = "<group>";
+		};
 		CC0E47A318E1DF8C003F2CAD /* icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -640,15 +658,6 @@
 			name = "frame icons";
 			sourceTree = "<group>";
 		};
-		CC0E48F518E2251A003F2CAD /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CC0E48FB18E2251A003F2CAD /* libGPUImage.a */,
-				CC0E48FD18E2251A003F2CAD /* GPUImageTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		CC0E490018E22A8F003F2CAD /* filters */ = {
 			isa = PBXGroup;
 			children = (
@@ -731,6 +740,7 @@
 		CC2F4D7118D923590039E515 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CC0E48D918E214C7003F2CAD /* GPUImage.xcodeproj */,
 				CCEA9B3F18F09BD100FF5771 /* CoreData.framework */,
 				CCEA9B3918F0931D00FF5771 /* Twitter.framework */,
 				CCEA9B3718F092F100FF5771 /* MobileCoreServices.framework */,
@@ -768,6 +778,8 @@
 		CC2F4D7818D923590039E515 /* splitagram */ = {
 			isa = PBXGroup;
 			children = (
+				CC0A5A2A1905529A001745F9 /* adViewController.h */,
+				CC0A5A2B1905529A001745F9 /* adViewController.m */,
 				CC2F4D8118D923590039E515 /* AppDelegate.h */,
 				CC2F4D8218D923590039E515 /* AppDelegate.m */,
 				CCD28DEF18DB4430001127EC /* MainStoryboard.storyboard */,
@@ -789,7 +801,6 @@
 				CCD28DEA18DAD565001127EC /* PhotoCell.m */,
 				CCD28DF218DB7A4D001127EC /* SettingVC.h */,
 				CCD28DF318DB7A4D001127EC /* SettingVC.m */,
-				CC0E48D918E214C7003F2CAD /* GPUImage.xcodeproj */,
 				CC2F4D8A18D923590039E515 /* Images.xcassets */,
 				CC2F4D7918D923590039E515 /* Supporting Files */,
 			);
@@ -890,6 +901,7 @@
 		CCD28DD718DAB635001127EC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CC0A5A2D19055486001745F9 /* ad images */,
 				CC99FEA318FCAB6D001F7CBE /* masks */,
 				CCAC971D18F051BE000B669B /* filter images */,
 				CC0E490018E22A8F003F2CAD /* filters */,
@@ -956,7 +968,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				CC0E48FF18E2252D003F2CAD /* PBXTargetDependency */,
 			);
 			name = splitagram;
 			productName = splitagram;
@@ -1016,7 +1027,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = CC0E48F518E2251A003F2CAD /* Products */;
+					ProductGroup = CC0A5A201904DB47001745F9 /* Products */;
 					ProjectRef = CC0E48D918E214C7003F2CAD /* GPUImage.xcodeproj */;
 				},
 			);
@@ -1029,18 +1040,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		CC0E48FB18E2251A003F2CAD /* libGPUImage.a */ = {
+		CC0A5A261904DB47001745F9 /* libGPUImage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libGPUImage.a;
-			remoteRef = CC0E48FA18E2251A003F2CAD /* PBXContainerItemProxy */;
+			remoteRef = CC0A5A251904DB47001745F9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CC0E48FD18E2251A003F2CAD /* GPUImageTests.octest */ = {
+		CC0A5A281904DB47001745F9 /* GPUImageTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = GPUImageTests.octest;
-			remoteRef = CC0E48FC18E2251A003F2CAD /* PBXContainerItemProxy */;
+			remoteRef = CC0A5A271904DB47001745F9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1112,6 +1123,7 @@
 				CC0E489118E1E7F5003F2CAD /* secondFrame15.png in Resources */,
 				CC0E493F18E22AA1003F2CAD /* edgyAmber.png in Resources */,
 				CC0E494D18E22AA1003F2CAD /* softWarm.png in Resources */,
+				CC0A5A311905549F001745F9 /* One Frame 1024x1024.png in Resources */,
 				CC0E493718E22AA1003F2CAD /* copperSepia2strip.png in Resources */,
 				CCAC973F18F051BE000B669B /* filter12.png in Resources */,
 				CC0E494818E22AA1003F2CAD /* lookup.png in Resources */,
@@ -1169,6 +1181,7 @@
 				CC0E487018E1E7F5003F2CAD /* Frame15.png in Resources */,
 				CC0E487E18E1E7F5003F2CAD /* secondFrame01.png in Resources */,
 				CC0E486D18E1E7F5003F2CAD /* Frame12.png in Resources */,
+				CC0A5A301905549F001745F9 /* iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png in Resources */,
 				CC0E486518E1E7F5003F2CAD /* Frame04.png in Resources */,
 				CC0E493318E22AA1003F2CAD /* blue.png in Resources */,
 				CC0E493B18E22AA1003F2CAD /* crossprocess.acv in Resources */,
@@ -1230,6 +1243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCD28E2418DCB501001127EC /* designViewController.m in Sources */,
+				CC0A5A2C1905529A001745F9 /* adViewController.m in Sources */,
 				CCD28DF418DB7A4D001127EC /* SettingVC.m in Sources */,
 				CCD28E1118DBE74E001127EC /* MKStoreManager.m in Sources */,
 				CCD28DEB18DAD565001127EC /* PhotoCell.m in Sources */,
@@ -1260,11 +1274,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		CC0E48FF18E2252D003F2CAD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = GPUImage;
-			targetProxy = CC0E48FE18E2252D003F2CAD /* PBXContainerItemProxy */;
-		};
 		CC2F4D9618D9235A0039E515 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CC2F4D6E18D923590039E515 /* splitagram */;
@@ -1417,8 +1426,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/saswata_basu/Documents/Developer/splitagram/TapjoySDK_iOS_v10.0-2.0/Libraries/Tapjoy.embeddedframework",

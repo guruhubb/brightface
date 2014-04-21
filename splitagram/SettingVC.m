@@ -345,7 +345,7 @@
 {
     UIActionSheet *popupQuery;
     if (![defaults boolForKey:kFeature2]){  //if not purchased
-        popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"remove watermark",@"buy for $1.99",nil];
+        popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"remove watermark",@"buy for $0.99",nil];
         popupQuery.tag=3;
         [popupQuery showInView:self.view];
         watermark.on = YES;

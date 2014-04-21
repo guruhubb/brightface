@@ -17,6 +17,7 @@
     NSString *albumName;
     ALAssetsLibrary *library;
     ALAsset *assetSaved;
+    BOOL saveImageOn;
 }
 @end
 
@@ -34,6 +35,9 @@
     label.textColor = [UIColor whiteColor];
     label.text = @"share";
     self.navigationItem.titleView = label;
+    NSDictionary *attrs = @{ NSFontAttributeName : [UIFont systemFontOfSize:18] };
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:attrs forState:UIControlStateNormal];
+
     if (!IS_TALL_SCREEN) {
         self.menuView.frame = CGRectMake(0, 454-88, 320, 50);  // for 3.5 screen; remove autolayout
     }
@@ -57,6 +61,10 @@
     }
     else
         _saveButton.hidden=NO;
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"oneframe"])
+        [self performSegueWithIdentifier:@"adView" sender:self];
+    else
+        [self performSegueWithIdentifier:@"shareToNav" sender:self];
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
 //                                             initWithImage:nil
 //                                             style:UIBarButtonItemStylePlain
@@ -66,6 +74,7 @@
 }
 - (IBAction)saveImageAction:(id)sender {
     [self saveImage];
+    saveImageOn=YES;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Saved to your camera roll" message:nil
                                                    delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
@@ -100,8 +109,7 @@
                                }];
 }
 - (IBAction)deleteImage:(id)sender {
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"savePhoto"]) {
-
+if (![[NSUserDefaults standardUserDefaults] boolForKey:@"savePhoto"] || saveImageOn) {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"delete",nil];
     [actionSheet showInView:sender];
     }

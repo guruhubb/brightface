@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vcY-a8-Sft">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vcY-a8-Sft">
     <dependencies>
         <deployment version="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
@@ -336,25 +336,25 @@
                                     <action selector="lookAtApp:" destination="oY5-ld-Ukb" eventType="touchUpInside" id="Bd6-76-kVU"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="One Frame 1024x1024.png" id="GZJ-9J-6dd">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="anonogram 1024x1024.png" id="GZJ-9J-6dd">
                                 <rect key="frame" x="20" y="0.0" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="One Frame" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bl9-kB-Jfd">
-                                <rect key="frame" x="152" y="41" width="109" height="18"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anonogram" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bl9-kB-Jfd">
+                                <rect key="frame" x="152" y="41" width="131" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frame entire photo with one tap!  Post your photo without cropping!  " lineBreakMode="wordWrap" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pVX-0b-hab">
-                                <rect key="frame" x="10" y="68" width="301" height="100"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Freely share your thoughts, issues, experience. Truly Anonymous." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pVX-0b-hab">
+                                <rect key="frame" x="10" y="73" width="301" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png" id="FcN-FU-C3T">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png" id="FcN-FU-C3T">
                                 <rect key="frame" x="70" y="155" width="180" height="270"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -718,12 +718,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="One Frame 1024x1024.png" width="1024" height="1024"/>
+        <image name="anonogram 1024x1024.png" width="1024" height="1024"/>
         <image name="comments-icon-614x460.png" width="614" height="460"/>
         <image name="facebook-70251b04a4be865178ab592bc9586c83.png" width="500" height="500"/>
         <image name="glyphicons_019_heart_empty.png" width="24" height="22"/>
         <image name="glyphicons_136_cogwheel.png" width="24" height="24"/>
-        <image name="iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png" width="640" height="960"/>
+        <image name="iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png" width="640" height="960"/>
         <image name="icon-letter-mail-hi.png" width="600" height="429"/>
         <image name="instagram-512-2.png" width="512" height="512"/>
         <image name="more-512.png" width="512" height="512"/>

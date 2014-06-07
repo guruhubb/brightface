@@ -81,6 +81,8 @@
 		CC0E495418E24690003F2CAD /* Frame20.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E495218E24690003F2CAD /* Frame20.png */; };
 		CC0E495518E24690003F2CAD /* Frame21.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E495318E24690003F2CAD /* Frame21.png */; };
 		CC0E495718E26587003F2CAD /* lockImage.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E495618E26587003F2CAD /* lockImage.png */; };
+		CC17B6441942A11600B33CCF /* anonogram 1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = CC17B6421942A11600B33CCF /* anonogram 1024x1024.png */; };
+		CC17B6451942A11600B33CCF /* iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = CC17B6431942A11600B33CCF /* iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png */; };
 		CC205D7318E61D1700EECDE8 /* glyphicons_019_heart_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = CC205D7118E61D1700EECDE8 /* glyphicons_019_heart_empty.png */; };
 		CC205D7918E6260F00EECDE8 /* libFlurry_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC205D7818E6260F00EECDE8 /* libFlurry_4.3.2.a */; };
 		CC205D7B18E6270900EECDE8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC205D7A18E6270900EECDE8 /* SystemConfiguration.framework */; };
@@ -280,6 +282,8 @@
 		CC0E495218E24690003F2CAD /* Frame20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Frame20.png; path = "Resources/frame icons/Frame20.png"; sourceTree = "<group>"; };
 		CC0E495318E24690003F2CAD /* Frame21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Frame21.png; path = "Resources/frame icons/Frame21.png"; sourceTree = "<group>"; };
 		CC0E495618E26587003F2CAD /* lockImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lockImage.png; path = Resources/icons/lockImage.png; sourceTree = "<group>"; };
+		CC17B6421942A11600B33CCF /* anonogram 1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "anonogram 1024x1024.png"; path = "Resources/ad images/anonogram 1024x1024.png"; sourceTree = "<group>"; };
+		CC17B6431942A11600B33CCF /* iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png"; path = "Resources/ad images/iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png"; sourceTree = "<group>"; };
 		CC205D7118E61D1700EECDE8 /* glyphicons_019_heart_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glyphicons_019_heart_empty.png; path = Resources/icons/glyphicons_019_heart_empty.png; sourceTree = "<group>"; };
 		CC205D7718E6260F00EECDE8 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		CC205D7818E6260F00EECDE8 /* libFlurry_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.2.a; sourceTree = "<group>"; };
@@ -463,6 +467,8 @@
 		CC0A5A2D19055486001745F9 /* ad images */ = {
 			isa = PBXGroup;
 			children = (
+				CC17B6421942A11600B33CCF /* anonogram 1024x1024.png */,
+				CC17B6431942A11600B33CCF /* iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png */,
 				CC0A5A2E1905549F001745F9 /* iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png */,
 				CC0A5A2F1905549F001745F9 /* One Frame 1024x1024.png */,
 			);
@@ -962,6 +968,7 @@
 				CC0E492C18E22AA1003F2CAD /* 06.acv in Resources */,
 				CC2F4D8B18D923590039E515 /* Images.xcassets in Resources */,
 				CCAC974818F051BE000B669B /* filter21.png in Resources */,
+				CC17B6441942A11600B33CCF /* anonogram 1024x1024.png in Resources */,
 				CC0E489118E1E7F5003F2CAD /* secondFrame15.png in Resources */,
 				CC0A5A311905549F001745F9 /* One Frame 1024x1024.png in Resources */,
 				CC0E493718E22AA1003F2CAD /* copperSepia2strip.png in Resources */,
@@ -986,6 +993,7 @@
 				CCAC973C18F051BE000B669B /* filter09.png in Resources */,
 				CCD28E1318DBE74E001127EC /* AddDevice.html in Resources */,
 				CC0E486818E1E7F5003F2CAD /* Frame07.png in Resources */,
+				CC17B6451942A11600B33CCF /* iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png in Resources */,
 				CCAC973D18F051BE000B669B /* filter10.png in Resources */,
 				CCD28E1218DBE74E001127EC /* README.mdown in Resources */,
 				CC0E48AE18E1E80D003F2CAD /* instagram-512-2.png in Resources */,

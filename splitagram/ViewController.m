@@ -44,7 +44,7 @@
     [alert show];
 
 }
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(int)buttonIndex {
     NSLog(@"buttonIndex is %d",buttonIndex);
     if (buttonIndex == 1) {
         [self rateApp];
@@ -56,7 +56,7 @@
     else {
         [defaults setBool:NO forKey:@"showSurvey"];
         [defaults setInteger:0 forKey:@"counter" ];
-           NSLog(@"showSurvey is %d and counter is %d",[defaults boolForKey:@"showSurvey"],[defaults integerForKey:@"counter"]);
+           NSLog(@"showSurvey is %d and counter is %ld",[defaults boolForKey:@"showSurvey"],(long)[defaults integerForKey:@"counter"]);
     }
     [defaults synchronize];
 }
@@ -149,7 +149,7 @@
     {
         designViewController *vc = [segue destinationViewController];
         vc.selectedImage=image;
-        NSLog(@"image size is %d",[UIImageJPEGRepresentation(image, 1.0) length]);
+        NSLog(@"image size is %lu",(unsigned long)[UIImageJPEGRepresentation(image, 1.0) length]);
     }
 }
 // Helper methods for thumbnailForAsset:maxPixelSize:
@@ -196,7 +196,7 @@ static void releaseAssetCallback(void *info) {
     
     CGImageRef imageRef = CGImageSourceCreateThumbnailAtIndex(source, 0, (__bridge CFDictionaryRef) @{
                                                                                                       (NSString *)kCGImageSourceCreateThumbnailFromImageAlways : @YES,
-                                                                                                      (NSString *)kCGImageSourceThumbnailMaxPixelSize : [NSNumber numberWithInt:size],
+                                                                                                      (NSString *)kCGImageSourceThumbnailMaxPixelSize : [NSNumber numberWithInt:(int)size],
                                                                                                       (NSString *)kCGImageSourceCreateThumbnailWithTransform : @YES,
                                                                                                       });
     CFRelease(source);

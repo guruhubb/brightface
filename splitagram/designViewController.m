@@ -21,7 +21,9 @@
 #import "doneViewController.h"
 #import "GPUImage.h"
 #import "Flurry.h"
-#import "MKStoreManager.h"
+#import "MKStoreKit.h"
+
+//#import "MKStoreManager.h"
 
 
 @interface designViewController (){
@@ -35,10 +37,10 @@
     BOOL firstTimeFilter;
     BOOL firstTimeDesign;
     BOOL resizeOn;
-    NSInteger tapBlockNumber;
-    NSInteger nStyle;
-    NSInteger nSubStyle;
-    NSInteger nMargin;
+    int tapBlockNumber;
+    int nStyle;
+    int nSubStyle;
+    int nMargin;
     
     CGRect rectBlockSlider1;
     CGRect rectBlockSlider2;
@@ -146,7 +148,7 @@
     if ([defaults boolForKey:@"white"])
         _frameContainer.backgroundColor=[UIColor blackColor];
 
-    nMargin = [defaults integerForKey:@"Split"];
+    nMargin = (int)[defaults integerForKey:@"Split"];
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
         nMargin = 3;
@@ -156,7 +158,7 @@
 
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.tag=[defaults integerForKey:@"frame"];
-    NSLog(@"VDL btn.tag is %d",btn.tag);
+    NSLog(@"VDL btn.tag is %ld",(long)btn.tag);
 
     if (btn.tag==0 || btn.tag > 25+35) btn.tag = 20;
     [self frameClicked:btn];
@@ -164,7 +166,7 @@
 //        btn.tag = 20;
 
     if (btn.tag >25  && [defaults boolForKey:kFeature0]) {
-        NSLog(@" btn.tag is %d; nstyle = %d, nsubstyle = %d",btn.tag, nStyle,nSubStyle);
+        NSLog(@" btn.tag is %ld; nstyle = %d, nsubstyle = %d",(long)btn.tag, nStyle,nSubStyle);
 
         [self secondFrameClicked:btn];
     }
@@ -247,7 +249,7 @@
     if (!firstTimeDesign){
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag=[defaults integerForKey:@"frame"];
-        NSLog(@"VWA btn.tag is %d; nstyle = %d, nsubstyle = %d",btn.tag, nStyle,nSubStyle);
+        NSLog(@"VWA btn.tag is %ld; nstyle = %d, nsubstyle = %d",(long)btn.tag, nStyle,nSubStyle);
         [self resizeFrames];
         //        if (btn.tag <= 25)
         //            [self frameClicked:btn];
@@ -264,7 +266,7 @@
 -(void)frameAction
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"move + frames pack",@"buy for $0.99",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"move + frames pack",@"buy for $0.99",nil];
     popupQuery.tag=0;
     [popupQuery showInView:self.view];
 }
@@ -272,7 +274,7 @@
 -(void)filterAction
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"get more filters",@"buy for $0.99",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"get more filters",@"buy for $0.99",nil];
     popupQuery.tag=1;
     [popupQuery showInView:self.view];
 }
@@ -280,25 +282,25 @@
 -(void)resizeAction
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"resize to create frames",@"buy for $0.99",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"resize to create frames",@"buy for $0.99",nil];
     popupQuery.tag=2;
     [popupQuery showInView:self.view];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
         if (buttonIndex==1){
-            [self inAppBuyAction:actionSheet.tag];
+            [self inAppBuyAction:(int)actionSheet.tag];
         }
 }
 
 - (void) updateAppViewAndDefaults {
     
-        if ([MKStoreManager isFeaturePurchased:kFeature0])
+    if ([[MKStoreKit sharedKit] isProductPurchased:kFeature0])
             [defaults setBool:YES forKey:kFeature0];
         else
             [defaults setBool:NO forKey:kFeature0];
         
-        if([MKStoreManager isFeaturePurchased:kFeature1])
+        if([[MKStoreKit sharedKit] isProductPurchased:kFeature1])
             [defaults setBool:YES forKey:kFeature1];
         else
             [defaults setBool:NO forKey:kFeature1];
@@ -328,26 +330,41 @@
         default:
             break;
     }
+    [[MKStoreKit sharedKit] initiatePaymentRequestForProductWithIdentifier:string];
+    [[NSNotificationCenter defaultCenter] addObserverForName:kMKStoreKitProductPurchasedNotification
+                                                      object:nil
+                                                       queue:[[NSOperationQueue alloc] init]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      
+                                                      NSLog(@"Purchased/Subscribed to product with id: %@", [note object]);
+                                                      
+                                                      NSLog(@"%@", [[MKStoreKit sharedKit] valueForKey:@"purchaseRecord"]);
+                                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Successful" message:nil
+                                                                                                     delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                                      [defaults setBool:YES  forKey:string];
+                                                      [alert show];
+                                                      [self updateAppViewAndDefaults];
+                                                  }];
     
-    [[MKStoreManager sharedManager] buyFeature:string
-                                    onComplete:^(NSString* purchasedFeature,
-                                                 NSData* purchasedReceipt,
-                                                 NSArray* availableDownloads)
-     {
-             NSLog(@"Purchased: %@, available downloads is %@ string is %@", purchasedFeature, availableDownloads, string);
-             
-   
-             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Successful" message:nil
-                                                            delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-             [defaults setBool:YES  forKey:string];
-             [alert show];
-             [self updateAppViewAndDefaults];
-
-     }
-                                   onCancelled:^
-     {
-         NSLog(@"User Cancelled Transaction");
-     }];
+//    [[MKStoreManager sharedManager] buyFeature:string
+//                                    onComplete:^(NSString* purchasedFeature,
+//                                                 NSData* purchasedReceipt,
+//                                                 NSArray* availableDownloads)
+//     {
+//             NSLog(@"Purchased: %@, available downloads is %@ string is %@", purchasedFeature, availableDownloads, string);
+//             
+//   
+//             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Successful" message:nil
+//                                                            delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//             [defaults setBool:YES  forKey:string];
+//             [alert show];
+//             [self updateAppViewAndDefaults];
+//
+//     }
+//                                   onCancelled:^
+//     {
+//         NSLog(@"User Cancelled Transaction");
+//     }];
     
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -929,7 +946,7 @@
         btn.layer.frame = btn.frame;
         btn.layer.borderWidth=kBorderWidth;
         btn.layer.borderColor=[[UIColor clearColor] CGColor];
-        NSLog(@"effects btn.tag is %d ",btn.tag);
+        NSLog(@"effects btn.tag is %ld ",(long)btn.tag);
         [btn addTarget:self action:@selector(effectsClicked:) forControlEvents:UIControlEventTouchUpInside];
         CGRect labelEffects;
         if (!IS_TALL_SCREEN)
@@ -972,7 +989,7 @@
         btn.layer.borderWidth=kBorderWidth;
         btn.layer.borderColor=[[UIColor clearColor] CGColor];
         [btn setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 13.0, 0.0)];
-        NSLog(@" second effects btn.tag is %d ",btn.tag);
+        NSLog(@" second effects btn.tag is %ld ",(long)btn.tag);
         [btn addTarget:self action:@selector(secondEffectsClicked:) forControlEvents:UIControlEventTouchUpInside];
         CGRect labelEffects;
         if (!IS_TALL_SCREEN)
@@ -1569,7 +1586,7 @@
     [defaults setFloat:ptY forKey:@"PanY"];
 
     for (UIScrollView *blockSlider in droppableAreas){
-        NSLog(@"blockSlider is %@, count is %d",blockSlider,blockSlider.subviews.count);
+        NSLog(@"blockSlider is %@, count is %lu",blockSlider,(unsigned long)blockSlider.subviews.count);
         if (blockSlider.subviews.count==0) return;
         UIImageView *imageView = blockSlider.subviews[0];
             imageView.center = CGPointMake(imageView.center.x + translation.x,
@@ -1623,7 +1640,7 @@
     for (UIScrollView *blockSlider in droppableAreas) {
         CGPoint tappedBlock = [recognizer locationInView:blockSlider];
         if ([blockSlider pointInside:tappedBlock withEvent:nil]) {
-            tapBlockNumber = blockSlider.tag;
+            tapBlockNumber = (int)blockSlider.tag;
             NSLog(@"tapblocknumber is %d",tapBlockNumber);
 //            [blockSlider.layer setBorderColor:[[UIColor cyanColor] CGColor]];
         }

@@ -9,11 +9,17 @@
 
 #import "AppDelegate.h"
 
+@interface AppDelegate (){
+    NSUserDefaults *defaults;
+}
+@end
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    defaults = [NSUserDefaults standardUserDefaults];
+
 //    static dispatch_once_t pred;
 //    dispatch_once(&pred, ^{
 //    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"rateDone"];
@@ -38,9 +44,10 @@
     
 	// NOTE: This is the only step required if you're an advertiser.
 	// NOTE: This must be replaced by your App ID. It is retrieved from the Tapjoy website, in your account.
-	[Tapjoy requestTapjoyConnect:@"076a56d4-4ec1-44ce-b4b4-89e03032c2c5"
-					   secretKey:@"BMgDZYR6Az8t23lCSQWf" options:@{ TJC_OPTION_ENABLE_LOGGING : @(YES) }];
-     
+    
+//	[Tapjoy requestTapjoyConnect:@"076a56d4-4ec1-44ce-b4b4-89e03032c2c5"
+//					   secretKey:@"BMgDZYR6Az8t23lCSQWf" options:@{ TJC_OPTION_ENABLE_LOGGING : @(YES) }];
+    
  
      // If you are not using Tapjoy Managed currency, you would set your own user ID here.
      // TJC_OPTION_USER_ID : @"A_UNIQUE_USER_ID"
@@ -58,9 +65,54 @@
 //    UINavigationController *navigationController;
 //    [navigationController.interactivePopGestureRecognizer setEnabled:NO];
 //    }
+    [[MKStoreKit sharedKit] startProductRequest];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:kMKStoreKitProductsAvailableNotification
+                                                      object:nil
+                                                       queue:[[NSOperationQueue alloc] init]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      
+                                                      NSLog(@"Products available: %@", [[MKStoreKit sharedKit] availableProducts]);
+                                                  }];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:kMKStoreKitProductPurchasedNotification
+                                                      object:nil
+                                                       queue:[[NSOperationQueue alloc] init]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      
+                                                      NSLog(@"Purchased/Subscribed to product with id: %@", [note object]);
+                                                  }];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:kMKStoreKitRestoredPurchasesNotification
+                                                      object:nil
+                                                       queue:[[NSOperationQueue alloc] init]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      
+                                                      NSLog(@"Restored Purchases");
+                                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Restore Successful" message:nil
+                                                                                                     delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                                      [alert show];
+                                                      [self updateAppViewAndDefaults];
+                                                      [defaults setBool:YES forKey:@"restorePurchases"];
 
+                                                  }];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:kMKStoreKitRestoringPurchasesFailedNotification
+                                                      object:nil
+                                                       queue:[[NSOperationQueue alloc] init]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      
+                                                      NSLog(@"Failed restoring purchases with error: %@", [note object]);
+                                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Restore Failed" message:nil
+                                                                                                     delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                                      [alert show];
+                                                      [self updateAppViewAndDefaults];
+                                                      [defaults setBool:NO forKey:@"restorePurchases"];
 
-    [MKStoreManager sharedManager];
+                                                  }];
+
+//    [MKStoreManager sharedManager];
     //create album
     NSString *albumName = @"splitagram";
     __block BOOL albumFound = NO;
@@ -87,6 +139,23 @@
 //    [[MKStoreManager sharedManager] removeAllKeychainData];  //test purpose to reset in-app purchase
 
     return YES;
+}
+- (void) updateAppViewAndDefaults {
+    
+    if ([[MKStoreKit sharedKit] isProductPurchased:kFeature0])
+        [defaults setBool:YES forKey:kFeature0];
+    else
+        [defaults setBool:NO forKey:kFeature0];
+    
+    if([[MKStoreKit sharedKit] isProductPurchased:kFeature1])
+        [defaults setBool:YES forKey:kFeature1];
+    else
+        [defaults setBool:NO forKey:kFeature1];
+    
+    if([[MKStoreKit sharedKit] isProductPurchased:kFeature2])
+        [defaults setBool:YES forKey:kFeature2];
+    else
+        [defaults setBool:NO forKey:kFeature2];
 }
 #pragma mark - assets
 + (ALAssetsLibrary *)defaultAssetsLibrary
@@ -130,12 +199,12 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    NSInteger counter = [[NSUserDefaults standardUserDefaults] integerForKey:@"counter" ];
+    NSInteger counter = [[NSUserDefaults standardUserDefaults] integerForKey:@"counter"];
     counter++;
-    NSLog(@"counter is %d",counter);
+    NSLog(@"counter is %ld",(long)counter);
 
     if (counter>4){
-        NSLog(@"counter is %d",counter);
+        NSLog(@"counter is %ld",(long)counter);
 
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"showSurvey"];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"counter" ];

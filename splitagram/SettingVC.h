@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
-#import "MKStoreManager.h"
+//#import "MKStoreManager.h"
+#import "MKStoreKit.h"
+#import <StoreKit/StoreKit.h>
 
 
 @class HackbookAppDelegate;
-@interface SettingVC : UITableViewController<UITableViewDataSource,UITableViewDelegate,NSURLConnectionDelegate,NSURLConnectionDataDelegate,UIAlertViewDelegate, MFMailComposeViewControllerDelegate, UIActionSheetDelegate,SKStoreProductViewControllerDelegate>{
+@interface SettingVC : UITableViewController<UITableViewDataSource,UITableViewDelegate,NSURLConnectionDelegate,NSURLConnectionDataDelegate,UIAlertViewDelegate, MFMailComposeViewControllerDelegate, UIActionSheetDelegate
+,SKStoreProductViewControllerDelegate >{
     
     NSArray *editArr;
     UISwitch *savePhoto;

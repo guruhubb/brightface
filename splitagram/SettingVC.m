@@ -345,7 +345,7 @@
 {
     UIActionSheet *popupQuery;
     if (![defaults boolForKey:kFeature2]){  //if not purchased
-        popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"remove watermark",@"buy for $0.99",nil];
+        popupQuery = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"remove watermark",@"buy for $0.99",nil];
         popupQuery.tag=3;
         [popupQuery showInView:self.view];
         watermark.on = YES;
@@ -366,25 +366,42 @@
  
     NSLog(@"buying...");
     
-    [[MKStoreManager sharedManager] buyFeature:kFeature2
-                                    onComplete:^(NSString* purchasedFeature,
-                                                 NSData* purchasedReceipt,
-                                                 NSArray* availableDownloads)
-     {
-         NSLog(@"Purchased: %@, available downloads is %@ watermark ", purchasedFeature, availableDownloads );
-         
-         
-         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Successful" message:nil
-                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-         [defaults setBool:YES  forKey:kFeature2];
-         [alert show];
-         [self updateAppViewAndDefaults];
+//    [[MKStoreManager sharedManager] buyFeature:kFeature2
+//                                    onComplete:^(NSString* purchasedFeature,
+//                                                 NSData* purchasedReceipt,
+//                                                 NSArray* availableDownloads)
+//     {
+//         NSLog(@"Purchased: %@, available downloads is %@ watermark ", purchasedFeature, availableDownloads );
+//         
+//         
+//         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Successful" message:nil
+//                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//         [defaults setBool:YES  forKey:kFeature2];
+//         [alert show];
+//         [self updateAppViewAndDefaults];
+//
+//     }
+//                                   onCancelled:^
+//     {
+//         NSLog(@"User Cancelled Transaction");
+//     }];
+    [[MKStoreKit sharedKit] initiatePaymentRequestForProductWithIdentifier:kFeature2];
+    [[NSNotificationCenter defaultCenter] addObserverForName:kMKStoreKitProductPurchasedNotification
+                                                      object:nil
+                                                       queue:[[NSOperationQueue alloc] init]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      
+                                                      NSLog(@"Purchased/Subscribed to product with id: %@", [note object]);
+                                                      
+                                                      NSLog(@"%@", [[MKStoreKit sharedKit] valueForKey:@"purchaseRecord"]);
+                                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Successful" message:nil
+                                                                                                     delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                                      [defaults setBool:YES  forKey:kFeature2];
+                                                      [alert show];
+                                                      [self updateAppViewAndDefaults];
+                                                  }];
+    
 
-     }
-                                   onCancelled:^
-     {
-         NSLog(@"User Cancelled Transaction");
-     }];
     
 }
 - (void)restorePurchases {
@@ -395,33 +412,53 @@
             [alert show];
             return;
         }
-        [[MKStoreManager sharedManager]restorePreviousTransactionsOnComplete:^{
-            NSLog(@"RESTORED PREVIOUS PURCHASE");
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Restore Successful" message:nil
-                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-            [self updateAppViewAndDefaults];
-            [defaults setBool:YES forKey:@"restorePurchases"];
-        } onError:nil];
+//        [[MKStoreManager sharedManager]restorePreviousTransactionsOnComplete:^{
+//            NSLog(@"RESTORED PREVIOUS PURCHASE");
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Restore Successful" message:nil
+//                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//            [alert show];
+//            [self updateAppViewAndDefaults];
+//            [defaults setBool:YES forKey:@"restorePurchases"];
+//        } onError:nil];
+    [[MKStoreKit sharedKit] restorePurchases];
     
 }
 - (void) updateAppViewAndDefaults {
-    if ([MKStoreManager isFeaturePurchased:kFeature0])
+    
+    if ([[MKStoreKit sharedKit] isProductPurchased:kFeature0])
         [defaults setBool:YES forKey:kFeature0];
     else
         [defaults setBool:NO forKey:kFeature0];
     
-    if([MKStoreManager isFeaturePurchased:kFeature1])
+    if([[MKStoreKit sharedKit] isProductPurchased:kFeature1])
         [defaults setBool:YES forKey:kFeature1];
     else
         [defaults setBool:NO forKey:kFeature1];
     
-    if([MKStoreManager isFeaturePurchased:kFeature2])
+    if([[MKStoreKit sharedKit] isProductPurchased:kFeature2])
         [defaults setBool:YES forKey:kFeature2];
     else
         [defaults setBool:NO forKey:kFeature2];
-    
 }
+
+//- (void) updateAppViewAndDefaults {
+//    
+//    if ([MKStoreManager isFeaturePurchased:kFeature0])
+//        [defaults setBool:YES forKey:kFeature0];
+//    else
+//        [defaults setBool:NO forKey:kFeature0];
+//    
+//    if([MKStoreManager isFeaturePurchased:kFeature1])
+//        [defaults setBool:YES forKey:kFeature1];
+//    else
+//        [defaults setBool:NO forKey:kFeature1];
+//    
+//    if([MKStoreManager isFeaturePurchased:kFeature2])
+//        [defaults setBool:YES forKey:kFeature2];
+//    else
+//        [defaults setBool:NO forKey:kFeature2];
+//    
+//}
 
 - (void) turnOnIndicator {
     UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc]     initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -448,7 +485,7 @@
 -(void)frameActionSettings
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"fill frame",@"fit frame",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"fill frame",@"fit frame",nil];
     popupQuery.tag=0;
     [popupQuery showInView:self.view];
 }
@@ -456,21 +493,21 @@
 -(void)backgroundColorAction
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"white",@"black",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"white",@"black",nil];
     popupQuery.tag=1;
     [popupQuery showInView:self.view];
 }
 -(void)filterAction
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"auto filter",@"no filter",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"auto filter",@"no filter",nil];
     popupQuery.tag=2;
     [popupQuery showInView:self.view];
 }
 -(void)pixelAction
 {
     UIActionSheet *popupQuery;
-    popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"640x640",@"1280x1280",@"2560x2560",nil];
+    popupQuery = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"640x640",@"1280x1280",@"2560x2560",nil];
     popupQuery.tag=4;
     [popupQuery showInView:self.view];
 }
@@ -496,7 +533,7 @@
         }
         else if (actionSheet.tag == 3) {
             if (buttonIndex==1){
-                [self inAppBuyAction:actionSheet.tag];
+                [self inAppBuyAction:(int)actionSheet.tag];
             }
         }
         else if (actionSheet.tag == 4) {

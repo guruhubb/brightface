@@ -83,7 +83,6 @@
 		CC17B6441942A11600B33CCF /* anonogram 1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = CC17B6421942A11600B33CCF /* anonogram 1024x1024.png */; };
 		CC17B6451942A11600B33CCF /* iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = CC17B6431942A11600B33CCF /* iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png */; };
 		CC205D7318E61D1700EECDE8 /* glyphicons_019_heart_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = CC205D7118E61D1700EECDE8 /* glyphicons_019_heart_empty.png */; };
-		CC205D7918E6260F00EECDE8 /* libFlurry_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC205D7818E6260F00EECDE8 /* libFlurry_4.3.2.a */; };
 		CC205D7B18E6270900EECDE8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC205D7A18E6270900EECDE8 /* SystemConfiguration.framework */; };
 		CC205D7D18E6271A00EECDE8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC205D7C18E6271A00EECDE8 /* Security.framework */; };
 		CC205D9B18E62BA200EECDE8 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC205D9A18E62BA200EECDE8 /* MessageUI.framework */; };
@@ -102,6 +101,9 @@
 		CC2F4D9418D9235A0039E515 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7618D923590039E515 /* UIKit.framework */; };
 		CC2F4D9C18D9235A0039E515 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC2F4D9A18D9235A0039E515 /* InfoPlist.strings */; };
 		CC2F4D9E18D9235A0039E515 /* splitagramTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2F4D9D18D9235A0039E515 /* splitagramTests.m */; };
+		CC45AAFD1A321B5A004753C5 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC8EB73C1A2CE3100046D26F /* libGPUImage.a */; };
+		CC45AAFF1A321C98004753C5 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC45AAFE1A321C98004753C5 /* CoreVideo.framework */; };
+		CC45AB031A321D4C004753C5 /* libFlurry_5.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC45AB021A321D4C004753C5 /* libFlurry_5.4.0.a */; };
 		CC6C650618FF01D300F7D53F /* secondFrame27.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6C650018FF01D300F7D53F /* secondFrame27.png */; };
 		CC6C650718FF01D300F7D53F /* secondFrame28.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6C650118FF01D300F7D53F /* secondFrame28.png */; };
 		CC6C650818FF01D300F7D53F /* secondFrame29.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6C650218FF01D300F7D53F /* secondFrame29.png */; };
@@ -110,8 +112,6 @@
 		CC6C650B18FF01D300F7D53F /* secondFrame32.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6C650518FF01D300F7D53F /* secondFrame32.png */; };
 		CC8EB7431A2D72E60046D26F /* MKStoreKit.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8EB7411A2D72E60046D26F /* MKStoreKit.m */; };
 		CC8EB7471A2DA1B60046D26F /* MKStoreKitConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC8EB7461A2DA1B60046D26F /* MKStoreKitConfigs.plist */; };
-		CC8EB74D1A2E2E320046D26F /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC8EB73E1A2CE3100046D26F /* GPUImage.framework */; };
-		CC8EB74F1A2E2EE70046D26F /* GPUImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC8EB73E1A2CE3100046D26F /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CC99FEA218F76A87001F7CBE /* square.png in Resources */ = {isa = PBXBuildFile; fileRef = CC99FEA018F76A87001F7CBE /* square.png */; };
 		CC99FEA918FE12FB001F7CBE /* maskStar.png in Resources */ = {isa = PBXBuildFile; fileRef = CC99FEA818FE12FB001F7CBE /* maskStar.png */; };
 		CC99FEAF18FE2AE5001F7CBE /* maskCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = CC99FEAA18FE2AE5001F7CBE /* maskCircle.png */; };
@@ -177,6 +177,13 @@
 			remoteGlobalIDString = CC2F4D6E18D923590039E515;
 			remoteInfo = splitagram;
 		};
+		CC45AAFB1A321B4D004753C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC8EB7351A2CE3100046D26F /* GPUImage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BCF1A33314DDB1EC00852800;
+			remoteInfo = GPUImage;
+		};
 		CC8EB73B1A2CE3100046D26F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CC8EB7351A2CE3100046D26F /* GPUImage.xcodeproj */;
@@ -191,27 +198,7 @@
 			remoteGlobalIDString = BCE209E51943F20C002FEED8;
 			remoteInfo = GPUImageFramework;
 		};
-		CC8EB74B1A2E2E120046D26F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CC8EB7351A2CE3100046D26F /* GPUImage.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BCE209E41943F20C002FEED8;
-			remoteInfo = GPUImageFramework;
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		CC8EB74E1A2E2EA80046D26F /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 11;
-			files = (
-				CC8EB74F1A2E2EE70046D26F /* GPUImage.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CC0A5A2A1905529A001745F9 /* adViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adViewController.h; sourceTree = "<group>"; };
@@ -291,8 +278,6 @@
 		CC17B6421942A11600B33CCF /* anonogram 1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "anonogram 1024x1024.png"; path = "Resources/ad images/anonogram 1024x1024.png"; sourceTree = "<group>"; };
 		CC17B6431942A11600B33CCF /* iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png"; path = "Resources/ad images/iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png"; sourceTree = "<group>"; };
 		CC205D7118E61D1700EECDE8 /* glyphicons_019_heart_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glyphicons_019_heart_empty.png; path = Resources/icons/glyphicons_019_heart_empty.png; sourceTree = "<group>"; };
-		CC205D7718E6260F00EECDE8 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
-		CC205D7818E6260F00EECDE8 /* libFlurry_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.2.a; sourceTree = "<group>"; };
 		CC205D7A18E6270900EECDE8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CC205D7C18E6271A00EECDE8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CC205D9A18E62BA200EECDE8 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -316,6 +301,9 @@
 		CC2F4D9918D9235A0039E515 /* splitagramTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "splitagramTests-Info.plist"; sourceTree = "<group>"; };
 		CC2F4D9B18D9235A0039E515 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CC2F4D9D18D9235A0039E515 /* splitagramTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = splitagramTests.m; sourceTree = "<group>"; };
+		CC45AAFE1A321C98004753C5 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		CC45AB011A321D4C004753C5 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		CC45AB021A321D4C004753C5 /* libFlurry_5.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.4.0.a; sourceTree = "<group>"; };
 		CC6C650018FF01D300F7D53F /* secondFrame27.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame27.png; path = "Resources/frame icons/secondFrame27.png"; sourceTree = "<group>"; };
 		CC6C650118FF01D300F7D53F /* secondFrame28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame28.png; path = "Resources/frame icons/secondFrame28.png"; sourceTree = "<group>"; };
 		CC6C650218FF01D300F7D53F /* secondFrame29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame29.png; path = "Resources/frame icons/secondFrame29.png"; sourceTree = "<group>"; };
@@ -397,8 +385,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC8EB74D1A2E2E320046D26F /* GPUImage.framework in Frameworks */,
+				CC45AAFF1A321C98004753C5 /* CoreVideo.framework in Frameworks */,
 				CCEA9B4018F09BD100FF5771 /* CoreData.framework in Frameworks */,
+				CC45AAFD1A321B5A004753C5 /* libGPUImage.a in Frameworks */,
 				CCEA9B3A18F0931D00FF5771 /* Twitter.framework in Frameworks */,
 				CC0E479E18E15CA7003F2CAD /* QuartzCore.framework in Frameworks */,
 				CCEA9B3818F092F100FF5771 /* MobileCoreServices.framework in Frameworks */,
@@ -419,9 +408,9 @@
 				CC205D9F18E62BD400EECDE8 /* StoreKit.framework in Frameworks */,
 				CC205D7D18E6271A00EECDE8 /* Security.framework in Frameworks */,
 				CC205D7B18E6270900EECDE8 /* SystemConfiguration.framework in Frameworks */,
+				CC45AB031A321D4C004753C5 /* libFlurry_5.4.0.a in Frameworks */,
 				CC0E47A218E15CBC003F2CAD /* AVFoundation.framework in Frameworks */,
 				CC0E47A018E15CB5003F2CAD /* OpenGLES.framework in Frameworks */,
-				CC205D7918E6260F00EECDE8 /* libFlurry_4.3.2.a in Frameworks */,
 				CC0E479C18E15C9F003F2CAD /* CoreMedia.framework in Frameworks */,
 				CC2B4BE118DF9CFB002CC198 /* Social.framework in Frameworks */,
 				CCD28DE818DACD46001127EC /* AssetsLibrary.framework in Frameworks */,
@@ -549,20 +538,11 @@
 			name = filters;
 			sourceTree = "<group>";
 		};
-		CC205D7618E6260F00EECDE8 /* Flurry */ = {
-			isa = PBXGroup;
-			children = (
-				CC205D7718E6260F00EECDE8 /* Flurry.h */,
-				CC205D7818E6260F00EECDE8 /* libFlurry_4.3.2.a */,
-			);
-			path = Flurry;
-			sourceTree = "<group>";
-		};
 		CC2F4D6618D923580039E515 = {
 			isa = PBXGroup;
 			children = (
+				CC45AB001A321D4C004753C5 /* Flurry */,
 				CC8EB73F1A2D72E60046D26F /* MKStoreKit-master-3 */,
-				CC205D7618E6260F00EECDE8 /* Flurry */,
 				CC2F4D7818D923590039E515 /* splitagram */,
 				CCD28DD718DAB635001127EC /* Resources */,
 				CC2F4D7118D923590039E515 /* Frameworks */,
@@ -583,6 +563,7 @@
 		CC2F4D7118D923590039E515 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CC45AAFE1A321C98004753C5 /* CoreVideo.framework */,
 				CC8EB7351A2CE3100046D26F /* GPUImage.xcodeproj */,
 				CCEA9B3F18F09BD100FF5771 /* CoreData.framework */,
 				CCEA9B3918F0931D00FF5771 /* Twitter.framework */,
@@ -678,6 +659,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CC45AB001A321D4C004753C5 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				CC45AB011A321D4C004753C5 /* Flurry.h */,
+				CC45AB021A321D4C004753C5 /* libFlurry_5.4.0.a */,
+			);
+			name = Flurry;
+			path = "../../../Downloads/Flurry iPhone SDK viPhone 5/Flurry-iOS-5.4.0/Flurry";
+			sourceTree = "<group>";
+		};
 		CC8EB7361A2CE3100046D26F /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -766,12 +757,11 @@
 				CC2F4D6B18D923590039E515 /* Sources */,
 				CC2F4D6C18D923590039E515 /* Frameworks */,
 				CC2F4D6D18D923590039E515 /* Resources */,
-				CC8EB74E1A2E2EA80046D26F /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				CC8EB74C1A2E2E120046D26F /* PBXTargetDependency */,
+				CC45AAFC1A321B4D004753C5 /* PBXTargetDependency */,
 			);
 			name = splitagram;
 			productName = splitagram;
@@ -1026,10 +1016,10 @@
 			target = CC2F4D6E18D923590039E515 /* splitagram */;
 			targetProxy = CC2F4D9518D9235A0039E515 /* PBXContainerItemProxy */;
 		};
-		CC8EB74C1A2E2E120046D26F /* PBXTargetDependency */ = {
+		CC45AAFC1A321B4D004753C5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = GPUImageFramework;
-			targetProxy = CC8EB74B1A2E2E120046D26F /* PBXContainerItemProxy */;
+			name = GPUImage;
+			targetProxy = CC45AAFB1A321B4D004753C5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1090,7 +1080,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"/Users/saswata_basu/Documents/Developer/GPUImage-master/framework/Source",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1130,7 +1120,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"/Users/saswata_basu/Documents/Developer/GPUImage-master/framework/Source",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1163,6 +1153,16 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/saswata_basu/Documents/Developer/splitagram/Flurry,
+					/Users/saswata_basu/Downloads/Flurry,
+					iPhone,
+					SDK,
+					viPhone,
+					"5/Flurry-iOS-5.4.0/Flurry",
+					/Users/saswata_basu/Downloads/Flurry,
+					iPhone,
+					SDK,
+					viPhone,
+					"5/Flurry-iOS-5.4.0/Flurry",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1200,6 +1200,16 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/saswata_basu/Documents/Developer/splitagram/Flurry,
+					/Users/saswata_basu/Downloads/Flurry,
+					iPhone,
+					SDK,
+					viPhone,
+					"5/Flurry-iOS-5.4.0/Flurry",
+					/Users/saswata_basu/Downloads/Flurry,
+					iPhone,
+					SDK,
+					viPhone,
+					"5/Flurry-iOS-5.4.0/Flurry",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";

@@ -58,7 +58,7 @@
     if (([self.pageImages count] == 0) || (index >= [self.pageImages count])) {
         return nil;
     }
-    NSString *string = [NSString stringWithFormat:@"%lu of %lu",index+1,(unsigned long)self.pageImages.count];
+    NSString *string = [NSString stringWithFormat:@"%lu of %lu",(unsigned long)index+1,(unsigned long)self.pageImages.count];
     ALAsset *asset = self.pageImages[index];
     ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
     UIImage *image = [UIImage imageWithCGImage:[defaultRep fullScreenImage] scale:[defaultRep scale] orientation:0];

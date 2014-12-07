@@ -19,7 +19,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     defaults = [NSUserDefaults standardUserDefaults];
-
+    [defaults setBool:YES forKey:kFeature0];  //test
+    [defaults setBool:YES forKey:kFeature1];  //test
 //    static dispatch_once_t pred;
 //    dispatch_once(&pred, ^{
 //    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"rateDone"];

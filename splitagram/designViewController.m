@@ -115,6 +115,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     library = [designViewController defaultAssetsLibrary];
 
     CGRect frame = CGRectMake(0, 0, 125, 40);
@@ -151,8 +152,8 @@
     nMargin = (int)[defaults integerForKey:@"Split"];
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
-        nMargin = 3;
-        [defaults setInteger:3 forKey:@"Split"];
+        nMargin = 0;
+        [defaults setInteger:0 forKey:@"Split"];
         sliderSplit.value = nMargin;
     });
 

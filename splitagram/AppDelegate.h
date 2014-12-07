@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Tapjoy/Tapjoy.h>
+//#import <Tapjoy/Tapjoy.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 //#import "MKStoreManager.h"
 #import "MKStoreKit.h"

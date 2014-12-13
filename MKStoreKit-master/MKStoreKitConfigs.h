@@ -51,11 +51,11 @@
 //#define kFeature7 @"com.guruhubb.bookly.fonts"
 //#define kFeature8 @"com.guruhubb.bookly.all"
 
-#define kFeature0 @"com.guruhubb.splitagram.frames"
-#define kFeature1 @"com.guruhubb.splitagram.filters"
-#define kFeature2 @"com.guruhubb.splitagram.watermark"  
+#define kFeature0 @"com.guruhubb.stripes.frames"
+#define kFeature1 @"com.guruhubb.stripes.filters"
+#define kFeature2 @"com.guruhubb.stripes.watermark"  
 
-//#define kFeature3 @"com.guruhubb.splitagram.resize" 
+//#define kFeature3 @"com.guruhubb.stripes.resize" 
 //#define kFeature3 @"com.guruhubb.bookly.stickersPack"
 //#define kFeature4 @"com.guruhubb.bookly.music"  //replaced with transitions
 ////#define kFeature5 @"com.guruhubb.bookly.titles"  //deleted it

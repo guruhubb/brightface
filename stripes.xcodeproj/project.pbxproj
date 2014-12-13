@@ -82,6 +82,9 @@
 		CC0E495718E26587003F2CAD /* lockImage.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0E495618E26587003F2CAD /* lockImage.png */; };
 		CC17B6441942A11600B33CCF /* anonogram 1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = CC17B6421942A11600B33CCF /* anonogram 1024x1024.png */; };
 		CC17B6451942A11600B33CCF /* iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = CC17B6431942A11600B33CCF /* iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png */; };
+		CC19732A1A3A13B900780CE7 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = CC1973271A3A13B900780CE7 /* en.lproj */; };
+		CC19732B1A3A13B900780CE7 /* stripesTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC1973281A3A13B900780CE7 /* stripesTests-Info.plist */; };
+		CC19732C1A3A13B900780CE7 /* stripesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1973291A3A13B900780CE7 /* stripesTests.m */; };
 		CC205D7318E61D1700EECDE8 /* glyphicons_019_heart_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = CC205D7118E61D1700EECDE8 /* glyphicons_019_heart_empty.png */; };
 		CC205D7B18E6270900EECDE8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC205D7A18E6270900EECDE8 /* SystemConfiguration.framework */; };
 		CC205D7D18E6271A00EECDE8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC205D7C18E6271A00EECDE8 /* Security.framework */; };
@@ -99,8 +102,6 @@
 		CC2F4D9218D9235A0039E515 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D9118D9235A0039E515 /* XCTest.framework */; };
 		CC2F4D9318D9235A0039E515 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7218D923590039E515 /* Foundation.framework */; };
 		CC2F4D9418D9235A0039E515 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7618D923590039E515 /* UIKit.framework */; };
-		CC2F4D9C18D9235A0039E515 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC2F4D9A18D9235A0039E515 /* InfoPlist.strings */; };
-		CC2F4D9E18D9235A0039E515 /* splitagramTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2F4D9D18D9235A0039E515 /* splitagramTests.m */; };
 		CC45AAFF1A321C98004753C5 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC45AAFE1A321C98004753C5 /* CoreVideo.framework */; };
 		CC45AB201A341229004753C5 /* MKStoreKit.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45AB1E1A341229004753C5 /* MKStoreKit.m */; };
 		CC45AB3D1A34180F004753C5 /* libFlurry_5.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC45AB1A1A3411A1004753C5 /* libFlurry_5.4.0.a */; };
@@ -276,6 +277,9 @@
 		CC0E495618E26587003F2CAD /* lockImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lockImage.png; path = Resources/icons/lockImage.png; sourceTree = "<group>"; };
 		CC17B6421942A11600B33CCF /* anonogram 1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "anonogram 1024x1024.png"; path = "Resources/ad images/anonogram 1024x1024.png"; sourceTree = "<group>"; };
 		CC17B6431942A11600B33CCF /* iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png"; path = "Resources/ad images/iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png"; sourceTree = "<group>"; };
+		CC1973271A3A13B900780CE7 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
+		CC1973281A3A13B900780CE7 /* stripesTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "stripesTests-Info.plist"; sourceTree = "<group>"; };
+		CC1973291A3A13B900780CE7 /* stripesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = stripesTests.m; sourceTree = "<group>"; };
 		CC205D7118E61D1700EECDE8 /* glyphicons_019_heart_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glyphicons_019_heart_empty.png; path = Resources/icons/glyphicons_019_heart_empty.png; sourceTree = "<group>"; };
 		CC205D7A18E6270900EECDE8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CC205D7C18E6271A00EECDE8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -284,22 +288,19 @@
 		CC2B4BDD18DF746E002CC198 /* shareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shareViewController.h; sourceTree = "<group>"; };
 		CC2B4BDE18DF746F002CC198 /* shareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shareViewController.m; sourceTree = "<group>"; };
 		CC2B4BE018DF9CFB002CC198 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		CC2F4D6F18D923590039E515 /* splitagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = splitagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC2F4D6F18D923590039E515 /* stripes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = stripes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2F4D7218D923590039E515 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CC2F4D7418D923590039E515 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CC2F4D7618D923590039E515 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		CC2F4D7A18D923590039E515 /* splitagram-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "splitagram-Info.plist"; sourceTree = "<group>"; };
+		CC2F4D7A18D923590039E515 /* stripes-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "stripes-Info.plist"; sourceTree = "<group>"; };
 		CC2F4D7C18D923590039E515 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CC2F4D7E18D923590039E515 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		CC2F4D8018D923590039E515 /* splitagram-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "splitagram-Prefix.pch"; sourceTree = "<group>"; };
+		CC2F4D8018D923590039E515 /* stripes-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "stripes-Prefix.pch"; sourceTree = "<group>"; };
 		CC2F4D8118D923590039E515 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CC2F4D8218D923590039E515 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CC2F4D8A18D923590039E515 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		CC2F4D9018D9235A0039E515 /* splitagramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = splitagramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC2F4D9018D9235A0039E515 /* stripesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = stripesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2F4D9118D9235A0039E515 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		CC2F4D9918D9235A0039E515 /* splitagramTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "splitagramTests-Info.plist"; sourceTree = "<group>"; };
-		CC2F4D9B18D9235A0039E515 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		CC2F4D9D18D9235A0039E515 /* splitagramTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = splitagramTests.m; sourceTree = "<group>"; };
 		CC45AAFE1A321C98004753C5 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		CC45AB191A3411A1004753C5 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		CC45AB1A1A3411A1004753C5 /* libFlurry_5.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.4.0.a; sourceTree = "<group>"; };
@@ -541,19 +542,19 @@
 			children = (
 				CC45AB1C1A341229004753C5 /* MKStoreKit-master */,
 				CC45AB181A3411A1004753C5 /* Flurry */,
-				CC2F4D7818D923590039E515 /* splitagram */,
+				CC2F4D7818D923590039E515 /* stripes */,
 				CCD28DD718DAB635001127EC /* Resources */,
 				CC2F4D7118D923590039E515 /* Frameworks */,
 				CC2F4D7018D923590039E515 /* Products */,
-				CC2F4D9718D9235A0039E515 /* splitagramTests */,
+				CC2F4D9718D9235A0039E515 /* stripesTests */,
 			);
 			sourceTree = "<group>";
 		};
 		CC2F4D7018D923590039E515 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CC2F4D6F18D923590039E515 /* splitagram.app */,
-				CC2F4D9018D9235A0039E515 /* splitagramTests.xctest */,
+				CC2F4D6F18D923590039E515 /* stripes.app */,
+				CC2F4D9018D9235A0039E515 /* stripesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -596,7 +597,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CC2F4D7818D923590039E515 /* splitagram */ = {
+		CC2F4D7818D923590039E515 /* stripes */ = {
 			isa = PBXGroup;
 			children = (
 				CC0A5A2A1905529A001745F9 /* adViewController.h */,
@@ -625,36 +626,28 @@
 				CC2F4D8A18D923590039E515 /* Images.xcassets */,
 				CC2F4D7918D923590039E515 /* Supporting Files */,
 			);
-			path = splitagram;
+			path = stripes;
 			sourceTree = "<group>";
 		};
 		CC2F4D7918D923590039E515 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CC2F4D7A18D923590039E515 /* splitagram-Info.plist */,
+				CC2F4D7A18D923590039E515 /* stripes-Info.plist */,
 				CC2F4D7B18D923590039E515 /* InfoPlist.strings */,
 				CC2F4D7E18D923590039E515 /* main.m */,
-				CC2F4D8018D923590039E515 /* splitagram-Prefix.pch */,
+				CC2F4D8018D923590039E515 /* stripes-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		CC2F4D9718D9235A0039E515 /* splitagramTests */ = {
+		CC2F4D9718D9235A0039E515 /* stripesTests */ = {
 			isa = PBXGroup;
 			children = (
-				CC2F4D9D18D9235A0039E515 /* splitagramTests.m */,
-				CC2F4D9818D9235A0039E515 /* Supporting Files */,
+				CC1973271A3A13B900780CE7 /* en.lproj */,
+				CC1973281A3A13B900780CE7 /* stripesTests-Info.plist */,
+				CC1973291A3A13B900780CE7 /* stripesTests.m */,
 			);
-			path = splitagramTests;
-			sourceTree = "<group>";
-		};
-		CC2F4D9818D9235A0039E515 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				CC2F4D9918D9235A0039E515 /* splitagramTests-Info.plist */,
-				CC2F4D9A18D9235A0039E515 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
+			path = stripesTests;
 			sourceTree = "<group>";
 		};
 		CC45AB181A3411A1004753C5 /* Flurry */ = {
@@ -745,9 +738,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CC2F4D6E18D923590039E515 /* splitagram */ = {
+		CC2F4D6E18D923590039E515 /* stripes */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CC2F4DA118D9235A0039E515 /* Build configuration list for PBXNativeTarget "splitagram" */;
+			buildConfigurationList = CC2F4DA118D9235A0039E515 /* Build configuration list for PBXNativeTarget "stripes" */;
 			buildPhases = (
 				CC2F4D6B18D923590039E515 /* Sources */,
 				CC2F4D6C18D923590039E515 /* Frameworks */,
@@ -758,14 +751,14 @@
 			dependencies = (
 				CC45ABBF1A3769D0004753C5 /* PBXTargetDependency */,
 			);
-			name = splitagram;
+			name = stripes;
 			productName = splitagram;
-			productReference = CC2F4D6F18D923590039E515 /* splitagram.app */;
+			productReference = CC2F4D6F18D923590039E515 /* stripes.app */;
 			productType = "com.apple.product-type.application";
 		};
-		CC2F4D8F18D9235A0039E515 /* splitagramTests */ = {
+		CC2F4D8F18D9235A0039E515 /* stripesTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CC2F4DA418D9235A0039E515 /* Build configuration list for PBXNativeTarget "splitagramTests" */;
+			buildConfigurationList = CC2F4DA418D9235A0039E515 /* Build configuration list for PBXNativeTarget "stripesTests" */;
 			buildPhases = (
 				CC2F4D8C18D9235A0039E515 /* Sources */,
 				CC2F4D8D18D9235A0039E515 /* Frameworks */,
@@ -776,9 +769,9 @@
 			dependencies = (
 				CC2F4D9618D9235A0039E515 /* PBXTargetDependency */,
 			);
-			name = splitagramTests;
+			name = stripesTests;
 			productName = splitagramTests;
-			productReference = CC2F4D9018D9235A0039E515 /* splitagramTests.xctest */;
+			productReference = CC2F4D9018D9235A0039E515 /* stripesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -803,7 +796,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CC2F4D6A18D923580039E515 /* Build configuration list for PBXProject "splitagram" */;
+			buildConfigurationList = CC2F4D6A18D923580039E515 /* Build configuration list for PBXProject "stripes" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -822,8 +815,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				CC2F4D6E18D923590039E515 /* splitagram */,
-				CC2F4D8F18D9235A0039E515 /* splitagramTests */,
+				CC2F4D6E18D923590039E515 /* stripes */,
+				CC2F4D8F18D9235A0039E515 /* stripesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -967,7 +960,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC2F4D9C18D9235A0039E515 /* InfoPlist.strings in Resources */,
+				CC19732A1A3A13B900780CE7 /* en.lproj in Resources */,
+				CC19732B1A3A13B900780CE7 /* stripesTests-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -998,7 +992,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC2F4D9E18D9235A0039E515 /* splitagramTests.m in Sources */,
+				CC19732C1A3A13B900780CE7 /* stripesTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1007,7 +1001,7 @@
 /* Begin PBXTargetDependency section */
 		CC2F4D9618D9235A0039E515 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CC2F4D6E18D923590039E515 /* splitagram */;
+			target = CC2F4D6E18D923590039E515 /* stripes */;
 			targetProxy = CC2F4D9518D9235A0039E515 /* PBXContainerItemProxy */;
 		};
 		CC45ABBF1A3769D0004753C5 /* PBXTargetDependency */ = {
@@ -1022,14 +1016,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				CC2F4D7C18D923590039E515 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		CC2F4D9A18D9235A0039E515 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CC2F4D9B18D9235A0039E515 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1072,7 +1058,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/Users/saswata_basu/code/splitagram/GPUImage-master-6/framework/Source",
+					"/Users/saswata_basu/code/stripes/GPUImage-master-6/framework/Source/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1113,7 +1099,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/Users/saswata_basu/code/splitagram/GPUImage-master-6/framework/Source",
+					"/Users/saswata_basu/code/stripes/GPUImage-master-6/framework/Source/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
@@ -1133,13 +1119,13 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "splitagram/splitagram-Prefix.pch";
+				GCC_PREFIX_HEADER = "stripes/stripes-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/Users/saswata_basu/code/splitagram/GPUImage-master-6/framework/Source/**",
+					"/Users/saswata_basu/code/stripes/GPUImage-master-6/framework/Source/**",
 				);
-				INFOPLIST_FILE = "splitagram/splitagram-Info.plist";
+				INFOPLIST_FILE = "stripes/stripes-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1147,7 +1133,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = stripes;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1165,13 +1151,13 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "splitagram/splitagram-Prefix.pch";
+				GCC_PREFIX_HEADER = "stripes/stripes-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/Users/saswata_basu/code/splitagram/GPUImage-master-6/framework/Source/**",
+					"/Users/saswata_basu/code/stripes/GPUImage-master-6/framework/Source/**",
 				);
-				INFOPLIST_FILE = "splitagram/splitagram-Info.plist";
+				INFOPLIST_FILE = "stripes/stripes-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1179,7 +1165,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = stripes;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1191,20 +1177,20 @@
 		CC2F4DA518D9235A0039E515 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/splitagram.app/splitagram";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/stripes.app/stripes";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "splitagram/splitagram-Prefix.pch";
+				GCC_PREFIX_HEADER = "stripes/stripes-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "splitagramTests/splitagramTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "stripesTests/stripesTests-Info.plist";
+				PRODUCT_NAME = stripesTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1213,16 +1199,16 @@
 		CC2F4DA618D9235A0039E515 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/splitagram.app/splitagram";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/stripes.app/stripes";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "splitagram/splitagram-Prefix.pch";
-				INFOPLIST_FILE = "splitagramTests/splitagramTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "stripes/stripes-Prefix.pch";
+				INFOPLIST_FILE = "stripesTests/stripesTests-Info.plist";
+				PRODUCT_NAME = stripesTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1231,7 +1217,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CC2F4D6A18D923580039E515 /* Build configuration list for PBXProject "splitagram" */ = {
+		CC2F4D6A18D923580039E515 /* Build configuration list for PBXProject "stripes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CC2F4D9F18D9235A0039E515 /* Debug */,
@@ -1240,7 +1226,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CC2F4DA118D9235A0039E515 /* Build configuration list for PBXNativeTarget "splitagram" */ = {
+		CC2F4DA118D9235A0039E515 /* Build configuration list for PBXNativeTarget "stripes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CC2F4DA218D9235A0039E515 /* Debug */,
@@ -1249,7 +1235,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CC2F4DA418D9235A0039E515 /* Build configuration list for PBXNativeTarget "splitagramTests" */ = {
+		CC2F4DA418D9235A0039E515 /* Build configuration list for PBXNativeTarget "stripesTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CC2F4DA518D9235A0039E515 /* Debug */,

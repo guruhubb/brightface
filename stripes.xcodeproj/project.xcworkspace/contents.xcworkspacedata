@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:splitagram.xcodeproj">
+      location = "self:stripes.xcodeproj">
    </FileRef>
 </Workspace>

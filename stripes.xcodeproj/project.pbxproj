@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC01DC3A1A3FEC8200031F56 /* MKSKConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01DC321A3FEC8200031F56 /* MKSKConfig.m */; };
+		CC01DC3B1A3FEC8200031F56 /* MKSKProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01DC341A3FEC8200031F56 /* MKSKProduct.m */; };
+		CC01DC3C1A3FEC8200031F56 /* MKSKSubscriptionProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01DC361A3FEC8200031F56 /* MKSKSubscriptionProduct.m */; };
+		CC01DC3D1A3FEC8200031F56 /* MKStoreKitConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC01DC371A3FEC8200031F56 /* MKStoreKitConfigs.plist */; };
+		CC01DC3E1A3FEC8200031F56 /* MKStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01DC391A3FEC8200031F56 /* MKStoreManager.m */; };
+		CC01DC461A4011A200031F56 /* NSData+MKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01DC431A4011A200031F56 /* NSData+MKBase64.m */; };
+		CC01DC471A4011A200031F56 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01DC451A4011A200031F56 /* SFHFKeychainUtils.m */; };
 		CC0A5A2C1905529A001745F9 /* adViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0A5A2B1905529A001745F9 /* adViewController.m */; };
 		CC0A5A301905549F001745F9 /* iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0A5A2E1905549F001745F9 /* iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png */; };
 		CC0A5A311905549F001745F9 /* One Frame 1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0A5A2F1905549F001745F9 /* One Frame 1024x1024.png */; };
@@ -83,7 +90,6 @@
 		CC17B6441942A11600B33CCF /* anonogram 1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = CC17B6421942A11600B33CCF /* anonogram 1024x1024.png */; };
 		CC17B6451942A11600B33CCF /* iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = CC17B6431942A11600B33CCF /* iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png */; };
 		CC19732A1A3A13B900780CE7 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = CC1973271A3A13B900780CE7 /* en.lproj */; };
-		CC19732B1A3A13B900780CE7 /* stripesTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC1973281A3A13B900780CE7 /* stripesTests-Info.plist */; };
 		CC19732C1A3A13B900780CE7 /* stripesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1973291A3A13B900780CE7 /* stripesTests.m */; };
 		CC205D7318E61D1700EECDE8 /* glyphicons_019_heart_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = CC205D7118E61D1700EECDE8 /* glyphicons_019_heart_empty.png */; };
 		CC205D7B18E6270900EECDE8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC205D7A18E6270900EECDE8 /* SystemConfiguration.framework */; };
@@ -95,7 +101,6 @@
 		CC2F4D7318D923590039E515 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7218D923590039E515 /* Foundation.framework */; };
 		CC2F4D7518D923590039E515 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7418D923590039E515 /* CoreGraphics.framework */; };
 		CC2F4D7718D923590039E515 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7618D923590039E515 /* UIKit.framework */; };
-		CC2F4D7D18D923590039E515 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC2F4D7B18D923590039E515 /* InfoPlist.strings */; };
 		CC2F4D7F18D923590039E515 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2F4D7E18D923590039E515 /* main.m */; };
 		CC2F4D8318D923590039E515 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2F4D8218D923590039E515 /* AppDelegate.m */; };
 		CC2F4D8B18D923590039E515 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC2F4D8A18D923590039E515 /* Images.xcassets */; };
@@ -103,7 +108,6 @@
 		CC2F4D9318D9235A0039E515 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7218D923590039E515 /* Foundation.framework */; };
 		CC2F4D9418D9235A0039E515 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2F4D7618D923590039E515 /* UIKit.framework */; };
 		CC45AAFF1A321C98004753C5 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC45AAFE1A321C98004753C5 /* CoreVideo.framework */; };
-		CC45AB201A341229004753C5 /* MKStoreKit.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45AB1E1A341229004753C5 /* MKStoreKit.m */; };
 		CC45AB3D1A34180F004753C5 /* libFlurry_5.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC45AB1A1A3411A1004753C5 /* libFlurry_5.4.0.a */; };
 		CC45ABC01A3769DA004753C5 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC45ABBB1A3769B3004753C5 /* libGPUImage.a */; };
 		CC6C650618FF01D300F7D53F /* secondFrame27.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6C650018FF01D300F7D53F /* secondFrame27.png */; };
@@ -201,6 +205,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC01DC311A3FEC8200031F56 /* MKSKConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKSKConfig.h; path = "MKStoreKit-master-4/MKSKConfig.h"; sourceTree = SOURCE_ROOT; };
+		CC01DC321A3FEC8200031F56 /* MKSKConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKSKConfig.m; path = "MKStoreKit-master-4/MKSKConfig.m"; sourceTree = SOURCE_ROOT; };
+		CC01DC331A3FEC8200031F56 /* MKSKProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKSKProduct.h; path = "MKStoreKit-master-4/MKSKProduct.h"; sourceTree = SOURCE_ROOT; };
+		CC01DC341A3FEC8200031F56 /* MKSKProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKSKProduct.m; path = "MKStoreKit-master-4/MKSKProduct.m"; sourceTree = SOURCE_ROOT; };
+		CC01DC351A3FEC8200031F56 /* MKSKSubscriptionProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKSKSubscriptionProduct.h; path = "MKStoreKit-master-4/MKSKSubscriptionProduct.h"; sourceTree = SOURCE_ROOT; };
+		CC01DC361A3FEC8200031F56 /* MKSKSubscriptionProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKSKSubscriptionProduct.m; path = "MKStoreKit-master-4/MKSKSubscriptionProduct.m"; sourceTree = SOURCE_ROOT; };
+		CC01DC371A3FEC8200031F56 /* MKStoreKitConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = MKStoreKitConfigs.plist; path = "MKStoreKit-master-4/MKStoreKitConfigs.plist"; sourceTree = SOURCE_ROOT; };
+		CC01DC381A3FEC8200031F56 /* MKStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKStoreManager.h; path = "MKStoreKit-master-4/MKStoreManager.h"; sourceTree = SOURCE_ROOT; };
+		CC01DC391A3FEC8200031F56 /* MKStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKStoreManager.m; path = "MKStoreKit-master-4/MKStoreManager.m"; sourceTree = SOURCE_ROOT; };
+		CC01DC421A4011A200031F56 /* NSData+MKBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MKBase64.h"; sourceTree = "<group>"; };
+		CC01DC431A4011A200031F56 /* NSData+MKBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MKBase64.m"; sourceTree = "<group>"; };
+		CC01DC441A4011A200031F56 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
+		CC01DC451A4011A200031F56 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		CC0A5A2A1905529A001745F9 /* adViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adViewController.h; sourceTree = "<group>"; };
 		CC0A5A2B1905529A001745F9 /* adViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = adViewController.m; sourceTree = "<group>"; };
 		CC0A5A2E1905549F001745F9 /* iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png"; path = "Resources/ad images/iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png"; sourceTree = "<group>"; };
@@ -288,7 +305,7 @@
 		CC2B4BDD18DF746E002CC198 /* shareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shareViewController.h; sourceTree = "<group>"; };
 		CC2B4BDE18DF746F002CC198 /* shareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shareViewController.m; sourceTree = "<group>"; };
 		CC2B4BE018DF9CFB002CC198 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		CC2F4D6F18D923590039E515 /* stripes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = stripes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC2F4D6F18D923590039E515 /* stripesLayered.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = stripesLayered.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2F4D7218D923590039E515 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CC2F4D7418D923590039E515 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CC2F4D7618D923590039E515 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -304,8 +321,6 @@
 		CC45AAFE1A321C98004753C5 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		CC45AB191A3411A1004753C5 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		CC45AB1A1A3411A1004753C5 /* libFlurry_5.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.4.0.a; sourceTree = "<group>"; };
-		CC45AB1D1A341229004753C5 /* MKStoreKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStoreKit.h; sourceTree = "<group>"; };
-		CC45AB1E1A341229004753C5 /* MKStoreKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKStoreKit.m; sourceTree = "<group>"; };
 		CC45AB3C1A341760004753C5 /* MKStoreKitConfigs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKStoreKitConfigs.h; sourceTree = "<group>"; };
 		CC45ABB41A3769B3004753C5 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = "GPUImage-master-6/framework/GPUImage.xcodeproj"; sourceTree = "<group>"; };
 		CC6C650018FF01D300F7D53F /* secondFrame27.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = secondFrame27.png; path = "Resources/frame icons/secondFrame27.png"; sourceTree = "<group>"; };
@@ -431,6 +446,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC01DC411A4011A200031F56 /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				CC01DC421A4011A200031F56 /* NSData+MKBase64.h */,
+				CC01DC431A4011A200031F56 /* NSData+MKBase64.m */,
+				CC01DC441A4011A200031F56 /* SFHFKeychainUtils.h */,
+				CC01DC451A4011A200031F56 /* SFHFKeychainUtils.m */,
+			);
+			name = Externals;
+			path = "MKStoreKit-master-4/Externals";
+			sourceTree = SOURCE_ROOT;
+		};
 		CC0A5A2D19055486001745F9 /* ad images */ = {
 			isa = PBXGroup;
 			children = (
@@ -553,7 +580,7 @@
 		CC2F4D7018D923590039E515 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CC2F4D6F18D923590039E515 /* stripes.app */,
+				CC2F4D6F18D923590039E515 /* stripesLayered.app */,
 				CC2F4D9018D9235A0039E515 /* stripesTests.xctest */,
 			);
 			name = Products;
@@ -662,9 +689,17 @@
 		CC45AB1C1A341229004753C5 /* MKStoreKit-master */ = {
 			isa = PBXGroup;
 			children = (
-				CC45AB1D1A341229004753C5 /* MKStoreKit.h */,
+				CC01DC411A4011A200031F56 /* Externals */,
+				CC01DC311A3FEC8200031F56 /* MKSKConfig.h */,
+				CC01DC321A3FEC8200031F56 /* MKSKConfig.m */,
+				CC01DC331A3FEC8200031F56 /* MKSKProduct.h */,
+				CC01DC341A3FEC8200031F56 /* MKSKProduct.m */,
+				CC01DC351A3FEC8200031F56 /* MKSKSubscriptionProduct.h */,
+				CC01DC361A3FEC8200031F56 /* MKSKSubscriptionProduct.m */,
+				CC01DC371A3FEC8200031F56 /* MKStoreKitConfigs.plist */,
+				CC01DC381A3FEC8200031F56 /* MKStoreManager.h */,
+				CC01DC391A3FEC8200031F56 /* MKStoreManager.m */,
 				CC45AB3C1A341760004753C5 /* MKStoreKitConfigs.h */,
-				CC45AB1E1A341229004753C5 /* MKStoreKit.m */,
 			);
 			path = "MKStoreKit-master";
 			sourceTree = "<group>";
@@ -753,7 +788,7 @@
 			);
 			name = stripes;
 			productName = splitagram;
-			productReference = CC2F4D6F18D923590039E515 /* stripes.app */;
+			productReference = CC2F4D6F18D923590039E515 /* stripesLayered.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CC2F4D8F18D9235A0039E515 /* stripesTests */ = {
@@ -792,6 +827,7 @@
 						};
 					};
 					CC2F4D8F18D9235A0039E515 = {
+						DevelopmentTeam = N58P763A7V;
 						TestTargetID = CC2F4D6E18D923590039E515;
 					};
 				};
@@ -894,6 +930,7 @@
 				CC0E48AA18E1E80D003F2CAD /* facebook-70251b04a4be865178ab592bc9586c83.png in Resources */,
 				CC0E492D18E22AA1003F2CAD /* 17.acv in Resources */,
 				CCAC974318F051BE000B669B /* filter16.png in Resources */,
+				CC01DC3D1A3FEC8200031F56 /* MKStoreKitConfigs.plist in Resources */,
 				CCAC974218F051BE000B669B /* filter15.png in Resources */,
 				CC99FEA218F76A87001F7CBE /* square.png in Resources */,
 				CCAC973B18F051BE000B669B /* filter08.png in Resources */,
@@ -913,7 +950,6 @@
 				CC0E488A18E1E7F5003F2CAD /* secondFrame10.png in Resources */,
 				CC0E487718E1E7F5003F2CAD /* Frame24.png in Resources */,
 				CC0E487218E1E7F5003F2CAD /* Frame17.png in Resources */,
-				CC2F4D7D18D923590039E515 /* InfoPlist.strings in Resources */,
 				CC0E494718E22AA1003F2CAD /* lookup_miss_etikate.png in Resources */,
 				CC0E493818E22AA1003F2CAD /* crispWarm.png in Resources */,
 				CCAC974418F051BE000B669B /* filter17.png in Resources */,
@@ -961,7 +997,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC19732A1A3A13B900780CE7 /* en.lproj in Resources */,
-				CC19732B1A3A13B900780CE7 /* stripesTests-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -972,15 +1007,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC01DC3C1A3FEC8200031F56 /* MKSKSubscriptionProduct.m in Sources */,
 				CCD28E2418DCB501001127EC /* designViewController.m in Sources */,
 				CC0A5A2C1905529A001745F9 /* adViewController.m in Sources */,
 				CCD28DF418DB7A4D001127EC /* SettingVC.m in Sources */,
 				CCD28DEB18DAD565001127EC /* PhotoCell.m in Sources */,
 				CCD28E1E18DC965B001127EC /* gridViewController.m in Sources */,
+				CC01DC3A1A3FEC8200031F56 /* MKSKConfig.m in Sources */,
 				CC2F4D8318D923590039E515 /* AppDelegate.m in Sources */,
+				CC01DC3E1A3FEC8200031F56 /* MKStoreManager.m in Sources */,
 				CCD28E2718DCB512001127EC /* doneViewController.m in Sources */,
-				CC45AB201A341229004753C5 /* MKStoreKit.m in Sources */,
+				CC01DC461A4011A200031F56 /* NSData+MKBase64.m in Sources */,
+				CC01DC3B1A3FEC8200031F56 /* MKSKProduct.m in Sources */,
 				CC2F4D7F18D923590039E515 /* main.m in Sources */,
+				CC01DC471A4011A200031F56 /* SFHFKeychainUtils.m in Sources */,
 				CCD28E2A18DCB533001127EC /* pageViewController.m in Sources */,
 				CCD28E2D18DD0CCB001127EC /* pageViewContentViewController.m in Sources */,
 				CC2B4BDF18DF746F002CC198 /* shareViewController.m in Sources */,
@@ -1039,6 +1079,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1062,6 +1103,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -1103,6 +1145,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
@@ -1133,7 +1176,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = stripes;
+				PRODUCT_NAME = stripesLayered;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1165,7 +1208,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = stripes;
+				PRODUCT_NAME = stripesLayered;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1177,7 +1220,9 @@
 		CC2F4DA518D9235A0039E515 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/stripes.app/stripes";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/stripesLayered.app/stripesLayered";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1191,6 +1236,7 @@
 				);
 				INFOPLIST_FILE = "stripesTests/stripesTests-Info.plist";
 				PRODUCT_NAME = stripesTests;
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1199,7 +1245,9 @@
 		CC2F4DA618D9235A0039E515 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/stripes.app/stripes";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/stripesLayered.app/stripesLayered";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1209,6 +1257,7 @@
 				GCC_PREFIX_HEADER = "stripes/stripes-Prefix.pch";
 				INFOPLIST_FILE = "stripesTests/stripesTests-Info.plist";
 				PRODUCT_NAME = stripesTests;
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};

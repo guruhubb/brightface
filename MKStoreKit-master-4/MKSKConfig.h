@@ -28,9 +28,9 @@
 //  2) or crediting me inside the app's credits page
 //  3) or a tweet mentioning @mugunthkumar
 //  4) A paypal donation to mugunth.kumar@gmail.com
-#define kFeature0 @"com.guruhubb.stripesLayered.frames"
-#define kFeature1 @"com.guruhubb.stripesLayered.filters"
-#define kFeature2 @"com.guruhubb.stripesLayered.watermark"
+#define kFeature0 @"com.guruhubb.brightface.frames"
+#define kFeature1 @"com.guruhubb.brightface.filters"
+#define kFeature2 @"com.guruhubb.brightface.watermark"
 
 @interface MKSKConfig : NSObject
 

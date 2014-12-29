@@ -57,7 +57,7 @@
                          onError:(void (^)(NSError*)) errorBlock
 {        
   self.onSubscriptionVerificationCompleted = completionBlock;
-  self.onSubscriptionVerificationFailed = errorBlock;
+//  self.onSubscriptionVerificationFailed = errorBlock;
   
   NSURL *url = [NSURL URLWithString:kReceiptValidationURL];
 	
@@ -146,7 +146,7 @@ didReceiveResponse:(NSURLResponse *)response
 {
   self.dataFromConnection = nil;
   if(self.onSubscriptionVerificationFailed)
-    self.onSubscriptionVerificationFailed(error);
+//    self.onSubscriptionVerificationFailed(error);
   
   self.onSubscriptionVerificationFailed = nil;
 }

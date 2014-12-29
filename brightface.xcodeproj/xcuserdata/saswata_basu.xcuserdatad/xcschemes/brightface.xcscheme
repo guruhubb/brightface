@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CC2F4D6E18D923590039E515"
-               BuildableName = "brightfaceLayered.app"
+               BuildableName = "brightface.app"
                BlueprintName = "brightface"
                ReferencedContainer = "container:brightface.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CC2F4D6E18D923590039E515"
-            BuildableName = "brightfaceLayered.app"
+            BuildableName = "brightface.app"
             BlueprintName = "brightface"
             ReferencedContainer = "container:brightface.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CC2F4D6E18D923590039E515"
-            BuildableName = "brightfaceLayered.app"
+            BuildableName = "brightface.app"
             BlueprintName = "brightface"
             ReferencedContainer = "container:brightface.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CC2F4D6E18D923590039E515"
-            BuildableName = "brightfaceLayered.app"
+            BuildableName = "brightface.app"
             BlueprintName = "brightface"
             ReferencedContainer = "container:brightface.xcodeproj">
          </BuildableReference>

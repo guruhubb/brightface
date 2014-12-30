@@ -19,3 +19,6 @@
     #define NSLog(...);
 #endif
 
+#ifdef __cplusplus
+#include <opencv2/opencv.hpp>
+#endif

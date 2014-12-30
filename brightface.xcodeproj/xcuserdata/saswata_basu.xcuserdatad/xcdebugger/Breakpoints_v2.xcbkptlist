@@ -9,7 +9,7 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MKStoreKit-master-4/MKSKSubscriptionProduct.m"
+            filePath = "MKStoreKit-master-4/MKSKSubscriptionProduct.mm"
             timestampString = "441364145.346141"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"

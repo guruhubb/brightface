@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CC0A5A2C1905529A001745F9 /* adViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0A5A2B1905529A001745F9 /* adViewController.m */; };
-		CC0A5A301905549F001745F9 /* iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0A5A2E1905549F001745F9 /* iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png */; };
+		CC0A5A301905549F001745F9 /* ad.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0A5A2E1905549F001745F9 /* ad.png */; };
 		CC0A5A311905549F001745F9 /* One Frame 1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = CC0A5A2F1905549F001745F9 /* One Frame 1024x1024.png */; };
 		CC0E479C18E15C9F003F2CAD /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0E479B18E15C9F003F2CAD /* CoreMedia.framework */; };
 		CC0E479E18E15CA7003F2CAD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0E479D18E15CA7003F2CAD /* QuartzCore.framework */; };
@@ -170,6 +170,8 @@
 		CCB38CDC1A52A8D9008A8E1B /* verifyProduct.php in Resources */ = {isa = PBXBuildFile; fileRef = CCB38CCC1A52A8D9008A8E1B /* verifyProduct.php */; };
 		CCB38CDD1A52A8D9008A8E1B /* VerificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB38CCE1A52A8D9008A8E1B /* VerificationController.m */; };
 		CCB38CDF1A5316FA008A8E1B /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCB38CDE1A5316FA008A8E1B /* opencv2.framework */; };
+		CCCB06921A5480DC006F63EC /* SkinDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCCB06911A5480DC006F63EC /* SkinDetector.cpp */; };
+		CCCB06951A591DEA006F63EC /* mask1.png in Resources */ = {isa = PBXBuildFile; fileRef = CCCB06941A591DEA006F63EC /* mask1.png */; };
 		CCD28DE818DACD46001127EC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCD28DE718DACD46001127EC /* AssetsLibrary.framework */; };
 		CCD28DEB18DAD565001127EC /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28DEA18DAD565001127EC /* PhotoCell.m */; };
 		CCD28DEE18DB4421001127EC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD28DED18DB4421001127EC /* ViewController.m */; };
@@ -223,7 +225,7 @@
 /* Begin PBXFileReference section */
 		CC0A5A2A1905529A001745F9 /* adViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adViewController.h; sourceTree = "<group>"; };
 		CC0A5A2B1905529A001745F9 /* adViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = adViewController.m; sourceTree = "<group>"; };
-		CC0A5A2E1905549F001745F9 /* iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png"; path = "Resources/ad images/iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png"; sourceTree = "<group>"; };
+		CC0A5A2E1905549F001745F9 /* ad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ad.png; path = "Resources/ad images/ad.png"; sourceTree = "<group>"; };
 		CC0A5A2F1905549F001745F9 /* One Frame 1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "One Frame 1024x1024.png"; path = "Resources/ad images/One Frame 1024x1024.png"; sourceTree = "<group>"; };
 		CC0E479B18E15C9F003F2CAD /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		CC0E479D18E15CA7003F2CAD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -399,6 +401,9 @@
 		CCB38CCD1A52A8D9008A8E1B /* VerificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerificationController.h; sourceTree = "<group>"; };
 		CCB38CCE1A52A8D9008A8E1B /* VerificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerificationController.m; sourceTree = "<group>"; };
 		CCB38CDE1A5316FA008A8E1B /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		CCCB068E1A54807F006F63EC /* SkinDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkinDetector.h; sourceTree = "<group>"; };
+		CCCB06911A5480DC006F63EC /* SkinDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SkinDetector.cpp; sourceTree = "<group>"; };
+		CCCB06941A591DEA006F63EC /* mask1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mask1.png; path = ../../Downloads/mask1.png; sourceTree = "<group>"; };
 		CCD28DE718DACD46001127EC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		CCD28DE918DAD565001127EC /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		CCD28DEA18DAD565001127EC /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
@@ -485,9 +490,10 @@
 		CC0A5A2D19055486001745F9 /* ad images */ = {
 			isa = PBXGroup;
 			children = (
+				CCCB06941A591DEA006F63EC /* mask1.png */,
 				CC17B6421942A11600B33CCF /* anonogram 1024x1024.png */,
 				CC17B6431942A11600B33CCF /* iOS Simulator Screen shot May 25, 2014, 12.14.00 PM.png */,
-				CC0A5A2E1905549F001745F9 /* iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png */,
+				CC0A5A2E1905549F001745F9 /* ad.png */,
 				CC0A5A2F1905549F001745F9 /* One Frame 1024x1024.png */,
 			);
 			name = "ad images";
@@ -666,6 +672,8 @@
 				CCD28E1D18DC965B001127EC /* gridViewController.m */,
 				CCD28E2218DCB501001127EC /* designViewController.h */,
 				CCD28E2318DCB501001127EC /* designViewController.mm */,
+				CCCB068E1A54807F006F63EC /* SkinDetector.h */,
+				CCCB06911A5480DC006F63EC /* SkinDetector.cpp */,
 				CCD28E2518DCB512001127EC /* doneViewController.h */,
 				CCD28E2618DCB512001127EC /* doneViewController.m */,
 				CCD28E2818DCB533001127EC /* pageViewController.h */,
@@ -1027,7 +1035,7 @@
 				CC0E494E18E22AA1003F2CAD /* softWarmBleach.png in Resources */,
 				CC0E487018E1E7F5003F2CAD /* Frame15.png in Resources */,
 				CC0E486D18E1E7F5003F2CAD /* Frame12.png in Resources */,
-				CC0A5A301905549F001745F9 /* iOS Simulator Screen shot Apr 20, 2014, 12.41.28 AM.png in Resources */,
+				CC0A5A301905549F001745F9 /* ad.png in Resources */,
 				CC0E494C18E22AA1003F2CAD /* sepiaSelenium2.png in Resources */,
 				CC0E48B018E1E80D003F2CAD /* twitter_logo_white.png in Resources */,
 				CC0E48A018E1E7F5003F2CAD /* secondFrame26.png in Resources */,
@@ -1048,6 +1056,7 @@
 				CC0E486918E1E7F5003F2CAD /* Frame08.png in Resources */,
 				CC0E493118E22AA1003F2CAD /* bleachNight.png in Resources */,
 				CC0E494918E22AA1003F2CAD /* maximumWhite.png in Resources */,
+				CCCB06951A591DEA006F63EC /* mask1.png in Resources */,
 				CCAC974118F051BE000B669B /* filter14.png in Resources */,
 				CCB38CD81A52A8D9008A8E1B /* AddDevice.html in Resources */,
 				CCAC973418F051BE000B669B /* filter01.png in Resources */,
@@ -1084,6 +1093,7 @@
 				CCB38CD71A52A8D9008A8E1B /* README.mdown in Sources */,
 				CCB38CD11A52A8D9008A8E1B /* MKSKConfig.m in Sources */,
 				CCD28DEB18DAD565001127EC /* PhotoCell.m in Sources */,
+				CCCB06921A5480DC006F63EC /* SkinDetector.cpp in Sources */,
 				CCD28E1E18DC965B001127EC /* gridViewController.m in Sources */,
 				CCB38CD01A52A8D9008A8E1B /* SFHFKeychainUtils.m in Sources */,
 				CC2F4D8318D923590039E515 /* AppDelegate.m in Sources */,

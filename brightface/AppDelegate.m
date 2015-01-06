@@ -19,6 +19,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:NO forKey:@"filter"];  //YES for auto-filter
+    [defaults setBool:YES forKey:@"pan"];  //YES for pan
+
 //    [defaults setBool:YES forKey:kFeature0];  //test
 //    [defaults setBool:YES forKey:kFeature1];  //test
 //    static dispatch_once_t pred;
@@ -32,7 +35,7 @@
     [Flurry setCrashReportingEnabled:YES];
     
     // Replace YOUR_API_KEY with the api key in the downloaded package
-    [Flurry startSession:@"KJ3Z269788RNJPRGP929"];
+    [Flurry startSession:@"PBYYKHX2TB8QWD6JR3VS"];
     // Tapjoy Connect Notifications
 //    [[NSNotificationCenter defaultCenter] addObserver:self
 //                                             selector:@selector(tjcConnectSuccess:)

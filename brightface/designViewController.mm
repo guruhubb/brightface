@@ -142,19 +142,19 @@
 //    Cr_MAX = 173;//173;
 //    Cb_MIN = 60;//77;
 //    Cb_MAX = 255;//127;
-    Y_MIN  = 80;
+    Y_MIN  = 0;
     Y_MAX  = 255;
     Cr_MIN = 130;//140
-    Cr_MAX = 185;//165 low cr, high cb for dark skin
-    Cb_MIN = 80;//105
-    Cb_MAX = 120;//135
+    Cr_MAX = 195;//165 low cr, high cb for dark skin
+    Cb_MIN = 77;//105
+    Cb_MAX = 135;//135
     CGRect frame = CGRectMake(0, 0, 125, 40);
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont systemFontOfSize:18.0];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
-    label.text = @"CREATE";
+    label.text = @"create";
     self.navigationItem.titleView = label;
     NSDictionary *attrs = @{ NSFontAttributeName : [UIFont systemFontOfSize:18] };
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:attrs forState:UIControlStateNormal];
@@ -556,8 +556,12 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
     cv::Mat inputMat = [self cvMatFromUIImage:self.selectedImage];
     cv::Mat converted;
     cv::Mat skinMask;
+    cv::Mat temp;
+    cv::Mat tmp;
     cv::Mat skinMat;
     cv::Mat kernel;
+    cv::Mat grayMat;
+
     
     cvtColor(inputMat, converted, cv::COLOR_RGB2YCrCb);
     inRange(converted,cv::Scalar(Y_MIN,Cr_MIN,Cb_MIN),cv::Scalar(Y_MAX,Cr_MAX,Cb_MAX),skinMask);
@@ -565,13 +569,13 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
 //    inputMat = imutils.resize(in, width = 400)
 //    cv::Mat skinMat = mySkinDetector.getSkin(inputMat);
     
-    // Declare the Mat that will hold the gray image
-//    cv::Mat grayMat;
-    // Convert from a red/green/blue image to a gray one
-//    cv::cvtColor(skinMat, grayMat, cv::COLOR_BGR2GRAY);
-//    cv::Mat tmp=grayMat.clone();
-//    cv::Mat tmp=skinMat.clone();
-//
+//    Declare the Mat that will hold the gray image
+//     Convert from a red/green/blue image to a gray one
+//    cvtColor(skinMask, temp, cv::COLOR_YCrCb2BGR);
+//    cv::cvtColor(temp, grayMat, cv::COLOR_BGR2GRAY);
+//    tmp=skinMask;
+//    cv::Mat tmp=skinMask.clone();
+
 //    morphologyEx(tmp,tmp,cv::MORPH_GRADIENT,getStructuringElement(cv::MORPH_ELLIPSE,cv::Size(3,3)));
 //    bitwise_not(tmp,tmp);
 //    cv::Mat smallholes=cv::Mat::zeros(tmp.size(), CV_8UC1);
@@ -588,19 +592,23 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
 //    }
 //    cv::Mat done;
 //    bitwise_or(grayMat,smallholes,done);
-    
+//    morphologyEx(done,done,cv::MORPH_CLOSE,getStructuringElement(cv::MORPH_ELLIPSE,cv::Size(3,3)));
+
+//    morphologyEx(skinMask,skinMask,cv::MORPH_CLOSE,getStructuringElement(cv::MORPH_ELLIPSE,cv::Size(7,7)));
+
 // apply a series of erosions and dilations to the mask
 // using an elliptical kernel
+    
     kernel = getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(11, 11));
-    dilate(skinMask, skinMask, kernel);
     erode(skinMask, skinMask, kernel);
+    dilate(skinMask, skinMask, kernel);
+
     
 // blur the mask to help remove noise, then apply the
 // mask to the frame
     GaussianBlur(skinMask, skinMask,cv::Size(3, 3), 0);
     cv::bitwise_and(inputMat, inputMat, skinMat, skinMask);
     
-//    morphologyEx(skinMat,skinMat,cv::MORPH_CLOSE,getStructuringElement(cv::MORPH_ELLIPSE,cv::Size(3,3)));
     // Convert back to a UIImage
     return [self UIImageFromCVMat:skinMat];
 
@@ -1237,8 +1245,8 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
 }
 
 - (void) fillEffectsSlider {
-    labelEffectsArray = [[NSMutableArray alloc]initWithObjects: @"original", @"delight", @"sunny",@"night", @"beach",@"b&w-red",nil];
-    labelSecondEffectsArray = [[NSMutableArray alloc]initWithObjects: @"sepia",@"water", @"b&w",@"morning", @"sky",@"2layer",nil];
+    labelEffectsArray = [[NSMutableArray alloc]initWithObjects: @"original", @"delight", @"sunny",@"night", @"beach",@"b&w+",nil];
+    labelSecondEffectsArray = [[NSMutableArray alloc]initWithObjects: @"sepia",@"warm", @"b&w",@"morning", @"bleach",@"2layer",nil];
 
 //    if (!IS_TALL_SCREEN)
 //        self.filterSelectionBar.contentSize = CGSizeMake(55 * 11+10, self.frameSelectionBar.frame.size.height);
@@ -1535,11 +1543,12 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
 //    }
 }
 - (void)effectsClicked:(UIButton *)clickedBtn {
-    if (!doneMarkingFaces) return;
 
     NSLog(@"block number %d",tapBlockNumber);
+    if (!doneMarkingFaces) return;
+
     @autoreleasepool {
-        [defaults setInteger:clickedBtn.tag forKey:@"filter"];
+//        [defaults setInteger:clickedBtn.tag forKey:@"filter"];
         //    [  Flurry logEvent:@"Frame - Effects"];
         //    [labelToApplyFilterToVideo removeFromSuperview];
         if (tapBlockNumber==100) tapBlockNumber=0;
@@ -1593,30 +1602,13 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
                         //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_amatorka.png"];
                     } break;
                     case 3: {
-                        GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
+//                        GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
 
-//                        GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
+                        GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
                         //                            GPUImageSobelEdgeDetectionFilter *filter= [[GPUImageSobelEdgeDetectionFilter alloc] init];
                         UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                         imageView.image=quickFilteredImage;
                         //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"02"];
-                    } break;
-                    case 10: {
-                        GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
-                        
-                        //                            GPUImageRGBClosingFilter *filter = [[GPUImageRGBClosingFilter alloc] init];
-                        UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
-                        imageView.image=quickFilteredImage;
-                        //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
-                    } break;
-                    case 11: {
-//                        GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
-                        GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors"];
-
-                        //                            GPUImagePinchDistortionFilter *filter = [[GPUImagePinchDistortionFilter alloc] init];
-                        UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
-                        imageView.image=quickFilteredImage;
-                        //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
                     } break;
                     case 4:{
                         GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
@@ -1626,8 +1618,8 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
                         //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"bleachNight"];
                     } break;
                     case 5: {
-//                        GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
-                        GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"gold2.png"];
+                        GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"06"];
+//                        GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"gold2.png"];
 
                         //                            GPUImageSmoothToonFilter *filter = [[GPUImageSmoothToonFilter alloc] init];
                         UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
@@ -1642,7 +1634,12 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
                         //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"BWhighContrastRed"];
                     } break;
                     case 7: {
-                        GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
+                        GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
+
+//                        GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
+//                        GPUImageToonFilter * filter = [[GPUImageToonFilter alloc] init];
+
+//                        GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
                         //                            GPUImageSepiaFilter *filter = [[GPUImageSepiaFilter alloc] init];
                         UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                         imageView.image=quickFilteredImage;
@@ -1652,9 +1649,12 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
                         //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"sepiaSelenium2"];
                     } break;
                     case 8: {
+//                                                GPUImageSharpenFilter * filter = [[GPUImageSharpenFilter alloc] init];
+                        GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"crispWarm.png"];
+
 //                        GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
-                        //                            GPUImageColorInvertFilter *filter = [[GPUImageColorInvertFilter alloc] init];
-                        GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
+//                        GPUImageColorInvertFilter *filter = [[GPUImageColorInvertFilter alloc] init];
+//                        GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
 
                         UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                         imageView.image=quickFilteredImage;
@@ -1664,9 +1664,9 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
                         //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"aqua"];
                     } break;
                     case 9: {
+                        GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"maximumWhite.png"];
+
 //                        GPUImageGrayscaleFilter * filter = [[GPUImageGrayscaleFilter alloc] init];
-//                        GPUImageBrightnessFilter * filter = [[GPUImageBrightnessFilter alloc] init];
-                        GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarmBleach.png"];
 
                         UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
                         imageView.image=quickFilteredImage;
@@ -1675,6 +1675,27 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
                         //                            [filter removeAllTargets];
                         //                            videoFilter = [[GPUImageGrayscaleFilter alloc] init];
                     } break;
+                    case 10: {
+                        GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
+                        
+                        //                            GPUImageRGBClosingFilter *filter = [[GPUImageRGBClosingFilter alloc] init];
+                        UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                        imageView.image=quickFilteredImage;
+                        //                            videoFilter = [[GPUImageAmatorkaFilter alloc] initWithString:@"lookup_miss_etikate.png"];
+                    } break;
+                    case 11: {
+//                        GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"copperSepia2strip.png"];
+                        GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"softWarmBleach.png"];
+
+//                                                GPUImageToneCurveFilter* filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
+//                        GPUImageAmatorkaFilter* filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"fallcolors"];
+                        
+                        //                            GPUImagePinchDistortionFilter *filter = [[GPUImagePinchDistortionFilter alloc] init];
+                        UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
+                        imageView.image=quickFilteredImage;
+                        //                            videoFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"17"];
+                    } break;
+
                     case 12:{
                         GPUImageAmatorkaFilter*  filter = [[GPUImageAmatorkaFilter alloc] initWithString:@"2strip.png"];
                         UIImage *quickFilteredImage = [filter imageByFilteringImage:inputImage];
@@ -1746,8 +1767,22 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
 //              opencv method
 //                cv::Mat originalImage = [self cvMatFromUIImage:self.selectedImage];
 //                cv::Mat maskImage = [self cvMatFromUIImage:imageTemp];
-//                cv::Mat outputImage;
+//                cv::Mat outputImage=originalImage;
+//                cv::bitwise_and(originalImage, maskImage, outputImage);
+//                originalImage.copyTo(outputImage, maskImage);
 //                max(originalImage, maskImage, outputImage);
+//                NSLog(@"maskImage row, cols = %d, %d; originalImage rows,cols = %d, %d", maskImage.rows, maskImage.cols, originalImage.rows, originalImage.cols);
+//                for(int r=0; r<maskImage.rows; ++r){
+//                    for(int c=0; c<maskImage.cols; ++c){
+//                        // 0<H<0.25  -   0.15<S<0.9    -    0.2<V<0.95
+//
+//                        if( (maskImage.at<cv::Vec3b>(r,c).val[0]==0) && (maskImage.at<cv::Vec3b>(r,c).val[1]==0) && (maskImage.at<cv::Vec3b>(r,c).val[2]==0) ){
+//                            outputImage.at<cv::Vec3b>(r,c) = originalImage.at<cv::Vec3b>(r,c);
+//                        }// do nothing
+//                        else outputImage.at<cv::Vec3b>(r,c)= maskImage.at<cv::Vec3b>(r,c);
+//                    }
+//                }
+//                
 //                originalImageView.image = [self UIImageFromCVMat:outputImage];
 
                 
@@ -2207,7 +2242,12 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
     [blockSlider1 setTransform:CGAffineTransformMakeScale(1, -1)];
     NSLog(@"Done Marking Faces");
     doneMarkingFaces = YES;
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
 
+        btn.tag=9;//black and white
+    //    tapBlockNumber=0;
+    if (![defaults boolForKey:@"filter"])
+        [self effectsClicked:btn];
   
 }
 
@@ -2302,10 +2342,16 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
         UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchImage:)];
         pinchGesture.delegate=self;
         [self.frameContainer addGestureRecognizer:pinchGesture];
+        
+        if ([defaults boolForKey:@"pan"]){
+            UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanImage:)];
+            panGesture.delegate=self;
+            [self.frameContainer addGestureRecognizer:panGesture];
+        }
 
-        UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanImage:)];
-        panGesture.delegate=self;
-        [self.frameContainer addGestureRecognizer:panGesture];
+//        UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanImage:)];
+//        panGesture.delegate=self;
+//        [self.frameContainer addGestureRecognizer:panGesture];
         [self.frameContainer bringSubviewToFront:_watermarkOnImage];
 //        [self faceDetector];
 

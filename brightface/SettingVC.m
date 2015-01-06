@@ -41,7 +41,7 @@
     label.text = @"settings";
     self.navigationItem.titleView = label;
     editArr = [[NSArray alloc]initWithObjects:
-               @"photo format for frame",@"photo background color",@"auto-filter",@"auto-save to camera roll",@"add watermark",@"output pixel format",@"enable pan",
+               @"photo background color",@"auto-filter",@"auto-save to camera roll",@"add watermark",@"output pixel format",@"enable pan",
                @"follow us on instagram", @"like us on facebook",@"follow us on twitter",
                @"rate app",@"feedback",@"restore purchases",nil];
     [self.settingsTableView reloadData];
@@ -128,7 +128,7 @@
 {
     switch (section) {
         case (0):
-            return 7;
+            return 6;
         case (1):
             return 3;
 //        case (2):
@@ -168,22 +168,22 @@
 //        [cell.textLabel setFont:[UIFont systemFontOfSize:18]];
 //        cell.selectionStyle = UITableViewCellSelectionStyleGray;
         if (indexPath.section == 0){
+//            if (indexPath.row==0) {
+//                [cell.textLabel setText:[editArr objectAtIndex:0]];
+//                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+//                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(255, 0, 40, 40)];
+//                label.textColor = [UIColor lightGrayColor];
+//                label.font = [UIFont systemFontOfSize:14];
+//                label.tag = 100;
+//                [cell.contentView addSubview:label];
+//                if ([defaults boolForKey:@"fill"])
+//                    label.text = @"fit";
+//                else
+//                    label.text = @"fill";
+//            
+//            }
             if (indexPath.row==0) {
                 [cell.textLabel setText:[editArr objectAtIndex:0]];
-                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(255, 0, 40, 40)];
-                label.textColor = [UIColor lightGrayColor];
-                label.font = [UIFont systemFontOfSize:14];
-                label.tag = 100;
-                [cell.contentView addSubview:label];
-                if ([defaults boolForKey:@"fill"])
-                    label.text = @"fit";
-                else
-                    label.text = @"fill";
-            
-            }
-            if (indexPath.row==1) {
-                [cell.textLabel setText:[editArr objectAtIndex:1]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(255, 0, 40, 40)];
                 label.textColor = [UIColor lightGrayColor];
@@ -196,8 +196,8 @@
                     label.text = @"white";
                 
             }
-            if (indexPath.row==2) {
-                [cell.textLabel setText:[editArr objectAtIndex:2]];
+            if (indexPath.row==1) {
+                [cell.textLabel setText:[editArr objectAtIndex:1]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(255, 0, 40, 40)];
                 label.textColor = [UIColor lightGrayColor];
@@ -210,8 +210,8 @@
                     label.text = @"yes";
                 
             }
-            if (indexPath.row==3) {
-                [cell.textLabel setText:[editArr objectAtIndex:3]];
+            if (indexPath.row==2) {
+                [cell.textLabel setText:[editArr objectAtIndex:2]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
                 savePhoto = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [savePhoto addTarget: self action: @selector(flip) forControlEvents:UIControlEventValueChanged];
@@ -222,8 +222,8 @@
                 cell.accessoryView = savePhoto;
 
             }
-            if (indexPath.row==4) {
-                [cell.textLabel setText:[editArr objectAtIndex:4]];
+            if (indexPath.row==3) {
+                [cell.textLabel setText:[editArr objectAtIndex:3]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
                 watermark = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [watermark addTarget: self action: @selector(watermarkAction) forControlEvents:UIControlEventValueChanged];
@@ -237,8 +237,8 @@
                     watermark.on = YES;
                 
             }
-            else if(indexPath.row==5) {
-                [cell.textLabel setText:[editArr objectAtIndex:5]];
+            else if(indexPath.row==4) {
+                [cell.textLabel setText:[editArr objectAtIndex:4]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(190, 0, 100, 40)];
                 label.textColor = [UIColor lightGrayColor];
@@ -255,8 +255,8 @@
                     label.text = @"2560x2560";
                 }
             }
-            if (indexPath.row==6) {
-                [cell.textLabel setText:[editArr objectAtIndex:6]];
+            if (indexPath.row==5) {
+                [cell.textLabel setText:[editArr objectAtIndex:5]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
                 UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(255, 0, 40, 40)];
                 label.textColor = [UIColor lightGrayColor];
@@ -288,15 +288,15 @@
 //        }
         if (indexPath.section == 1) {
             if(indexPath.row==0){
-                [cell.textLabel setText:[editArr objectAtIndex:10]];
+                [cell.textLabel setText:[editArr objectAtIndex:9]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             }
             if(indexPath.row==1){
-                [cell.textLabel setText:[editArr objectAtIndex:11]];
+                [cell.textLabel setText:[editArr objectAtIndex:10]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             }
             if(indexPath.row==2){
-                [cell.textLabel setText:[editArr objectAtIndex:12]];
+                [cell.textLabel setText:[editArr objectAtIndex:11]];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             }
         }
@@ -308,20 +308,20 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        if (indexPath.row==0) {
-            [self frameActionSettings];
-        }
+//        if (indexPath.row==0) {
+//            [self frameActionSettings];
+//        }
 
-        if (indexPath.row==1) {
+        if (indexPath.row==0) {
             [self backgroundColorAction];
         }
-        if (indexPath.row==2) {
+        if (indexPath.row==1) {
             [self filterAction];
         }
-        if (indexPath.row==5){
+        if (indexPath.row==4){
             [self pixelAction];
         }
-        if (indexPath.row==6){
+        if (indexPath.row==5){
             [self panAction];
         }
     }

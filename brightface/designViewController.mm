@@ -51,6 +51,9 @@
     int Cb_MIN;
     int Cb_MAX;
     
+    UIActivityIndicatorView *indicatorView;
+
+    
     CGRect rectBlockSlider1;
     CGRect rectBlockSlider2;
     CGRect rectBlockSlider3;
@@ -131,6 +134,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self startActivityIndicator];
+    
     faceViews = [[NSMutableArray alloc] init];
     library = [designViewController defaultAssetsLibrary];
     imageTemp=[UIImage imageWithCGImage:self.selectedImage.CGImage scale:[self.selectedImage scale] orientation:self.selectedImage.imageOrientation];
@@ -224,7 +230,30 @@
 //    if (![defaults boolForKey:@"filter"])
 //        [self effectsClicked:btn];
 }
-
+- (void) startActivityIndicator {
+    //Start Activity Indicator View
+    indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    indicatorView.frame = CGRectMake(40.0, 20.0, 60.0, 60.0);
+    indicatorView.center = self.view.center;
+    indicatorView.backgroundColor = [UIColor colorWithRed:255./255 green:131./255 blue:0.0 alpha:1.0];
+    
+    // border radius
+    [indicatorView.layer setCornerRadius:5.0f];
+    
+    // border
+    [indicatorView.layer setBorderColor:[UIColor blackColor].CGColor];
+    [indicatorView.layer setBorderWidth:1.5f];
+    
+    // drop shadow
+    [indicatorView.layer setShadowColor:[UIColor blackColor].CGColor];
+    [indicatorView.layer setShadowOpacity:0.8];
+    [indicatorView.layer setShadowRadius:3.0];
+    [indicatorView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
+    
+    [self.view addSubview:indicatorView];
+    //    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [indicatorView startAnimating];
+}
 - (void) randomFilterPick {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    int number = [defaults integerForKey:@"number"];
@@ -1544,6 +1573,8 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
 }
 - (void)effectsClicked:(UIButton *)clickedBtn {
 
+    [indicatorView stopAnimating];
+
     NSLog(@"block number %d",tapBlockNumber);
     if (!doneMarkingFaces) return;
 
@@ -1571,6 +1602,7 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
                 if (blockSlider.subviews.count==0) return;
 //                UIImageView *imageView = blockSlider.subviews[0];
                 UIImageView *imageView = [[UIImageView alloc] initWithImage:imageTemp];
+                
                 
                 //            for (int i=0;i<[self.originalImages count];i++){
                 //                if ( (i == imageView.tag) && imageView.image ){

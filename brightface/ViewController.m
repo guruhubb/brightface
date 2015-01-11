@@ -65,6 +65,14 @@
     [super viewDidAppear:animated];
     _assets = [@[] mutableCopy];
     __block NSMutableArray *tmpAssets = [@[] mutableCopy];
+    
+    ALAuthorizationStatus status = [ALAssetsLibrary authorizationStatus];
+    
+    if (status != ALAuthorizationStatusAuthorized) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention" message:@"Please give permission to access your photo library.  Go to Settings. Tap Privacy. Tap Photos. Slide On/Off switch next to Stripes app!" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
     ALAssetsLibrary *assetsLibrary = [ViewController defaultAssetsLibrary];
     [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         [group setAssetsFilter:[ALAssetsFilter allPhotos]];

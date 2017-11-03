@@ -200,35 +200,10 @@
     [self frameClicked:btn];
     [self frameClicked:btn];
     [self filtersButton:self];
-//    if (![defaults boolForKey:kFeature0])
-//        btn.tag = 20;
 
-//    if (btn.tag >25  && [defaults boolForKey:kFeature0]) {
-//        NSLog(@" btn.tag is %d; nstyle = %d, nsubstyle = %d",btn.tag, nStyle,nSubStyle);
-//
-//        [self secondFrameClicked:btn];
-//    }
-//    else {
-//        [self frameClicked:btn];
-//    }
-//    [self centerImage];
     firstTimeDesign = YES;
 
-//    [defaults setBool:YES forKey:kFeature0];  //test
-//    [defaults setBool:YES forKey:kFeature1];  //test
 
-//    int number = [defaults integerForKey:@"number"];
-//    NSLog(@"number is %d",number);
-//    if (number > 9 || number == 0) {
-//        number = 2;
-//    }
-//    [defaults setInteger:number forKey:@"number"];
- 
-//    btn.tag = number;
-//    btn.tag=9;//black and white
-//    tapBlockNumber=0;
-//    if (![defaults boolForKey:@"filter"])
-//        [self effectsClicked:btn];
 }
 - (void) startActivityIndicator {
     //Start Activity Indicator View
@@ -337,23 +312,6 @@
         }
 }
 
-- (void) updateAppViewAndDefaults {
-    
-//        if ([MKStoreManager isFeaturePurchased:kFeature0])
-//            [defaults setBool:YES forKey:kFeature0];
-//        else
-//            [defaults setBool:NO forKey:kFeature0];
-//        
-//        if([MKStoreManager isFeaturePurchased:kFeature1])
-//            [defaults setBool:YES forKey:kFeature1];
-//        else
-//            [defaults setBool:NO forKey:kFeature1];
-    
-//    if([MKStoreManager isFeaturePurchased:kFeature3])
-//        [defaults setBool:YES forKey:kFeature3];
-//    else
-//        [defaults setBool:NO forKey:kFeature3];
-}
 - (void)inAppBuyAction:(int)tag {
     [Flurry logEvent:@"InApp Watermark"];
     
@@ -378,66 +336,9 @@
          {
              NSLog(@"User Cancelled Transaction");
          }];
-//    [[MKStoreKit sharedKit] initiatePaymentRequestForProductWithIdentifier:kFeature2];
-//    [[NSNotificationCenter defaultCenter] addObserverForName:kMKStoreKitProductPurchasedNotification
-//                                                      object:nil
-//                                                       queue:[[NSOperationQueue alloc] init]
-//                                                  usingBlock:^(NSNotification *note) {
-//                                                      
-//                                                      NSLog(@"Purchased/Subscribed to product with id: %@", [note object]);
-//                                                      
-//                                                      NSLog(@"%@", [[MKStoreKit sharedKit] valueForKey:@"purchaseRecord"]);
-//                                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Successful" message:nil
-//                                                                                                     delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-//                                                      [defaults setBool:YES  forKey:kFeature2];
-//                                                      [alert show];
-//                                                      [self updateAppViewAndDefaults];
-//                                                  }];
-    
-    
-    
+ 
 }
-//- (void)inAppBuyAction:(int)tag {
-//    NSString *string;
-//
-////    switch (tag) {
-////        case 0:
-////            string = kFeature0;
-////            [Flurry logEvent:@"InApp Frames"];
-////            break;
-////        case 1:
-////            string = kFeature1;
-////            [Flurry logEvent:@"InApp Filters"];
-////            break;
-//////        case 2:
-//////            string = kFeature3;
-//////            [Flurry logEvent:@"InApp Resize"];
-//////            break;
-////        default:
-////            break;
-////    }
-//    
-//    [[MKStoreManager sharedManager] buyFeature:string
-//                                    onComplete:^(NSString* purchasedFeature,
-//                                                 NSData* purchasedReceipt,
-//                                                 NSArray* availableDownloads)
-//     {
-//             NSLog(@"Purchased: %@, available downloads is %@ string is %@", purchasedFeature, availableDownloads, string);
-//             
-//   
-//             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchase Successful" message:nil
-//                                                            delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-//             [defaults setBool:YES  forKey:string];
-//             [alert show];
-//             [self updateAppViewAndDefaults];
-//
-//     }
-//                                   onCancelled:^
-//     {
-//         NSLog(@"User Cancelled Transaction");
-//     }];
-//    
-//}
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -483,20 +384,7 @@
     [captureView.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage * screenshot = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
-    /* Render the screen shot at custom resolution */
-//    CGRect cropRect=CGRectMake(captureView.bounds.origin.x, captureView.bounds.origin.y, captureView.bounds.size.width, captureView.bounds.size.height);
-//    if ([defaults integerForKey:@"pixel"]==1)
-//        cropRect= CGRectMake(0 ,0 ,640,640);
-//    else if ([defaults integerForKey:@"pixel"]==0)
-//        cropRect= CGRectMake(0 ,0 ,1280,1280);
-//    else if ([defaults integerForKey:@"pixel"]==2)
-//        cropRect= CGRectMake(0 ,0 ,2560,2560);
-    
-//    UIGraphicsBeginImageContextWithOptions(cropRect.size, captureView.opaque, 1.0f);
-//    [screenshot drawInRect:captureView.frame];
-//    UIImage * customScreenShot = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
+   
     return screenshot;
 }
 static inline double rad(double deg)
@@ -595,38 +483,6 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
     cvtColor(inputMat, converted, cv::COLOR_RGB2YCrCb);
     inRange(converted,cv::Scalar(Y_MIN,Cr_MIN,Cb_MIN),cv::Scalar(Y_MAX,Cr_MAX,Cb_MAX),skinMask);
     
-//    inputMat = imutils.resize(in, width = 400)
-//    cv::Mat skinMat = mySkinDetector.getSkin(inputMat);
-    
-//    Declare the Mat that will hold the gray image
-//     Convert from a red/green/blue image to a gray one
-//    cvtColor(skinMask, temp, cv::COLOR_YCrCb2BGR);
-//    cv::cvtColor(temp, grayMat, cv::COLOR_BGR2GRAY);
-//    tmp=skinMask;
-//    cv::Mat tmp=skinMask.clone();
-
-//    morphologyEx(tmp,tmp,cv::MORPH_GRADIENT,getStructuringElement(cv::MORPH_ELLIPSE,cv::Size(3,3)));
-//    bitwise_not(tmp,tmp);
-//    cv::Mat smallholes=cv::Mat::zeros(tmp.size(), CV_8UC1);
-//    // Find the contours in the canny image.
-//    std::vector<cv::Vec4i> hierarchy;
-//    std::vector<std::vector<cv::Point> > contours;
-////    std::vector<std::vector<Point>> contours;
-//    findContours(tmp,contours,hierarchy, cv::RETR_LIST,cv::CHAIN_APPROX_SIMPLE);
-//    for(int i = 0; i < contours.size(); i++)
-//    {
-//        double area = contourArea(cv::Mat(contours[i]));
-//        if(area<100)
-//            drawContours(smallholes, contours, i, 255, -1);
-//    }
-//    cv::Mat done;
-//    bitwise_or(grayMat,smallholes,done);
-//    morphologyEx(done,done,cv::MORPH_CLOSE,getStructuringElement(cv::MORPH_ELLIPSE,cv::Size(3,3)));
-
-//    morphologyEx(skinMask,skinMask,cv::MORPH_CLOSE,getStructuringElement(cv::MORPH_ELLIPSE,cv::Size(7,7)));
-
-// apply a series of erosions and dilations to the mask
-// using an elliptical kernel
     
     kernel = getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(11, 11));
     erode(skinMask, skinMask, kernel);
@@ -705,22 +561,7 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
     return finalImage;
 }
 - (UIImage *) cropImageWithView :(UIView *) captureView {
-    
-    // Create the image from a png file
-//    UIImage *image = self.selectedImage;
-//    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-//    
-//    // Get size of current image
-//    CGSize size = [self.selectedImage size];
-    
-    // Frame location in view to show original image
-//    [imageView setFrame:CGRectMake(0, 0, size.width, size.height)];
-//    [[self view] addSubview:imageView];
-    
-    // Create rectangle that represents a cropped image
-    // from the middle of the existing image
-    //    CGRect rect = CGRectMake(size.width / 4, size.height / 4 ,
-    //                             (size.width / 2), (size.height / 2));
+
     CGRect rect=CGRectMake(captureView.frame.origin.x/scaleView, captureView.frame.origin.y/scaleView, captureView.frame.size.width/scaleView, captureView.frame.size.height/scaleView);
     // Create bitmap image from original image data,
     // using rectangle to specify desired crop area
@@ -812,32 +653,7 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
 
         [self.frameSelectionBar addSubview:btn];
     }
-//    for (int ind = 25; ind <= 26; ind++) {
-//        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        if (!IS_TALL_SCREEN)
-//            btn.frame = CGRectMake((ind - 25 ) * 55+5+ 20*55, 5, 50, 50);
-//        else
-//            btn.frame = CGRectMake((ind - 25 ) * 70+5+ 20*70, 5, 65, 65);
-//        btn.tag = ind+25;
-//        btn.layer.borderWidth=kBorderWidth;
-//        btn.layer.borderColor=[[UIColor clearColor] CGColor];
-//        [btn addTarget:self action:@selector(secondFrameClicked:) forControlEvents:UIControlEventTouchUpInside];
-//        NSLog(@"secondFrame%02d.png",ind);
-//        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"secondFrame%02d.png",ind]] forState:UIControlStateNormal];
-//        [btn.imageView setContentMode:UIViewContentModeScaleToFill];
-//        btn.alpha = 0.4;
-//        [self.frameSelectionBar addSubview:btn];
-//        
-//        if (![defaults boolForKey:kFeature0]){
-//            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockImage.png"]];
-//            imageView.alpha = 0.8;
-//            imageView.layer.shadowColor = [UIColor blackColor].CGColor;
-//            imageView.layer.shadowOffset = CGSizeMake(0, 1);
-//            imageView.layer.shadowOpacity = 1;
-//            imageView.frame=CGRectMake(btn.frame.size.width-15, 2, 15, 15);
-//            [btn addSubview:imageView];
-//        }
-//    }
+
 }
 
 - (void) fillSecondFrameSelectionSlider {
@@ -855,45 +671,8 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"secondFrame%02d.png",ind]] forState:UIControlStateNormal];
         [btn.imageView setContentMode:UIViewContentModeScaleToFill];
         btn.alpha = 0.4;
-        [self.frameSelectionBar addSubview:btn];
-        
-//        if (![defaults boolForKey:kFeature0]){
-//            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockImage.png"]];
-//            imageView.alpha = 0.8;
-//            imageView.layer.shadowColor = [UIColor blackColor].CGColor;
-//            imageView.layer.shadowOffset = CGSizeMake(0, 1);
-//            imageView.layer.shadowOpacity = 1;
-//            imageView.frame=CGRectMake(btn.frame.size.width-15, 2, 15, 15);
-//            [btn addSubview:imageView];
-//        }
+        [self.frameSelectionBar addSubview:btn];   
     }
-
-//    for (int ind = 9; ind <= 24; ind++) {
-//        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        if (!IS_TALL_SCREEN)
-//            btn.frame = CGRectMake((ind - 9 ) * 55+5+6*55, 60, 50, 50);
-//        else
-//            btn.frame = CGRectMake((ind - 9 ) * 70+5+6*70, 75, 65, 65);
-//        btn.tag = ind+25;
-//        btn.layer.borderWidth=kBorderWidth;
-//        btn.layer.borderColor=[[UIColor clearColor] CGColor];
-//        [btn addTarget:self action:@selector(secondFrameClicked:) forControlEvents:UIControlEventTouchUpInside];
-//        NSLog(@"secondFrame%02d.png",ind);
-//        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"secondFrame%02d.png",ind]] forState:UIControlStateNormal];
-//        [btn.imageView setContentMode:UIViewContentModeScaleToFill];
-//        btn.alpha = 0.4;
-//        [self.frameSelectionBar addSubview:btn];
-//        
-//        if (![defaults boolForKey:kFeature0]){
-//            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockImage.png"]];
-//            imageView.alpha = 0.8;
-//            imageView.layer.shadowColor = [UIColor blackColor].CGColor;
-//            imageView.layer.shadowOffset = CGSizeMake(0, 1);
-//            imageView.layer.shadowOpacity = 1;
-//            imageView.frame=CGRectMake(btn.frame.size.width-15, 2, 15, 15);
-//            [btn addSubview:imageView];
-//        }
-//    }
 }
 
 - (void)frameClicked:(UIButton *)clickedBtn
@@ -961,70 +740,7 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
             [self resetAdjustedValues];
             [self selectFrame:1 SUB:12];
             break;
-            
-//        case 13:
-//            [self resetAdjustedValues];
-//            [self selectFrame:1 SUB:12];
-//            break;
-//        case 14:
-//            [self resetAdjustedValues];
-//            [self selectFrame:3 SUB:2];
-//            break;
-//        case  15:
-//            
-//            [self resetAdjustedValues];
-//            [self selectFrame:3 SUB:3];
-//            break;
-//        case 16:
-//            
-//            [self resetAdjustedValues];
-//            [self selectFrame:3 SUB:4];
-//            break;
-//        case 17:
-//            
-//            [self resetAdjustedValues];
-//            [self selectFrame:3 SUB:5];
-//            break;
-//        case 18:
-//            
-//            [self selectFrame:3 SUB:6];
-//            break;
-//        case 19:
-//            
-//            [self resetAdjustedValues];
-//            [self selectFrame:4 SUB:1];
-//            break;
-//        case 20:
-//            
-//            [self resetAdjustedValues];
-//            [self selectFrame:4 SUB:2];
-//            break;
-//        case 21:
-//            
-//            [self resetAdjustedValues];
-//            [self selectFrame:4 SUB:3];
-//            break;
-//        case 22:
-//            
-//            [self resetAdjustedValues];
-//            [self selectFrame:4 SUB:4];
-//            break;
-//        case 23:
-//            
-//            [self resetAdjustedValues];
-//            [self selectFrame:4 SUB:5];
-//            break;
-//        case 24:
-//            
-//            [self resetAdjustedValues];
-//            [self selectFrame:4 SUB:6];
-//            break;
-//        case 25:
-//            
-//            [self resetAdjustedValues];
-//            [self selectFrame:4 SUB:7];
-//            break;
-            
+
         default:
             [self resetAdjustedValues];
             [self selectFrame:1 SUB:1];
@@ -1110,149 +826,6 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
                 [self resetAdjustedValues];
                 [self selectFrame:1 SUB:24];
                 break;
-//            case 11:
-//                
-//                [self resetAdjustedValues];
-//                [self selectFrame:2 SUB:13];
-//                break;
-//            case 15:
-//                
-//                [self selectFrame:2 SUB:14];
-//                break;
-//            case 16:
-//                
-//                [self selectFrame:2 SUB:15];
-//                break;
-                
-                
-//            case 17:
-//                
-//                [self selectFrame:2 SUB:16];
-//                break;
-//            case 13:
-//                
-//                [self resetAdjustedValues];
-//                [self selectFrame:3 SUB:7];
-//                break;
-//            case 14:
-//                
-//                [self resetAdjustedValues];
-//                [self selectFrame:3 SUB:8];
-//                break;
-//            case 15:
-//                
-//                [self resetAdjustedValues];
-//                [self selectFrame:3 SUB:9];
-//                break;
-//            case 16:
-//                
-//                [self resetAdjustedValues];
-//                [self selectFrame:3 SUB:10];
-//                break;
-//            case 17:
-//                
-//                [self resetAdjustedValues];
-//                [self selectFrame:3 SUB:11];
-//                break;
-//            case 18:
-//                
-//                [self resetAdjustedValues];
-//                [self selectFrame:3 SUB:12];
-//                break;
-//            case 18:
-//                
-//                [self selectFrame:3 SUB:13];
-//                break;
-                
-//            case 19:
-//                [self resetAdjustedValues];
-//                [self selectFrame:3 SUB:14];
-//                break;
-//            case 26:
-//                
-//                [self selectFrame:3 SUB:15];
-//                break;
-//            case 27:
-//                [self selectFrame:3 SUB:16];
-//                break;
-                
-                //        case 28:
-                //
-                //            [self selectFrame:4 SUB:8];
-                //            break;
-                //        case 29:
-                //
-                //            [self selectFrame:4 SUB:9];
-                //            break;
-//            case 20:
-//                
-//                [self resetAdjustedValues];
-//                [self selectFrame:4 SUB:10];
-//                break;
-//            case 21:
-//                
-//                [self resetAdjustedValues];
-//                [self selectFrame:4 SUB:11];
-//                break;
-//            case 22:
-//                
-//                [self resetAdjustedValues];
-//                [self selectFrame:4 SUB:12];
-//                break;
-//            case 23:
-//                
-//                [self resetAdjustedValues];
-//                [self selectFrame:4 SUB:13];
-//                break;
-//                
-//            case 24:
-//                [self resetAdjustedValues];
-//                [self selectFrame:4 SUB:14];
-//                break;
-                //        case 33:
-                //
-                //            [self selectFrame:4 SUB:15];
-                //            break;
-//            case 25:
-//                [self resetAdjustedValues];
-//                [self selectFrame:4 SUB:16];
-//                
-//                break;
-//            case 26:
-//                [self resetAdjustedValues];
-//                [self selectFrame:4 SUB:18];
-//                
-//                break;
-//            case 27:
-//                [self resetAdjustedValues];
-//                [self selectFrame:2 SUB:17];
-//                
-//                break;
-//            case 28:
-//                [self resetAdjustedValues];
-//                [self selectFrame:2 SUB:18];
-//                
-//                break;
-//            case 29:
-//                [self resetAdjustedValues];
-//                [self selectFrame:2 SUB:19];
-//                
-//                break;
-//            case 30:
-//                [self resetAdjustedValues];
-//                [self selectFrame:2 SUB:20];
-//                
-//                break;
-//            case 31:
-//                [self resetAdjustedValues];
-//                [self selectFrame:2 SUB:21];
-//                
-//                break;
-//            case 32:
-//                [self resetAdjustedValues];
-//                [self selectFrame:2 SUB:22];
-//                
-//                break;
 
                 
             default:
@@ -1260,7 +833,6 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
                 [self selectFrame:1 SUB:13];
                 break;
         }
-//    }
 }
 
 - (UIImage *) cropImage: (UIImage *) image {
@@ -1370,15 +942,7 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
 
         [self.filterSelectionBar addSubview:btn];
         [self.filterSelectionBar addSubview:label];
-//        if (![defaults boolForKey:kFeature1]){
-//            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockImage.png"]];
-//            imageView.alpha = 0.8;
-//            imageView.layer.shadowColor = [UIColor blackColor].CGColor;
-//            imageView.layer.shadowOffset = CGSizeMake(0, 1);
-//            imageView.layer.shadowOpacity = 1;
-//            imageView.frame=CGRectMake(btn.frame.size.width-15, 2, 15, 15);
-//            [btn addSubview:imageView];
-//        }
+
     }
 }
 - (void) saveImage : (UIImage *)image {
@@ -1401,25 +965,7 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
 }
 
 - (void)edgeDilationClosing {
-//    NSLog(@"block number %d",tapBlockNumber);
-//    @autoreleasepool {
-//        [defaults setInteger:clickedBtn.tag forKey:@"filter"];
-//    [  Flurry logEvent:@"Frame - Effects"];
-//    [labelToApplyFilterToVideo removeFromSuperview];
-//    if (tapBlockNumber==100) tapBlockNumber=0;
-//    AppRecord *app = [[AppRecord alloc] init];
-//    for (int i = 1; i <= 12; i++) {
-//        UIButton *frameButton = (UIButton *)[_filterSelectionBar viewWithTag:i];
-//        frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
-//    }
-//    for (int i = 1; i <= 20; i++) {
-//        UIButton *frameButton = (UIButton *)[_secondEffectsSlider viewWithTag:i];
-//        frameButton.layer.borderColor=[[UIColor clearColor] CGColor];
-//    }
-//    clickedBtnTag = clickedBtn.tag;
-//    clickedBtn.layer.borderColor=[[UIColor blackColor] CGColor];
-//    blendBtnClicked=NO;
-//    effectsBtnClicked=YES;
+
     UIView *tempView = [[UIView alloc] initWithFrame:blockSlider1.frame];
     int i=0;
     for (UIImageView *imageView in blockSlider1.subviews){
@@ -1602,21 +1148,7 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
                 if (blockSlider.subviews.count==0) return;
 //                UIImageView *imageView = blockSlider.subviews[0];
                 UIImageView *imageView = [[UIImageView alloc] initWithImage:imageTemp];
-                
-                
-                //            for (int i=0;i<[self.originalImages count];i++){
-                //                if ( (i == imageView.tag) && imageView.image ){
-                
-//                GPUImageColorInvertFilter *invertFilter = [[GPUImageColorInvertFilter alloc] init];
-//                UIImage *invertFilteredImage = [invertFilter imageByFilteringImage:maskTemp];
-                
-//                GPUImageGaussianBlurFilter *blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
-//                UIImage *blurFilteredImage = [blurFilter imageByFilteringImage:self.selectedImage];
-//                GPUImageClosingFilter *closingFilter = [[GPUImageClosingFilter alloc] init];
-//                UIImage *closeFilteredImage = [closingFilter imageByFilteringImage:blurFilteredImage];
-                
-//                UIImage *inputImage = self.selectedImage;
-//                UIImage *inputImage = invertFilteredImage;
+
                 UIImage *inputImage = maskTemp;
 
                 switch (clickedBtn.tag) {
@@ -1745,46 +1277,8 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
                 }
                 imageTemp = imageView.image;
                 UIImageView *originalImageView = blockSlider.subviews[0];
-//                CGImageRef imageCGI = CGImageCreateWithMask(originalImageView.image.CGImage, imageTemp.CGImage);
-//                UIImage* uiImage = [[UIImage alloc] initWithCGImage:CGImageCreateWithMask(originalImageView.image.CGImage, imageTemp.CGImage)];
-//                CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-//                NSUInteger width = CGImageGetWidth(imageCGI);
-//                NSUInteger height = CGImageGetHeight(imageCGI);
-//                NSUInteger bytesPerPixel = 4;
-//                NSUInteger bytesPerRow = bytesPerPixel * width;
-//                NSUInteger bitsPerComponent = 8;
-//                NSUInteger size = height*width*bytesPerPixel;
-////                NSMutableData *myData = [[NSMutableData alloc] initWithCapacity:size];
-////                unsigned char *rawData = myData.mutableBytes;
-////                unsigned char *rawData = malloc(size);
-//                CGContextRef context = CGBitmapContextCreate(NULL,width,height,bitsPerComponent,bytesPerRow,colorSpace,kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
-//                CGColorSpaceRelease(colorSpace);
-//                CGContextDrawImage(context, CGRectMake(0,0,width,height),imageCGI);
-//                UIImage *newImage = [UIImage imageWithCGImage:CGBitmapContextCreateImage(context)];
-//                CGContextRelease(context);    
-//                free(rawData);
-//                UIImage* myImage = [[UIImage alloc] initWithCGImage:imageCGI];
-                
-//                UIImage *imgMask = [UIImage imageNamed:@"Mask.png"];
-//                UIImage *imgBgImage = [UIImage imageNamed:@"Full.png"];
-                
-                
-                
-//                GPUImageMaskFilter *maskingFilter = [[GPUImageMaskFilter alloc] init];
-//                GPUImageAlphaBlendFilter *maskingFilter = [[GPUImageAlphaBlendFilter alloc] init];
+
                 GPUImageLightenBlendFilter *maskingFilter = [[GPUImageLightenBlendFilter alloc] init];  //this works!!
-//                GPUImageSoftLightBlendFilter *maskingFilter = [[GPUImageSoftLightBlendFilter alloc] init];
-//                GPUImageChromaKeyBlendFilter *maskingFilter = [[GPUImageChromaKeyBlendFilter alloc] init];
-//                GPUImageDissolveBlendFilter *maskingFilter = [[GPUImageDissolveBlendFilter alloc] init];
-//                GPUImageAddBlendFilter *maskingFilter = [[GPUImageAddBlendFilter alloc] init];
-//                GPUImageMultiplyBlendFilter *maskingFilter = [[GPUImageMultiplyBlendFilter alloc] init];
-//                GPUImageOverlayBlendFilter *maskingFilter = [[GPUImageOverlayBlendFilter alloc] init];
-//                GPUImageScreenBlendFilter *maskingFilter = [[GPUImageScreenBlendFilter alloc] init];
-//                GPUImageExclusionBlendFilter *maskingFilter = [[GPUImageExclusionBlendFilter alloc] init];  //this is interesting!
-//                GPUImageSourceOverBlendFilter *maskingFilter = [[GPUImageSourceOverBlendFilter alloc] init];
-//                GPUImageColorBurnBlendFilter *maskingFilter = [[GPUImageColorBurnBlendFilter alloc] init];
-//                GPUImageLuminosityBlendFilter *maskingFilter = [[GPUImageLuminosityBlendFilter alloc] init];
-//                GPUImageHueBlendFilter *maskingFilter = [[GPUImageHueBlendFilter alloc] init];
 
                 GPUImagePicture * maskGpuImage = [[GPUImagePicture alloc] initWithImage:imageTemp ];
                 GPUImagePicture *FullGpuImage = [[GPUImagePicture alloc] initWithImage:self.selectedImage ];
@@ -1795,30 +1289,7 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
                 [maskGpuImage addTarget:maskingFilter];
                 [maskGpuImage processImage];
                 UIImage *OutputImage = [maskingFilter imageFromCurrentFramebuffer];
-                
-//              opencv method
-//                cv::Mat originalImage = [self cvMatFromUIImage:self.selectedImage];
-//                cv::Mat maskImage = [self cvMatFromUIImage:imageTemp];
-//                cv::Mat outputImage=originalImage;
-//                cv::bitwise_and(originalImage, maskImage, outputImage);
-//                originalImage.copyTo(outputImage, maskImage);
-//                max(originalImage, maskImage, outputImage);
-//                NSLog(@"maskImage row, cols = %d, %d; originalImage rows,cols = %d, %d", maskImage.rows, maskImage.cols, originalImage.rows, originalImage.cols);
-//                for(int r=0; r<maskImage.rows; ++r){
-//                    for(int c=0; c<maskImage.cols; ++c){
-//                        // 0<H<0.25  -   0.15<S<0.9    -    0.2<V<0.95
-//
-//                        if( (maskImage.at<cv::Vec3b>(r,c).val[0]==0) && (maskImage.at<cv::Vec3b>(r,c).val[1]==0) && (maskImage.at<cv::Vec3b>(r,c).val[2]==0) ){
-//                            outputImage.at<cv::Vec3b>(r,c) = originalImage.at<cv::Vec3b>(r,c);
-//                        }// do nothing
-//                        else outputImage.at<cv::Vec3b>(r,c)= maskImage.at<cv::Vec3b>(r,c);
-//                    }
-//                }
-//                
-//                originalImageView.image = [self UIImageFromCVMat:outputImage];
 
-                
-//                originalImageView.image = [self maskImage:self.selectedImage withMask:imageTemp];
                 originalImageView.image = OutputImage;
 
 //                imageTemp=imageView.image;
@@ -2144,34 +1615,7 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
 //        faceView.layer.borderColor = [[UIColor redColor] CGColor];
         [faceView setFrame:CGRectMake(faceView.frame.origin.x*scaleView, faceView.frame.origin.y*scaleView, faceView.frame.size.width*scaleView, faceView.frame.size.height*scaleView)];
         // add the new view to create a box around the face
-//        [blockSlider1 addSubview:faceView];
-//        UIImage *captureImageInsideFaceView = [self cropImageFromView:faceView];
-//        UIImageView *imageView = [[UIImageView alloc] initWithImage:captureImageInsideFaceView];
-//        [imageView setFrame:CGRectMake(faceView.frame.origin.x, faceView.frame.origin.y, faceView.frame.size.width,   faceView.frame.size.height)];
-        
-//        UIImage *image = [self captureImageFromView:tempView];
-//        UIImageView *mask = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"maskCircle.png"]];
-//
-//        mask.frame = faceView.frame;
-//        //            [blockSlider1.layer addSublayer:mask]
-//        [tempView addSubview:mask];
-        
-        
-        
-        
-//        CGRect rect = CGRectMake(faceView.frame.origin.x/scaleView , faceView.frame.origin.y/scaleView, faceView.frame.size.width/scaleView, faceView.frame.size.height/scaleView);
-//        maskTemp = UIImageCrop(self.selectedImage, faceFeature.bounds);
-//        UIImageView *maskView = [[UIImageView alloc] initWithImage:maskTemp];
-//
-//        maskView.frame = faceView.frame;  //set imageview frame size to scaled boxed view
-//        maskView.tag = 100 + i;
-//        [blockSlider1 addSubview:maskView];
-//        NSLog(@"imageView 1 subview count = %lu", (unsigned long)maskView.subviews.count);
 
-        // flip image on y-axis to match coordinate system used by core image
-//        [mask setTransform:CGAffineTransformMakeScale(1, -1)];
-
-        // flip the entire window to make everything right side up
         [blockSlider1 addSubview:faceView];
 //        [faceViews addObject:faceView];
         
@@ -2239,35 +1683,7 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
 //    UIImage *image10 = [self captureYourView:tempView];
 //    UIImageView *imageView = [[UIImageView alloc] initWithImage:image10];
     maskTemp=[self skinTone];
-//    UIImageView *imageView2 = [[UIImageView alloc] initWithImage:maskTemp];  //replace with skinDetect
-//    UIView *tempView1 = [[UIView alloc] initWithFrame:blockSlider1.frame];
-//    [tempView1 addSubview:imageView2];
-    
-//    UIImageView *imageView2 = [[UIImageView alloc] initWithImage:maskTemp];  //replace with skinDetect
-//    [self fitImageToScroll:imageView2 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:[defaults floatForKey:@"Rotate"]+sliderRotate.value];
-    
-//    UIImage *image11 = [self captureYourView:tempView1];
-//    UIImageView *imageView11 = [[UIImageView alloc] initWithImage:image11];
 
-//    GPUImageColorInvertFilter *invertFilter = [[GPUImageColorInvertFilter alloc] init];
-//    UIImage *invertFilterImage = [invertFilter imageByFilteringImage:imageView2.image];
-//    imageView2.image = invertFilterImage;
-//    mask.contents = (id)[image11 CGImage];  //replace with imageView
-    
-//    [blockSlider1 addSubview:imageView2];            // replace with imageView
-
-//    imageView.frame = blockSlider1.frame;
-//    mask.contents = (id)[[self skinDetect] CGImage];
-//    imageView.image = [self skinDetect];
-//    mask.contents = (id)[[UIImage imageNamed:@"maskCircle.png"] CGImage];
-//    UIImageView *imageMaskView = blockSlider1.subviews[0];
-//    imageMaskView.layer.mask=mask;
-
-//    mask.frame = blockSlider2.frame;
-//    blockSlider2.layer.mask=mask;
-    
-//    [image2 setTransform:CGAffineTransformMakeScale(1, -1)];
-//    [imageView2 setTransform:CGAffineTransformMakeScale(1, -1)];
     
 
 //    [blockSlider2 setTransform:CGAffineTransformMakeScale(1, -1)];
@@ -2329,33 +1745,7 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
 //        blockSlider4.tag = 3;
         [blockSlider1.layer setBorderColor:[[UIColor clearColor] CGColor]];
         [blockSlider1.layer setBorderWidth:kBlockWidth];
-        
-//        [blockSlider2.layer setBorderColor:[[UIColor clearColor] CGColor]];
-//        [blockSlider2.layer setBorderWidth:kBlockWidth];
-//        
-//        [blockSlider3.layer setBorderColor:[[UIColor clearColor] CGColor]];
-//        [blockSlider3.layer setBorderWidth:kBlockWidth];
-//        
-//        [blockSlider4.layer setBorderColor:[[UIColor clearColor] CGColor]];
-//        [blockSlider4.layer setBorderWidth:kBlockWidth];
-//        image1 = [[UIImageView alloc] initWithImage:self.selectedImage];
-//
-//        image1.tag =0;
-//        [blockSlider1 addSubview:image1];
-//        [self fitImageToScroll:image1 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:0.0 ];
-
-//        image2 = [[UIImageView alloc] initWithImage:self.selectedImage];
-//        image2.tag =1;
-//        [blockSlider2 addSubview:image2];
-//        [self fitImageToScroll:image2 SCROLL:blockSlider2 scrollViewNumber:blockSlider2.tag angle:0.0 ];
-//        image3 = [[UIImageView alloc] initWithImage:self.selectedImage];
-//        image3.tag =2;
-//        [blockSlider3 addSubview:image3];
-//        [self fitImageToScroll:image3 SCROLL:blockSlider3 scrollViewNumber:blockSlider3.tag angle:0.0 ];
-//        image4 = [[UIImageView alloc] initWithImage:self.selectedImage];
-//        image4.tag =3;
-//        [blockSlider4 addSubview:image4];
-//        [self fitImageToScroll:image4 SCROLL:blockSlider4 scrollViewNumber:blockSlider4.tag angle:0.0 ];
+   
         
         [self.frameContainer addSubview:blockSlider1];
 //        [self.frameContainer addSubview:blockSlider2];
@@ -2403,24 +1793,6 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
         blockSlider1.layer.mask=nil;
 //    blockSlider2.layer.mask=nil;
 
-//        if (blockSlider.tag == 0) {
-//            rectBlockSlider1 = [self getScrollFrame1:nStyle subStyle:nSubStyle];
-//            blockSlider1.frame = rectBlockSlider1;
-//        }
-//        else if (blockSlider.tag == 1) {
-//            rectBlockSlider2 = [self getScrollFrame2:nStyle subStyle:nSubStyle];
-//            blockSlider.frame = rectBlockSlider2;
-//        }
-//        else if (blockSlider.tag == 2) {
-//            rectBlockSlider3 = [self getScrollFrame3:nStyle subStyle:nSubStyle];
-//            blockSlider.frame = rectBlockSlider3;
-//        }
-//        else if (blockSlider.tag == 3) {
-//            rectBlockSlider4 = [self getScrollFrame4:nStyle subStyle:nSubStyle];
-//            blockSlider.frame = rectBlockSlider4;
-//        }
-//        for (UIImageView *imageView in blockSlider.subviews){
-//            [imageView removeFromSuperview];
 //        }
     for (UIImageView *imageView in blockSlider1.subviews){
              [imageView removeFromSuperview];
@@ -2446,31 +1818,7 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
     
     //    [blockSlider1 addSubview:image1];
     
-    // flip image on y-axis to match coordinate system used by core image
-//    [image1 setTransform:CGAffineTransformMakeScale(1, -1)];
-//    // flip the entire window to make everything right side up
-//    [blockSlider1 setTransform:CGAffineTransformMakeScale(1, -1)];
-//    NSLog(@"blockslider 4 subview count = %lu", (unsigned long)blockSlider1.subviews.count);
-//
-////    nowTime =[[NSDate date] timeIntervalSince1970];
-////    if ((nowTime-startTime)> 1 ){
-////        NSLog(@"nowTime is %f",nowTime);
-////        startTime =[[NSDate date] timeIntervalSince1970];
-////    [self reFilterImage:[defaults integerForKey:@"filter"] :image1];
-////    }
-////    if (nSubStyle==1){
-////        CALayer *mask = [CALayer layer];
-////        mask.contents = (id)[[UIImage imageNamed:@"maskCircle.png"] CGImage];
-////        mask.frame = CGRectMake(155-50/2-nMargin*6, 155-50/2-nMargin*6, 50+nMargin*12, 50+nMargin*12 );
-////        blockSlider1.layer.mask=mask;
-////    }
-//    [self performSelectorInBackground:@selector(edgeDilationClosing) withObject:nil];
-//
-////    [self edgeDilationClosing];
 
-
-//        [blockSlider setContentOffset:CGPointMake(blockSlider.frame.origin.x, blockSlider.frame.origin.y) animated:NO];
-//    }
 }
 - (void) resizeFramesWithoutFilter {
     
@@ -2480,22 +1828,7 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
     //        if (blockSlider.tag == 0) {
     rectBlockSlider1 = [self getScrollFrame1:nStyle subStyle:nSubStyle];
     blockSlider1.frame = rectBlockSlider1;
-    //        }
-    //        else if (blockSlider.tag == 1) {
-    //            rectBlockSlider2 = [self getScrollFrame2:nStyle subStyle:nSubStyle];
-    //            blockSlider.frame = rectBlockSlider2;
-    //        }
-    //        else if (blockSlider.tag == 2) {
-    //            rectBlockSlider3 = [self getScrollFrame3:nStyle subStyle:nSubStyle];
-    //            blockSlider.frame = rectBlockSlider3;
-    //        }
-    //        else if (blockSlider.tag == 3) {
-    //            rectBlockSlider4 = [self getScrollFrame4:nStyle subStyle:nSubStyle];
-    //            blockSlider.frame = rectBlockSlider4;
-    //        }
-    //        for (UIImageView *imageView in blockSlider.subviews){
-    //            [imageView removeFromSuperview];
-    //        }
+
     for (UIImageView *imageView in blockSlider1.subviews){
         [imageView removeFromSuperview];
     }
@@ -2504,22 +1837,9 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
     
     [self fitImageToScroll:image1 SCROLL:blockSlider1 scrollViewNumber:blockSlider1.tag angle:[defaults floatForKey:@"Rotate"]+sliderRotate.value];
     
-    //    nowTime =[[NSDate date] timeIntervalSince1970];
-    //    if ((nowTime-startTime)> 1 ){
-    //        NSLog(@"nowTime is %f",nowTime);
-    //        startTime =[[NSDate date] timeIntervalSince1970];
+
     [self reFilterImage:[defaults integerForKey:@"filter"] :image1];
-    //    }
-    //    if (nSubStyle==1){
-    //        CALayer *mask = [CALayer layer];
-    //        mask.contents = (id)[[UIImage imageNamed:@"maskCircle.png"] CGImage];
-    //        mask.frame = CGRectMake(155-50/2-nMargin*6, 155-50/2-nMargin*6, 50+nMargin*12, 50+nMargin*12 );
-    //        blockSlider1.layer.mask=mask;
-    //    }
-    
-    
-    //        [blockSlider setContentOffset:CGPointMake(blockSlider.frame.origin.x, blockSlider.frame.origin.y) animated:NO];
-    //    }
+
 }
 - (void) reFilterImage : (NSInteger) tag : (UIImageView *) imageView{
    
@@ -2694,10 +2014,6 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
     else
         return NO;
 }
-// this allows you to dispatch touches
-//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-//    return YES;
-//}
 
 
 
@@ -2778,158 +2094,11 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
 
     [scrView setContentOffset:pt animated:NO];
     NSLog(@"blockslider 6 subview count = %lu", (unsigned long)scrView.subviews.count);
-
-    
-//    float imageWidthGreater = imgView.frame.size.width > imgView.frame.size.height ? imgView.frame.size.width: imgView.frame.size.height;
-//    float imageWidthSmaller = imgView.frame.size.width > imgView.frame.size.height ? imgView.frame.size.height: imgView.frame.size.width;
-//    float scrollViewWidthGreater = scrView.frame.size.width > scrView.frame.size.height ? scrView.frame.size.width:scrView.frame.size.height;
-//    float scrollViewWidthSmaller = scrView.frame.size.width > scrView.frame.size.height ? scrView.frame.size.height:scrView.frame.size.width;
-//    
-//    float rateImageFill;
-//    float rateImageFit;
-////        rateImageFill = 310/imageWidthSmaller;
-////        rateImageFit = 310/imageWidthGreater;
-//    rateImageFill = scrollViewWidthSmaller/imageWidthSmaller;
-//    rateImageFit = scrollViewWidthGreater/imageWidthGreater;
-//
-//    
-//    float rate;
-//    if ([defaults boolForKey:@"fill"])
-//        rate = rateImageFit;
-//    else
-//        rate = rateImageFill;
-//    
-//    
-//    
-//    if(!isinf(rate)) {
-//     [imgView setFrame:CGRectMake(0.0,0.0, imgView.frame.size.width*rate, imgView.frame.size.height*rate)];  //split
-//        NSLog (@"imageView frame size is %f width %f height",imgView.frame.size.width,imgView.frame.size.height);
-//        imageWidth=imgView.frame.size.width;
-//        imageHeight=imgView.frame.size.height;
-//    }
-//    scale = rate;
-//    
-//    CGPoint pt;
-//    pt.x =   scrView.frame.origin.x ;//One Frame
-//    pt.y =   scrView.frame.origin.y;//One Frame
-//    
-//    NSLog(@"pt is x=%f and y=%f",pt.x, pt.y);
-//    [scrView setContentOffset:pt animated:NO];
-//    NSLog(@"angle is %f",angle);
-//    float zoomFactor = [defaults floatForKey:@"Zoom"];
-//    imgView.transform = CGAffineTransformRotate(imgView.transform, angle);
-//    if ([defaults boolForKey:@"Flip"])
-//        imgView.transform = CGAffineTransformScale(imgView.transform, -zoomFactor, zoomFactor);
-//    else
-//        imgView.transform = CGAffineTransformScale(imgView.transform, zoomFactor, zoomFactor);
     
     NSLog(@"blockslider 7 subview count = %lu", (unsigned long)scrView.subviews.count);
 
 }
 
-//- (void) scaleFeatureViewToBlockSlider:(UIView*)faceView scale:(CGFloat)scale  /*scrollViewNumber: (NSInteger)tagNumber angle: (CGFloat) angle*/
-//{
-//    float rateScr;
-//    float rateImg;
-//    float rateWidth;
-//    float rateHeight;
-//    rateScr = scrView.frame.size.height / scrView.frame.size.width;
-//    rateImg = faceView.frame.size.height / faceView.frame.size.width;
-//
-//    rateWidth = scrView.frame.size.width / faceView.frame.size.width;
-//    rateHeight = scrView.frame.size.height / faceView.frame.size.height;
-//    NSLog(@"imgView is width=%f, height=%f, rateWidth is %f, rateHeight is %f",faceView.frame.size.width, faceView.frame.size.height,rateWidth,rateHeight);
-//    CGFloat rateFit = rateScr < rateImg ? rateWidth : rateHeight;
-//    rateFit = rateHeight > rateWidth? rateWidth : rateHeight;
-    
-    
-//    NSLog (@"rateFit is %f",rateFit);
-//    CGSize szImage = CGSizeMake(faceView.frame.size.width*rateFit, faceView.frame.size.height*rateFit);
-//    [faceView setFrame:CGRectMake(0.0, 0.0, faceView.frame.size.width*scaleView, faceView.frame.size.width*scaleView)];
-//    
-//    [scrView setContentSize:CGSizeMake(faceView.frame.size.width, faceView.frame.size.height)];
-//    CGPoint pt;
-//    pt.x = (faceView.frame.size.width - scrView.frame.size.width)/2;
-//    pt.y = (faceView.frame.size.height - scrView.frame.size.height)/2;
-//    NSLog(@"pt is x=%f and y=%f",pt.x, pt.y);
-//    [scrView setContentOffset:pt animated:NO];
-
-//    NSLog(@"angle is %f",angle);
-//    float zoomFactor = [defaults floatForKey:@"Zoom"];
-//    imgView.transform = CGAffineTransformRotate(imgView.transform, angle);
-//    if ([defaults boolForKey:@"Flip"])
-//        imgView.transform = CGAffineTransformScale(imgView.transform, -zoomFactor, zoomFactor);
-//    else
-//        imgView.transform = CGAffineTransformScale(imgView.transform, zoomFactor, zoomFactor);
-// }
-
-//- (void) fitImageToScroll:(MyImageView*)imgView SCROLL:(UIScrollView*)scrView  scrollViewNumber: (NSInteger)tagNumber angle: (CGFloat) angle
-//{
-//    float rateScr, rateImg, rateWidth, rateHeight;
-//    if (scrView.frame.size.width > 0 && imgView.frame.size.width >0){
-//        rateScr = scrView.frame.size.height / scrView.frame.size.width;
-//        rateImg = imgView.frame.size.height / imgView.frame.size.width;
-//    }
-//    if (imgView.frame.size.width > 0 && imgView.frame.size.height > 0){
-//        rateWidth = scrView.frame.size.width / imgView.frame.size.width;
-//        rateHeight = scrView.frame.size.height / imgView.frame.size.height;
-//    }
-//    NSLog(@"imgView is width=%f, height=%f, rateWidth is %f, rateHeight is %f",imgView.frame.size.width, imgView.frame.size.height,rateWidth,rateHeight);
-//    CGFloat rateFit = rateScr < rateImg ? rateWidth : rateHeight;
-//    NSLog (@"rateFit is %f",rateFit);
-//    CGSize szImage = CGSizeMake(imgView.frame.size.width*rateFit, imgView.frame.size.height*rateFit);
-//    [imgView setFrame:CGRectMake(0.0, 0.0, szImage.width, szImage.height)];
-//
-//    [scrView setContentSize:CGSizeMake(imgView.frame.size.width*1.2, imgView.frame.size.height*1.2)];
-//    CGPoint pt;
-//    pt.x = (imgView.frame.size.width - scrView.frame.size.width)/2;
-//    pt.y = (imgView.frame.size.height - scrView.frame.size.height)/2;
-//    NSLog(@"pt is x=%f and y=%f",pt.x, pt.y);
-//    [scrView setContentOffset:pt animated:YES];
-//    
-//    NSString *tagPtX = [NSString stringWithFormat:@"PtX%d",tagNumber];
-//    NSString *tagPtY = [NSString stringWithFormat:@"PtY%d",tagNumber];
-//    NSString *tagScale = [NSString stringWithFormat:@"Scale%d",tagNumber];
-//    [defaults setFloat:pt.x  forKey:tagPtX];
-//    [defaults setFloat:pt.y forKey:tagPtY];
-//    [defaults setFloat:rateFit forKey:tagScale];
-//    switch (tagNumber) {
-//        case 0:{
-//            zoom1 = [defaults floatForKey:@"Scale0"];
-//            [defaults setFloat:0.0f forKey:@"PanX0"];
-//            [defaults setFloat:0.0f forKey:@"PanY0"];
-//            [defaults setFloat:1.0f forKey:@"Zoom0"];
-//        }
-//            break;
-//        case 1:{
-//            zoom2 = [defaults floatForKey:@"Scale1"];
-//            [defaults setFloat:0.0f forKey:@"PanX1"];
-//            [defaults setFloat:0.0f forKey:@"PanY1"];
-//            [defaults setFloat:1.0f forKey:@"Zoom1"];
-//        }
-//            break;
-//        case 2:{
-//            zoom3 = [defaults floatForKey:@"Scale2"];
-//            [defaults setFloat:0.0f forKey:@"PanX2"];
-//            [defaults setFloat:0.0f forKey:@"PanY2"];
-//            [defaults setFloat:1.0f forKey:@"Zoom2"];
-//        }
-//            break;
-//        case 3:{
-//            zoom4 = [defaults floatForKey:@"Scale3"];
-//            [defaults setFloat:0.0f forKey:@"PanX3"];
-//            [defaults setFloat:0.0f forKey:@"PanY3"];
-//            [defaults setFloat:1.0f forKey:@"Zoom3"];
-//        }
-//            break;
-//            
-//    }
-//    //    [self resetPostionZoomParameters];
-//    //    [self resetGestureParameters];
-//    NSLog(@"angle is %f",angle);
-//    imgView.transform = CGAffineTransformRotate(imgView.transform, angle);
-//    
-//}
 - (void) fillRotateMenu {
     CGRect frame = CGRectMake(5.0, 5.0, 310.0, 47.0);
     sliderRotate = [[UISlider alloc] initWithFrame:frame];
@@ -4901,62 +4070,6 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
             return rc;
         }
         
-        
-//        else if ( sub == 13) {   //        //secondFrameSlider stuff begins here
-//            scroll_width = 50;
-//            scroll_height =50;
-//            rc = CGRectMake(155-50/2-nMargin*6+adjustedPtX2, 155-50/2-nMargin*6+adjustedPtY2, scroll_width+nMargin*12, scroll_height+nMargin*12 );
-//            
-//            CALayer *mask = [CALayer layer];
-//            mask.contents = (id)[[UIImage imageNamed:@"maskHeart.png"] CGImage];
-//            mask.frame = rc;
-//            blockSlider1.layer.mask=mask;
-//            return rc;
-//        }
-//        else if ( sub == 14) {
-//            scroll_width = 50;
-//            scroll_height =50;
-//            rc = CGRectMake(155-50/2-nMargin*6+adjustedPtX2, 155-50/2-nMargin*6+adjustedPtY2, scroll_width+nMargin*12, scroll_height+nMargin*12 );
-//            
-//            CALayer *mask = [CALayer layer];
-//            mask.contents = (id)[[UIImage imageNamed:@"maskStar.png"] CGImage];
-//            mask.frame = rc;
-//            blockSlider1.layer.mask=mask;
-//            return rc;
-//        }
-//        else if ( sub == 15) {
-//            scroll_width = 50;
-//            scroll_height =50;
-//            rc = CGRectMake(155-50/2-nMargin*6+adjustedPtX2, 155-50/2-nMargin*6+adjustedPtY2, scroll_width+nMargin*12, scroll_height+nMargin*12 );
-//            
-//            CALayer *mask = [CALayer layer];
-//            mask.contents = (id)[[UIImage imageNamed:@"maskDiamond.png"] CGImage];
-//            mask.frame = rc;
-//            blockSlider1.layer.mask=mask;
-//            return rc;
-//        }
-//        else if ( sub == 16) {
-//            scroll_width = 50;
-//            scroll_height =50;
-//            rc = CGRectMake(155-50/2-nMargin*6+adjustedPtX2, 155-50/2-nMargin*6+adjustedPtY2, scroll_width+nMargin*12, scroll_height+nMargin*12 );
-//            
-//            CALayer *mask = [CALayer layer];
-//            mask.contents = (id)[[UIImage imageNamed:@"maskTriangle.png"] CGImage];
-//            mask.frame = rc;
-//            blockSlider1.layer.mask=mask;
-//            return rc;
-//        }
-//        else if ( sub == 17) {
-//            scroll_width = 50;
-//            scroll_height =50;
-//            rc = CGRectMake(155-50/2-nMargin*6+adjustedPtX2, 155-50/2-nMargin*6+adjustedPtY2, scroll_width+nMargin*12, scroll_height+nMargin*12 );
-//            
-//            CALayer *mask = [CALayer layer];
-//            mask.contents = (id)[[UIImage imageNamed:@"maskInvertedTriangle.png"] CGImage];
-//            mask.frame = rc;
-//            blockSlider1.layer.mask=mask;
-//            return rc;
-//        }
         else if ( sub == 12) { // left corner frame
             scroll_width = 150+4*nMargin;
             scroll_height = 150+4*nMargin;
@@ -4969,22 +4082,7 @@ UIImage* UIImageCrop(UIImage* img, CGRect rect)
             rc = CGRectMake(55-nMargin, 55-nMargin, scroll_width, scroll_height );
             return rc;
         }
-//        else if ( sub == 20) { // right frame
-//            scroll_width = 270;
-//            scroll_height = 310;
-//            rc = CGRectMake(0, 0, scroll_width+nMargin, scroll_height );
-//            return rc;
-//        }
-//        else if ( sub == 21) { // small right corner with 10 margin top/right
-//            scroll_width = 150+nMargin;
-//            scroll_height = 150+nMargin;
-//            //            nTopMargin = nMargin;
-//            //            nLeftMargin = 0;
-//            //nLeftMargin=  200;
-//            NSLog(@"width=%f , height=%f",scroll_width,scroll_height);
-//            rc = CGRectMake(150-nMargin/2, 10, scroll_width, scroll_height );
-//            return rc;
-//        }
+
     }
     
     else if (style == 2) {
